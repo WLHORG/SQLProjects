@@ -6,6 +6,7 @@
       <Options>
         <ServerName>WLHTESTSQL01\DEV01</ServerName>
         <PathOnServer>/SSISDB/DiabetesDWH/solPopulate_CIS_Tables_ETLPOC</PathOnServer>
+        <Run64BitRuntime>true</Run64BitRuntime>
         <UserIDs />
         <UserPasswords />
         <OfflineMode>false</OfflineMode>
