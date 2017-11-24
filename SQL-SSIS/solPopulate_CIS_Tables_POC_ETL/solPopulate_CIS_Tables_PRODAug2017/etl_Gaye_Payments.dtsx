@@ -1,0 +1,2656 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/25/2014 8:49:04 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="W2K8R2-SQL2K8R2"
+  DTS:CreatorName="W2K8R2-SQL2K8R2\Administrator"
+  DTS:DTSID="{379C95CA-C5F1-4988-B2E9-949278B57DC7}"
+  DTS:EnableConfig="True"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.6020.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="etl_Gaye_Payments"
+  DTS:PackageType="5"
+  DTS:VersionBuild="150"
+  DTS:VersionGUID="{C528990C-E306-4C24-927A-A70120172550}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:LogProviders>
+    <DTS:LogProvider
+      DTS:ConfigString="LocalHost.DiabetesDWH"
+      DTS:CreationName="DTS.LogProviderSQLServer.3"
+      DTS:Description="Writes log entries for events to a SQL Server database"
+      DTS:DTSID="{02C59167-2057-408A-B30B-3F9A283D9AFD}"
+      DTS:ObjectName="SSIS log provider for SQL Server">
+      <DTS:ObjectData>
+        <InnerObject />
+      </DTS:ObjectData>
+    </DTS:LogProvider>
+  </DTS:LogProviders>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EEA18272-CAF5-42F2-B0EC-F71A9406E85F}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ApplicationLineageID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5F58689A-C189-4EBC-890C-DA95AE88D8B5}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="LastRunDT">
+      <DTS:VariableValue
+        DTS:DataType="7">2/28/2014 12:29:36 PM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1B60BE48-907D-4CB0-8725-A74C7CD0642A}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="LastRunTMST">
+      <DTS:VariableValue
+        DTS:DataType="7">2/28/2014 12:29:15 PM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E35013C3-7E0A-4253-8D76-C36A0CCF4A08}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="LineageID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D065207E-F8F9-4187-9B32-0401462E2109}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="LineageTMST">
+      <DTS:VariableValue
+        DTS:DataType="7">2/26/2014 7:41:11 AM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BE6D615B-09D5-462A-B7ED-FC45DD1D37F2}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RecordCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6AC69EFF-541E-40D1-BCD8-00AF3D66595E}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;Process Succeeded - &quot; +  (DT_STR, 10, 1252) @[User::RecordCount] + &quot; rows processed.&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SuccessMessage">
+      <DTS:VariableValue
+        DTS:DataType="8">Process Succeeded - 0 rows processed.</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:LoggingOptions
+    DTS:FilterKind="0"
+    DTS:LoggingMode="1">
+    <DTS:Property
+      DTS:DataType="8"
+      DTS:Name="EventFilter">2,7,OnError,12,OnTaskFailed</DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnError"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">0</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnTaskFailed"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">0</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnWarning"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">0</DTS:Property>
+    </DTS:Property>
+    <DTS:SelectedLogProviders>
+      <DTS:SelectedLogProvider
+        DTS:InstanceID="{02C59167-2057-408A-B30B-3F9A283D9AFD}" />
+    </DTS:SelectedLogProviders>
+  </DTS:LoggingOptions>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Processing"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{C12F5B1F-7DD6-4720-A14D-D8F86051ED85}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Processing">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{EEA40E4B-FF19-46B8-A678-B592B61B3439}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Data Flow Task GAYE PAYMENTS"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination"
+                  componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[cis_delta].[gaye_payments]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="{A7202722-F760-4DEE-BB0C-B0045540580C}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[LocalHost.DiabetesDWH]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CONTACT_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="CONTACT_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[contact_number]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[CONTACT_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ADDRESS_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="ADDRESS_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[address_number]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[GAYE_PAYMENT_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="GAYE_PAYMENT_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[gaye_payment_number]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[GAYE_PAYMENT_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DONOR_NAME]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="60"
+                          cachedName="DONOR_NAME"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[donor_name]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[DONOR_NAME]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DONOR_ID]"
+                          cachedDataType="numeric"
+                          cachedName="DONOR_ID"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[donor_id]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[DONOR_ID]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ADDRESS_LINE_1]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="36"
+                          cachedName="ADDRESS_LINE_1"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[address_line_1]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_LINE_1]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ADDRESS_LINE_2]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="36"
+                          cachedName="ADDRESS_LINE_2"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[address_line_2]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_LINE_2]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ADDRESS_LINE_3]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="36"
+                          cachedName="ADDRESS_LINE_3"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[address_line_3]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_LINE_3]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ADDRESS_LINE_4]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="36"
+                          cachedName="ADDRESS_LINE_4"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[address_line_4]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_LINE_4]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ADDRESS_LINE_5]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="36"
+                          cachedName="ADDRESS_LINE_5"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[address_line_5]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_LINE_5]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[POSTCODE]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="POSTCODE"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[postcode]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[POSTCODE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EMPLOYER_NAME]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="60"
+                          cachedName="EMPLOYER_NAME"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[employer_name]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[EMPLOYER_NAME]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SOURCE_CODE]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="SOURCE_CODE"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[source_code]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[SOURCE_CODE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PFO_CODE]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="PFO_CODE"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[pfo_code]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[PFO_CODE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NEW_DONOR]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1"
+                          cachedName="NEW_DONOR"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[new_donor]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[NEW_DONOR]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EMPLOYEE_DONATION]"
+                          cachedDataType="numeric"
+                          cachedName="EMPLOYEE_DONATION"
+                          cachedPrecision="9"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[employee_donation]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[EMPLOYEE_DONATION]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EMPLOYER_DONATION]"
+                          cachedDataType="numeric"
+                          cachedName="EMPLOYER_DONATION"
+                          cachedPrecision="9"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[employer_donation]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[EMPLOYER_DONATION]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[GOV_PAYMENT]"
+                          cachedDataType="numeric"
+                          cachedName="GOV_PAYMENT"
+                          cachedPrecision="9"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[gov_payment]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[GOV_PAYMENT]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ADMIN_FEE]"
+                          cachedDataType="numeric"
+                          cachedName="ADMIN_FEE"
+                          cachedPrecision="9"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[admin_fee]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[ADMIN_FEE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NO_OF_DONATIONS]"
+                          cachedDataType="numeric"
+                          cachedName="NO_OF_DONATIONS"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[no_of_donations]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[NO_OF_DONATIONS]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AGENCY_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="AGENCY_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[agency_number]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[AGENCY_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ORGANISATION_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="ORGANISATION_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[organisation_number]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[ORGANISATION_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[GAYE_PLEDGE_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="GAYE_PLEDGE_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[gaye_pledge_number]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[GAYE_PLEDGE_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TITLE]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="40"
+                          cachedName="TITLE"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[title]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[TITLE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[INITIALS]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="7"
+                          cachedName="INITIALS"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[initials]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[INITIALS]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[FORENAMES]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="30"
+                          cachedName="FORENAMES"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[forenames]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[FORENAMES]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SURNAME]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="30"
+                          cachedName="SURNAME"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[surname]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[SURNAME]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TRANSACTION_DATE]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="TRANSACTION_DATE"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[transaction_date]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[TRANSACTION_DATE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[POST_BATCH_TO_CB]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1"
+                          cachedName="POST_BATCH_TO_CB"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[post_batch_to_cb]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[POST_BATCH_TO_CB]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RECONCILED]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1"
+                          cachedName="RECONCILED"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[reconciled]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[RECONCILED]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[contact_number]"
+                          dataType="numeric"
+                          name="contact_number"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[address_number]"
+                          dataType="numeric"
+                          name="address_number"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[gaye_payment_number]"
+                          dataType="numeric"
+                          name="gaye_payment_number"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[donor_name]"
+                          codePage="1252"
+                          dataType="str"
+                          length="60"
+                          name="donor_name" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[donor_id]"
+                          dataType="numeric"
+                          name="donor_id"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[address_line_1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="36"
+                          name="address_line_1" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[address_line_2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="36"
+                          name="address_line_2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[address_line_3]"
+                          codePage="1252"
+                          dataType="str"
+                          length="36"
+                          name="address_line_3" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[address_line_4]"
+                          codePage="1252"
+                          dataType="str"
+                          length="36"
+                          name="address_line_4" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[address_line_5]"
+                          codePage="1252"
+                          dataType="str"
+                          length="36"
+                          name="address_line_5" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[postcode]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="postcode" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[employer_name]"
+                          codePage="1252"
+                          dataType="str"
+                          length="60"
+                          name="employer_name" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[source_code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="source_code" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[pfo_code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="pfo_code" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[new_donor]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="new_donor" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[employee_donation]"
+                          dataType="numeric"
+                          name="employee_donation"
+                          precision="9"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[employer_donation]"
+                          dataType="numeric"
+                          name="employer_donation"
+                          precision="9"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[gov_payment]"
+                          dataType="numeric"
+                          name="gov_payment"
+                          precision="9"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[admin_fee]"
+                          dataType="numeric"
+                          name="admin_fee"
+                          precision="9"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[no_of_donations]"
+                          dataType="numeric"
+                          name="no_of_donations"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[agency_number]"
+                          dataType="numeric"
+                          name="agency_number"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[organisation_number]"
+                          dataType="numeric"
+                          name="organisation_number"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[gaye_pledge_number]"
+                          dataType="numeric"
+                          name="gaye_pledge_number"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[title]"
+                          codePage="1252"
+                          dataType="str"
+                          length="40"
+                          name="title" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[initials]"
+                          codePage="1252"
+                          dataType="str"
+                          length="7"
+                          name="initials" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[forenames]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          name="forenames" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[surname]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          name="surname" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[transaction_date]"
+                          dataType="dbTimeStamp"
+                          name="transaction_date" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[post_batch_to_cb]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="post_batch_to_cb" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[reconciled]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="reconciled" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source"
+                  componentClassID="{CB67CD40-126C-4280-912D-2A625DFAFB66}"
+                  contactInfo="Oracle Source;Microsoft Connector for Oracle by Attunity; Attunity Ltd.; All Rights Reserved; http://www.attunity.com;4"
+                  description="Microsoft Oracle Source Component by Attunity"
+                  name="Oracle Source"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="The name of the table to be fetched."
+                      expressionType="Notify"
+                      name="TableName">"CARE_ADMIN"."GAYE_PAYMENTS"</property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      expressionType="Notify"
+                      name="SqlCommand"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of rows fetched in a batch."
+                      expressionType="Notify"
+                      name="BatchSize">50000</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Number of pre-fetched rows."
+                      expressionType="Notify"
+                      name="PrefetchCount">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Determines the chunk size allocation for LOB columns"
+                      expressionType="Notify"
+                      name="LobChunkSize">32768</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The code page to use when code page information is unavailable from the data source."
+                      expressionType="Notify"
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Connections[MSOraConnection]"
+                      connectionManagerID="{B0E6080B-7584-431F-9BC5-B95A0F1857CA}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CIS Live]"
+                      description="The Oracle runtime connection"
+                      name="MSOraConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output]"
+                      errorRowDisposition="FailComponent"
+                      name="Oracle Source Output"
+                      truncationRowDisposition="FailComponent">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[GAYE_PAYMENT_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[GAYE_PAYMENT_NUMBER]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[GAYE_PAYMENT_NUMBER]"
+                          name="GAYE_PAYMENT_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[DONOR_NAME]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DONOR_NAME]"
+                          length="60"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[DONOR_NAME]"
+                          name="DONOR_NAME" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[DONOR_ID]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DONOR_ID]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[DONOR_ID]"
+                          name="DONOR_ID"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_LINE_1]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_LINE_1]"
+                          length="36"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_LINE_1]"
+                          name="ADDRESS_LINE_1" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_LINE_2]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_LINE_2]"
+                          length="36"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_LINE_2]"
+                          name="ADDRESS_LINE_2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_LINE_3]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_LINE_3]"
+                          length="36"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_LINE_3]"
+                          name="ADDRESS_LINE_3" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_LINE_4]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_LINE_4]"
+                          length="36"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_LINE_4]"
+                          name="ADDRESS_LINE_4" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_LINE_5]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_LINE_5]"
+                          length="36"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_LINE_5]"
+                          name="ADDRESS_LINE_5" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[POSTCODE]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[POSTCODE]"
+                          length="10"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[POSTCODE]"
+                          name="POSTCODE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[EMPLOYER_NAME]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[EMPLOYER_NAME]"
+                          length="60"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[EMPLOYER_NAME]"
+                          name="EMPLOYER_NAME" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[SOURCE_CODE]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SOURCE_CODE]"
+                          length="10"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[SOURCE_CODE]"
+                          name="SOURCE_CODE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[PFO_CODE]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[PFO_CODE]"
+                          length="10"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[PFO_CODE]"
+                          name="PFO_CODE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[NEW_DONOR]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[NEW_DONOR]"
+                          length="1"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[NEW_DONOR]"
+                          name="NEW_DONOR" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[EMPLOYEE_DONATION]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[EMPLOYEE_DONATION]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[EMPLOYEE_DONATION]"
+                          name="EMPLOYEE_DONATION"
+                          precision="9"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[EMPLOYER_DONATION]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[EMPLOYER_DONATION]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[EMPLOYER_DONATION]"
+                          name="EMPLOYER_DONATION"
+                          precision="9"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[GOV_PAYMENT]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[GOV_PAYMENT]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[GOV_PAYMENT]"
+                          name="GOV_PAYMENT"
+                          precision="9"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[ADMIN_FEE]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADMIN_FEE]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[ADMIN_FEE]"
+                          name="ADMIN_FEE"
+                          precision="9"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[NO_OF_DONATIONS]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[NO_OF_DONATIONS]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[NO_OF_DONATIONS]"
+                          name="NO_OF_DONATIONS"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[AGENCY_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AGENCY_NUMBER]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[AGENCY_NUMBER]"
+                          name="AGENCY_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[CONTACT_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CONTACT_NUMBER]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[CONTACT_NUMBER]"
+                          name="CONTACT_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[ORGANISATION_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ORGANISATION_NUMBER]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[ORGANISATION_NUMBER]"
+                          name="ORGANISATION_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_NUMBER]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_NUMBER]"
+                          name="ADDRESS_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[GAYE_PLEDGE_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[GAYE_PLEDGE_NUMBER]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[GAYE_PLEDGE_NUMBER]"
+                          name="GAYE_PLEDGE_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[TITLE]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TITLE]"
+                          length="40"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[TITLE]"
+                          name="TITLE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[INITIALS]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[INITIALS]"
+                          length="7"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[INITIALS]"
+                          name="INITIALS" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[FORENAMES]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[FORENAMES]"
+                          length="30"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[FORENAMES]"
+                          name="FORENAMES" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[SURNAME]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SURNAME]"
+                          length="30"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[SURNAME]"
+                          name="SURNAME" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[TRANSACTION_DATE]"
+                          dataType="dbTimeStamp"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TRANSACTION_DATE]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[TRANSACTION_DATE]"
+                          name="TRANSACTION_DATE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[POST_BATCH_TO_CB]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[POST_BATCH_TO_CB]"
+                          length="1"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[POST_BATCH_TO_CB]"
+                          name="POST_BATCH_TO_CB" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[RECONCILED]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[RECONCILED]"
+                          length="1"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].Columns[RECONCILED]"
+                          name="RECONCILED" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[GAYE_PAYMENT_NUMBER]"
+                          dataType="numeric"
+                          name="GAYE_PAYMENT_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DONOR_NAME]"
+                          codePage="1252"
+                          dataType="str"
+                          length="60"
+                          name="DONOR_NAME" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DONOR_ID]"
+                          dataType="numeric"
+                          name="DONOR_ID"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_LINE_1]"
+                          codePage="1252"
+                          dataType="str"
+                          length="36"
+                          name="ADDRESS_LINE_1" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_LINE_2]"
+                          codePage="1252"
+                          dataType="str"
+                          length="36"
+                          name="ADDRESS_LINE_2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_LINE_3]"
+                          codePage="1252"
+                          dataType="str"
+                          length="36"
+                          name="ADDRESS_LINE_3" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_LINE_4]"
+                          codePage="1252"
+                          dataType="str"
+                          length="36"
+                          name="ADDRESS_LINE_4" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_LINE_5]"
+                          codePage="1252"
+                          dataType="str"
+                          length="36"
+                          name="ADDRESS_LINE_5" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[POSTCODE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="POSTCODE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[EMPLOYER_NAME]"
+                          codePage="1252"
+                          dataType="str"
+                          length="60"
+                          name="EMPLOYER_NAME" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SOURCE_CODE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="SOURCE_CODE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[PFO_CODE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="PFO_CODE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[NEW_DONOR]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="NEW_DONOR" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[EMPLOYEE_DONATION]"
+                          dataType="numeric"
+                          name="EMPLOYEE_DONATION"
+                          precision="9"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[EMPLOYER_DONATION]"
+                          dataType="numeric"
+                          name="EMPLOYER_DONATION"
+                          precision="9"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[GOV_PAYMENT]"
+                          dataType="numeric"
+                          name="GOV_PAYMENT"
+                          precision="9"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADMIN_FEE]"
+                          dataType="numeric"
+                          name="ADMIN_FEE"
+                          precision="9"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[NO_OF_DONATIONS]"
+                          dataType="numeric"
+                          name="NO_OF_DONATIONS"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AGENCY_NUMBER]"
+                          dataType="numeric"
+                          name="AGENCY_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CONTACT_NUMBER]"
+                          dataType="numeric"
+                          name="CONTACT_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ORGANISATION_NUMBER]"
+                          dataType="numeric"
+                          name="ORGANISATION_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_NUMBER]"
+                          dataType="numeric"
+                          name="ADDRESS_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[GAYE_PLEDGE_NUMBER]"
+                          dataType="numeric"
+                          name="GAYE_PLEDGE_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TITLE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="40"
+                          name="TITLE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[INITIALS]"
+                          codePage="1252"
+                          dataType="str"
+                          length="7"
+                          name="INITIALS" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[FORENAMES]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          name="FORENAMES" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SURNAME]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          name="SURNAME" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TRANSACTION_DATE]"
+                          dataType="dbTimeStamp"
+                          name="TRANSACTION_DATE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[POST_BATCH_TO_CB]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="POST_BATCH_TO_CB" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[RECONCILED]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="RECONCILED" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output]"
+                      isErrorOut="true"
+                      name="Oracle Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[GAYE_PAYMENT_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[GAYE_PAYMENT_NUMBER]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[GAYE_PAYMENT_NUMBER]"
+                          name="GAYE_PAYMENT_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[DONOR_NAME]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DONOR_NAME]"
+                          length="60"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[DONOR_NAME]"
+                          name="DONOR_NAME" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[DONOR_ID]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DONOR_ID]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[DONOR_ID]"
+                          name="DONOR_ID"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[ADDRESS_LINE_1]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_LINE_1]"
+                          length="36"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[ADDRESS_LINE_1]"
+                          name="ADDRESS_LINE_1" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[ADDRESS_LINE_2]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_LINE_2]"
+                          length="36"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[ADDRESS_LINE_2]"
+                          name="ADDRESS_LINE_2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[ADDRESS_LINE_3]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_LINE_3]"
+                          length="36"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[ADDRESS_LINE_3]"
+                          name="ADDRESS_LINE_3" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[ADDRESS_LINE_4]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_LINE_4]"
+                          length="36"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[ADDRESS_LINE_4]"
+                          name="ADDRESS_LINE_4" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[ADDRESS_LINE_5]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_LINE_5]"
+                          length="36"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[ADDRESS_LINE_5]"
+                          name="ADDRESS_LINE_5" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[POSTCODE]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[POSTCODE]"
+                          length="10"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[POSTCODE]"
+                          name="POSTCODE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[EMPLOYER_NAME]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[EMPLOYER_NAME]"
+                          length="60"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[EMPLOYER_NAME]"
+                          name="EMPLOYER_NAME" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[SOURCE_CODE]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SOURCE_CODE]"
+                          length="10"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[SOURCE_CODE]"
+                          name="SOURCE_CODE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[PFO_CODE]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[PFO_CODE]"
+                          length="10"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[PFO_CODE]"
+                          name="PFO_CODE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[NEW_DONOR]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[NEW_DONOR]"
+                          length="1"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[NEW_DONOR]"
+                          name="NEW_DONOR" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[EMPLOYEE_DONATION]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[EMPLOYEE_DONATION]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[EMPLOYEE_DONATION]"
+                          name="EMPLOYEE_DONATION"
+                          precision="9"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[EMPLOYER_DONATION]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[EMPLOYER_DONATION]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[EMPLOYER_DONATION]"
+                          name="EMPLOYER_DONATION"
+                          precision="9"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[GOV_PAYMENT]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[GOV_PAYMENT]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[GOV_PAYMENT]"
+                          name="GOV_PAYMENT"
+                          precision="9"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[ADMIN_FEE]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADMIN_FEE]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[ADMIN_FEE]"
+                          name="ADMIN_FEE"
+                          precision="9"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[NO_OF_DONATIONS]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[NO_OF_DONATIONS]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[NO_OF_DONATIONS]"
+                          name="NO_OF_DONATIONS"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[AGENCY_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AGENCY_NUMBER]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[AGENCY_NUMBER]"
+                          name="AGENCY_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[CONTACT_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CONTACT_NUMBER]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[CONTACT_NUMBER]"
+                          name="CONTACT_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[ORGANISATION_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ORGANISATION_NUMBER]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[ORGANISATION_NUMBER]"
+                          name="ORGANISATION_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[ADDRESS_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_NUMBER]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[ADDRESS_NUMBER]"
+                          name="ADDRESS_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[GAYE_PLEDGE_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[GAYE_PLEDGE_NUMBER]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[GAYE_PLEDGE_NUMBER]"
+                          name="GAYE_PLEDGE_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[TITLE]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TITLE]"
+                          length="40"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[TITLE]"
+                          name="TITLE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[INITIALS]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[INITIALS]"
+                          length="7"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[INITIALS]"
+                          name="INITIALS" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[FORENAMES]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[FORENAMES]"
+                          length="30"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[FORENAMES]"
+                          name="FORENAMES" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[SURNAME]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SURNAME]"
+                          length="30"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[SURNAME]"
+                          name="SURNAME" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[TRANSACTION_DATE]"
+                          dataType="dbTimeStamp"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TRANSACTION_DATE]"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[TRANSACTION_DATE]"
+                          name="TRANSACTION_DATE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[POST_BATCH_TO_CB]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[POST_BATCH_TO_CB]"
+                          length="1"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[POST_BATCH_TO_CB]"
+                          name="POST_BATCH_TO_CB" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[RECONCILED]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[RECONCILED]"
+                          length="1"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[RECONCILED]"
+                          name="RECONCILED" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Row Count"
+                  componentClassID="{E2697D8C-70DA-42B2-8208-A19CE3A9FE41}"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Row Count">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::RecordCount</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Row Count.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Row Count.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Row Count.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS.Paths[Oracle Source Output]"
+                  endId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Row Count.Inputs[Row Count Input 1]"
+                  name="Oracle Source Output"
+                  startId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source.Outputs[Oracle Source Output]" />
+                <path
+                  refId="Package\Data Processing\Data Flow Task GAYE PAYMENTS.Paths[Row Count Output 1]"
+                  endId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Row Count Output 1"
+                  startId="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Row Count.Outputs[Row Count Output 1]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Data Processing\Merge delta tables"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{6D57CD74-AC14-48D5-8A67-AC0926D07201}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Merge delta tables"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{A7202722-F760-4DEE-BB0C-B0045540580C}"
+              SQLTask:SqlStatementSource="EXEC [cis].[usp_Merge_gaye_payments]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Data Processing\Truncate Delta Tables"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{02DBCF4B-01DD-45A1-8057-BC35535DA937}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate Delta Tables"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{A7202722-F760-4DEE-BB0C-B0045540580C}"
+              SQLTask:SqlStatementSource=" &#xA;&#xA;truncate table cis_delta.GAYE_Payments&#xA;&#xA;GO&#xA;truncate table cis.GAYE_Payments" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{DA2A8674-4C09-4136-A55E-4D13F2C2E093}"
+          DTS:From="Package\Data Processing\Truncate Delta Tables"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Data Processing\Data Flow Task GAYE PAYMENTS" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{63B67FEF-7385-4092-BF08-64F3EE0C83DC}"
+          DTS:From="Package\Data Processing\Data Flow Task GAYE PAYMENTS"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Data Processing\Merge delta tables" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Failure Loading Closeout"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{80DB5EED-A883-4E5B-86C7-405E447034E8}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Failure Loading Closeout">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Failure Loading Closeout\Write Failure Record"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{81287BC6-B3EF-480C-AC7C-E8259C68A795}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Write Failure Record"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{843B9DF5-618A-48DA-8301-85359228D94D}"
+              SQLTask:SqlStatementSource="UPDATE [custom].[PackageAudit] SET&#xA;CompleteTMST = GETDATE(),&#xA;LastRunDT = CAST(GETDATE() AS date),&#xA;CompletionMessage = 'Process Failed- 0 rows processed.'&#xA;WHERE PackageAuditKey = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::LineageID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Setup"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{57E0C059-3781-443B-ACCB-BBD45ED36C5C}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Setup">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Setup\Get Lineage - Insert Audit Record"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{69B95935-DFAC-4B4A-A86E-5821149F83A8}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Lineage - Insert Audit Record"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{843B9DF5-618A-48DA-8301-85359228D94D}"
+              SQLTask:SqlStatementSource="INSERT INTO custom.PackageAudit (ApplicationRunID,PackageName, LineageTMST, LastRunDT) VALUES (?, ?, ?, CAST('1/1/1900' AS date));&#xA;&#xA;SELECT ? = SCOPE_IDENTITY();" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::ApplicationLineageID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="System::PackageName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="System::StartTime"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="7"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="User::LineageID"
+                SQLTask:ParameterDirection="Output"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Setup\Set Application Run ID"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{54424841-F122-4395-9A93-061DD41E878E}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Set Application Run ID"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{843B9DF5-618A-48DA-8301-85359228D94D}"
+              SQLTask:SqlStatementSource="SELECT ISNULL((SELECT TOP 1 [AppAuditKey] from  [SSISDB].[custom].[ApplicationAudit] WHERE [ApplicationName] = 'CIS DataLoad' and isRunning = 1 ORDER BY AppAuditKey Desc), 0) as AppAuditKey"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="AppAuditKey"
+                SQLTask:DtsVariableName="User::ApplicationLineageID" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Setup\Validate Connections Script"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ScriptTask.ScriptTask, Microsoft.SqlServer.ScriptTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Script Task"
+          DTS:DTSID="{658BD7C6-D875-4508-8493-1CBDDAE0263A}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ScriptTask.ScriptTask, Microsoft.SqlServer.ScriptTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Validate Connections Script"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:ObjectData>
+            <ScriptProject
+              Name="ST_374b266265e948ff8f610409510a2afb"
+              VSTAMajorVersion="3"
+              VSTAMinorVersion="0"
+              Language="CSharp">
+              <ProjectItem
+                Name="Properties\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Resources.resx"
+                Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></ProjectItem>
+              <ProjectItem
+                Name="ST_374b266265e948ff8f610409510a2afb.csproj"
+                Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="utf-16"?><Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"><!-- This section defines project-level properties.
+
+       Configuration - Specifies whether the default configuration is Release or Debug.
+       Platform - Specifies what CPU the output of this project can run on.
+       OutputType - Must be "Library" for VSTA.
+       NoStandardLibraries - Set to "false" for VSTA.
+       RootNamespace - In C#, this specifies the namespace given to new files.
+                       In Visual Basic, all objects are wrapped in this namespace at runtime.
+       AssemblyName - Name of the output assembly.
+  --><PropertyGroup><ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids><Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration><Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform><OutputType>Library</OutputType><NoStandardLibraries>false</NoStandardLibraries><RootNamespace>ST_231a69c233f842a39d0e227465cc132a.csproj</RootNamespace><AssemblyName>ST_374b266265e948ff8f610409510a2afb</AssemblyName><ProjectGuid>{5980A4A4-A166-41B3-B4F4-623262612552}</ProjectGuid></PropertyGroup><!-- This section defines properties that are set when the "Debug" configuration is
+       selected.
+
+       DebugSymbols - If true, create symbols (.pdb). If false, do not create symbols.
+       Optimize - If true, optimize the build output. If false, do not optimize.
+       OutputPath - Output path of the project relative to the project file.
+       EnableUnmanagedDebugging - If true, starting the debugger will attach both managed and unmanaged debuggers.
+       DefineConstants - Constants defined for the preprocessor.
+       Warning Level - Warning level for the compiler.
+  --><PropertyGroup Condition=" '$(Configuration)' == 'Debug' "><DebugSymbols>true</DebugSymbols><Optimize>false</Optimize><OutputPath>.\bin\Debug\</OutputPath><EnableUnmanagedDebugging>false</EnableUnmanagedDebugging><DefineConstants>DEBUG;TRACE</DefineConstants><WarningLevel>4</WarningLevel></PropertyGroup><!-- This section defines properties that are set when the "Release" configuration is
+       selected.
+
+       DebugSymbols - If true, create symbols (.pdb). If false, do not create symbols.
+       Optimize - If true, optimize the build output. If false, do not optimize.
+       OutputPath - Output path of the project relative to the project file.
+       EnableUnmanagedDebugging - If true, starting the debugger will attach both managed and unmanaged debuggers.
+       DefineConstants - Constants defined for the preprocessor.
+       Warning Level - Warning level for the compiler.
+  --><PropertyGroup Condition=" '$(Configuration)' == 'Release' "><DebugSymbols>false</DebugSymbols><Optimize>true</Optimize><OutputPath>.\bin\Release\</OutputPath><EnableUnmanagedDebugging>false</EnableUnmanagedDebugging><DefineConstants>TRACE</DefineConstants><WarningLevel>4</WarningLevel></PropertyGroup><!-- This section enables pre- and post-build steps. However,
+       it is recommended that MSBuild tasks be used instead of these properties.
+  --><PropertyGroup><PreBuildEvent></PreBuildEvent><PostBuildEvent></PostBuildEvent></PropertyGroup><!-- This sections specifies references for the project. --><ItemGroup><Reference Include="System" /><Reference Include="System.Data" /><Reference Include="System.Windows.Forms" /><Reference Include="System.Xml" /><Reference Include="Microsoft.SqlServer.ManagedDTS, Version=11.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" /><Reference Include="Microsoft.SqlServer.ScriptTask, Version=11.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" /></ItemGroup><!-- This section defines the user source files that are part of the
+       project.
+
+       Compile - Specifies a source file to compile.
+       EmbeddedResource - Specifies a .resx file for embedded resources.
+       None - Specifies a file that is not to be passed to the compiler (for instance,
+              a text file or XML file).
+       AppDesigner - Specifies the directory where the application properties files can
+                     be found.
+  --><ItemGroup><AppDesigner Include="Properties\" /><Compile Include="Properties\AssemblyInfo.cs"><SubType>Code</SubType></Compile><EmbeddedResource Include="Properties\Resources.resx"><Generator>ResXFileCodeGenerator</Generator><LastGenOutput>Resources.Designer.cs</LastGenOutput></EmbeddedResource><Compile Include="Properties\Resources.Designer.cs"><AutoGen>True</AutoGen><DependentUpon>Resources.resx</DependentUpon></Compile><None Include="Properties\Settings.settings"><Generator>SettingsSingleFileGenerator</Generator><LastGenOutput>Settings.Designer.cs</LastGenOutput></None><Compile Include="Properties\Settings.Designer.cs"><AutoGen>True</AutoGen><DependentUpon>Settings.settings</DependentUpon></Compile><Compile Include="ScriptMain.cs"><SubType>Code</SubType></Compile><!-- Include the default configuration information and metadata files for the add-in.
+         These files are copied to the build output directory when the project is
+         built, and the path to the configuration file is passed to add-in on the command
+         line when debugging.
+    --></ItemGroup><!-- Include the build rules for a C# project.--><Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" /><!-- This section defines VSTA properties that describe the host-changable project properties. --><ProjectExtensions><VisualStudio><FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}"><ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" DebugInfoExeName="" /><Host Name="SSIS_ScriptTask" /><ProjectClient><HostIdentifier>SSIS_ST110</HostIdentifier></ProjectClient></FlavorProperties></VisualStudio></ProjectExtensions><PropertyGroup><TargetFrameworkVersion>v4.0</TargetFrameworkVersion></PropertyGroup><PropertyGroup><TargetFrameworkProfile></TargetFrameworkProfile></PropertyGroup></Project>]]></ProjectItem>
+              <ProjectItem
+                Name="ScriptMain.cs"
+                Encoding="UTF8"><![CDATA[/*
+   Microsoft SQL Server Integration Services Script Task
+   Write scripts using Microsoft Visual C# 2008.
+   The ScriptMain is the entry point class of the script.
+*/
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Runtime;
+using System.Windows.Forms;
+
+namespace ValidateConnectionsScript
+{
+    [Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute]
+    public partial class ScriptMain : Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+    {
+
+        #region VSTA generated code
+        enum ScriptResults
+        {
+            Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success,
+            Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+        };
+        #endregion
+
+        /*
+		The execution engine calls this method when the task executes.
+		To access the object model, use the Dts property. Connections, variables, events,
+		and logging features are available as members of the Dts property as shown in the following examples.
+
+		To reference a variable, call Dts.Variables["MyCaseSensitiveVariableName"].Value;
+		To post a log entry, call Dts.Log("This is my log text", 999, null);
+		To fire an event, call Dts.Events.FireInformation(99, "test", "hit the help message", "", 0, true);
+
+		To use the connections collection use something like the following:
+		ConnectionManager cm = Dts.Connections.Add("OLEDB");
+		cm.ConnectionString = "Data Source=localhost;Initial Catalog=AdventureWorks;Provider=SQLNCLI10;Integrated Security=SSPI;Auto Translate=False;";
+
+		Before returning from this method, set the value of Dts.TaskResult to indicate success or failure.
+		
+		To open Help, press F1.
+	*/
+
+   public void Main()
+   {
+        string connStr;
+		bool success = true;
+		bool fireAgain = true;
+														
+		if (Dts.Connections.Count == 0)
+		{
+            MessageBox.Show("Count = " + Dts.Connections.Count.ToString());
+            Dts.TaskResult = (int)Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure;
+			return;
+		}
+
+			
+		foreach(ConnectionManager connMgr in Dts.Connections)
+		{
+			connStr = connMgr.ConnectionString;
+			Dts.Events.FireInformation(1, "", "Connection string = " + connStr, "", 0, ref fireAgain);
+			try
+			{
+				connMgr.AcquireConnection(null);
+				Dts.Events.FireInformation(1, "", "Connected successfully to " + connMgr.Name, "", 0, ref fireAgain);
+			}
+			catch
+			{
+				Dts.Events.FireError(-1, "", "Connection failed on " + connMgr.Name, "", 0);
+				success = false;
+			}
+		}
+
+
+		if (success)
+			Dts.TaskResult = (int)Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success;
+		else
+			Dts.TaskResult = (int)Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure;
+		}	
+   }
+}]]></ProjectItem>
+              <ProjectItem
+                Name="Project"
+                Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:Language>msBuild</msb:Language>
+		<msb:NoContent>Reference;Import;Folder</msb:NoContent>
+		<msb:ProjectId>{A418F06C-C70E-4795-A03F-56C9A83964FD}</msb:ProjectId>
+		<msb:DisplayName>st_231a69c233f842a39d0e227465cc132a</msb:DisplayName>
+		<msb:CodeName>st_231a69c233f842a39d0e227465cc132a</msb:CodeName>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:File Include="Properties\AssemblyInfo.cs"/>
+		<msb:File Include="Properties\Resources.resx"/>
+		<msb:File Include="Properties\Resources.Designer.cs"/>
+		<msb:File Include="Properties\Settings.Designer.cs"/>
+		<msb:File Include="Properties\Settings.settings"/>
+		<msb:File Include="ScriptMain.cs"/>
+		<msb:Project Include="ST_374b266265e948ff8f610409510a2afb.csproj"/>
+	</msb:ItemGroup>
+</c:Project>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Settings.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "ST_231a69c233f842a39d0e227465cc132a.csproj.Properties.Settings.get_Default():ST_231a69c233f842a39d0e227465cc132a.csproj.Properties.Sett" +
+    "ings")]
+
+namespace ST_231a69c233f842a39d0e227465cc132a.csproj.Properties
+{
+
+
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
+    {
+
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+
+        public static Settings Default
+        {
+            get
+            {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\AssemblyInfo.cs"
+                Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_231a69c233f842a39d0e227465cc132a.csproj")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyProduct("ST_231a69c233f842a39d0e227465cc132a.csproj")]
+[assembly: AssemblyCopyright("Copyright @ Microsoft 2014")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Resources.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "ST_231a69c233f842a39d0e227465cc132a.csproj.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "ST_231a69c233f842a39d0e227465cc132a.csproj.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "ST_231a69c233f842a39d0e227465cc132a.csproj.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace ST_231a69c233f842a39d0e227465cc132a.csproj.Properties
+{
+
+
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources
+    {
+
+        private static global::System.Resources.ResourceManager resourceMan;
+
+        private static global::System.Globalization.CultureInfo resourceCulture;
+
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources()
+        {
+        }
+
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager
+        {
+            get
+            {
+                if ((resourceMan == null))
+                {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ST_231a69c233f842a39d0e227465cc132a.csproj.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture
+        {
+            get
+            {
+                return resourceCulture;
+            }
+            set
+            {
+                resourceCulture = value;
+            }
+        }
+    }
+}]]></ProjectItem>
+              <BinaryItem
+                Name="ST_231a69c233f842a39d0e227465cc132a.csproj.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAJFPK1MAAAAAAAAAAOAAAiELAQsAABIAAAAIAAAAAAAArjEA
+AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAEAAAAAAAAAACAAAAAAgAAAAAAAAMAQIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAGAxAABLAAAAAEAAAJAEAAAAAAAAAAAAAAAAAAAA
+AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAAtBEAAAAgAAAAEgAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAJAEAAAAQAAAAAYAAAAUAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAGgAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAACQ
+MQAAAAAAAEgAAAACAAUAyCIAAJgOAAABAAAAAAAAABAiAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4CKA4AAAoqEzACAC0AAAABAAARfgEAAAQtIHIBAABw0AIA
+AAIoDwAACm8QAAAKcxEAAAoKBoABAAAEfgEAAAQqGn4CAAAEKh4CgAIAAAQqGn4DAAAEKi5zBgAA
+BoADAAAEKh4CKBQAAAoqABswBwAuAQAAAgAAERcLFwwCKBYAAApvFwAACm8YAAAKLTZygQAAcAIo
+FgAACm8XAAAKbxgAAAoTBBIEKBkAAAooGgAACigbAAAKJgIoFgAAChdvHAAACioCKBYAAApvFwAA
+Cm8dAAAKEwU4ogAAABEFbx4AAAoNCW8fAAAKCgIoFgAACm8gAAAKF3KTAABwcpUAAHAGKBoAAApy
+kwAAcBYSAm8hAAAKCRRvIgAACiYCKBYAAApvIAAAChdykwAAcHK/AABwCW8jAAAKKBoAAApykwAA
+cBYSAm8hAAAK3jImAigWAAAKbyAAAAoVcpMAAHBy9QAAcAlvIwAACigaAAAKcpMAAHAWbyQAAAom
+FgveABEFbyUAAAo6Uv///wcsDQIoFgAAChZvHAAACioCKBYAAAoXbxwAAAoqAAABEAAAAACbADjT
+ADIBAAABHgIoJgAACiq0AAAAzsrvvgEAAACRAAAAbFN5c3RlbS5SZXNvdXJjZXMuUmVzb3VyY2VS
+ZWFkZXIsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGlj
+S2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OSNTeXN0ZW0uUmVzb3VyY2VzLlJ1bnRpbWVSZXNvdXJj
+ZVNldAIAAAAAAAAAAAAAAFBBRFBBRFC0AAAAQlNKQgEAAQAAAAAADAAAAHY0LjAuMzAzMTkAAAAA
+BQBsAAAAQAQAACN+AACsBAAA+AYAACNTdHJpbmdzAAAAAKQLAAAkAQAAI1VTAMgMAAAQAAAAI0dV
+SUQAAADYDAAAwAEAACNCbG9iAAAAAAAAAAIAAAFXHaIBCQMAAAD6JTMAFgAAAQAAACUAAAAFAAAA
+BgAAAAkAAAABAAAAJgAAAAIAAAAPAAAAAgAAAAIAAAADAAAABAAAAAEAAAAFAAAAAQAAAAEAAAAA
+AAoAAQAAAAAABgDFAL4ACgDhAMwADgBBARgBBgBdAb4ABgBzAWIBBgCkAY8BBgBbAkECBgCGAnQC
+BgCdAnQCBgC6AnQCBgDZAnQCBgDyAnQCBgALA3QCBgAmA3QCBgBBA3QCBgBaA3QCBgCTA3MDBgCz
+A3MDBgAPBPwDBgAsBL4ABgAxBL4ABgBVBHQCCgCBBGsECgCaBGsEBgCvBHMDDgDRBBgBDgDzBBgB
+EgBMBSwFEgBoBSwFBgCMBb4ABgCbBb4AFgC+BakFFgDJBakFEgDqBSwFEgANBiwFDgBABhgBEgCU
+BiwFAAAAAAEAAAAAAAEAAQAAABAAOQBDAAUAAQABAAABEAB5AEMACQADAAUAAQAQAIIAjQANAAQA
+CAADAQAApwAAABEABAAKABEAgwETABEAsAEXABEA+gE5AAYGIwJHAFaAKwJKAFaAMwJKAFAgAAAA
+AIMYwAEbAAEAWCAAAAAAkwjGAR8AAQCRIAAAAACTCNoBJAABAJggAAAAAJMI5gEpAAEAoCAAAAAA
+lggKAj0AAgCzIAAAAACGGMABGwACAKcgAAAAAJEYygSJAAIAvCAAAAAAhgAeAhsAAgAIIgAAAACG
+GMABGwACAAAAAQA7AjkAwAFYAEEAwAFYAEkAwAFYAFEAwAFYAFkAwAFYAGEAwAFYAGkAwAFYAHEA
+wAFYAHkAwAFYAIEAwAFYAIkAwAFdAJEAwAEbAJkAwAEbAAkAwAEbAKEAQwRiAKEAXgRpACkAwAFu
+ALkAwAF6AMkAwAEbABEAwAEbANEAwAEbABkABQWNANkAWAWSAOkAggWXAPEAkgWbAPkAogWfAAEB
+1gWlANkA2wVdAOEA/wWsABEBHwayABkBKwabANkAVAa4ACEBXwa+ABkBbwbJABkBgQabACEBigbO
+ACkBogbXABkAwAEbAAgAFABOAAgAGABTACkAkwCAAC4AGwBgAS4AIwBgAS4AYwCeAS4ACwDoAC4A
+EwAwAS4AMwAwAS4AKwBmAS4AOwB1AS4AQwBgAS4AWwCVAUMAawBTAEkAkwCAAGEAmwBTAIMAqwBT
+AHUA2wACAAEAAwADAAAAcwEvAAAA8gE0AAAAFgJCAAIAAgADAAIAAwAFAAEABAAFAAIABQAHAASA
+AAABAAAASBTYZQAAAAAAANEDAAAEAAAAAAAAAAAAAAABALUAAAAAAAQAAAAAAAAAAAAAAAEAvgAA
+AAAACwAAAAAAAAAAAAAACgD5AAAAAAALAAAAAAAAAAAAAAAKAA0FAAAAAAQAAAAAAAAAAAAAAAEA
+qQUAAAAAAAAAAAEAAACrBgAABQAEAAAAAAAAPE1vZHVsZT4AU1RfMjMxYTY5YzIzM2Y4NDJhMzlk
+MGUyMjc0NjVjYzEzMmEuY3Nwcm9qLmRsbABSZXNvdXJjZXMAU1RfMjMxYTY5YzIzM2Y4NDJhMzlk
+MGUyMjc0NjVjYzEzMmEuY3Nwcm9qLlByb3BlcnRpZXMAU2V0dGluZ3MAU2NyaXB0TWFpbgBWYWxp
+ZGF0ZUNvbm5lY3Rpb25zU2NyaXB0AFNjcmlwdFJlc3VsdHMAbXNjb3JsaWIAU3lzdGVtAE9iamVj
+dABTeXN0ZW0uQ29uZmlndXJhdGlvbgBBcHBsaWNhdGlvblNldHRpbmdzQmFzZQBNaWNyb3NvZnQu
+U3FsU2VydmVyLlNjcmlwdFRhc2sATWljcm9zb2Z0LlNxbFNlcnZlci5EdHMuVGFza3MuU2NyaXB0
+VGFzawBWU1RBUlRTY3JpcHRPYmplY3RNb2RlbEJhc2UARW51bQBTeXN0ZW0uUmVzb3VyY2VzAFJl
+c291cmNlTWFuYWdlcgByZXNvdXJjZU1hbgBTeXN0ZW0uR2xvYmFsaXphdGlvbgBDdWx0dXJlSW5m
+bwByZXNvdXJjZUN1bHR1cmUALmN0b3IAZ2V0X1Jlc291cmNlTWFuYWdlcgBnZXRfQ3VsdHVyZQBz
+ZXRfQ3VsdHVyZQBDdWx0dXJlAGRlZmF1bHRJbnN0YW5jZQBnZXRfRGVmYXVsdABEZWZhdWx0AE1h
+aW4AdmFsdWVfXwBTdWNjZXNzAEZhaWx1cmUAdmFsdWUAU3lzdGVtLlJ1bnRpbWUuVmVyc2lvbmlu
+ZwBUYXJnZXRGcmFtZXdvcmtBdHRyaWJ1dGUAU3lzdGVtLlJlZmxlY3Rpb24AQXNzZW1ibHlUaXRs
+ZUF0dHJpYnV0ZQBBc3NlbWJseURlc2NyaXB0aW9uQXR0cmlidXRlAEFzc2VtYmx5Q29uZmlndXJh
+dGlvbkF0dHJpYnV0ZQBBc3NlbWJseUNvbXBhbnlBdHRyaWJ1dGUAQXNzZW1ibHlQcm9kdWN0QXR0
+cmlidXRlAEFzc2VtYmx5Q29weXJpZ2h0QXR0cmlidXRlAEFzc2VtYmx5VHJhZGVtYXJrQXR0cmli
+dXRlAEFzc2VtYmx5Q3VsdHVyZUF0dHJpYnV0ZQBBc3NlbWJseVZlcnNpb25BdHRyaWJ1dGUAU3lz
+dGVtLlJ1bnRpbWUuQ29tcGlsZXJTZXJ2aWNlcwBDb21waWxhdGlvblJlbGF4YXRpb25zQXR0cmli
+dXRlAFJ1bnRpbWVDb21wYXRpYmlsaXR5QXR0cmlidXRlAFNUXzIzMWE2OWMyMzNmODQyYTM5ZDBl
+MjI3NDY1Y2MxMzJhLmNzcHJvagBTeXN0ZW0uRGlhZ25vc3RpY3MARGVidWdnZXJOb25Vc2VyQ29k
+ZUF0dHJpYnV0ZQBUeXBlAFJ1bnRpbWVUeXBlSGFuZGxlAEdldFR5cGVGcm9tSGFuZGxlAEFzc2Vt
+Ymx5AGdldF9Bc3NlbWJseQBTeXN0ZW0uQ29tcG9uZW50TW9kZWwARWRpdG9yQnJvd3NhYmxlQXR0
+cmlidXRlAEVkaXRvckJyb3dzYWJsZVN0YXRlAENvbXBpbGVyR2VuZXJhdGVkQXR0cmlidXRlAC5j
+Y3RvcgBTU0lTU2NyaXB0VGFza0VudHJ5UG9pbnRBdHRyaWJ1dGUAU2NyaXB0T2JqZWN0TW9kZWwA
+Z2V0X0R0cwBNaWNyb3NvZnQuU3FsU2VydmVyLk1hbmFnZWREVFMATWljcm9zb2Z0LlNxbFNlcnZl
+ci5EdHMuUnVudGltZQBDb25uZWN0aW9ucwBnZXRfQ29ubmVjdGlvbnMARFRTUmVhZE9ubHlDb2xs
+ZWN0aW9uQmFzZQBnZXRfQ291bnQASW50MzIAVG9TdHJpbmcAU3RyaW5nAENvbmNhdABTeXN0ZW0u
+V2luZG93cy5Gb3JtcwBNZXNzYWdlQm94AERpYWxvZ1Jlc3VsdABTaG93AHNldF9UYXNrUmVzdWx0
+AENvbm5lY3Rpb25FbnVtZXJhdG9yAEdldEVudW1lcmF0b3IAQ29ubmVjdGlvbk1hbmFnZXIAZ2V0
+X0N1cnJlbnQAZ2V0X0Nvbm5lY3Rpb25TdHJpbmcARXZlbnRzT2JqZWN0V3JhcHBlcgBnZXRfRXZl
+bnRzAEZpcmVJbmZvcm1hdGlvbgBBY3F1aXJlQ29ubmVjdGlvbgBnZXRfTmFtZQBGaXJlRXJyb3IA
+RHRzRW51bWVyYXRvcgBNb3ZlTmV4dABTVF8yMzFhNjljMjMzZjg0MmEzOWQwZTIyNzQ2NWNjMTMy
+YS5jc3Byb2ouUHJvcGVydGllcy5SZXNvdXJjZXMucmVzb3VyY2VzAAAAAAB/UwBUAF8AMgAzADEA
+YQA2ADkAYwAyADMAMwBmADgANAAyAGEAMwA5AGQAMABlADIAMgA3ADQANgA1AGMAYwAxADMAMgBh
+AC4AYwBzAHAAcgBvAGoALgBQAHIAbwBwAGUAcgB0AGkAZQBzAC4AUgBlAHMAbwB1AHIAYwBlAHMA
+ABFDAG8AdQBuAHQAIAA9ACAAAAEAKUMAbwBuAG4AZQBjAHQAaQBvAG4AIABzAHQAcgBpAG4AZwAg
+AD0AIAAANUMAbwBuAG4AZQBjAHQAZQBkACAAcwB1AGMAYwBlAHMAcwBmAHUAbABsAHkAIAB0AG8A
+IAAAK0MAbwBuAG4AZQBjAHQAaQBvAG4AIABmAGEAaQBsAGUAZAAgAG8AbgAgAAAAAAB1m+4UHlB3
+R58RvXJmKx3LAAi3elxWGTTgiQiJhF3NgIDMkQMGEhUDBhIZAyAAAQQAABIVBAAAEhkFAAEBEhkE
+CAASFQQIABIZAwYSDAQAABIMBAgAEgwCBggDBhEUBAAAAAAEAQAAAAQgAQEOBCABAQgGAAESURFV
+BCAAElkGIAIBDhJZBAcBEhUFIAEBEWEIAQACAAAAAAADAAABBCAAEm0EIAAScQMgAAgDIAAOBQAC
+Dg4OBgABEYCFDgUgABKAiQUgABKAjQUgABKAkQogBgEIDg4OCBACBCABHBwIIAUCCA4ODggDIAAC
+DAcGDgICEoCNCBKAiUcBABouTkVURnJhbWV3b3JrLFZlcnNpb249djQuMAEAVA4URnJhbWV3b3Jr
+RGlzcGxheU5hbWUQLk5FVCBGcmFtZXdvcmsgNC8BACpTVF8yMzFhNjljMjMzZjg0MmEzOWQwZTIy
+NzQ2NWNjMTMyYS5jc3Byb2oAAAUBAAAAAA4BAAlNaWNyb3NvZnQAAB8BABpDb3B5cmlnaHQgQCBN
+aWNyb3NvZnQgMjAxNAAACAEACAAAAAAAHgEAAQBUAhZXcmFwTm9uRXhjZXB0aW9uVGhyb3dzAQAA
+AIgxAAAAAAAAAAAAAJ4xAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQMQAAAAAAAAAAX0NvckRs
+bE1haW4AbXNjb3JlZS5kbGwAAAAAAP8lACAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAEAEAAAABgAAIAAAAAAAAAAAAAAAAAAAAEAAQAAADAAAIAAAAAAAAAAAAAAAAAAAAEAAAAA
+AEgAAABYQAAAOAQAAAAAAAAAAAAAOAQ0AAAAVgBTAF8AVgBFAFIAUwBJAE8ATgBfAEkATgBGAE8A
+AAAAAL0E7/4AAAEAAAABANhlSBQAAAEA2GVIFD8AAAAAAAAABAAAAAIAAAAAAAAAAAAAAAAAAABE
+AAAAAQBWAGEAcgBGAGkAbABlAEkAbgBmAG8AAAAAACQABAAAAFQAcgBhAG4AcwBsAGEAdABpAG8A
+bgAAAAAAAACwBJgDAAABAFMAdAByAGkAbgBnAEYAaQBsAGUASQBuAGYAbwAAAHQDAAABADAAMAAw
+ADAAMAA0AGIAMAAAADQACgABAEMAbwBtAHAAYQBuAHkATgBhAG0AZQAAAAAATQBpAGMAcgBvAHMA
+bwBmAHQAAACAACsAAQBGAGkAbABlAEQAZQBzAGMAcgBpAHAAdABpAG8AbgAAAAAAUwBUAF8AMgAz
+ADEAYQA2ADkAYwAyADMAMwBmADgANAAyAGEAMwA5AGQAMABlADIAMgA3ADQANgA1AGMAYwAxADMA
+MgBhAC4AYwBzAHAAcgBvAGoAAAAAAEAADwABAEYAaQBsAGUAVgBlAHIAcwBpAG8AbgAAAAAAMQAu
+ADAALgA1ADEAOQAyAC4AMgA2ADAANwAyAAAAAACAAC8AAQBJAG4AdABlAHIAbgBhAGwATgBhAG0A
+ZQAAAFMAVABfADIAMwAxAGEANgA5AGMAMgAzADMAZgA4ADQAMgBhADMAOQBkADAAZQAyADIANwA0
+ADYANQBjAGMAMQAzADIAYQAuAGMAcwBwAHIAbwBqAC4AZABsAGwAAAAAAFwAGwABAEwAZQBnAGEA
+bABDAG8AcAB5AHIAaQBnAGgAdAAAAEMAbwBwAHkAcgBpAGcAaAB0ACAAQAAgAE0AaQBjAHIAbwBz
+AG8AZgB0ACAAMgAwADEANAAAAAAAiAAvAAEATwByAGkAZwBpAG4AYQBsAEYAaQBsAGUAbgBhAG0A
+ZQAAAFMAVABfADIAMwAxAGEANgA5AGMAMgAzADMAZgA4ADQAMgBhADMAOQBkADAAZQAyADIANwA0
+ADYANQBjAGMAMQAzADIAYQAuAGMAcwBwAHIAbwBqAC4AZABsAGwAAAAAAHgAKwABAFAAcgBvAGQA
+dQBjAHQATgBhAG0AZQAAAAAAUwBUAF8AMgAzADEAYQA2ADkAYwAyADMAMwBmADgANAAyAGEAMwA5
+AGQAMABlADIAMgA3ADQANgA1AGMAYwAxADMAMgBhAC4AYwBzAHAAcgBvAGoAAAAAAEQADwABAFAA
+cgBvAGQAdQBjAHQAVgBlAHIAcwBpAG8AbgAAADEALgAwAC4ANQAxADkAMgAuADIANgAwADcAMgAA
+AAAASAAPAAEAQQBzAHMAZQBtAGIAbAB5ACAAVgBlAHIAcwBpAG8AbgAAADEALgAwAC4ANQAxADkA
+MgAuADIANgAwADcAMgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAADAAAALAxAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
+            </ScriptProject>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Setup.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{06AE0481-7F26-456F-896A-CF22333FE8B8}"
+          DTS:From="Package\Setup\Validate Connections Script"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Setup\Set Application Run ID" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Setup.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{1997FD84-DB27-4A92-8502-39A86A2EF922}"
+          DTS:From="Package\Setup\Set Application Run ID"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Setup\Get Lineage - Insert Audit Record" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Successful Loading Closeout"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{B120956E-4DEA-446A-8431-5FA8F200EF0B}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Successful Loading Closeout">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Successful Loading Closeout\Write Success Record"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{E4037B42-E2F5-4F2C-9868-1CF38604FEEA}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Write Success Record"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{843B9DF5-618A-48DA-8301-85359228D94D}"
+              SQLTask:SqlStatementSource="&#xA;UPDATE [custom].[PackageAudit] SET&#xA;CompleteTMST = GETDATE(),&#xA; LastRunDT = CAST(GETDATE() AS date),&#xA;CompletionMessage = ?&#xA;WHERE PackageAuditKey = ?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::SuccessMessage"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::LineageID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{F49F7E4E-975D-49C2-831F-9DCEF6189B15}"
+      DTS:From="Package\Setup"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Data Processing" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{101C7F51-32E1-445E-BBE3-AAC1C0FA96D2}"
+      DTS:From="Package\Data Processing"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Successful Loading Closeout" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{355E6E9B-36E9-45F9-AB04-1CBC607DEB13}"
+      DTS:From="Package\Data Processing"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Failure Loading Closeout"
+      DTS:Value="1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="236,42"
+          Id="Package\Data Processing\Data Flow Task GAYE PAYMENTS"
+          TopLeft="60,165.035297060508" />
+        <NodeLayout
+          Size="167,42"
+          Id="Package\Data Processing\Merge delta tables"
+          TopLeft="79.428571759438,280.141178177962" />
+        <NodeLayout
+          Size="183,42"
+          Id="Package\Data Processing\Truncate Delta Tables"
+          TopLeft="82.8571432463976,17.9764675080979" />
+        <EdgeLayout
+          Id="Package\Data Processing.PrecedenceConstraints[Constraint]"
+          TopLeft="176.178571623199,59.9764675080979">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,105.05882955241"
+              Start="0,0"
+              End="0,97.5588295524101">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,97.5588295524101" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Processing.PrecedenceConstraints[Constraint 1]"
+          TopLeft="178,207.035297060508">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-15.071428240562,73.105881117454"
+              Start="0,0"
+              End="-15.071428240562,65.605881117454">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.552940558727" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,32.552940558727"
+                    Point2="0,36.552940558727"
+                    Point3="-4,36.552940558727" />
+                  <mssgle:LineSegment
+                    End="-11.071428240562,36.552940558727" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-11.071428240562,36.552940558727"
+                    Point2="-15.071428240562,36.552940558727"
+                    Point3="-15.071428240562,40.552940558727" />
+                  <mssgle:LineSegment
+                    End="-15.071428240562,65.605881117454" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43.924528301886795"
+          IsExpanded="True"
+          PanelSize="340,377"
+          Size="340,421"
+          Id="Package\Data Processing"
+          TopLeft="295.16846825859,510.068668020351" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Failure Loading Closeout\Write Failure Record"
+          TopLeft="75.8867924528302,21.6792452830191" />
+        <ContainerLayout
+          HeaderHeight="43.924528301886795"
+          IsExpanded="True"
+          PanelSize="284,116"
+          Size="284,160"
+          Id="Package\Failure Loading Closeout"
+          TopLeft="539.090305429355,1142.76789192946" />
+        <NodeLayout
+          Size="238,42"
+          Id="Package\Setup\Get Lineage - Insert Audit Record"
+          TopLeft="34.0571503989554,218.258827704899" />
+        <NodeLayout
+          Size="186,42"
+          Id="Package\Setup\Set Application Run ID"
+          TopLeft="67.5664933251099,122.729703928414" />
+        <NodeLayout
+          Size="153,52"
+          Id="Package\Setup\Validate Connections Script"
+          TopLeft="82.1401629658173,11.09248979037" />
+        <EdgeLayout
+          Id="Package\Setup.PrecedenceConstraints[Constraint]"
+          TopLeft="159.653328145464,63.09248979037">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.6372141380444"
+              Start="0,0"
+              End="0,52.1372141380444">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.1372141380444" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Setup.PrecedenceConstraints[Constraint 1]"
+          TopLeft="156.811821862033,164.329703928414">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53.9291237764849"
+              Start="0,0"
+              End="0,46.4291237764849">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.4291237764849" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43.924528301886795"
+          IsExpanded="True"
+          PanelSize="297,322"
+          Size="297,366"
+          Id="Package\Setup"
+          TopLeft="318.535032183929,52.7745439599149" />
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Successful Loading Closeout\Write Success Record"
+          TopLeft="41.9838263741537,22.6892343772847" />
+        <ContainerLayout
+          HeaderHeight="43.924528301886795"
+          IsExpanded="True"
+          PanelSize="336,119"
+          Size="336,163"
+          Id="Package\Successful Loading Closeout"
+          TopLeft="40.8827496424155,1167.00318330158" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="466.05175022126,419.174543959915">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,90.8941240604362"
+              Start="0,0"
+              End="0,83.3941240604362">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,83.3941240604362" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="409.835134925257,918.868668020351">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-200.952385282841,248.134515281229"
+              Start="0,0"
+              End="-200.952385282841,240.634515281229">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,95.9511396448978" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,95.9511396448978"
+                    Point2="0,99.9511396448978"
+                    Point3="-4,99.9511396448978" />
+                  <mssgle:LineSegment
+                    End="-196.952385282841,99.9511396448978" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-196.952385282841,99.9511396448978"
+                    Point2="-200.952385282841,99.9511396448978"
+                    Point3="-200.952385282841,103.951139644898" />
+                  <mssgle:LineSegment
+                    End="-200.952385282841,240.634515281229" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="520.501801591923,918.868668020351">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="160.588503837432,223.899223909109"
+              Start="0,0"
+              End="160.588503837432,216.399223909109">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,86.1889145488682" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,86.1889145488682"
+                    Point2="0,90.1889145488682"
+                    Point3="4,90.1889145488682" />
+                  <mssgle:LineSegment
+                    End="156.588503837432,90.1889145488682" />
+                  <mssgle:CubicBezierSegment
+                    Point1="156.588503837432,90.1889145488682"
+                    Point2="160.588503837432,90.1889145488682"
+                    Point3="160.588503837432,94.1889145488682" />
+                  <mssgle:LineSegment
+                    End="160.588503837432,216.399223909109" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="65.0529042624658,95.1889145488682,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Processing\Data Flow Task GAYE PAYMENTS">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="131,42"
+          Id="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Row Count"
+          TopLeft="87.4285729174711,156.000002187841" />
+        <NodeLayout
+          Size="144,42"
+          Id="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source"
+          TopLeft="69,27" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination"
+          TopLeft="70.2751320123853,259.835294143387" />
+        <EdgeLayout
+          Id="Package\Data Processing\Data Flow Task GAYE PAYMENTS.Paths[Row Count Output 1]"
+          TopLeft="154.351852464928,198.000002187841">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61.835291955546"
+              Start="0,0"
+              End="0,54.335291955546">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54.335291955546" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Processing\Data Flow Task GAYE PAYMENTS.Paths[Oracle Source Output]"
+          TopLeft="141,69">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="11.9285729174711,87.000002187841"
+              Start="0,0"
+              End="11.9285729174711,79.500002187841">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.5000010939205" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,39.5000010939205"
+                    Point2="0,43.5000010939205"
+                    Point3="4,43.5000010939205" />
+                  <mssgle:LineSegment
+                    End="7.92857291747112,43.5000010939205" />
+                  <mssgle:CubicBezierSegment
+                    Point1="7.92857291747112,43.5000010939205"
+                    Point2="11.9285729174711,43.5000010939205"
+                    Point3="11.9285729174711,47.5000010939205" />
+                  <mssgle:LineSegment
+                    End="11.9285729174711,79.500002187841" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Processing\Data Flow Task GAYE PAYMENTS\Oracle Source">
+    <Properties>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Processing\Data Flow Task GAYE PAYMENTS\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

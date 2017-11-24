@@ -1,0 +1,21 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="CIS Live"
+  DTS:DTSID="{B0E6080B-7584-431F-9BC5-B95A0F1857CA}"
+  DTS:CreationName="MSORA">
+  <DTS:ObjectData>
+    <OracleXMLPackage>
+      <OraConnectionString>SERVER=CISLIVE;USERNAME=care_admin;ORACLEHOME=;ORACLEHOME64=;WINAUTH=0</OraConnectionString>
+      <OraRetain>False</OraRetain>
+      <OraInitialCatalog></OraInitialCatalog>
+      <OraServerName>CISLIVE</OraServerName>
+      <OraUserName>care_admin</OraUserName>
+      <OraOracleHome></OraOracleHome>
+      <OraOracleHome64></OraOracleHome64>
+      <OraWinAuthentication>False</OraWinAuthentication>
+      <OraEnableDetailedTracing>False</OraEnableDetailedTracing>
+      <OraPassword
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA8kZIAXw5jUOO/wjY8ajMxgAAAAACAAAAAAADZgAAwAAAABAAAABy6+wmyMR/3kCiJmPvE0XOAAAAAASAAACgAAAAEAAAANDBklCKFCJiDaSSHXzTOjY4AAAAnsLKV3LPPb+DVP+qpTn/v8ZJ3Tt7Nzys3fIRCina/0vmPl1QNmA2MUkGGuwEKYIHEsU6qKk8nkoUAAAAfsFCFv/sSwDAfarX/SvGOE9MWcs=</OraPassword>
+    </OracleXMLPackage>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
