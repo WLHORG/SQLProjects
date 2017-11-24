@@ -1,0 +1,27 @@
+﻿CREATE TABLE [cis_delta].[order_details] (
+    [order_number]         NUMERIC (18)   NOT NULL,
+    [contact_number]       NUMERIC (18)   NULL,
+    [address_number]       NUMERIC (18)   NULL,
+    [detail_number]        NUMERIC (18)   NOT NULL,
+    [product]              VARCHAR (20)   NOT NULL,
+    [rate]                 VARCHAR (4)    NOT NULL,
+    [quantity]             NUMERIC (18)   NOT NULL,
+    [amount]               NUMERIC (9, 2) NULL,
+    [balance]              NUMERIC (9, 2) NOT NULL,
+    [arrears]              NUMERIC (9, 2) NOT NULL,
+    [despatch_method]      VARCHAR (4)    NULL,
+    [time_status]          VARCHAR (1)    NOT NULL,
+    [product_number]       NUMERIC (18)   NULL,
+    [distribution_code]    VARCHAR (10)   NULL,
+    [amended_by]           VARCHAR (14)   NOT NULL,
+    [amended_on]           DATETIME       NOT NULL,
+    [source]               VARCHAR (10)   NULL,
+    [created_by]           VARCHAR (14)   NULL,
+    [created_on]           DATETIME       NULL,
+    [communication_number] NUMERIC (18)   NULL,
+    [effective_date]       DATETIME       NULL,
+    [valid_from]           DATETIME       NULL,
+    [valid_to]             DATETIME       NULL,
+    [net_fixed_amount]     NUMERIC (9, 2) NULL
+);
+

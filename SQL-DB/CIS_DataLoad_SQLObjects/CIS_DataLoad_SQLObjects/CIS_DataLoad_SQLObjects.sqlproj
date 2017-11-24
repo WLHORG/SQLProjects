@@ -1,0 +1,500 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>CIS_DataLoad_SQLObjects</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{5f52d806-86f3-49a9-8067-d7d26b0b04ea}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>CIS_DataLoad_SQLObjects</RootNamespace>
+    <AssemblyName>CIS_DataLoad_SQLObjects</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>Latin1_General_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="cis\" />
+    <Folder Include="cis\Tables\" />
+    <Folder Include="cis_delta\" />
+    <Folder Include="cis_delta\Tables\" />
+    <Folder Include="control\" />
+    <Folder Include="control\Tables\" />
+    <Folder Include="cis\Stored Procedures\" />
+    <Folder Include="custom\" />
+    <Folder Include="custom\Stored Procedures\" />
+    <Folder Include="Security\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="cis\Tables\mailing_suppressions.sql" />
+    <Build Include="cis_delta\Tables\expenditure_groups.sql" />
+    <Build Include="cis\Tables\mailing_template_paragraphs.sql" />
+    <Build Include="cis_delta\Tables\ext_tf_report.sql" />
+    <Build Include="cis\Tables\mailing_templates.sql" />
+    <Build Include="cis_delta\Tables\financial_history.sql" />
+    <Build Include="cis\Tables\mailings.sql" />
+    <Build Include="cis\Tables\maintenance_attributes.sql" />
+    <Build Include="cis_delta\Tables\financial_history_details.sql" />
+    <Build Include="cis\Tables\maintenance_tables.sql" />
+    <Build Include="cis_delta\Tables\financial_links.sql" />
+    <Build Include="cis\Tables\members.sql" />
+    <Build Include="cis_delta\Tables\fundraising_request_stages.sql" />
+    <Build Include="cis_delta\Tables\fundraising_request_targets.sql" />
+    <Build Include="cis\Tables\membership_types.sql" />
+    <Build Include="cis_delta\Tables\fundraising_request_types.sql" />
+    <Build Include="cis\Tables\order_details.sql" />
+    <Build Include="cis_delta\Tables\fundraising_requests.sql" />
+    <Build Include="cis\Tables\order_payment_history.sql" />
+    <Build Include="cis_delta\Tables\fundraising_statuses.sql" />
+    <Build Include="cis\Tables\order_payment_schedule.sql" />
+    <Build Include="cis_delta\Tables\GAD_Invalid_Declaration_date.sql" />
+    <Build Include="cis\Tables\orders.sql" />
+    <Build Include="cis_delta\Tables\gaye_agencies.sql" />
+    <Build Include="cis\Tables\organisation_actions.sql" />
+    <Build Include="cis_delta\Tables\gaye_controls.sql" />
+    <Build Include="cis\Tables\organisation_address_usages.sql" />
+    <Build Include="cis_delta\Tables\gaye_payments.sql" />
+    <Build Include="cis\Tables\organisation_addresses.sql" />
+    <Build Include="cis\Tables\action_priorities.sql" />
+    <Build Include="cis_delta\Tables\gaye_pledge_payment_history.sql" />
+    <Build Include="cis\Tables\organisation_categories.sql" />
+    <Build Include="cis\Tables\action_statuses.sql" />
+    <Build Include="cis_delta\Tables\gaye_pledges.sql" />
+    <Build Include="cis\Tables\organisation_groups.sql" />
+    <Build Include="cis\Tables\action_subjects.sql" />
+    <Build Include="cis_delta\Tables\geographical_region_postcodes.sql" />
+    <Build Include="cis\Tables\organisation_links.sql" />
+    <Build Include="cis\Tables\actions.sql" />
+    <Build Include="cis_delta\Tables\geographical_regions.sql" />
+    <Build Include="cis\Tables\organisation_suppressions.sql" />
+    <Build Include="cis\Tables\activities.sql" />
+    <Build Include="cis_delta\Tables\gift_aid_declarations.sql" />
+    <Build Include="cis\Tables\organisations.sql" />
+    <Build Include="cis\Tables\activity_users.sql" />
+    <Build Include="cis_delta\Tables\government_region_postcodes.sql" />
+    <Build Include="cis\Tables\ownership_groups.sql" />
+    <Build Include="cis\Tables\activity_value_users.sql" />
+    <Build Include="cis_delta\Tables\government_regions.sql" />
+    <Build Include="cis\Tables\payment_frequencies.sql" />
+    <Build Include="cis\Tables\activity_values.sql" />
+    <Build Include="cis_delta\Tables\invoice_details.sql" />
+    <Build Include="cis\Tables\payment_methods.sql" />
+    <Build Include="cis\Tables\address_geographical_regions.sql" />
+    <Build Include="cis_delta\Tables\invoice_pay_statuses.sql" />
+    <Build Include="cis\Tables\principal_users.sql" />
+    <Build Include="cis\Tables\address_usages.sql" />
+    <Build Include="cis_delta\Tables\invoice_payment_history.sql" />
+    <Build Include="cis\Tables\product_groups.sql" />
+    <Build Include="cis\Tables\addresses.sql" />
+    <Build Include="cis_delta\Tables\invoices.sql" />
+    <Build Include="cis\Tables\products.sql" />
+    <Build Include="cis\Tables\amendment_history.sql" />
+    <Build Include="cis_delta\Tables\legacy_bequest_receipts.sql" />
+    <Build Include="cis\Tables\rates.sql" />
+    <Build Include="cis\Tables\bank_accounts.sql" />
+    <Build Include="cis_delta\Tables\legacy_bequests.sql" />
+    <Build Include="cis\Tables\relationships.sql" />
+    <Build Include="cis\Tables\bankers_orders.sql" />
+    <Build Include="cis\Tables\reversals.sql" />
+    <Build Include="cis\Tables\banks.sql" />
+    <Build Include="cis_delta\Tables\mailing_history.sql" />
+    <Build Include="cis\Tables\roles.sql" />
+    <Build Include="cis\Tables\batch_transaction_analysis.sql" />
+    <Build Include="cis_delta\Tables\mailing_suppressions.sql" />
+    <Build Include="cis\Tables\sales_groups.sql" />
+    <Build Include="cis\Tables\batch_transactions.sql" />
+    <Build Include="cis_delta\Tables\mailing_template_paragraphs.sql" />
+    <Build Include="cis\Tables\selected_contacts.sql" />
+    <Build Include="cis\Tables\batch_types.sql" />
+    <Build Include="cis_delta\Tables\mailing_templates.sql" />
+    <Build Include="cis\Tables\selection_sets.sql" />
+    <Build Include="cis\Tables\batches.sql" />
+    <Build Include="cis_delta\Tables\mailings.sql" />
+    <Build Include="cis\Tables\session_activities.sql" />
+    <Build Include="cis\Tables\branch_postcodes.sql" />
+    <Build Include="cis_delta\Tables\maintenance_attributes.sql" />
+    <Build Include="cis\Tables\session_bookings.sql" />
+    <Build Include="cis\Tables\cancellation_reasons.sql" />
+    <Build Include="cis_delta\Tables\maintenance_tables.sql" />
+    <Build Include="cis\Tables\sessions.sql" />
+    <Build Include="cis\Tables\communication_usages.sql" />
+    <Build Include="cis_delta\Tables\members.sql" />
+    <Build Include="cis\Tables\sources.sql" />
+    <Build Include="cis\Tables\communications.sql" />
+    <Build Include="cis\Tables\standard_documents.sql" />
+    <Build Include="cis\Tables\communications_log.sql" />
+    <Build Include="cis_delta\Tables\membership_types.sql" />
+    <Build Include="cis\Tables\status_history.sql" />
+    <Build Include="cis\Tables\communications_log_links.sql" />
+    <Build Include="cis_delta\Tables\order_details.sql" />
+    <Build Include="cis\Tables\statuses.sql" />
+    <Build Include="cis\Tables\communications_log_subjects.sql" />
+    <Build Include="cis_delta\Tables\order_payment_history.sql" />
+    <Build Include="cis\Tables\sub_topics.sql" />
+    <Build Include="cis\Tables\contact_accounts.sql" />
+    <Build Include="cis_delta\Tables\order_payment_schedule.sql" />
+    <Build Include="cis\Tables\suppression_group_details.sql" />
+    <Build Include="cis\Tables\contact_actions.sql" />
+    <Build Include="cis\Tables\suppression_groups.sql" />
+    <Build Include="cis\Tables\contact_address_usages.sql" />
+    <Build Include="cis_delta\Tables\orders.sql" />
+    <Build Include="cis\Tables\topics.sql" />
+    <Build Include="cis\Tables\contact_addresses.sql" />
+    <Build Include="cis_delta\Tables\organisation_actions.sql" />
+    <Build Include="cis\Tables\transaction_origins.sql" />
+    <Build Include="cis\Tables\contact_categories.sql" />
+    <Build Include="cis_delta\Tables\organisation_address_usages.sql" />
+    <Build Include="cis\Tables\transaction_types.sql" />
+    <Build Include="cis\Tables\contact_communication_usages.sql" />
+    <Build Include="cis_delta\Tables\organisation_addresses.sql" />
+    <Build Include="cis\Tables\users.sql" />
+    <Build Include="cis\Tables\contact_external_links.sql" />
+    <Build Include="cis_delta\Tables\organisation_categories.sql" />
+    <Build Include="cis\Tables\venues.sql" />
+    <Build Include="cis\Tables\contact_legacies.sql" />
+    <Build Include="cis_delta\Tables\organisation_groups.sql" />
+    <Build Include="cis_delta\Tables\action_priorities.sql" />
+    <Build Include="cis\Tables\contact_links.sql" />
+    <Build Include="cis_delta\Tables\organisation_links.sql" />
+    <Build Include="cis_delta\Tables\action_statuses.sql" />
+    <Build Include="cis\Tables\contact_mailing_documents.sql" />
+    <Build Include="cis_delta\Tables\organisation_suppressions.sql" />
+    <Build Include="cis_delta\Tables\action_subjects.sql" />
+    <Build Include="cis\Tables\contact_mailings.sql" />
+    <Build Include="cis_delta\Tables\organisations.sql" />
+    <Build Include="cis_delta\Tables\actions.sql" />
+    <Build Include="cis\Tables\contact_positions.sql" />
+    <Build Include="cis_delta\Tables\ownership_groups.sql" />
+    <Build Include="cis_delta\Tables\activities.sql" />
+    <Build Include="cis\Tables\contact_roles.sql" />
+    <Build Include="cis_delta\Tables\payment_frequencies.sql" />
+    <Build Include="cis_delta\Tables\activity_users.sql" />
+    <Build Include="cis\Tables\contact_suppressions.sql" />
+    <Build Include="cis_delta\Tables\payment_methods.sql" />
+    <Build Include="cis_delta\Tables\activity_value_users.sql" />
+    <Build Include="cis\Tables\contacts.sql" />
+    <Build Include="cis_delta\Tables\principal_users.sql" />
+    <Build Include="cis_delta\Tables\activity_values.sql" />
+    <Build Include="cis\Tables\countries.sql" />
+    <Build Include="cis_delta\Tables\product_groups.sql" />
+    <Build Include="cis_delta\Tables\address_geographical_regions.sql" />
+    <Build Include="cis\Tables\covenants.sql" />
+    <Build Include="cis_delta\Tables\products.sql" />
+    <Build Include="cis_delta\Tables\address_usages.sql" />
+    <Build Include="cis\Tables\credit_card_authorisations.sql" />
+    <Build Include="cis_delta\Tables\rates.sql" />
+    <Build Include="cis_delta\Tables\addresses.sql" />
+    <Build Include="cis\Tables\data_sources.sql" />
+    <Build Include="cis_delta\Tables\relationships.sql" />
+    <Build Include="cis\Tables\dba_notes.sql" />
+    <Build Include="cis_delta\Tables\reversals.sql" />
+    <Build Include="cis_delta\Tables\amendment_history.sql" />
+    <Build Include="cis\Tables\declaration_lines_unclaimed.sql" />
+    <Build Include="cis_delta\Tables\roles.sql" />
+    <Build Include="cis_delta\Tables\bank_accounts.sql" />
+    <Build Include="cis\Tables\declaration_potential_lines.sql" />
+    <Build Include="cis_delta\Tables\selected_contacts.sql" />
+    <Build Include="cis_delta\Tables\bankers_orders.sql" />
+    <Build Include="cis\Tables\declaration_tax_claim_lines.sql" />
+    <Build Include="cis_delta\Tables\selection_sets.sql" />
+    <Build Include="cis_delta\Tables\banks.sql" />
+    <Build Include="cis_delta\Tables\session_activities.sql" />
+    <Build Include="cis_delta\Tables\batch_transaction_analysis.sql" />
+    <Build Include="cis\Tables\declaration_tax_claims.sql" />
+    <Build Include="cis_delta\Tables\session_bookings.sql" />
+    <Build Include="cis_delta\Tables\batch_transactions.sql" />
+    <Build Include="cis\Tables\delegate_activities.sql" />
+    <Build Include="cis_delta\Tables\sessions.sql" />
+    <Build Include="cis\Tables\delegates.sql" />
+    <Build Include="cis_delta\Tables\sources.sql" />
+    <Build Include="cis_delta\Tables\batch_types.sql" />
+    <Build Include="cis\Tables\departments.sql" />
+    <Build Include="cis_delta\Tables\standard_documents.sql" />
+    <Build Include="cis_delta\Tables\batches.sql" />
+    <Build Include="cis\Tables\devices.sql" />
+    <Build Include="cis_delta\Tables\status_history.sql" />
+    <Build Include="cis_delta\Tables\branch_postcodes.sql" />
+    <Build Include="cis\Tables\direct_debits.sql" />
+    <Build Include="cis_delta\Tables\statuses.sql" />
+    <Build Include="cis_delta\Tables\cancellation_reasons.sql" />
+    <Build Include="cis\Tables\distribution_codes.sql" />
+    <Build Include="cis_delta\Tables\sub_topics.sql" />
+    <Build Include="cis_delta\Tables\communication_usages.sql" />
+    <Build Include="cis\Tables\duk_acorn.sql" />
+    <Build Include="cis_delta\Tables\suppression_group_details.sql" />
+    <Build Include="cis_delta\Tables\communications.sql" />
+    <Build Include="cis_delta\Tables\suppression_groups.sql" />
+    <Build Include="cis_delta\Tables\communications_log.sql" />
+    <Build Include="cis\Tables\duk_bta_update_log.sql" />
+    <Build Include="cis_delta\Tables\topics.sql" />
+    <Build Include="cis\Tables\duk_channels.sql" />
+    <Build Include="cis_delta\Tables\transaction_origins.sql" />
+    <Build Include="cis_delta\Tables\communications_log_links.sql" />
+    <Build Include="cis\Tables\duk_comms_log_update_log.sql" />
+    <Build Include="cis_delta\Tables\transaction_types.sql" />
+    <Build Include="cis_delta\Tables\communications_log_subjects.sql" />
+    <Build Include="cis\Tables\duk_cont_categories_update_log.sql" />
+    <Build Include="cis_delta\Tables\users.sql" />
+    <Build Include="cis_delta\Tables\contact_accounts.sql" />
+    <Build Include="cis\Tables\duk_contacts_update_log.sql" />
+    <Build Include="cis_delta\Tables\venues.sql" />
+    <Build Include="cis_delta\Tables\contact_actions.sql" />
+    <Build Include="cis\Tables\duk_cost_centre_activities.sql" />
+    <Build Include="control\Tables\LastTableUpdate.sql" />
+    <Build Include="cis_delta\Tables\contact_address_usages.sql" />
+    <Build Include="cis\Tables\duk_cost_centre_teams.sql" />
+    <Build Include="control\Tables\TableErrors.sql" />
+    <Build Include="cis_delta\Tables\contact_addresses.sql" />
+    <Build Include="cis\Tables\duk_cost_centres.sql" />
+    <Build Include="cis_delta\Tables\contact_categories.sql" />
+    <Build Include="cis\Tables\duk_fin_hist_reconciliation.sql" />
+    <Build Include="cis_delta\Tables\contact_communication_usages.sql" />
+    <Build Include="cis\Tables\duk_fund_region_hierarchy.sql" />
+    <Build Include="cis_delta\Tables\contact_external_links.sql" />
+    <Build Include="cis_delta\Tables\contact_legacies.sql" />
+    <Build Include="cis\Tables\duk_fundraising_areas.sql" />
+    <Build Include="cis_delta\Tables\contact_links.sql" />
+    <Build Include="cis_delta\Tables\contact_mailing_documents.sql" />
+    <Build Include="cis\Tables\duk_fundraising_regions.sql" />
+    <Build Include="cis_delta\Tables\contact_mailings.sql" />
+    <Build Include="cis_delta\Tables\contact_positions.sql" />
+    <Build Include="cis\Tables\duk_month_codes.sql" />
+    <Build Include="cis_delta\Tables\contact_roles.sql" />
+    <Build Include="cis\Tables\duk_new2015_products.sql" />
+    <Build Include="cis_delta\Tables\contact_suppressions.sql" />
+    <Build Include="cis\Tables\duk_new2015_sources.sql" />
+    <Build Include="cis_delta\Tables\contacts.sql" />
+    <Build Include="cis\Tables\duk_order_details_update_log.sql" />
+    <Build Include="cis_delta\Tables\countries.sql" />
+    <Build Include="cis\Tables\duk_orders_update_log.sql" />
+    <Build Include="cis_delta\Tables\covenants.sql" />
+    <Build Include="cis\Tables\duk_programmes.sql" />
+    <Build Include="cis_delta\Tables\credit_card_authorisations.sql" />
+    <Build Include="cis\Tables\duk_region_hierarchy.sql" />
+    <Build Include="cis_delta\Tables\data_sources.sql" />
+    <Build Include="cis\Tables\duk_regions.sql" />
+    <Build Include="cis_delta\Tables\dba_notes.sql" />
+    <Build Include="cis\Tables\duk_sources.sql" />
+    <Build Include="cis_delta\Tables\declaration_lines_unclaimed.sql" />
+    <Build Include="cis\Tables\duk_year_codes.sql" />
+    <Build Include="cis_delta\Tables\declaration_potential_lines.sql" />
+    <Build Include="cis\Tables\event_booking_options.sql" />
+    <Build Include="cis_delta\Tables\declaration_tax_claim_lines.sql" />
+    <Build Include="cis\Tables\event_bookings.sql" />
+    <Build Include="cis\Tables\event_personnel.sql" />
+    <Build Include="cis_delta\Tables\declaration_tax_claims.sql" />
+    <Build Include="cis\Tables\event_personnel_tasks.sql" />
+    <Build Include="cis_delta\Tables\delegate_activities.sql" />
+    <Build Include="cis\Tables\event_topics.sql" />
+    <Build Include="cis_delta\Tables\delegates.sql" />
+    <Build Include="cis\Tables\events.sql" />
+    <Build Include="cis_delta\Tables\departments.sql" />
+    <Build Include="cis\Tables\expenditure_groups.sql" />
+    <Build Include="cis_delta\Tables\devices.sql" />
+    <Build Include="cis\Tables\ext_tf_report.sql" />
+    <Build Include="cis_delta\Tables\direct_debits.sql" />
+    <Build Include="cis\Tables\financial_history.sql" />
+    <Build Include="cis_delta\Tables\distribution_codes.sql" />
+    <Build Include="cis\Tables\financial_history_details.sql" />
+    <Build Include="cis_delta\Tables\duk_acorn.sql" />
+    <Build Include="cis\Tables\financial_links.sql" />
+    <Build Include="cis\Tables\fundraising_request_stages.sql" />
+    <Build Include="cis_delta\Tables\duk_channels.sql" />
+    <Build Include="cis\Tables\fundraising_request_targets.sql" />
+    <Build Include="cis_delta\Tables\duk_cost_centre_activities.sql" />
+    <Build Include="cis\Tables\fundraising_request_types.sql" />
+    <Build Include="cis_delta\Tables\duk_cost_centre_teams.sql" />
+    <Build Include="cis\Tables\fundraising_requests.sql" />
+    <Build Include="cis_delta\Tables\duk_cost_centres.sql" />
+    <Build Include="cis\Tables\fundraising_statuses.sql" />
+    <Build Include="cis_delta\Tables\duk_fund_region_hierarchy.sql" />
+    <Build Include="cis\Tables\GAD_Invalid_Declaration_date.sql" />
+    <Build Include="cis\Tables\gaye_agencies.sql" />
+    <Build Include="cis_delta\Tables\duk_fundraising_areas.sql" />
+    <Build Include="cis\Tables\gaye_controls.sql" />
+    <Build Include="cis\Tables\gaye_payments.sql" />
+    <Build Include="cis_delta\Tables\duk_fundraising_regions.sql" />
+    <Build Include="cis\Tables\gaye_pledge_payment_history.sql" />
+    <Build Include="cis\Tables\gaye_pledges.sql" />
+    <Build Include="cis_delta\Tables\duk_month_codes.sql" />
+    <Build Include="cis\Tables\geographical_region_postcodes.sql" />
+    <Build Include="cis_delta\Tables\duk_new2015_products.sql" />
+    <Build Include="cis\Tables\geographical_regions.sql" />
+    <Build Include="cis_delta\Tables\duk_new2015_sources.sql" />
+    <Build Include="cis\Tables\gift_aid_declarations.sql" />
+    <Build Include="cis_delta\Tables\duk_programmes.sql" />
+    <Build Include="cis\Tables\government_region_postcodes.sql" />
+    <Build Include="cis_delta\Tables\duk_region_hierarchy.sql" />
+    <Build Include="cis\Tables\government_regions.sql" />
+    <Build Include="cis_delta\Tables\duk_regions.sql" />
+    <Build Include="cis\Tables\invoice_details.sql" />
+    <Build Include="cis_delta\Tables\duk_sources.sql" />
+    <Build Include="cis\Tables\invoice_pay_statuses.sql" />
+    <Build Include="cis_delta\Tables\duk_year_codes.sql" />
+    <Build Include="cis\Tables\invoice_payment_history.sql" />
+    <Build Include="cis_delta\Tables\event_booking_options.sql" />
+    <Build Include="cis\Tables\invoices.sql" />
+    <Build Include="cis_delta\Tables\event_bookings.sql" />
+    <Build Include="cis\Tables\legacy_bequest_receipts.sql" />
+    <Build Include="cis_delta\Tables\event_personnel.sql" />
+    <Build Include="cis\Tables\legacy_bequests.sql" />
+    <Build Include="cis_delta\Tables\event_personnel_tasks.sql" />
+    <Build Include="cis_delta\Tables\event_topics.sql" />
+    <Build Include="cis\Tables\mailing_history.sql" />
+    <Build Include="cis_delta\Tables\events.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_gaye_payments.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_gaye_pledge_payment_history.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_gaye_pledges.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_geographical_region_postcodes.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_Gift_Aid_Declarations.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_government_region_postcodes.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_Invoice_Details.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_Invoice_Payment_History.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_invoices.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_legacy_bequest_receipts.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_mailing_history.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_mailing_template_paragraphs.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_mailings.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_Members.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_Order_Details.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_Order_Payment_History.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_Order_Payment_Schedule.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_orders.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_organisation_actions.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_organisation_address_usages.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_organisation_addresses.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_organisation_categories.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_organisation_links.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_organisations.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_products.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_rates.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_reversals.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_selected_contacts.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_selection_sets.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_session_activities.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_session_bookings.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_sessions.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_sources.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_Status_History.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_Users.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_Venues.sql" />
+    <Build Include="custom\Stored Procedures\spPopulateCIS_branch_reg_nat_transformation.sql" />
+    <Build Include="custom\Stored Procedures\spPopulateCIS_catalogue_financial_history.sql" />
+    <Build Include="custom\Stored Procedures\spPopulateCIS_comms_log_detail.sql" />
+    <Build Include="custom\Stored Procedures\spPopulateCIS_contact_analysis_headers.sql" />
+    <Build Include="custom\Stored Procedures\spPopulateCIS_contact_created_log.sql" />
+    <Build Include="custom\Stored Procedures\spPopulateCIS_contact_selection_header.sql" />
+    <Build Include="custom\Stored Procedures\spPopulateCIS_contact_to_nation.sql" />
+    <Build Include="custom\Stored Procedures\spPopulateCIS_contact_topic_subtopic.sql" />
+    <Build Include="custom\Stored Procedures\spPopulateCIS_current_rg.sql" />
+    <Build Include="custom\Stored Procedures\spPopulateCIS_current_wl.sql" />
+    <Build Include="custom\Stored Procedures\spPopulateCIS_emailable.sql" />
+    <Build Include="custom\Stored Procedures\spPopulateCIS_events_fin_hist.sql" />
+    <Build Include="custom\Stored Procedures\spPopulateCIS_major_donors_account_managed.sql" />
+    <Build Include="custom\Stored Procedures\spPopulateCIS_parents.sql" />
+    <Build Include="custom\Stored Procedures\spPopulateCIS_phoneable.sql" />
+    <Build Include="custom\Stored Procedures\spPopulateCIS_source_code_mapping.sql" />
+    <Build Include="custom\Stored Procedures\spPopulateCIS_universefile_output.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_actions.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_addresses.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_amendment_history.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_bankers_orders.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_Batch_Transaction_Analysis.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_Batch_Transactions.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_batches.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_branch_postcodes.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_communications.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_communications_log.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_communications_log_links.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_communications_log_subjects.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_contact_accounts.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_contact_actions.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_contact_address_usages.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_contact_addresses.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_contact_categories.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_contact_communication_usages.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_contact_external_links.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_contact_legacies.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_contact_links.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_contact_mailing_documents.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_contact_mailings.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_contact_positions.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_Contact_Roles.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_contact_suppressions.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_Contacts.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_Covenants.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_credit_card_authorisations.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_dba_notes.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_Declaration_Lines_Unclaimed.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_Declaration_Potential_Lines.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_Declaration_Tax_Claim_Lines.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_Declaration_Tax_Claims.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_delegate_activities.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_delegates.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_direct_debits.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_duk_new2015_sources.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_duk_sources.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_event_booking_options.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_event_bookings.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_event_personnel.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_event_personnel_tasks.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_event_topics.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_events.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_ext_tf_report.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_Financial_History.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_Financial_History_Details.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_Financial_Links.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_fundraising_requests.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_gaye_agencies.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_gaye_controls.sql" />
+    <Build Include="Security\cis.sql" />
+    <Build Include="Security\cis_delta.sql" />
+    <Build Include="Security\control.sql" />
+    <Build Include="Security\custom.sql" />
+  </ItemGroup>
+</Project>
