@@ -1,0 +1,2402 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="322ed8c3-fdda-4159-ac90-1c4b44ac949c" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>GDPRSSUP</ID>
+  <Name>GDPRSSUP</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+      <Value>
+        <dds xmlns="">
+          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="68" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="2452" scrolltop="6437" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="25019" y="15642" backcolor="16119285" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="1" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+            <font>
+              <ddsxmlobjectstreamwrapper binary="010000009001b0300100065461686f6d61" />
+            </font>
+            <mouseicon>
+              <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+            </mouseicon>
+          </diagram>
+          <layoutmanager>
+            <ddsxmlobj />
+          </layoutmanager>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="GDPR_dimSuppression_TelOptIn" left="8338" top="0" logicalid="34" controlid="1" masterid="0" hint1="0" hint2="0" width="5318" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000c0000c614000088130000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="GDPR_GDPR_dimSuppression_TelOptIn" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="GDPR_dimSuppression_NoSMS" left="6480" top="16400" logicalid="35" controlid="2" masterid="0" hint1="0" hint2="0" width="5318" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000c0000c614000088130000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="GDPR_GDPR_dimSuppression_NoSMS" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="GDPR_dimContactInteractionMailing" left="11434" top="31200" logicalid="36" controlid="3" masterid="0" hint1="0" hint2="0" width="3254" height="3149" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000c0000b60c00004d0c0000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="GDPR_GDPR_dimContactInteractionMailing" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="GDPR_dimDate" left="1524" top="44149" logicalid="37" controlid="4" masterid="0" hint1="0" hint2="0" width="3810" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000c0000e20e000088130000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_GDPR_dimDate" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="GDPR_dimContactInteractionFinancial" left="20" top="34900" logicalid="38" controlid="5" masterid="0" hint1="0" hint2="0" width="3307" height="3149" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000c0000eb0c00004d0c0000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="GDPR_GDPR_dimContactInteractionFinancial" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="vw_ContactEventFACT" left="5727" top="34900" logicalid="39" controlid="6" masterid="0" hint1="0" hint2="0" width="3307" height="3149" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000c0000eb0c00004d0c0000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_vw_ContactEventFACT" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="GDPR_dimSuppression_TelOptOut" left="20" top="0" logicalid="40" controlid="7" masterid="0" hint1="0" hint2="0" width="5318" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000c0000c614000088130000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="GDPR_GDPR_dimSuppression_TelOptOut" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="GDPR_dimSuppression_DPA" left="10339" top="9000" logicalid="41" controlid="8" masterid="0" hint1="0" hint2="0" width="5318" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000c0000c614000088130000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="GDPR_GDPR_dimSuppression_DPA" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="GDPR_dimEmailOptOut" left="11434" top="36749" logicalid="42" controlid="9" masterid="0" hint1="0" hint2="0" width="5503" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000c00007f15000088130000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_GDPR_dimEmailOptOut" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="GDPR_DimContactSegmentation" left="21916" top="16691" logicalid="43" controlid="10" masterid="0" hint1="0" hint2="0" width="6509" height="4419" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000c00006d19000043110000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_GDPR_DimContactSegmentation" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="GDPR_dimSuppression_SMS" left="19336" top="31200" logicalid="44" controlid="11" masterid="0" hint1="0" hint2="0" width="5318" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000c0000c614000088130000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="GDPR_GDPR_dimSuppression_SMS" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="GDPR_dimContacts" left="14198" top="20100" logicalid="45" controlid="12" masterid="0" hint1="0" hint2="0" width="5318" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000c0000c614000088130000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_GDPR_dimContacts" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="GDPR_dimDiscretionaryOptOut" left="6480" top="23800" logicalid="46" controlid="13" masterid="0" hint1="0" hint2="0" width="5318" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000c0000c614000088130000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="GDPR_GDPR_dimDiscretionaryOptOut" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="GDPR_dimContactSuppressions" left="18057" top="9000" logicalid="47" controlid="14" masterid="0" hint1="0" hint2="0" width="5318" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000c0000c614000088130000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_GDPR_dimContactSuppressions" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="GDPR_dimEmailOptIn" left="7734" top="44149" logicalid="48" controlid="15" masterid="0" hint1="0" hint2="0" width="5503" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000c00007f15000088130000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_GDPR_dimEmailOptIn" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="GDPR_dimSuppression_GoneAway" left="21916" top="23510" logicalid="49" controlid="16" masterid="0" hint1="0" hint2="0" width="5318" height="5000" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000c0000c614000088130000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="GDPR_GDPR_dimSuppression_GoneAway" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" tooltip="GDPR_dimContactRelationship" left="27054" top="31200" logicalid="50" controlid="17" masterid="0" hint1="0" hint2="0" width="6641" height="3149" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="1" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000c0000f11900004d0c0000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dbo_GDPR_dimContactRelationship" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="11498" top="18600" logicalid="51" controlid="18" masterid="0" hint1="0" hint2="0" width="3000" height="3300" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[GDPR_dimSuppression_NoSMS-GDPR_dimContacts]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="12" destid="2" sourceattachpoint="22" destattachpoint="27" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="14198" y="21500" />
+              <point x="12998" y="21500" />
+              <point x="12998" y="18900" />
+              <point x="11798" y="18900" />
+            </connector>
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="8734" top="32375" logicalid="52" controlid="19" masterid="0" hint1="0" hint2="0" width="3000" height="3299" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[vw_ContactEventFACT-GDPR_dimContactInteractionMailing]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="3" destid="6" sourceattachpoint="14" destattachpoint="11" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="11434" y="32774" />
+              <point x="10234" y="32774" />
+              <point x="10234" y="35374" />
+              <point x="9034" y="35374" />
+            </connector>
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="3030" top="37749" logicalid="53" controlid="20" masterid="0" hint1="0" hint2="0" width="3550" height="6900" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[vw_ContactEventFACT-GDPR_dimDate]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="4" destid="6" sourceattachpoint="6" destattachpoint="1" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="3429" y="44149" />
+              <point x="3429" y="41099" />
+              <point x="6280" y="41099" />
+              <point x="6280" y="38049" />
+            </connector>
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="3027" top="36075" logicalid="54" controlid="21" masterid="0" hint1="0" hint2="0" width="3000" height="799" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[vw_ContactEventFACT-GDPR_dimContactInteractionFinancial]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="5" destid="6" sourceattachpoint="15" destattachpoint="14" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="3327" y="36474" />
+              <point x="5727" y="36474" />
+            </connector>
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="7630" top="37749" logicalid="55" controlid="22" masterid="0" hint1="0" hint2="0" width="3255" height="6900" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[GDPR_dimEmailOptIn-vw_ContactEventFACT]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="15" destid="6" sourceattachpoint="8" destattachpoint="7" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="10485" y="44149" />
+              <point x="10485" y="41099" />
+              <point x="7930" y="41099" />
+              <point x="7930" y="38049" />
+            </connector>
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="8734" top="36724" logicalid="56" controlid="23" masterid="0" hint1="0" hint2="0" width="3000" height="2925" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[vw_ContactEventFACT-GDPR_dimEmailOptOut]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="9" destid="6" sourceattachpoint="26" destattachpoint="17" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="11434" y="39249" />
+              <point x="10234" y="39249" />
+              <point x="10234" y="37024" />
+              <point x="9034" y="37024" />
+            </connector>
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="7080" top="24601" logicalid="57" controlid="24" masterid="0" hint1="0" hint2="0" width="8527" height="10599" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[vw_ContactEventFACT-GDPR_dimContacts]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="12" destid="6" sourceattachpoint="3" destattachpoint="4" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="15207" y="25100" />
+              <point x="15207" y="30000" />
+              <point x="7380" y="30000" />
+              <point x="7380" y="34900" />
+            </connector>
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="12698" top="13700" logicalid="58" controlid="25" masterid="0" hint1="0" hint2="0" width="3459" height="6900" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[GDPR_dimSuppression_DPA-GDPR_dimContacts]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="12" destid="8" sourceattachpoint="4" destattachpoint="9" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="15757" y="20100" />
+              <point x="15757" y="17050" />
+              <point x="12998" y="17050" />
+              <point x="12998" y="14000" />
+            </connector>
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="19216" top="18600" logicalid="59" controlid="26" masterid="0" hint1="0" hint2="0" width="3000" height="3300" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[GDPR_DimContactSegmentation-GDPR_dimContacts]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="12" destid="10" sourceattachpoint="23" destattachpoint="28" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="19516" y="21500" />
+              <point x="20716" y="21500" />
+              <point x="20716" y="18900" />
+              <point x="21916" y="18900" />
+            </connector>
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="16458" top="24601" logicalid="60" controlid="27" masterid="0" hint1="0" hint2="0" width="5837" height="6899" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[GDPR_dimSuppression_SMS-GDPR_dimContacts]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="12" destid="11" sourceattachpoint="9" destattachpoint="8" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="16857" y="25100" />
+              <point x="16857" y="28150" />
+              <point x="21995" y="28150" />
+              <point x="21995" y="31200" />
+            </connector>
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="17008" top="13700" logicalid="61" controlid="28" masterid="0" hint1="0" hint2="0" width="4008" height="6900" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[GDPR_dimContactSuppressions-GDPR_dimContacts]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="12" destid="14" sourceattachpoint="10" destattachpoint="9" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="17407" y="20100" />
+              <point x="17407" y="17050" />
+              <point x="20716" y="17050" />
+              <point x="20716" y="14000" />
+            </connector>
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="18108" top="24601" logicalid="62" controlid="29" masterid="0" hint1="0" hint2="0" width="12566" height="6899" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[GDPR_dimContactRelationship-GDPR_dimContacts]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="12" destid="17" sourceattachpoint="15" destattachpoint="10" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="18507" y="25100" />
+              <point x="18507" y="28150" />
+              <point x="30374" y="28150" />
+              <point x="30374" y="31200" />
+            </connector>
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="11498" top="22751" logicalid="63" controlid="30" masterid="0" hint1="0" hint2="0" width="3000" height="3849" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[GDPR_dimDiscretionaryOptOut-GDPR_dimContacts]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="12" destid="13" sourceattachpoint="28" destattachpoint="27" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="14198" y="23150" />
+              <point x="12998" y="23150" />
+              <point x="12998" y="26300" />
+              <point x="11798" y="26300" />
+            </connector>
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="19216" top="22751" logicalid="64" controlid="31" masterid="0" hint1="0" hint2="0" width="3000" height="3559" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[GDPR_dimSuppression_GoneAway-GDPR_dimContacts]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="12" destid="16" sourceattachpoint="29" destattachpoint="26" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="19516" y="23150" />
+              <point x="20716" y="23150" />
+              <point x="20716" y="26010" />
+              <point x="21916" y="26010" />
+            </connector>
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="12897" top="4700" logicalid="65" controlid="32" masterid="0" hint1="0" hint2="0" width="2160" height="15900" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[GDPR_dimSuppression_TelOptIn-GDPR_dimContacts]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="12" destid="1" sourceattachpoint="0" destattachpoint="17" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="14657" y="20100" />
+              <point x="14657" y="12550" />
+              <point x="13197" y="12550" />
+              <point x="13197" y="5000" />
+            </connector>
+          </ddscontrol>
+          <ddscontrol controlprogid="MSDDS.Polyline" left="4579" top="4700" logicalid="66" controlid="33" masterid="0" hint1="0" hint2="0" width="11028" height="15900" noresize="0" nomove="0" nodefaultattachpoints="1" autodrag="0" usedefaultiddshape="0" selectable="1" showselectionhandles="0" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="1" snaptogrid="0">
+            <control>
+              <ddsxmlobj>
+                <polyline endtypedst="6" endtypesrc="3" usercolor="1973790" linestyle="0" linerender="1" customendtypedstid="0" customendtypesrcid="0" adornsvisible="1" />
+              </ddsxmlobj>
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="dataSet.Relations[GDPR_dimSuppression_TelOptOut-GDPR_dimContacts]" vartype="8" />
+                <property name="Virtual" value="0" vartype="11" />
+                <property name="VisibleAP" value="0" vartype="3" />
+              </ddsxmlobj>
+            </layoutobject>
+            <connector lineroutestyle="MSDDS.Rectilinear" sourceid="12" destid="7" sourceattachpoint="2" destattachpoint="17" segmenteditmode="0" bendpointeditmode="0" bendpointvisibility="0" relatedid="0" virtual="0">
+              <point x="15207" y="20100" />
+              <point x="15207" y="12550" />
+              <point x="4879" y="12550" />
+              <point x="4879" y="5000" />
+            </connector>
+          </ddscontrol>
+        </dds>
+      </Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>2452</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>6437</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>20</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Dimensions>
+    <Dimension dwd:design-time-name="dad37ca7-0f4e-4e76-ba9b-06bc65153fb1">
+      <ID>GDPR Dim Date</ID>
+      <Name>GDPR Dim Date</Name>
+      <DimensionID>GDPR Dim Date</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="c5dff5ed-88f9-4188-baa1-13231beb454a">
+          <AttributeID>Date</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="f25571e5-6f99-4a40-bf27-adc2d5d24ffd">
+          <AttributeID>Month</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="87e08f33-ce55-4bde-91f6-7c3c6d3ac2fb">
+          <AttributeID>Year</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="a02cb6ba-592f-40dc-a4ee-92fd37e3ee8d">
+          <AttributeID>MMYYYY</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="b3818f64-8bd9-4f52-8357-5b8860ff16b1">
+          <AttributeID>Month Name</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="698bb132-bc95-482e-84df-c285919502cf">
+      <ID>GDPR Dim Email Opt Out</ID>
+      <Name>GDPR Dim Email Opt Out</Name>
+      <DimensionID>GDPR Dim Email Opt Out</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="fae34539-2e18-4569-8a3f-009b21d9a407">
+          <AttributeID>Contact Number</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="19b209fa-f772-45ee-bbe0-1665642c161e">
+          <AttributeID>Mailing Suppression Valid From</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="fd2ce4ba-4e3d-4fc9-b795-ffa2b2f97aee">
+          <AttributeID>Mailing Suppression Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="5737eb32-885c-4def-86e0-15d04626e9a7">
+          <AttributeID>Mailing Suppression Source</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="fa3a21e4-8594-490c-ba0d-94f3cac8d32b">
+          <AttributeID>Mailing Suppression Valid To</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="06eb8a4b-46b0-4674-b9e1-6748ec19f679">
+          <AttributeID>Mailing Suppression Amended On</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="be0612db-617c-422b-a3fc-064dbaec7b3d">
+          <AttributeID>Mailing Suppression Amended By</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="3aff0f75-4a00-405d-b1cc-d69b41b41561">
+          <AttributeID>Nec Count</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="1c67aba6-57d6-43fb-93af-d500f9641eff">
+          <AttributeID>Mailing Suppression Notes</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="6d63517d-d281-48ae-bdd1-8eff75043038">
+          <AttributeID>Source Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="17b6ce8e-fa1d-4739-b825-356ba90d0c81">
+          <AttributeID>Amended On</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="33b90234-b9cd-4457-bdb9-02ea3fbbdfbb">
+          <AttributeID>Cost Centre Team Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="88198b8e-ed67-4ebf-ac44-7b2336ab8bd6">
+          <AttributeID>Cost Centre Activity Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="56c7f752-4cbb-4260-9b29-989b2ac28a29">
+          <AttributeID>Region Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="80e580eb-4110-46f2-a39d-02dbc69909cb">
+          <AttributeID>Channel Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="61b4595a-b1fb-4864-b86a-2ff3e9c06684">
+          <AttributeID>Has Sufficient Campaign Detail</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="7464400c-5caa-403a-84c6-0da8b6c34daa">
+          <AttributeID>Date Of Code</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="17354245-21ca-4b2e-a48a-bb38d5fb7cac">
+      <ID>GDPR Dim Email Opt In</ID>
+      <Name>GDPR Dim Email Opt In</Name>
+      <DimensionID>GDPR Dim Email Opt In</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="e09eda16-0172-4013-95a8-27d4c95ba403">
+          <AttributeID>Contact Number</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="68d6472f-ea99-4e6b-bb5d-5f755d8c07b5">
+          <AttributeID>Mailing Suppression Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="6b1b9d39-34e8-4a71-bc98-c6c9b4228c65">
+          <AttributeID>Mailing Suppression Valid From</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="5ce1964a-9211-4c59-b38c-b8420112cfd9">
+          <AttributeID>Mailing Suppression Valid To</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="8e5be22f-e58e-4640-9cad-fb413c4b431d">
+          <AttributeID>Mailing Suppression Source</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="e2b49dd8-106f-4a9e-82ab-376561e3d49d">
+          <AttributeID>Mailing Suppression Amended On</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="ac2040fc-48b9-40cd-8c8a-0bd21ed894bc">
+          <AttributeID>Mailing Suppression Amended By</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="84fec6d9-9cea-4318-8571-b54dfcf40e75">
+          <AttributeID>Mailing Suppression Notes</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="f35262b2-76de-4e7c-9e45-959a98ac8efe">
+          <AttributeID>Mailing Suppression Notes 1</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="879fbb9a-03b6-4853-90f2-a6066c814c4c">
+          <AttributeID>Eoi Count</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="65d1de16-68bb-406e-a747-ffd7a021b69b">
+          <AttributeID>Source Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="9bc0673e-bce3-44bb-ad02-829b4812ced9">
+          <AttributeID>Amended On</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="ec5bde32-a10f-4920-92b9-287ba4259420">
+          <AttributeID>Cost Centre Team Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="e16c9314-1629-4ddf-a0c5-08411017a72e">
+          <AttributeID>Cost Centre Activity Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="f9ce910f-abed-420b-bc6e-e3a1007b0515">
+          <AttributeID>Region Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="501a9f27-aae7-44be-9a21-a41570067481">
+          <AttributeID>Channel Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="5e47f516-2849-4566-a92c-80409538cf72">
+          <AttributeID>Has Sufficient Campaign Detail</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="971d0040-09e5-4b84-b16f-ca1a75263ab2">
+          <AttributeID>SC Diff</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="54a30343-e47a-41d8-a3ab-bc946c1500a6">
+          <AttributeID>Amded Diff</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="58a7198a-cb52-4510-acc6-0f317f5c7114">
+          <AttributeID>Amend Match</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="144b4e0a-1cef-435e-a967-eea5ff26d013">
+          <AttributeID>Date Of Code</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="f2f99985-85c6-4075-af60-4383b8712831">
+      <ID>GDPR Dim Contacts</ID>
+      <Name>GDPR Dim Contacts</Name>
+      <DimensionID>GDPR Dim Contacts</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="6747499f-a7ba-4851-ae6f-624a6225c795">
+          <AttributeID>Contact Number</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="6be5bb0e-d3da-4d2a-a3f7-63010c85e941">
+          <AttributeID>Source</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="aeb7993f-d7dd-406d-9e62-bb92c9d8aacf">
+          <AttributeID>Source Date</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="9a6c8b27-9e47-41f2-be8b-7c21b0ac46d1">
+          <AttributeID>Status</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="74bcb47f-8327-4098-b246-ca991e9b4c1f">
+          <AttributeID>Ownership Group</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="7c602507-c93e-4998-927b-c58759499f35">
+          <AttributeID>Diabetes Type</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="3538ed08-74f1-4123-9385-7839935d3181">
+          <AttributeID>Source Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="b15c3da4-42b5-4415-a62b-88e590f3fc44">
+          <AttributeID>Amended On</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="f1f5fded-57dd-4065-9b9b-d70fc15f973e">
+          <AttributeID>Cost Centre Team Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="3b444123-f7a1-468b-a3df-6a72cbd938d4">
+          <AttributeID>Cost Centre Activity Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="2fe6f098-2bb9-4774-a38d-262d7202dfea">
+          <AttributeID>Region Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="94f01f43-520f-4eb4-8952-dcd9e990f73d">
+          <AttributeID>Channel Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="d07048b6-3ce4-45fc-a8e6-2ba6f3844bcd">
+          <AttributeID>Has Sufficient Campaign Detail</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="a6056674-f4f9-40ed-8cc5-51517020f0fa">
+          <AttributeID>Date Of Code</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="a35e5436-7210-45f9-a06f-a25ff06605e8">
+      <ID>GDPR Dim Contact Segmentation</ID>
+      <Name>GDPR Dim Contact Segmentation</Name>
+      <DimensionID>GDPR Dim Contact Segmentation</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="67c40a1e-84e3-42a6-80c8-2cd51fd3ef79">
+          <AttributeID>Contact Number</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="218b7710-2502-423e-9215-c17af95d6a47">
+          <AttributeID>Email Address</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="80899730-f06b-4111-827e-595f7815dd48">
+          <AttributeID>Seg Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="2635926c-a47d-4a90-abdc-1353d10fef2a">
+          <AttributeID>Email Amended On</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="13c2c62c-9660-426f-98ca-01488c80311f">
+      <ID>GDPR Dim Contact Suppressions</ID>
+      <Name>GDPR Dim Contact Suppressions</Name>
+      <DimensionID>GDPR Dim Contact Suppressions</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="f5ed5641-4322-4ba8-9d37-96f917ff744f">
+          <AttributeID>Contact Number</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="1ff730c5-dd2c-4cfd-8dd8-aeb04aa61813">
+          <AttributeID>Mailing Suppression</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="b00c34f2-a064-4d5a-92a4-5a7950de33d8">
+          <AttributeID>Valid From</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="367a4117-768f-447c-af07-0ae8b591b4b5">
+          <AttributeID>Valid To</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="30643581-2716-4a00-b7e7-66dd42c2ca30">
+          <AttributeID>Source</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="6218de53-7419-490e-82b1-40233e20889a">
+          <AttributeID>Blocked O Pt Out</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="de3576b6-272e-4549-a1c1-e46aac76eb38">
+          <AttributeID>Source Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="12b0ca6f-70f7-4396-896c-1943ceea90f5">
+          <AttributeID>Amended On</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="fa33082d-da0e-43a9-9f58-a96917ba7a86">
+          <AttributeID>Cost Centre Team Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="caf8cd28-36a3-4efd-880a-86a47201c7c3">
+          <AttributeID>Cost Centre Activity Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="cf1b9ad5-394e-4573-8673-ef91cdf6ed6a">
+          <AttributeID>Region Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="a8aa5036-d690-4a78-9971-2eee5790ffb1">
+          <AttributeID>Channel Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="c8704d55-fcd2-44b9-b53f-90fd6ad2dd9a">
+          <AttributeID>Has Sufficient Campaign Detail</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="27f8b079-4fac-4e95-be86-1df9f7acdb1b">
+          <AttributeID>Date Of Code</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="14a7eee5-b8b0-4484-b245-cd06792b924a">
+          <AttributeID>Alternative Opt In</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="c1b1df52-babd-427c-856c-1f817d8e813d">
+      <ID>GDPR Dim Contact Relationship</ID>
+      <Name>GDPR Dim Contact Relationship</Name>
+      <DimensionID>GDPR Dim Contact Relationship</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="0c89850d-5223-4976-9028-2dc85278f87d">
+          <AttributeID>Contact Number</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="2719daa1-4536-48ae-b8b5-d83a34ce61f0">
+          <AttributeID>Relationship</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="85bf301f-2d6f-4728-b6d5-ef7036eac1a8">
+          <AttributeID>Relationship Status</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="925dc64b-3d89-4816-8b86-6935f659443c">
+          <AttributeID>Last Non Fin Engagement Interaction Date</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="19cdd738-aba9-4977-8b5d-957920a3998f">
+          <AttributeID>Contact Source Date</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="f0fb3af6-cc66-408a-ba32-453250754e2e">
+      <ID>GDPR Dim Contact Interaction Financial</ID>
+      <Name>GDPR Dim Contact Interaction Financial</Name>
+      <DimensionID>GDPR Dim Contact Interaction Financial</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="e4334072-d20c-4543-82c1-03959960ac79">
+          <AttributeID>Contact Number</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="b93652a5-8e59-49c4-bdf0-49f7bd9a3cf9">
+          <AttributeID>Transaction Date</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="4c6d3441-db65-4020-9db6-873cd10d7f41">
+          <AttributeID>Type</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="d2c2dd42-9ef5-4f72-91a9-d79e98c5f198">
+          <AttributeID>Source</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="7ec26a6e-c96f-4faf-ac3a-58c05ce237f8">
+          <AttributeID>Product Desc</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="f01a2993-b860-46fa-a6b4-5d1adf602ee2">
+      <ID>GDPR Dim Contact Interaction Mailing</ID>
+      <Name>GDPR Dim Contact Interaction Mailing</Name>
+      <DimensionID>GDPR Dim Contact Interaction Mailing</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="df1d4487-00e1-45b7-9a8b-6d2e23a08d17">
+          <AttributeID>Contact Number</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="c00a2e74-0eb1-4816-b1e5-769bbce16578">
+          <AttributeID>Mailing Date</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="0e33a8b4-0bc6-433e-ad9c-d58dda5041bf">
+          <AttributeID>Type</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="b16393ae-1daf-41f0-b3f0-f3e4573b6874">
+          <AttributeID>Mailing</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="09475261-6320-4fbb-86ac-f31289160225">
+          <AttributeID>Mailing Desc</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="4d5ecf57-0865-4f84-912b-2a17b8e85e76">
+      <ID>GDPR Dim Discretionary Opt Out</ID>
+      <Name>GDPR Dim Discretionary Opt Out</Name>
+      <DimensionID>GDPR Dim Discretionary Opt Out</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="2c8625a0-a18e-408a-b5cf-df212a81515b">
+          <AttributeID>Contact Number</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="470673bc-34aa-41a8-b002-e6e2955defd9">
+          <AttributeID>Mailing Suppression</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="677e9b24-54c5-4954-98e7-ce7b256357d7">
+          <AttributeID>Valid From</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="59606d8c-cab3-4d8f-9873-f0d6ca32825b">
+          <AttributeID>Valid To</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="f7d4868f-e076-466d-ba94-efabdf617b61">
+          <AttributeID>Source</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="3801e902-44c2-43e8-acc7-fd82fb223627">
+          <AttributeID>Source Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="63f8e842-74be-4108-b0c3-9239a399dbe9">
+          <AttributeID>Amended On</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="5204bb36-6081-499c-a3da-38fadea959ac">
+          <AttributeID>Cost Centre Team Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="f11d8d44-bbe2-432c-b340-6fafec3ad7ee">
+          <AttributeID>Cost Centre Activity Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="8470827a-4737-4d17-a3a3-7aecfb23db84">
+          <AttributeID>Region Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="816662d9-fe2b-450a-8e4c-684a5328ba79">
+          <AttributeID>Channel Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="7d890555-d495-46a7-89f5-87df6a40eb8b">
+          <AttributeID>Has Sufficient Campaign Detail</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="2928ea3f-bcb9-4d4b-907c-8f651901a44a">
+          <AttributeID>Date Of Code</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="ddc310da-03a9-4594-9a92-ca37541e0a2e">
+      <ID>GDPR Dim Suppression DPA</ID>
+      <Name>GDPR Dim Suppression DPA</Name>
+      <DimensionID>GDPR Dim Suppression DPA</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="bb696296-18c3-4b69-a569-b65b6f18e5e0">
+          <AttributeID>Contact Number</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="47d8201e-c089-45ca-aa33-79d5fab8da34">
+          <AttributeID>Mailing Suppression</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="c7927d7c-ada4-4665-950a-82b277eb13f3">
+          <AttributeID>Valid From</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="db099fc4-27c2-4952-96e3-e15b57cd13fa">
+          <AttributeID>Valid To</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="5cdc475b-8975-4f93-bbb1-15ac29d6e8f0">
+          <AttributeID>Source</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="a34f52e3-6394-4f25-8f7d-8e5cf6a6e054">
+          <AttributeID>Source Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="5add5ce4-8f49-4d66-a4c7-e694e5b1e089">
+          <AttributeID>Amended On</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="508a6a1a-74ce-4887-951b-3c83f8b232fe">
+          <AttributeID>Cost Centre Team Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="9dba3ec3-09f4-4b12-a740-6aee3541ebec">
+          <AttributeID>Cost Centre Activity Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="e053cd67-fc77-4fee-adc1-aa1cce6bf959">
+          <AttributeID>Region Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="21454d72-c785-4a38-8f65-a07a53576b2a">
+          <AttributeID>Channel Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="2a27b075-1dfd-4842-89a2-82111d1541d7">
+          <AttributeID>Has Sufficient Campaign Detail</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="c36530ac-317d-4d9e-b623-64e8f21984c5">
+          <AttributeID>Date Of Code</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="2821878a-d20b-4a4e-a7a2-0dd56211362f">
+      <ID>GDPR Dim Suppression Gone Away</ID>
+      <Name>GDPR Dim Suppression Gone Away</Name>
+      <DimensionID>GDPR Dim Suppression Gone Away</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="1fc7e5d5-9c25-492a-8707-54522a2a4e9d">
+          <AttributeID>Contact Number</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="b6bee598-a7dd-4dd2-89d0-b1788766d908">
+          <AttributeID>Mailing Suppression</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="a3b7baff-1f2a-45dc-bf30-82b7b0c5b6a2">
+          <AttributeID>Valid From</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="bd050779-61a9-4e5e-ab32-b810ad61e322">
+          <AttributeID>Valid To</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="4f79f859-d9be-4f82-9f87-ef9580ecc8d8">
+          <AttributeID>Source</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="b02f6dc3-4695-43a1-ad95-7d6aceafc821">
+          <AttributeID>Source Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="a03e77ab-5476-4fc8-911f-4db1d84f4ea8">
+          <AttributeID>Amended On</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="52efc292-3401-46db-a101-99a13a6f0aa9">
+          <AttributeID>Cost Centre Team Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="438e1e29-a640-4968-8ae7-5109c1982ec0">
+          <AttributeID>Cost Centre Activity Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="2254ca67-976d-47d4-ac52-c2f2c0a6b93d">
+          <AttributeID>Region Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="9fab1729-a842-43b7-bd99-407e90582ac3">
+          <AttributeID>Channel Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="8b1ebf6b-bdd6-4899-ac5b-c12842358f60">
+          <AttributeID>Has Sufficient Campaign Detail</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="5faa6cb0-f2cc-4de2-8369-b4ee09314fcf">
+          <AttributeID>Date Of Code</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="a6248592-7443-4545-ab44-e3ee1ee23b1d">
+      <ID>GDPR Dim Suppression No SMS</ID>
+      <Name>GDPR Dim Suppression No SMS</Name>
+      <DimensionID>GDPR Dim Suppression No SMS</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="ed064414-f415-45cf-a7b4-bdf2cfe78534">
+          <AttributeID>Contact Number</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="0fbd4027-5abc-4ed1-971a-f17bd008ced3">
+          <AttributeID>Mailing Suppression</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="35c9e47d-a521-44fb-bff4-8e79c18cb729">
+          <AttributeID>Valid From</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="aa4e04ea-baf1-4f10-9927-0503fe0e17cd">
+          <AttributeID>Valid To</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="545c07d6-619c-4ce5-9cc7-f271a700ea16">
+          <AttributeID>Source</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="8b85ad0a-aa47-48b7-8cd5-157302addd79">
+          <AttributeID>Source Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="2735068f-c71b-4d6e-a9ba-aba98164cb0f">
+          <AttributeID>Amended On</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="29f5e49b-9591-4311-af95-b9684ead5be9">
+          <AttributeID>Cost Centre Team Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="56f4c6e3-e10e-4973-b945-f07087d24659">
+          <AttributeID>Cost Centre Activity Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="998a7fd9-4135-4dbe-b537-cb177f36ab92">
+          <AttributeID>Region Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="34d6d03b-29bb-4ae5-8c9b-0fd0caa67065">
+          <AttributeID>Channel Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="25c1d3b0-e4af-49e8-8611-e7f81078a08d">
+          <AttributeID>Has Sufficient Campaign Detail</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="6e1c91e6-29f1-4e23-850f-37734078a056">
+          <AttributeID>Date Of Code</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="ea4bccd6-13a0-4d95-b253-8e33e30f79df">
+      <ID>GDPR Dim Suppression SMS</ID>
+      <Name>GDPR Dim Suppression SMS</Name>
+      <DimensionID>GDPR Dim Suppression SMS</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="89135398-e8ea-44c5-92f0-bd860a75387d">
+          <AttributeID>Contact Number</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="cef8afe2-c4ed-4844-bdb3-c93c5d7c0dd3">
+          <AttributeID>Mailing Suppression</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="3aaabdf9-56cd-4293-87b3-ed96f70ad61c">
+          <AttributeID>Valid From</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="cf415083-3daf-41a7-8746-dcc9ee9cec68">
+          <AttributeID>Valid To</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="e737791f-95ad-4f6c-b325-c6de2795e3de">
+          <AttributeID>Source</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="3ee878db-d5d2-4298-bd34-f1552cdadaac">
+          <AttributeID>Source Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="9e0bed76-a407-4a0f-aaf3-c86a05668eee">
+          <AttributeID>Amended On</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="ba7e3d18-f80d-4c1e-870e-2365d426b89c">
+          <AttributeID>Cost Centre Team Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="62ea5bb9-2553-4424-b7eb-5b36a77dec6b">
+          <AttributeID>Cost Centre Activity Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="aa370b73-fb29-4516-b7c5-9fdc6f4f94e0">
+          <AttributeID>Region Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="16ce0b72-8086-41d7-8870-6333a2a0e3ca">
+          <AttributeID>Channel Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="d0edfeb0-1c55-4ca3-bcf7-d4847fe89bf2">
+          <AttributeID>Has Sufficient Campaign Detail</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="b028b44c-c354-4db9-a655-d8ff6cd7226a">
+          <AttributeID>Date Of Code</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="472f03f9-a228-4f0e-b8a5-6d608f2c915d">
+      <ID>GDPR Dim Suppression Tel Opt In</ID>
+      <Name>GDPR Dim Suppression Tel Opt In</Name>
+      <DimensionID>GDPR Dim Suppression Tel Opt In</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="08a21afe-5545-4015-9c85-e1a2229d65f6">
+          <AttributeID>Contact Number</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="bad682bc-622d-469b-af39-20ea3299f7d7">
+          <AttributeID>Mailing Suppression</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="5ac56bff-bc5d-4db8-91b0-b9fded5a68ec">
+          <AttributeID>Valid From</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="a58beed1-c511-445e-a295-ecf4e2cf4610">
+          <AttributeID>Valid To</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="baef9851-09e8-4110-8141-4b8bf4c4eb82">
+          <AttributeID>Source</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="95d38879-ca10-4402-874b-8652dbd2b2e9">
+          <AttributeID>Source Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="5b5932a3-9def-47bf-a1f6-b6155f617f58">
+          <AttributeID>Amended On</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="392bb77d-ef69-4f70-a6dc-5a78b6f6e2dc">
+          <AttributeID>Cost Centre Team Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="323305a0-4620-428d-a9c3-812b77639f41">
+          <AttributeID>Cost Centre Activity Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="937dc51a-5f3a-4dd1-bc26-3ffeaf22edce">
+          <AttributeID>Region Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="43cd6ba7-47cc-43c5-a925-018687fb4e79">
+          <AttributeID>Channel Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="73dcdd7f-a091-4f99-8bf8-9aa52ab55758">
+          <AttributeID>Has Sufficient Campaign Detail</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="17deb5d4-bde8-47de-8697-0ddf087142c1">
+          <AttributeID>Date Of Code</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+    <Dimension dwd:design-time-name="b1d6655b-f56d-4c9e-997d-555a20e1ec37">
+      <ID>GDPR Dim Suppression Tel Opt Out</ID>
+      <Name>GDPR Dim Suppression Tel Opt Out</Name>
+      <DimensionID>GDPR Dim Suppression Tel Opt Out</DimensionID>
+      <Attributes>
+        <Attribute dwd:design-time-name="10c32e4c-c7c8-472a-bcfd-d086f750d4cf">
+          <AttributeID>Contact Number</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="26a9bdb9-9d8b-4ab5-81ce-4fb7278599c2">
+          <AttributeID>Mailing Suppression</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="8978d657-f0b4-485e-ac12-5d124c12e88a">
+          <AttributeID>Valid From</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="66130744-1861-405e-9ec7-a96ebe1b2623">
+          <AttributeID>Valid To</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="479eccb3-2185-44e6-b4e3-1e0d70982881">
+          <AttributeID>Source</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="cc99ecda-5d15-4ee0-83c9-f968e113501a">
+          <AttributeID>Source Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="43703bd9-d032-4b56-84e0-5f2c61af34d2">
+          <AttributeID>Amended On</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="6e5e50a3-012a-4c09-bf05-b9a04eb4c245">
+          <AttributeID>Cost Centre Team Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="415ff79b-830b-4c7a-ba87-adaf1fbf5dee">
+          <AttributeID>Cost Centre Activity Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="802c94b8-8ffc-48b5-8e58-a1705fd3f1b2">
+          <AttributeID>Region Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="9dbee871-e1f3-499b-9293-ad745244dd19">
+          <AttributeID>Channel Desc</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="aaf71f5b-99cb-44b0-a8ba-54b8651acdba">
+          <AttributeID>Has Sufficient Campaign Detail</AttributeID>
+        </Attribute>
+        <Attribute dwd:design-time-name="0382f63a-b778-4896-8a1b-804b672f5bb7">
+          <AttributeID>Date Of Code</AttributeID>
+        </Attribute>
+      </Attributes>
+    </Dimension>
+  </Dimensions>
+  <CubePermissions>
+    <CubePermission dwd:design-time-name="7cebb895-5067-49c0-b28a-f343683a0ff8">
+      <ID>CubePermission</ID>
+      <Name>CubePermission</Name>
+      <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+      <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+      <RoleID>Role</RoleID>
+      <Read>Allowed</Read>
+      <ReadSourceData>Allowed</ReadSourceData>
+    </CubePermission>
+  </CubePermissions>
+  <MeasureGroups>
+    <MeasureGroup dwd:design-time-name="66c9ae2d-72d2-4894-a629-e55e3472daf9">
+      <ID>Vw Contact Event FACT 1</ID>
+      <Name>DistinctContact</Name>
+      <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+      <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+      <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+      <State>Unprocessed</State>
+      <Measures>
+        <Measure dwd:design-time-name="19c385a0-8ba6-45fa-a1a1-75cc90f9f888">
+          <ID>Contact Number Distinct Count</ID>
+          <Name>ActiveContacts_CNT</Name>
+          <AggregateFunction>DistinctCount</AggregateFunction>
+          <DataType>Integer</DataType>
+          <Source dwd:design-time-name="d8843aa9-2981-4b69-bd30-1f8dd94ed8fe">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="199a52ea-8836-4629-8f20-6ae7862861a5">
+              <TableID>dbo_vw_ContactEventFACT</TableID>
+              <ColumnID>contact_number</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+      </Measures>
+      <StorageMode>Molap</StorageMode>
+      <ProcessingMode>Regular</ProcessingMode>
+      <Dimensions>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="4854ad95-e625-42d5-ad7f-0841cfcb9dce">
+          <CubeDimensionID>GDPR Dim Date</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="ecca43d1-f742-43d8-9776-7790ddf9f5dc">
+              <AttributeID>Date</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="05310b2b-6a01-467d-95d5-aa3ca9e78205">
+                  <DataType>Date</DataType>
+                  <NullProcessing>UnknownMember</NullProcessing>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="9fb2d361-c2e0-41a0-809c-410287628410">
+                    <TableID>dbo_vw_ContactEventFACT</TableID>
+                    <ColumnID>transaction_date</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="331808bd-e2b9-4475-bb95-820010f6346a">
+          <CubeDimensionID>GDPR Dim Email Opt Out</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="778968ce-4920-407a-82aa-fd62dd36514e">
+              <AttributeID>Contact Number</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="fc727919-ce81-45ac-9017-87a35e9af5f4">
+                  <DataType>Double</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="065dd427-25ee-4a4e-b5b5-7f8cce4c10c5">
+                    <TableID>dbo_vw_ContactEventFACT</TableID>
+                    <ColumnID>contact_number</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="4332f06f-69b6-415b-8f16-eb4a9b123b24">
+          <CubeDimensionID>GDPR Dim Email Opt In</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="8653b8d1-8d1c-4749-98d2-228726b00038">
+              <AttributeID>Contact Number</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="444099aa-0df8-4711-bf2d-82de88e5cc03">
+                  <DataType>Double</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="2046117c-4682-4a25-9f08-750462164c86">
+                    <TableID>dbo_vw_ContactEventFACT</TableID>
+                    <ColumnID>contact_number</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="561cbf13-de86-49c2-b4d9-1fca6affa8cd">
+          <CubeDimensionID>GDPR Dim Contacts</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="c1b68528-c30c-4090-86a5-4bfd964e3a24">
+              <AttributeID>Contact Number</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="0c780bf7-4811-4ed8-86b2-5795e8e9c99d">
+                  <DataType>Double</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="a5f19ee6-1b21-4fe5-80ae-7bf55093a082">
+                    <TableID>dbo_vw_ContactEventFACT</TableID>
+                    <ColumnID>contact_number</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="ReferenceMeasureGroupDimension" dwd:design-time-name="7d2f5065-065f-4fbd-96d8-55b19d748045">
+          <CubeDimensionID>GDPR Dim Contact Segmentation</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="0313089d-2759-4340-ba7d-0b37cfa921f7">
+              <AttributeID>Contact Number</AttributeID>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+          <IntermediateCubeDimensionID>GDPR Dim Contacts</IntermediateCubeDimensionID>
+          <IntermediateGranularityAttributeID>Contact Number</IntermediateGranularityAttributeID>
+          <Materialization>Regular</Materialization>
+          <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+        </Dimension>
+        <Dimension xsi:type="ReferenceMeasureGroupDimension" dwd:design-time-name="f89904ae-ee02-41fc-8e62-f12212025572">
+          <CubeDimensionID>GDPR Dim Contact Suppressions</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="44a6012c-8fa3-43d5-82db-5ebda4a08543">
+              <AttributeID>Contact Number</AttributeID>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+          <IntermediateCubeDimensionID>GDPR Dim Contacts</IntermediateCubeDimensionID>
+          <IntermediateGranularityAttributeID>Contact Number</IntermediateGranularityAttributeID>
+          <Materialization>Regular</Materialization>
+          <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+        </Dimension>
+        <Dimension xsi:type="ReferenceMeasureGroupDimension" dwd:design-time-name="11f75fc0-7bda-41f1-bca9-db2a0f77fcf6">
+          <CubeDimensionID>GDPR Dim Contact Relationship</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="ab18f4f2-0b23-4b4f-9e4d-45a522d9558c">
+              <AttributeID>Contact Number</AttributeID>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+          <IntermediateCubeDimensionID>GDPR Dim Contacts</IntermediateCubeDimensionID>
+          <IntermediateGranularityAttributeID>Contact Number</IntermediateGranularityAttributeID>
+          <Materialization>Regular</Materialization>
+          <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+        </Dimension>
+        <Dimension xsi:type="ReferenceMeasureGroupDimension" dwd:design-time-name="cd7737be-800f-460a-9abd-a8098490aecc">
+          <CubeDimensionID>GDPR Dim Contact Interaction Financial</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="0ec9b65d-f4d1-4bd0-8f06-ce7bde6637f0">
+              <AttributeID>Contact Number</AttributeID>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+          <IntermediateCubeDimensionID>GDPR Dim Contacts</IntermediateCubeDimensionID>
+          <IntermediateGranularityAttributeID>Contact Number</IntermediateGranularityAttributeID>
+          <Materialization>Regular</Materialization>
+          <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+        </Dimension>
+        <Dimension xsi:type="ReferenceMeasureGroupDimension" dwd:design-time-name="b0cf37e9-f87c-4db4-8994-61401d897beb">
+          <CubeDimensionID>GDPR Dim Contact Interaction Mailing</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="dd46dc65-760e-4222-ada9-ef2ea2ac2e46">
+              <AttributeID>Contact Number</AttributeID>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+          <IntermediateCubeDimensionID>GDPR Dim Contacts</IntermediateCubeDimensionID>
+          <IntermediateGranularityAttributeID>Contact Number</IntermediateGranularityAttributeID>
+          <Materialization>Regular</Materialization>
+          <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+        </Dimension>
+        <Dimension xsi:type="ReferenceMeasureGroupDimension" dwd:design-time-name="9f14b408-8e41-4039-a206-c3c74f305e60">
+          <CubeDimensionID>GDPR Dim Discretionary Opt Out</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="36fe3443-1d7e-45de-82c2-d46e1efe91f4">
+              <AttributeID>Contact Number</AttributeID>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+          <IntermediateCubeDimensionID>GDPR Dim Contacts</IntermediateCubeDimensionID>
+          <IntermediateGranularityAttributeID>Contact Number</IntermediateGranularityAttributeID>
+          <Materialization>Regular</Materialization>
+          <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+        </Dimension>
+        <Dimension xsi:type="ReferenceMeasureGroupDimension" dwd:design-time-name="bb0dd15c-6300-4894-a262-24a951e9ba2d">
+          <CubeDimensionID>GDPR Dim Suppression DPA</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="0aa7c611-ff14-493b-ae9d-c46a8f3abf58">
+              <AttributeID>Contact Number</AttributeID>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+          <IntermediateCubeDimensionID>GDPR Dim Contacts</IntermediateCubeDimensionID>
+          <IntermediateGranularityAttributeID>Contact Number</IntermediateGranularityAttributeID>
+          <Materialization>Regular</Materialization>
+          <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+        </Dimension>
+        <Dimension xsi:type="ReferenceMeasureGroupDimension" dwd:design-time-name="5bab2033-d3e1-41bb-af2b-c260ca4e842f">
+          <CubeDimensionID>GDPR Dim Suppression Gone Away</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="970ac732-de69-45e3-b6c9-9a9b773f59a8">
+              <AttributeID>Contact Number</AttributeID>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+          <IntermediateCubeDimensionID>GDPR Dim Contacts</IntermediateCubeDimensionID>
+          <IntermediateGranularityAttributeID>Contact Number</IntermediateGranularityAttributeID>
+          <Materialization>Regular</Materialization>
+          <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+        </Dimension>
+        <Dimension xsi:type="ReferenceMeasureGroupDimension" dwd:design-time-name="5a80984a-e82c-4cda-aedf-b14ab350af94">
+          <CubeDimensionID>GDPR Dim Suppression No SMS</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="c437d421-ab15-4fc7-994b-9fc6e7b43efc">
+              <AttributeID>Contact Number</AttributeID>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+          <IntermediateCubeDimensionID>GDPR Dim Contacts</IntermediateCubeDimensionID>
+          <IntermediateGranularityAttributeID>Contact Number</IntermediateGranularityAttributeID>
+          <Materialization>Regular</Materialization>
+          <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+        </Dimension>
+        <Dimension xsi:type="ReferenceMeasureGroupDimension" dwd:design-time-name="cfa57edd-c3f1-4113-9472-b8934d28bed7">
+          <CubeDimensionID>GDPR Dim Suppression SMS</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="82fc63e6-3dc7-4438-90a3-dacb8dd40af3">
+              <AttributeID>Contact Number</AttributeID>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+          <IntermediateCubeDimensionID>GDPR Dim Contacts</IntermediateCubeDimensionID>
+          <IntermediateGranularityAttributeID>Contact Number</IntermediateGranularityAttributeID>
+          <Materialization>Regular</Materialization>
+          <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+        </Dimension>
+        <Dimension xsi:type="ReferenceMeasureGroupDimension" dwd:design-time-name="8890d002-9011-4523-a101-0c1a608fd0c7">
+          <CubeDimensionID>GDPR Dim Suppression Tel Opt In</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="bb6d46ed-1ef1-4e78-9189-22c98b3ada08">
+              <AttributeID>Contact Number</AttributeID>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+          <IntermediateCubeDimensionID>GDPR Dim Contacts</IntermediateCubeDimensionID>
+          <IntermediateGranularityAttributeID>Contact Number</IntermediateGranularityAttributeID>
+          <Materialization>Regular</Materialization>
+          <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+        </Dimension>
+        <Dimension xsi:type="ReferenceMeasureGroupDimension" dwd:design-time-name="40bae324-8a53-41eb-b05e-da254c4df85e">
+          <CubeDimensionID>GDPR Dim Suppression Tel Opt Out</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="82e783ee-45f2-4458-bfac-da2e8c3f84ff">
+              <AttributeID>Contact Number</AttributeID>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+          <IntermediateCubeDimensionID>GDPR Dim Contacts</IntermediateCubeDimensionID>
+          <IntermediateGranularityAttributeID>Contact Number</IntermediateGranularityAttributeID>
+          <Materialization>Regular</Materialization>
+          <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+        </Dimension>
+      </Dimensions>
+      <Partitions />
+    </MeasureGroup>
+    <MeasureGroup dwd:design-time-name="b4e9ccdd-0313-429a-a384-34e6ae22c2e5">
+      <ID>GDPR Dim Contacts</ID>
+      <Name>GDPR Dim Contacts</Name>
+      <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+      <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+      <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+      <State>Unprocessed</State>
+      <Measures>
+        <Measure dwd:design-time-name="baca0140-b11a-4e32-aa85-38f83c298254">
+          <ID>Contact Number Distinct Count 1</ID>
+          <Name>AllContacts_CNT</Name>
+          <AggregateFunction>DistinctCount</AggregateFunction>
+          <DataType>Integer</DataType>
+          <Source dwd:design-time-name="5fb8a58c-3f16-4c2d-941e-07c12f407840">
+            <DataType>Double</DataType>
+            <Source xsi:type="ColumnBinding" dwd:design-time-name="43b2a590-d1bd-48e9-bea3-ff613a6c86ce">
+              <TableID>dbo_GDPR_dimContacts</TableID>
+              <ColumnID>contact_number</ColumnID>
+            </Source>
+          </Source>
+        </Measure>
+      </Measures>
+      <StorageMode>Molap</StorageMode>
+      <ProcessingMode>Regular</ProcessingMode>
+      <Dimensions>
+        <Dimension xsi:type="DegenerateMeasureGroupDimension" dwd:design-time-name="0908acbd-324d-4873-82d2-29a721be1727">
+          <CubeDimensionID>GDPR Dim Contacts</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="78df63aa-1a60-4dd2-a6e1-ec324b4baa69">
+              <AttributeID>Contact Number</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="ce8b6a61-f15f-4436-8d08-09d5440da9fd">
+                  <DataType>Double</DataType>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="4f2f183b-63d8-464f-893d-2cfd3db5ce27">
+                    <TableID>dbo_GDPR_dimContacts</TableID>
+                    <ColumnID>contact_number</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="d214f598-e3df-428e-8f8b-e4dc02d871d2">
+          <CubeDimensionID>GDPR Dim Email Opt Out</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="fa650a9f-40f6-4fbb-96f6-404ea8c2f5c2">
+              <AttributeID>Contact Number</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="d2eb61ad-3dbc-4cb2-aa13-319d437e0f44">
+                  <DataType>Double</DataType>
+                  <NullProcessing>ZeroOrBlank</NullProcessing>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="c7ab44b1-abde-4409-bc90-338373b2fd46">
+                    <TableID>dbo_GDPR_dimContacts</TableID>
+                    <ColumnID>contact_number</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="facbaa13-35a8-43e7-ac4a-32b7055b0196">
+          <CubeDimensionID>GDPR Dim Email Opt In</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="9780f9fb-e10e-4f2a-8989-ecb02d288ae8">
+              <AttributeID>Contact Number</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="fcfdc10b-0574-4b7c-81a4-53719de349db">
+                  <DataType>Double</DataType>
+                  <NullProcessing>ZeroOrBlank</NullProcessing>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="79c9dd49-38c3-4ade-8b30-e29fe93b8054">
+                    <TableID>dbo_GDPR_dimContacts</TableID>
+                    <ColumnID>contact_number</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="1f64114e-516b-49a0-84b1-315c1a860a13">
+          <CubeDimensionID>GDPR Dim Contact Segmentation</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="a28b855c-c663-425f-aea9-651af3bba303">
+              <AttributeID>Contact Number</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="7a5fbecc-0b6d-4d76-9d25-3e94a9b1db8e">
+                  <DataType>Double</DataType>
+                  <NullProcessing>UnknownMember</NullProcessing>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="04ddd95f-327b-4ebf-8d89-5f8dd649704c">
+                    <TableID>dbo_GDPR_dimContacts</TableID>
+                    <ColumnID>contact_number</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="7945c92c-78c2-4f87-9ac5-72973ec9b4ac">
+          <CubeDimensionID>GDPR Dim Contact Suppressions</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="d39601d2-9c43-482a-9c76-9da29f9ec6f0">
+              <AttributeID>Mailing Suppression</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="4ad6bdfd-f82b-43b7-9afc-cab704b0f5aa">
+                  <DataType>WChar</DataType>
+                  <DataSize>4</DataSize>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="91a17b64-254b-4abf-93f6-e4dd81db8e9a">
+                    <TableID>dbo_GDPR_dimContacts</TableID>
+                    <ColumnID>contact_number</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+            </Attribute>
+            <Attribute dwd:design-time-name="3c8a6dff-9ab5-444a-9ff4-425efee730f3">
+              <AttributeID>Contact Number</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="e02a2ae2-e8d6-4505-8481-0a884adb0799">
+                  <DataType>Double</DataType>
+                  <NullProcessing>UnknownMember</NullProcessing>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="d7700353-6146-4ada-97b4-1d2577ca7a20">
+                    <TableID>dbo_GDPR_dimContacts</TableID>
+                    <ColumnID>contact_number</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="ReferenceMeasureGroupDimension" dwd:design-time-name="46f384b9-1225-4d05-a8db-5f4a612d6a7a">
+          <CubeDimensionID>GDPR Dim Contact Relationship</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="0b191c9f-e703-4bc0-a085-5fa05a554836">
+              <AttributeID>Contact Number</AttributeID>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+          <IntermediateCubeDimensionID>GDPR Dim Contacts</IntermediateCubeDimensionID>
+          <IntermediateGranularityAttributeID>Contact Number</IntermediateGranularityAttributeID>
+          <Materialization>Regular</Materialization>
+          <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+        </Dimension>
+        <Dimension xsi:type="ReferenceMeasureGroupDimension" dwd:design-time-name="31e49aad-1fd4-4906-9b8b-eae59650b122">
+          <CubeDimensionID>GDPR Dim Contact Interaction Financial</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="7681a4bd-2d6f-46d8-b9e8-a28cf601282b">
+              <AttributeID>Contact Number</AttributeID>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+          <IntermediateCubeDimensionID>GDPR Dim Contacts</IntermediateCubeDimensionID>
+          <IntermediateGranularityAttributeID>Contact Number</IntermediateGranularityAttributeID>
+          <Materialization>Regular</Materialization>
+          <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+        </Dimension>
+        <Dimension xsi:type="ReferenceMeasureGroupDimension" dwd:design-time-name="fc9ac0c3-15f4-4425-b815-947d203e675b">
+          <CubeDimensionID>GDPR Dim Contact Interaction Mailing</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="28c9bb6f-c630-49c3-a773-abb14e070f2e">
+              <AttributeID>Contact Number</AttributeID>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+          <IntermediateCubeDimensionID>GDPR Dim Contacts</IntermediateCubeDimensionID>
+          <IntermediateGranularityAttributeID>Contact Number</IntermediateGranularityAttributeID>
+          <Materialization>Regular</Materialization>
+          <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+        </Dimension>
+        <Dimension xsi:type="RegularMeasureGroupDimension" dwd:design-time-name="02740833-34a0-403d-ade1-285d04b48ac4">
+          <CubeDimensionID>GDPR Dim Discretionary Opt Out</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="13e67f07-a617-4409-882e-d069dd0d6cc6">
+              <AttributeID>Contact Number</AttributeID>
+              <KeyColumns>
+                <KeyColumn dwd:design-time-name="4f57371b-0bf7-486f-9416-646fcccdd8ad">
+                  <DataType>Double</DataType>
+                  <NullProcessing>UnknownMember</NullProcessing>
+                  <Source xsi:type="ColumnBinding" dwd:design-time-name="9c4d5e45-f1a4-4532-a52f-17560f6fe639">
+                    <TableID>dbo_GDPR_dimContacts</TableID>
+                    <ColumnID>contact_number</ColumnID>
+                  </Source>
+                </KeyColumn>
+              </KeyColumns>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+        </Dimension>
+        <Dimension xsi:type="ReferenceMeasureGroupDimension" dwd:design-time-name="d45b4b2c-f8f6-4bf5-8540-4c56be6b670f">
+          <CubeDimensionID>GDPR Dim Suppression DPA</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="a6902232-417b-47d2-95e4-da6ce72cbfb5">
+              <AttributeID>Contact Number</AttributeID>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+          <IntermediateCubeDimensionID>GDPR Dim Contacts</IntermediateCubeDimensionID>
+          <IntermediateGranularityAttributeID>Contact Number</IntermediateGranularityAttributeID>
+          <Materialization>Regular</Materialization>
+          <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+        </Dimension>
+        <Dimension xsi:type="ReferenceMeasureGroupDimension" dwd:design-time-name="0870c45b-7374-4500-b2c7-927d588b3e3d">
+          <CubeDimensionID>GDPR Dim Suppression Gone Away</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="fb6ea175-16e7-40d2-86a4-21f01ea300db">
+              <AttributeID>Contact Number</AttributeID>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+          <IntermediateCubeDimensionID>GDPR Dim Contacts</IntermediateCubeDimensionID>
+          <IntermediateGranularityAttributeID>Contact Number</IntermediateGranularityAttributeID>
+          <Materialization>Regular</Materialization>
+          <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+        </Dimension>
+        <Dimension xsi:type="ReferenceMeasureGroupDimension" dwd:design-time-name="75ec4040-d49b-4ecb-9681-c09b65533b50">
+          <CubeDimensionID>GDPR Dim Suppression No SMS</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="b6b9102c-05b0-4625-a985-09861f57f5bd">
+              <AttributeID>Contact Number</AttributeID>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+          <IntermediateCubeDimensionID>GDPR Dim Contacts</IntermediateCubeDimensionID>
+          <IntermediateGranularityAttributeID>Contact Number</IntermediateGranularityAttributeID>
+          <Materialization>Regular</Materialization>
+          <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+        </Dimension>
+        <Dimension xsi:type="ReferenceMeasureGroupDimension" dwd:design-time-name="c5543718-a59c-4746-b7ed-2eef4626efe0">
+          <CubeDimensionID>GDPR Dim Suppression SMS</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="626b6b74-d9f2-423e-ace5-76d3670d8c64">
+              <AttributeID>Contact Number</AttributeID>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+          <IntermediateCubeDimensionID>GDPR Dim Contacts</IntermediateCubeDimensionID>
+          <IntermediateGranularityAttributeID>Contact Number</IntermediateGranularityAttributeID>
+          <Materialization>Regular</Materialization>
+          <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+        </Dimension>
+        <Dimension xsi:type="ReferenceMeasureGroupDimension" dwd:design-time-name="72c7634b-4678-400a-9b69-c02302cd4a8f">
+          <CubeDimensionID>GDPR Dim Suppression Tel Opt In</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="9b96cf5d-7dcd-42bd-9f2b-75010bd8c077">
+              <AttributeID>Contact Number</AttributeID>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+          <IntermediateCubeDimensionID>GDPR Dim Contacts</IntermediateCubeDimensionID>
+          <IntermediateGranularityAttributeID>Contact Number</IntermediateGranularityAttributeID>
+          <Materialization>Regular</Materialization>
+          <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+        </Dimension>
+        <Dimension xsi:type="ReferenceMeasureGroupDimension" dwd:design-time-name="68be07b6-fc7d-43ea-bb48-91d8a6648f68">
+          <CubeDimensionID>GDPR Dim Suppression Tel Opt Out</CubeDimensionID>
+          <Attributes>
+            <Attribute dwd:design-time-name="c19fa450-d667-4edd-85a7-b5aca01c9dca">
+              <AttributeID>Contact Number</AttributeID>
+              <Type>Granularity</Type>
+            </Attribute>
+          </Attributes>
+          <IntermediateCubeDimensionID>GDPR Dim Contacts</IntermediateCubeDimensionID>
+          <IntermediateGranularityAttributeID>Contact Number</IntermediateGranularityAttributeID>
+          <Materialization>Regular</Materialization>
+          <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+        </Dimension>
+      </Dimensions>
+      <Partitions />
+    </MeasureGroup>
+  </MeasureGroups>
+  <Source dwd:design-time-name="6e314ee6-afe3-4b0c-84b8-462dd8b947da">
+    <DataSourceViewID>GDPRSSUP</DataSourceViewID>
+  </Source>
+  <MdxScripts>
+    <MdxScript dwd:design-time-name="2ea32bce-ac51-45fc-b4ea-7c26bf783ebc">
+      <ID>MdxScript</ID>
+      <Name>MdxScript</Name>
+      <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+      <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+      <Commands>
+        <Command>
+          <Text>/*
+The CALCULATE command controls the aggregation of leaf cells in the cube.
+If the CALCULATE command is deleted or modified, the data within the cube is affected.
+You should edit this command only if you manually specify how the cube is aggregated.
+*/
+CALCULATE; </Text>
+        </Command>
+      </Commands>
+    </MdxScript>
+  </MdxScripts>
+  <ErrorConfiguration dwd:design-time-name="4c910a2a-8090-4089-bd68-e275043a8070">
+    <KeyNotFound>IgnoreError</KeyNotFound>
+  </ErrorConfiguration>
+  <Actions>
+    <Action xsi:type="DrillThroughAction" dwd:design-time-name="1db89456-31be-4a42-9834-51364d90ba03">
+      <ID>Drillthrough Action</ID>
+      <Name>Drillthrough Action</Name>
+      <TargetType>Cells</TargetType>
+      <Target></Target>
+      <Type>DrillThrough</Type>
+      <Default>true</Default>
+      <Columns>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="833473d0-06f9-40ef-90fb-fc7671cb9c97">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contacts</CubeDimensionID>
+          <AttributeID>Contact Number</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="42b9b5d3-61b5-4a1b-a469-0dd1736367fb">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contacts</CubeDimensionID>
+          <AttributeID>Source</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="4fffa731-12fd-4d0b-9aff-f3e0269f6e0f">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contacts</CubeDimensionID>
+          <AttributeID>Source Date</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="0a459797-c76c-4002-b50c-d888889f1ab2">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contacts</CubeDimensionID>
+          <AttributeID>Status</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="bfb5f4cb-437d-44aa-9e2a-c26d23ab5b4a">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contacts</CubeDimensionID>
+          <AttributeID>Ownership Group</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="ffbb4bc4-aa25-4ced-8f78-6a8d705bd1a8">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contacts</CubeDimensionID>
+          <AttributeID>Diabetes Type</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="bc8c372f-ba66-4f4d-b9aa-8dc30045d128">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contacts</CubeDimensionID>
+          <AttributeID>Source Desc</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="d6a23b55-bdc3-4559-9d3d-ab0aeb895ab8">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contacts</CubeDimensionID>
+          <AttributeID>Amended On</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="7dad3f71-6936-40ef-85aa-b5d995d775be">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contacts</CubeDimensionID>
+          <AttributeID>Cost Centre Team Desc</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="5a2d7927-0dde-4f16-a5dc-be7d52e24c81">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contacts</CubeDimensionID>
+          <AttributeID>Cost Centre Activity Desc</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="5618f60a-1b37-4df8-b6e4-5f4e465063da">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contacts</CubeDimensionID>
+          <AttributeID>Region Desc</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="1d104a5a-caa9-40ce-a5e8-90804e24f1e5">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contacts</CubeDimensionID>
+          <AttributeID>Channel Desc</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="50ebc78d-61ee-4fb4-a28a-cf5c1ad42a52">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contacts</CubeDimensionID>
+          <AttributeID>Has Sufficient Campaign Detail</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="191a4582-a324-4bc0-84f6-15441957adbc">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contacts</CubeDimensionID>
+          <AttributeID>Date Of Code</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="a3c45d25-ccda-4c94-917f-99f4175ad484">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt In</CubeDimensionID>
+          <AttributeID>Mailing Suppression Desc</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="639fd6c4-0cba-4490-814e-1ac1615373b8">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt In</CubeDimensionID>
+          <AttributeID>Mailing Suppression Valid From</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="734f3461-6967-43cd-8055-828b16f5c38d">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt In</CubeDimensionID>
+          <AttributeID>Mailing Suppression Valid To</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="0a598ac2-59d2-4189-bdb4-4632a5fc9e17">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt In</CubeDimensionID>
+          <AttributeID>Mailing Suppression Source</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="b89e33a4-1151-4839-9a98-c19094588ebf">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt In</CubeDimensionID>
+          <AttributeID>Mailing Suppression Amended On</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="5ec6a60c-0764-4db4-9f15-3c99a76ebf55">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt In</CubeDimensionID>
+          <AttributeID>Mailing Suppression Amended By</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="ab099625-51af-43cd-8a7e-836b4aa1c324">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt In</CubeDimensionID>
+          <AttributeID>Mailing Suppression Notes</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="c93c5975-e92f-4932-a700-a8d4c4388518">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt In</CubeDimensionID>
+          <AttributeID>Mailing Suppression Notes 1</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="71c0f319-5207-404d-9073-01f97ed88b6b">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt In</CubeDimensionID>
+          <AttributeID>Eoi Count</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="7ea16071-3c1d-4654-a0f7-f90adad68e4a">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt In</CubeDimensionID>
+          <AttributeID>Source Desc</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="351030ee-5ab4-4e00-ad74-385117ddec9a">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt In</CubeDimensionID>
+          <AttributeID>Amended On</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="e2227d49-102e-4775-8fc0-c93d038afcfd">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt In</CubeDimensionID>
+          <AttributeID>Cost Centre Team Desc</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="d27bba6c-71dc-49b0-bac9-dca2585a72b1">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt In</CubeDimensionID>
+          <AttributeID>Cost Centre Activity Desc</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="c30a41df-c486-4f04-bfb6-dee3ce87a8ca">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt In</CubeDimensionID>
+          <AttributeID>Region Desc</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="cbe18eeb-84cf-43cb-a0b2-fa06320172b8">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt In</CubeDimensionID>
+          <AttributeID>Channel Desc</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="eede0014-223b-4656-91cc-bbb79c3df457">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt In</CubeDimensionID>
+          <AttributeID>Has Sufficient Campaign Detail</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="de526891-d00d-480d-91b5-74f50323273c">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt In</CubeDimensionID>
+          <AttributeID>SC Diff</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="a4617e6d-a02c-444c-b475-c504165fda52">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt In</CubeDimensionID>
+          <AttributeID>Amded Diff</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="875e19c0-82c2-4e30-af70-7f96477da4d5">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt In</CubeDimensionID>
+          <AttributeID>Amend Match</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="d82d3a0e-1115-4f8b-91e6-a74b54d1ea4a">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt In</CubeDimensionID>
+          <AttributeID>Date Of Code</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="553bc083-d648-4535-921b-60af1331d438">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt Out</CubeDimensionID>
+          <AttributeID>Mailing Suppression Valid From</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="ae017f11-539c-45ac-8b5d-9e26f4d48eed">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt Out</CubeDimensionID>
+          <AttributeID>Mailing Suppression Desc</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="3d2d1251-64cb-473e-b308-e3977c1eaec1">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt Out</CubeDimensionID>
+          <AttributeID>Mailing Suppression Source</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="f2055f36-6c29-4688-9ee2-c256ab934c3e">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt Out</CubeDimensionID>
+          <AttributeID>Mailing Suppression Valid To</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="e83910a9-8fdd-4a24-86ea-5703d5551680">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt Out</CubeDimensionID>
+          <AttributeID>Mailing Suppression Amended On</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="68f5b210-de91-4d53-a15b-e7d17bbea8cc">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt Out</CubeDimensionID>
+          <AttributeID>Mailing Suppression Amended By</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="5a9adc33-d559-4ace-9193-3fec7f7d860d">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt Out</CubeDimensionID>
+          <AttributeID>Nec Count</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="ec776afb-00e7-4e36-bbb5-313d052004d4">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt Out</CubeDimensionID>
+          <AttributeID>Mailing Suppression Notes</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="8f7e67e4-d1fe-4e40-9b4f-3228ae06567c">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt Out</CubeDimensionID>
+          <AttributeID>Source Desc</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="9df0cb5e-0e1e-4dca-b1f2-4769340d965e">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt Out</CubeDimensionID>
+          <AttributeID>Amended On</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="466e8a19-1281-43e5-904b-b1434b7775f4">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt Out</CubeDimensionID>
+          <AttributeID>Cost Centre Team Desc</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="86392187-783d-4bf1-958e-379b8375fbea">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt Out</CubeDimensionID>
+          <AttributeID>Cost Centre Activity Desc</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="c7fc66c2-4598-49cb-83ff-0ba4123f9f72">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt Out</CubeDimensionID>
+          <AttributeID>Region Desc</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="87822b5f-bff7-4688-93bf-d1ae1b8126ac">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt Out</CubeDimensionID>
+          <AttributeID>Channel Desc</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="804cada8-8e84-42fc-aa11-4d5cf9d6d4eb">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt Out</CubeDimensionID>
+          <AttributeID>Has Sufficient Campaign Detail</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="315fe599-3c62-4c1a-a4ba-1fdf9d15ff30">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Email Opt Out</CubeDimensionID>
+          <AttributeID>Date Of Code</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="6a234845-7289-4474-ae00-300399619498">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Relationship</CubeDimensionID>
+          <AttributeID>Relationship</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="776f7d3c-8bf4-4e98-bc0b-b1cd5e9dc2e2">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Relationship</CubeDimensionID>
+          <AttributeID>Relationship Status</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="0c6db91a-a23d-4c68-938f-d83905c0cbff">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Relationship</CubeDimensionID>
+          <AttributeID>Last Non Fin Engagement Interaction Date</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="58eacefe-cbec-4d1c-a259-ba26f49913b6">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Relationship</CubeDimensionID>
+          <AttributeID>Contact Source Date</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="88e3fd2f-4e43-4880-99e0-4c8688aea8e0">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Interaction Financial</CubeDimensionID>
+          <AttributeID>Transaction Date</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="8d1bfeb7-7487-4f7c-85b6-147df523ef7a">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Interaction Financial</CubeDimensionID>
+          <AttributeID>Type</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="cb68509d-42d5-4555-b8f8-b3a6b72054eb">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Interaction Financial</CubeDimensionID>
+          <AttributeID>Source</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="f22d73aa-8a72-45fb-9006-64843a295368">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Interaction Financial</CubeDimensionID>
+          <AttributeID>Product Desc</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="ad8024ae-9ce2-4279-a305-e30df3310e18">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Interaction Mailing</CubeDimensionID>
+          <AttributeID>Mailing Date</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="6433d460-100f-491d-a04a-6a8d4848317e">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Interaction Mailing</CubeDimensionID>
+          <AttributeID>Type</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="51403485-7400-4124-8a46-db2a4dbe12f7">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Interaction Mailing</CubeDimensionID>
+          <AttributeID>Mailing</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="4f65761d-dd75-4467-b874-0c6d73f1b292">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Interaction Mailing</CubeDimensionID>
+          <AttributeID>Mailing Desc</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="17ec7e67-eb65-4737-af4f-a3ba19ef313e">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Segmentation</CubeDimensionID>
+          <AttributeID>Email Address</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="cd51400a-f790-4b89-9d25-ce51ea22bae3">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Segmentation</CubeDimensionID>
+          <AttributeID>Seg Desc</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="a719a412-6359-4899-ae65-fab3296680f7">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Segmentation</CubeDimensionID>
+          <AttributeID>Email Amended On</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="633d608e-1a6d-4643-a050-32c3a4a900fc">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Suppressions</CubeDimensionID>
+          <AttributeID>Mailing Suppression</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="01d4ee8f-fd1f-4a9b-9563-550d58f9770f">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Suppressions</CubeDimensionID>
+          <AttributeID>Valid From</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="4dbc875b-4339-46f1-9ae2-73e86ebcf282">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Suppressions</CubeDimensionID>
+          <AttributeID>Valid To</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="eb44285a-654e-49f4-9991-a0f57ccf5178">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Suppressions</CubeDimensionID>
+          <AttributeID>Source</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="f9210ec4-0760-44de-9c98-7f77a84d4cf7">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Suppressions</CubeDimensionID>
+          <AttributeID>Blocked O Pt Out</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="12e02a02-0bd5-4fd1-a254-e72297c69200">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Suppressions</CubeDimensionID>
+          <AttributeID>Source Desc</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="b4a229cb-0d0a-470f-8bf7-d09c3d5fc123">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Suppressions</CubeDimensionID>
+          <AttributeID>Amended On</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="5919ea2e-2cc8-4d01-a68e-850f730de4ec">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Suppressions</CubeDimensionID>
+          <AttributeID>Cost Centre Team Desc</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="d0b04058-d811-453c-8501-85e299c08acf">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Suppressions</CubeDimensionID>
+          <AttributeID>Cost Centre Activity Desc</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="5e5b0a7e-b07d-444c-b7c6-d6792e0c8de0">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Suppressions</CubeDimensionID>
+          <AttributeID>Region Desc</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="622d810f-f494-4b1f-acab-48922e9db6e2">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Suppressions</CubeDimensionID>
+          <AttributeID>Channel Desc</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="2d1e3c06-3b8d-457b-8ae8-b43e0124daae">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Suppressions</CubeDimensionID>
+          <AttributeID>Has Sufficient Campaign Detail</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="fdfc8981-632d-40f1-b0e7-9edc9bd7350d">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Suppressions</CubeDimensionID>
+          <AttributeID>Date Of Code</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="af7f0610-fef2-42be-842d-f792b2276516">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Contact Suppressions</CubeDimensionID>
+          <AttributeID>Alternative Opt In</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="1e54c217-294a-403e-80ed-205a82df092d">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Discretionary Opt Out</CubeDimensionID>
+          <AttributeID>Mailing Suppression</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="38d01f73-f19e-455f-bf86-533b87be4f6f">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Discretionary Opt Out</CubeDimensionID>
+          <AttributeID>Valid From</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="5a90c6d3-9e0b-4a76-96d0-984a3ef4dbe5">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Discretionary Opt Out</CubeDimensionID>
+          <AttributeID>Valid To</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="a445f4ed-bb0e-4f1c-9a4a-3ad35a15b947">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Suppression DPA</CubeDimensionID>
+          <AttributeID>Mailing Suppression</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="5f7690aa-74fd-4bae-afdb-7fdf8a06e6c6">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Suppression DPA</CubeDimensionID>
+          <AttributeID>Valid From</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="7307bdc4-748f-4fe7-8127-fefcba99dd13">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Suppression DPA</CubeDimensionID>
+          <AttributeID>Valid To</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="782a6347-0ccc-4657-811b-ee58e1ad2263">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Suppression Gone Away</CubeDimensionID>
+          <AttributeID>Mailing Suppression</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="c58db7f2-329e-4c1f-828f-a91bac1934e0">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Suppression Gone Away</CubeDimensionID>
+          <AttributeID>Valid From</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="be552aa4-7c1a-4fa4-9b4a-0139ec167263">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Suppression Gone Away</CubeDimensionID>
+          <AttributeID>Valid To</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="0967e04d-79f4-4a53-81c1-e387aca93d87">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Suppression No SMS</CubeDimensionID>
+          <AttributeID>Mailing Suppression</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="e3d86c66-61a9-47c7-b992-ca9205ac5e9d">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Suppression No SMS</CubeDimensionID>
+          <AttributeID>Valid From</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="62ff78e3-076e-4d2b-97a3-64387e1d60f1">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Suppression No SMS</CubeDimensionID>
+          <AttributeID>Valid To</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="e698d6f9-efff-4320-97e0-4bdd81690579">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Suppression SMS</CubeDimensionID>
+          <AttributeID>Mailing Suppression</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="50e0d54e-2636-48ae-b538-10558a63e2f1">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Suppression SMS</CubeDimensionID>
+          <AttributeID>Valid From</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="2a077eba-61bc-4c82-aea7-f5aa8b9b2161">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Suppression SMS</CubeDimensionID>
+          <AttributeID>Valid To</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="eb47f3e1-1017-4ac8-8a76-7dda366d14c4">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Suppression Tel Opt In</CubeDimensionID>
+          <AttributeID>Mailing Suppression</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="d5c32462-7ca2-4602-a2f5-5c1f45c651a3">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Suppression Tel Opt In</CubeDimensionID>
+          <AttributeID>Valid From</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="978edd39-bc17-4eca-993d-3d09205e9cbc">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Suppression Tel Opt In</CubeDimensionID>
+          <AttributeID>Valid To</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="c886fa55-d713-4624-8faa-5e7f34f12750">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Suppression Tel Opt Out</CubeDimensionID>
+          <AttributeID>Mailing Suppression</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="63b5ecb1-eb68-4fe7-8dc7-3c8c09d4aed6">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Suppression Tel Opt Out</CubeDimensionID>
+          <AttributeID>Valid From</AttributeID>
+          <Type>All</Type>
+        </Column>
+        <Column xsi:type="CubeAttributeBinding" dwd:design-time-name="0040f874-bd23-4a7a-b5f4-6a0164749a6a">
+          <CubeID>GDPRSSUP</CubeID>
+          <CubeDimensionID>GDPR Dim Suppression Tel Opt Out</CubeDimensionID>
+          <AttributeID>Valid To</AttributeID>
+          <Type>All</Type>
+        </Column>
+      </Columns>
+    </Action>
+  </Actions>
+</Cube>

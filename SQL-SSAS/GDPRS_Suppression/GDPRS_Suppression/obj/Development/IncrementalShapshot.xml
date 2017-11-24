@@ -1,0 +1,173 @@
+﻿<DeploymentSnapshot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0">
+  <Target>
+    <Database>GDPRS_Suppression_TEST_NOV</Database>
+    <Server>WLHTESTSQL01\dev01</Server>
+    <ConnectionString>Data Source=WLHTESTSQL01\dev01;Timeout=0</ConnectionString>
+  </Target>
+  <Options>
+    <TransactionalDeployment>false</TransactionalDeployment>
+    <PartitionDeployment>DeployPartitions</PartitionDeployment>
+    <RoleDeployment>DeployRolesRetainMembers</RoleDeployment>
+    <ProcessingOption>Default</ProcessingOption>
+    <OutputScript></OutputScript>
+    <ImpactAnalysisFile></ImpactAnalysisFile>
+    <ConfigurationSettingsDeployment>Deploy</ConfigurationSettingsDeployment>
+    <OptimizationSettingsDeployment>Deploy</OptimizationSettingsDeployment>
+    <WriteBackTableCreation>UseExisting</WriteBackTableCreation>
+  </Options>
+  <Snapshot>
+    <ObjectSnapshots>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.RelationalDataSource</Type>
+        <TimeStamp>Yeoyd5HV+ulNIS0JkWJBksV2mvY=10/11/2017 23:03:1013/11/2017 12:27:43</TimeStamp>
+        <ID>
+          <String>GDPRSSUP</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.DataSourceView</Type>
+        <TimeStamp>B3tQD4v6mSUYsSXUoyrnCCAJvvs=14/11/2017 16:00:3813/11/2017 12:27:43</TimeStamp>
+        <ID>
+          <String>GDPRSSUP</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>qizCtXNVQHZc3WWr4fFPv7b2SQ0=02/11/2017 20:16:2713/11/2017 12:27:41</TimeStamp>
+        <ID>
+          <String>GDPR Dim Date</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>IG4HAPDFkuC+E+ehLPdcoYh+UoI=13/11/2017 17:53:5413/11/2017 12:27:42</TimeStamp>
+        <ID>
+          <String>GDPR Dim Email Opt Out</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>m5/qKwvwZ6VMSEHQvNslVha1uhE=13/11/2017 17:53:5413/11/2017 12:27:42</TimeStamp>
+        <ID>
+          <String>GDPR Dim Email Opt In</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>Jjc0baBHkELHZP5K2N5tpac6GFI=13/11/2017 17:53:5413/11/2017 12:27:41</TimeStamp>
+        <ID>
+          <String>GDPR Dim Contact Suppressions</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>GabjWQuweP1tAH2DLUmlT8wlCN0=13/11/2017 17:53:5413/11/2017 12:27:41</TimeStamp>
+        <ID>
+          <String>GDPR Dim Contact Segmentation</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>f/Ba/rpKDUhFMzHfEF5xsbryhFw=27/10/2017 13:48:1613/11/2017 12:27:41</TimeStamp>
+        <ID>
+          <String>GDPR Dim Contacts</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>ExqNovjHeze8LQckKLV+8gVIaqs=14/11/2017 16:56:2813/11/2017 12:27:41</TimeStamp>
+        <ID>
+          <String>GDPR Dim Contact Relationship</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>mpov1XJWLEOJfVEI8kdIcPTKOn4=13/11/2017 17:53:5413/11/2017 12:27:40</TimeStamp>
+        <ID>
+          <String>GDPR Dim Contact Interaction Financial</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>2xlk/2gyoOuIoMqzRBhDZAc7XKc=13/11/2017 17:53:5413/11/2017 12:27:40</TimeStamp>
+        <ID>
+          <String>GDPR Dim Contact Interaction Mailing</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>ov3Lp5TN1XAm09yxQi1nJLY0XLE=13/11/2017 17:53:5413/11/2017 12:27:41</TimeStamp>
+        <ID>
+          <String>GDPR Dim Discretionary Opt Out</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>ONqLllqMwOSzBdHPruA9N62tOCM=13/11/2017 17:53:5413/11/2017 12:27:42</TimeStamp>
+        <ID>
+          <String>GDPR Dim Suppression DPA</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>T9kleiFPjAdVClUFm0HXAOBol9w=13/11/2017 17:53:5413/11/2017 12:27:42</TimeStamp>
+        <ID>
+          <String>GDPR Dim Suppression Gone Away</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>Jkxu36qcrvo7Eg0QERQeeOhYM2Q=13/11/2017 17:53:5413/11/2017 12:27:42</TimeStamp>
+        <ID>
+          <String>GDPR Dim Suppression No SMS</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>Pevae7YsdXvAawHM7exWJQj0Yxs=13/11/2017 17:53:5413/11/2017 12:27:43</TimeStamp>
+        <ID>
+          <String>GDPR Dim Suppression SMS</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>MiszbDAvmUlggdSf0QfjgMdM2gU=13/11/2017 17:53:5413/11/2017 12:27:43</TimeStamp>
+        <ID>
+          <String>GDPR Dim Suppression Tel Opt In</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Dimension</Type>
+        <TimeStamp>tb18phJeu7S78QDTYD1v1HMU5R4=13/11/2017 17:53:5413/11/2017 12:27:43</TimeStamp>
+        <ID>
+          <String>GDPR Dim Suppression Tel Opt Out</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Cube</Type>
+        <TimeStamp>fpP1NCWXispa28MMBoZ7WZzPZDs=14/11/2017 16:00:3713/11/2017 12:27:43/G73bnaR0/ZaagFNNqhtogkuuFo=02/11/2017 16:29:0513/11/2017 12:27:44</TimeStamp>
+        <ID>
+          <String>GDPRSSUP</String>
+        </ID>
+      </ObjectSnapshot>
+      <ObjectSnapshot>
+        <Type>Microsoft.AnalysisServices.Role</Type>
+        <TimeStamp>HSzXxBTUviKQajPtiIqDHv/ua9Y=25/10/2017 20:17:4813/11/2017 12:27:44</TimeStamp>
+        <ID>
+          <String>Role</String>
+        </ID>
+      </ObjectSnapshot>
+    </ObjectSnapshots>
+    <DatabaseSnapshot>
+      <Type>Microsoft.AnalysisServices.Database</Type>
+      <TimeStamp>0TC3HCLgAczee5b6ced2AcxBnww=25/10/2017 20:17:4313/11/2017 12:27:44</TimeStamp>
+      <ID>
+        <String>GDPRS_Suppression_TEST_NOV</String>
+      </ID>
+    </DatabaseSnapshot>
+    <Granularity>Coarse</Granularity>
+  </Snapshot>
+  <AssemblyLocations />
+  <ProcessingComplete>true</ProcessingComplete>
+  <LastDeployed>2017-11-15T11:23:22.343333Z</LastDeployed>
+</DeploymentSnapshot>

@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">L3620</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA8kZIAXw5jUOO/wjY8ajMxgAAAAACAAAAAAADZgAAwAAAABAAAAAb69D6TulyAHT8zXL0OR6RAAAAAASAAACgAAAAEAAAAAIr82VOfgLBMSHZVH/2oR6IAAAAt9n6Xzk86fn96f2GVGQSYI6LCz4ic6AwqOkZT/yV79zKgUPqdeFcXDRpGUk6UyjLmN11M/h8LQvruQaKmC0Qvfx4ZCq/2ZG3qG3fSP04BdIds9DJjUUbKVSESGrSrnwcpH2e0nmeNrICloVw1nosFeIBbbMBT8sySsUX+BfyryQDauObVqbh9BQAAAB4rxl1WeD7suN7uFVJxjNhzyFtaQ==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA8kZIAXw5jUOO/wjY8ajMxgAAAAACAAAAAAADZgAAwAAAABAAAAChNf5E6Tuat+WDllTHmNn+AAAAAASAAACgAAAAEAAAAOX7dhSKcl3O946w/KdvUO2IAAAA5zu46Hv0XRuMspU79br4piQItxsQlcgs/VcVglXW0mD899zy2OHRU9HAYiowo3eBB/HCxPCOcK1iidpybaTiv19wPGM0nM6pYVDUeR0KrJ09qRq0DGtI7s2ptq7MHEIV6Lq0Lo1k3GmNvaJ4oJiEtxXnF51p1XGF8VbGICEWTwFtZUfJA6hOdBQAAADxAYPZLrPZaQzLhU7tBvxRD7ju2A==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -124,6 +124,7 @@
           <SSIS:Package SSIS:Name="etl_Gaye_Payments.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="etl_Gaye_Pledge_Payment_History.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="etl_Gaye_Pledges.dtsx" SSIS:EntryPoint="1" />
+          <SSIS:Package SSIS:Name="Child-Template.dtsx" SSIS:EntryPoint="1" />
         </SSIS:Packages>
         <SSIS:ConnectionManagers>
           <SSIS:ConnectionManager SSIS:Name="LocalHost.DiabetesDWH.conmgr" />
@@ -2023,6 +2024,23 @@
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionGUID">{8CFD5E08-D1BF-436A-BD24-46B562F93484}</SSIS:Property>
+                <SSIS:Property SSIS:Name="PackageFormatVersion">6</SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
+              </SSIS:Properties>
+              <SSIS:Parameters />
+            </SSIS:PackageMetaData>
+            <SSIS:PackageMetaData SSIS:Name="Child-Template.dtsx">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">{816ACC1B-8129-4A34-9919-6CB0B30360C4}</SSIS:Property>
+                <SSIS:Property SSIS:Name="Name">Child-Template</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">147</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionComments">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{62680351-D98E-4EB8-BBC9-99DBCF8502ED}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">6</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
