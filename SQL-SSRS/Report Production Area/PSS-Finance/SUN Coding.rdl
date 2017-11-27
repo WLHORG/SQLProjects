@@ -1,0 +1,1249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <Body>
+    <ReportItems>
+      <Tablix Name="table1">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>0.98425in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.3in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.3in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.3in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.3in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.3in</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>0.25292in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox21">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Cost Centre</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>White</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox21</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>#34baed</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox23">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Programme</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>White</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox23</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>#34baed</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox25">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>CC Desc</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>White</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox25</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>#34baed</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox27">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Prog Desc</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>White</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox27</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>#34baed</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox29">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Directorate</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>White</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox29</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>#34baed</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox31">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Department</Value>
+                              <Style>
+                                <FontWeight>Bold</FontWeight>
+                                <Color>White</Color>
+                              </Style>
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox31</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <BackgroundColor>#34baed</BackgroundColor>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+            <TablixRow>
+              <Height>0.21in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Cost_Centre">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!Cost_Centre.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Cost_Centre</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Programme">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!Programme.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Programme</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="CC_Desc">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!CC_Desc.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>CC_Desc</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Prog_Desc">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!Prog_Desc.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Prog_Desc</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Directorate">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!Directorate.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Directorate</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Department">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!Department.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style>
+                            <TextAlign>Left</TextAlign>
+                          </Style>
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Department</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <KeepWithGroup>After</KeepWithGroup>
+              <RepeatOnNewPage>true</RepeatOnNewPage>
+              <KeepTogether>true</KeepTogether>
+            </TablixMember>
+            <TablixMember>
+              <Group Name="table1_Details_Group">
+                <DataElementName>Detail</DataElementName>
+              </Group>
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
+              <DataElementName>Detail_Collection</DataElementName>
+              <DataElementOutput>Output</DataElementOutput>
+              <KeepTogether>true</KeepTogether>
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <RepeatRowHeaders>true</RepeatRowHeaders>
+        <FixedRowHeaders>true</FixedRowHeaders>
+        <DataSetName>MAIN</DataSetName>
+        <Top>28.83958mm</Top>
+        <Left>0.03528cm</Left>
+        <Height>0.46292in</Height>
+        <Width>12.48425in</Width>
+        <Style />
+      </Tablix>
+      <Textbox Name="textbox1">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Globals!ReportName</Value>
+                <Style>
+                  <FontSize>22pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <Color>#34baed</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>This tool allows you to find your new Finance codes by entering your old codes.  This is as a guide only- if another Programme is a better description of what you are doing, you should use that. If you have any questions on your new codes, please discuss with your budget holder (who has been briefed), or contact your Finance Business Partner.</Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontFamily>Calibri</FontFamily>
+                  <FontSize>11pt</FontSize>
+                  <FontWeight>Normal</FontWeight>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#000000</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>textbox1</rd:DefaultName>
+        <Height>28.83958mm</Height>
+        <Width>5.58425in</Width>
+        <ZIndex>1</ZIndex>
+        <Style>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox37">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Requested By: </Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                  <Color>#11296b</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>James Abbott</Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#11296b</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Requested On: </Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                  <Color>#11296b</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>2014-12-16</Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#11296b</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Executed By:</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                  <Color>#11296b</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value xml:space="preserve"> </Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#11296b</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=User!UserID</Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#11296b</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Executed On:</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                  <Color>#11296b</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value xml:space="preserve"> </Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Color>#11296b</Color>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=Globals!ExecutionTime</Value>
+                <Style>
+                  <FontWeight>Normal</FontWeight>
+                  <Format>dd/MM/yyyy</Format>
+                  <Color>#11296b</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <rd:DefaultName>Textbox37</rd:DefaultName>
+        <Top>9.78958mm</Top>
+        <Left>141.83995mm</Left>
+        <Height>19.05mm</Height>
+        <Width>175.26mm</Width>
+        <ZIndex>2</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+    </ReportItems>
+    <Height>1.59833in</Height>
+    <Style />
+  </Body>
+  <Width>12.49814in</Width>
+  <Page>
+    <PageHeight>100cm</PageHeight>
+    <PageWidth>20cm</PageWidth>
+    <LeftMargin>2cm</LeftMargin>
+    <RightMargin>2cm</RightMargin>
+    <TopMargin>2cm</TopMargin>
+    <BottomMargin>2cm</BottomMargin>
+    <ColumnSpacing>0.13cm</ColumnSpacing>
+    <Style />
+  </Page>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource1">
+      <DataSourceReference>DataSource1</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>737db578-46d7-4c62-b151-9c1266ec2f71</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="MAIN">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <CommandText>&lt;RSSharePointList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ListName&gt;SUN Codes&lt;/ListName&gt;
+  &lt;ViewFields&gt;
+    &lt;FieldRef Name="Title" /&gt;
+    &lt;FieldRef Name="Region" /&gt;
+    &lt;FieldRef Name="Project" /&gt;
+    &lt;FieldRef Name="Activity_x0020_Desc" /&gt;
+    &lt;FieldRef Name="Region_x0020_Desc" /&gt;
+    &lt;FieldRef Name="Project_x0020_Desc" /&gt;
+    &lt;FieldRef Name="Cost_x0020_Centre" /&gt;
+    &lt;FieldRef Name="Programme" /&gt;
+    &lt;FieldRef Name="CC_x0020_Desc" /&gt;
+    &lt;FieldRef Name="Prog_x0020_Desc" /&gt;
+    &lt;FieldRef Name="Directorate" /&gt;
+    &lt;FieldRef Name="Department" /&gt;
+
+  &lt;/ViewFields&gt;
+&lt;/RSSharePointList&gt;</CommandText>
+        <rd:DesignerState>
+          <QueryDefinition xmlns="http://schemas.microsoft.com/ReportingServices/QueryDefinition/Relational">
+            <SelectedColumns>
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Title" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Region" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Project" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Activity_x0020_Desc" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Region_x0020_Desc" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Project_x0020_Desc" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Cost_x0020_Centre" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Programme" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="CC_x0020_Desc" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Prog_x0020_Desc" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Directorate" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Department" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Budgeted_x0020_Income_x003f_" />
+            </SelectedColumns>
+            <Filters>
+              <Filter Operator="CONTAINS" Param="True">
+                <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Activity_x0020_Desc" />
+                <FilterValue>test</FilterValue>
+              </Filter>
+            </Filters>
+          </QueryDefinition>
+        </rd:DesignerState>
+      </Query>
+      <Fields>
+        <Field Name="Activity">
+          <DataField>Title</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Region">
+          <DataField>Region</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Project">
+          <DataField>Project</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Activity_Desc">
+          <DataField>Activity_x0020_Desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Region_Desc">
+          <DataField>Region_x0020_Desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Project_Desc">
+          <DataField>Project_x0020_Desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Cost_Centre">
+          <DataField>Cost_x0020_Centre</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Programme">
+          <DataField>Programme</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CC_Desc">
+          <DataField>CC_x0020_Desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Prog_Desc">
+          <DataField>Prog_x0020_Desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Directorate">
+          <DataField>Directorate</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Department">
+          <DataField>Department</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Activity_FULL_Desc">
+          <Value>="[" &amp; Fields!Activity.Value &amp; "] "&amp; Fields!Activity_Desc.Value</Value>
+        </Field>
+        <Field Name="Region_FULL_Desc">
+          <Value>="[" &amp; Fields!Region.Value &amp; "] "&amp; Fields!Region_Desc.Value</Value>
+        </Field>
+        <Field Name="Project_FULL_Desc">
+          <Value>="[" &amp; Fields!Project.Value &amp; "] "&amp; Fields!Project_Desc.Value</Value>
+        </Field>
+      </Fields>
+      <Filters>
+        <Filter>
+          <FilterExpression>=Fields!Activity_FULL_Desc.Value</FilterExpression>
+          <Operator>Equal</Operator>
+          <FilterValues>
+            <FilterValue>=Parameters!Activity_Desc.Value</FilterValue>
+          </FilterValues>
+        </Filter>
+        <Filter>
+          <FilterExpression>=Fields!Region_FULL_Desc.Value</FilterExpression>
+          <Operator>Equal</Operator>
+          <FilterValues>
+            <FilterValue>=Parameters!Region_Desc.Value</FilterValue>
+          </FilterValues>
+        </Filter>
+        <Filter>
+          <FilterExpression>=Fields!Project_FULL_Desc.Value</FilterExpression>
+          <Operator>Equal</Operator>
+          <FilterValues>
+            <FilterValue>=Parameters!Project_Desc.Value</FilterValue>
+          </FilterValues>
+        </Filter>
+      </Filters>
+    </DataSet>
+    <DataSet Name="ds_activity">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <CommandText>&lt;RSSharePointList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;ListName&gt;SUN Codes&lt;/ListName&gt;
+  &lt;ViewFields&gt;
+    &lt;FieldRef Name="Title" /&gt;
+    &lt;FieldRef Name="Region" /&gt;
+    &lt;FieldRef Name="Project" /&gt;
+    &lt;FieldRef Name="Activity_x0020_Desc" /&gt;
+    &lt;FieldRef Name="Region_x0020_Desc" /&gt;
+    &lt;FieldRef Name="Project_x0020_Desc" /&gt;
+    &lt;FieldRef Name="Cost_x0020_Centre" /&gt;
+    &lt;FieldRef Name="Programme" /&gt;
+    &lt;FieldRef Name="CC_x0020_Desc" /&gt;
+    &lt;FieldRef Name="Prog_x0020_Desc" /&gt;
+    &lt;FieldRef Name="Directorate" /&gt;
+    &lt;FieldRef Name="Department" /&gt;
+   
+  &lt;/ViewFields&gt;
+&lt;/RSSharePointList&gt;</CommandText>
+        <rd:DesignerState>
+          <QueryDefinition xmlns="http://schemas.microsoft.com/ReportingServices/QueryDefinition/Relational">
+            <SelectedColumns>
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Title" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Region" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Project" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Activity_x0020_Desc" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Region_x0020_Desc" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Project_x0020_Desc" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Cost_x0020_Centre" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Programme" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="CC_x0020_Desc" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Prog_x0020_Desc" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Directorate" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Department" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Budgeted_x0020_Income_x003f_" />
+            </SelectedColumns>
+          </QueryDefinition>
+        </rd:DesignerState>
+      </Query>
+      <Fields>
+        <Field Name="Activity">
+          <DataField>Title</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Region">
+          <DataField>Region</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Project">
+          <DataField>Project</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Activity_Desc">
+          <DataField>Activity_x0020_Desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Region_Desc">
+          <DataField>Region_x0020_Desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Project_Desc">
+          <DataField>Project_x0020_Desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Cost_Centre">
+          <DataField>Cost_x0020_Centre</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Programme">
+          <DataField>Programme</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CC_Desc">
+          <DataField>CC_x0020_Desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Prog_Desc">
+          <DataField>Prog_x0020_Desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Directorate">
+          <DataField>Directorate</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Department">
+          <DataField>Department</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Activity_FULL_Desc">
+          <Value>="[" &amp; Fields!Activity.Value &amp; "] " &amp; Fields!Activity_Desc.Value</Value>
+        </Field>
+        <Field Name="Region_FULL_Desc">
+          <Value>="[" &amp; Fields!Region.Value &amp; "] " &amp; Fields!Region_Desc.Value</Value>
+        </Field>
+        <Field Name="Project_FULL_Desc">
+          <Value>="[" &amp; Fields!Project.Value &amp; "] "&amp; Fields!Project_Desc.Value</Value>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="ds_region">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <CommandText>
+				  &lt;RSSharePointList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+				  &lt;ListName&gt;SUN Codes&lt;/ListName&gt;
+				  &lt;ViewFields&gt;
+				  &lt;FieldRef Name="Title" /&gt;
+				  &lt;FieldRef Name="Region" /&gt;
+				  &lt;FieldRef Name="Project" /&gt;
+				  &lt;FieldRef Name="Activity_x0020_Desc" /&gt;
+				  &lt;FieldRef Name="Region_x0020_Desc" /&gt;
+				  &lt;FieldRef Name="Project_x0020_Desc" /&gt;
+				  &lt;FieldRef Name="Cost_x0020_Centre" /&gt;
+				  &lt;FieldRef Name="Programme" /&gt;
+				  &lt;FieldRef Name="CC_x0020_Desc" /&gt;
+				  &lt;FieldRef Name="Prog_x0020_Desc" /&gt;
+				  &lt;FieldRef Name="Directorate" /&gt;
+				  &lt;FieldRef Name="Department" /&gt;
+
+				  &lt;/ViewFields&gt;
+				  &lt;/RSSharePointList&gt;
+			  </CommandText>
+        <rd:DesignerState>
+          <QueryDefinition xmlns="http://schemas.microsoft.com/ReportingServices/QueryDefinition/Relational">
+            <SelectedColumns>
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Title" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Region" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Project" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Activity_x0020_Desc" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Region_x0020_Desc" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Project_x0020_Desc" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Cost_x0020_Centre" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Programme" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="CC_x0020_Desc" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Prog_x0020_Desc" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Directorate" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Department" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Budgeted_x0020_Income_x003f_" />
+            </SelectedColumns>
+          </QueryDefinition>
+        </rd:DesignerState>
+      </Query>
+      <Fields>
+        <Field Name="Activity">
+          <DataField>Title</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Region">
+          <DataField>Region</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Project">
+          <DataField>Project</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Activity_Desc">
+          <DataField>Activity_x0020_Desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Region_Desc">
+          <DataField>Region_x0020_Desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Project_Desc">
+          <DataField>Project_x0020_Desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Cost_Centre">
+          <DataField>Cost_x0020_Centre</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Programme">
+          <DataField>Programme</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CC_Desc">
+          <DataField>CC_x0020_Desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Prog_Desc">
+          <DataField>Prog_x0020_Desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Directorate">
+          <DataField>Directorate</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Department">
+          <DataField>Department</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Activity_FULL_Desc">
+          <Value>="[" &amp; Fields!Activity.Value &amp; "] " &amp; Fields!Activity_Desc.Value</Value>
+        </Field>
+        <Field Name="Region_FULL_Desc">
+          <Value>="[" &amp; Fields!Region.Value &amp; "] " &amp; Fields!Region_Desc.Value</Value>
+        </Field>
+        <Field Name="Project_FULL_Desc">
+          <Value>="[" &amp; Fields!Project.Value &amp; "] "&amp; Fields!Project_Desc.Value</Value>
+        </Field>
+      </Fields>
+      <Filters>
+        <Filter>
+          <FilterExpression>=Fields!Activity_FULL_Desc.Value</FilterExpression>
+          <Operator>Equal</Operator>
+          <FilterValues>
+            <FilterValue>=Parameters!Activity_Desc.Value</FilterValue>
+          </FilterValues>
+        </Filter>
+      </Filters>
+    </DataSet>
+    <DataSet Name="ds_project">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <CommandText>
+				  &lt;RSSharePointList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+				  &lt;ListName&gt;SUN Codes&lt;/ListName&gt;
+				  &lt;ViewFields&gt;
+				  &lt;FieldRef Name="Title" /&gt;
+				  &lt;FieldRef Name="Region" /&gt;
+				  &lt;FieldRef Name="Project" /&gt;
+				  &lt;FieldRef Name="Activity_x0020_Desc" /&gt;
+				  &lt;FieldRef Name="Region_x0020_Desc" /&gt;
+				  &lt;FieldRef Name="Project_x0020_Desc" /&gt;
+				  &lt;FieldRef Name="Cost_x0020_Centre" /&gt;
+				  &lt;FieldRef Name="Programme" /&gt;
+				  &lt;FieldRef Name="CC_x0020_Desc" /&gt;
+				  &lt;FieldRef Name="Prog_x0020_Desc" /&gt;
+				  &lt;FieldRef Name="Directorate" /&gt;
+				  &lt;FieldRef Name="Department" /&gt;
+
+				  &lt;/ViewFields&gt;
+				  &lt;/RSSharePointList&gt;
+			  </CommandText>
+        <rd:DesignerState>
+          <QueryDefinition xmlns="http://schemas.microsoft.com/ReportingServices/QueryDefinition/Relational">
+            <SelectedColumns>
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Title" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Region" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Project" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Activity_x0020_Desc" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Region_x0020_Desc" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Project_x0020_Desc" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Cost_x0020_Centre" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Programme" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="CC_x0020_Desc" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Prog_x0020_Desc" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Directorate" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Department" />
+              <ColumnExpression ColumnOwner="SUN Codes" ColumnName="Budgeted_x0020_Income_x003f_" />
+            </SelectedColumns>
+          </QueryDefinition>
+        </rd:DesignerState>
+      </Query>
+      <Fields>
+        <Field Name="Activity">
+          <DataField>Title</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Region">
+          <DataField>Region</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Project">
+          <DataField>Project</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Activity_Desc">
+          <DataField>Activity_x0020_Desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Region_Desc">
+          <DataField>Region_x0020_Desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Project_Desc">
+          <DataField>Project_x0020_Desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Cost_Centre">
+          <DataField>Cost_x0020_Centre</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Programme">
+          <DataField>Programme</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CC_Desc">
+          <DataField>CC_x0020_Desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Prog_Desc">
+          <DataField>Prog_x0020_Desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Directorate">
+          <DataField>Directorate</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Department">
+          <DataField>Department</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Activity_FULL_Desc">
+          <Value>="[" &amp; Fields!Activity.Value &amp; "] " &amp; Fields!Activity_Desc.Value</Value>
+        </Field>
+        <Field Name="Region_FULL_Desc">
+          <Value>="[" &amp; Fields!Region.Value &amp; "] " &amp; Fields!Region_Desc.Value</Value>
+        </Field>
+        <Field Name="Project_FULL_Desc">
+          <Value>="[" &amp; Fields!Project.Value &amp; "] "&amp; Fields!Project_Desc.Value</Value>
+        </Field>
+      </Fields>
+      <Filters>
+        <Filter>
+          <FilterExpression>=Fields!Activity_FULL_Desc.Value</FilterExpression>
+          <Operator>Equal</Operator>
+          <FilterValues>
+            <FilterValue>=Parameters!Activity_Desc.Value</FilterValue>
+          </FilterValues>
+        </Filter>
+        <Filter>
+          <FilterExpression>=Fields!Region_FULL_Desc.Value</FilterExpression>
+          <Operator>Equal</Operator>
+          <FilterValues>
+            <FilterValue>=Parameters!Region_Desc.Value</FilterValue>
+          </FilterValues>
+        </Filter>
+      </Filters>
+    </DataSet>
+  </DataSets>
+  <ReportParameters>
+    <ReportParameter Name="pactivity_desc_dummy">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>ds_activity</DataSetName>
+          <ValueField>Activity_FULL_Desc</ValueField>
+        </DataSetReference>
+      </DefaultValue>
+      <Prompt>pactivity_desc_dummy</Prompt>
+      <Hidden>true</Hidden>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>ds_activity</DataSetName>
+          <ValueField>Activity_FULL_Desc</ValueField>
+          <LabelField>Activity_FULL_Desc</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+    <ReportParameter Name="Activity_Desc">
+      <DataType>String</DataType>
+      <Prompt>Activity Desc</Prompt>
+      <ValidValues>
+        <ParameterValues>
+          <ParameterValue>
+            <Value>=Code.RemoveDuplicates(Parameters!pactivity_desc_dummy)</Value>
+            <Label>=Code.RemoveDuplicates(Parameters!pactivity_desc_dummy)</Label>
+          </ParameterValue>
+        </ParameterValues>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="pregion_desc_dummy">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>ds_region</DataSetName>
+          <ValueField>Region_FULL_Desc</ValueField>
+        </DataSetReference>
+      </DefaultValue>
+      <Prompt>pregion_desc_dummy</Prompt>
+      <Hidden>true</Hidden>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>ds_region</DataSetName>
+          <ValueField>Region_FULL_Desc</ValueField>
+          <LabelField>Region_FULL_Desc</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+    <ReportParameter Name="Region_Desc">
+      <DataType>String</DataType>
+      <Prompt>Region Desc</Prompt>
+      <ValidValues>
+        <ParameterValues>
+          <ParameterValue>
+            <Value>=Code.RemoveDuplicates(Parameters!pregion_desc_dummy)</Value>
+            <Label>=Code.RemoveDuplicates(Parameters!pregion_desc_dummy)</Label>
+          </ParameterValue>
+        </ParameterValues>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="pproject_desc_dummy">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>ds_project</DataSetName>
+          <ValueField>Project_FULL_Desc</ValueField>
+        </DataSetReference>
+      </DefaultValue>
+      <Prompt>pproject_desc_dummy</Prompt>
+      <Hidden>true</Hidden>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>ds_project</DataSetName>
+          <ValueField>Project_FULL_Desc</ValueField>
+          <LabelField>Project_FULL_Desc</LabelField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+    <ReportParameter Name="Project_Desc">
+      <DataType>String</DataType>
+      <Prompt>Project Desc</Prompt>
+      <ValidValues>
+        <ParameterValues>
+          <ParameterValue>
+            <Value>=Code.RemoveDuplicates(Parameters!pproject_desc_dummy)</Value>
+            <Label>=Code.RemoveDuplicates(Parameters!pproject_desc_dummy)</Label>
+          </ParameterValue>
+        </ParameterValues>
+      </ValidValues>
+    </ReportParameter>
+  </ReportParameters>
+  <Code>Public Shared Function RemoveDuplicates(parameter As Parameter) As String()
+            Dim items As Object() = parameter.Value
+            System.Array.Sort(items)
+
+            Dim k As Integer = 0
+
+            For i As Integer = 0 To items.Length - 1
+                        If i &gt; 0 AndAlso items(i).Equals(items(i - 1)) Then
+                                    Continue For
+                        End If
+
+                        items(k) = items(i)
+                        k += 1
+            Next
+
+            Dim unique As [String]() = New [String](k - 1) {}
+
+            System.Array.Copy(items, 0, unique, 0, k)
+
+            Return unique
+End Function</Code>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>7f4c134b-867b-4c9b-b6b9-9cc86a3c682a</rd:ReportID>
+</Report>

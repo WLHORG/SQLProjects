@@ -1,0 +1,775 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:cl="http://schemas.microsoft.com/sqlserver/reporting/2010/01/componentdefinition" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition">
+  <Description>Data Source: DiabetesDWH</Description>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource1">
+      <DataSourceReference>/Data Sources/SharedDataSource_DiabetesDWH</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>e6025901-2a85-4ebd-a868-2c3a6851eff4</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <CommandText>---------------------------------------------------------------------------------------------------
+----------------------YTD income 3yr comparison----------------------------------------------------
+---------------------------------------------------------------------------------------------------
+if object_id('tempdb..#3100YTD') is not null drop table #3100YTD
+if object_id('tempdb..#3100YTD2012') is not null drop table #3100YTD2012
+if object_id('tempdb..#3100YTD2011') is not null drop table #3100YTD2011
+if object_id('tempdb..#2013cumulative') is not null drop table #2013cumulative
+if object_id('tempdb..#2012cumulative') is not null drop table #2012cumulative
+if object_id('tempdb..#2011cumulative') is not null drop table #2011cumulative
+
+create table #3100YTD
+(month_number int
+,month_name varchar(12)
+,amount float (2))
+
+insert into #3100YTD
+select datepart(mm,v.transaction_date) AS [Month_number]
+, datename(mm,v.transaction_date) as [month]
+, SUM(amount) as [3100_YTD]
+from wft.wft_financial_history_merge v
+INNER JOIN cis.rates r
+on v.product = r.product
+and v.rate = r.rate
+LEFT JOIN cis.duk_new2015_products dnp on dnp.product = r.product
+LEFT JOIN cis.duk_new2015_sources dnsr on dnsr.source = v.source and dnsr.new_product is null and dnsr.region = r.nominal_account_suffix
+LEFT JOIN cis.duk_new2015_sources dnsp on dnsp.source = v.source and dnp.new_product is not null and dnsp.new_product = dnp.new_product and dnsp.region is null
+LEFT JOIN cis.duk_new2015_sources dns on dns.source = v.source and dns.new_product is null and dns.region is null
+where (dnsr.new_cost_centre = 'FMCP'
+or dnsp.new_cost_centre = 'FMCP'
+or dns.new_cost_centre = 'FMCP'
+or dnsr.new_programme = 'FRFCNX')
+and (substring(dnsr.new_source,6,1) = 'X'
+or substring(dnsp.new_source,6,1) = 'X'
+or substring(dns.new_source,6,1) = 'X')
+and v.transaction_date &gt;= '01 JAN 2014'
+and v.transaction_date &lt;= GETDATE()
+and v.invoice = 0
+group by datepart(mm,v.transaction_date)
+, datename(mm,v.transaction_date)
+
+create table #3100YTD2012
+(month_number2012 int
+,month_name2012 varchar(12)
+,amount2012 float (2))
+
+insert into #3100YTD2012
+SELECT datepart(mm, l.transaction_date) AS [last_month_number]
+, datename (mm,l.transaction_date) as [2012_Month]
+, SUM(amount) as [LastYTD]
+from wft.wft_financial_history_merge l
+INNER JOIN cis.rates r
+on l.product = r.product
+and l.rate = r.rate
+LEFT JOIN cis.duk_new2015_products dnp on dnp.product = r.product
+LEFT JOIN cis.duk_new2015_sources dnsr on dnsr.source = l.source and dnsr.new_product is null and dnsr.region = r.nominal_account_suffix
+LEFT JOIN cis.duk_new2015_sources dnsp on dnsp.source = l.source and dnp.new_product is not null and dnsp.new_product = dnp.new_product and dnsp.region is null
+LEFT JOIN cis.duk_new2015_sources dns on dns.source = l.source and dns.new_product is null and dns.region is null
+where (dnsr.new_cost_centre = 'FMCP'
+or dnsp.new_cost_centre = 'FMCP'
+or dns.new_cost_centre = 'FMCP'
+or dnsr.new_programme = 'FRFCNX')
+and (substring(dnsr.new_source,6,1) = 'X'
+or substring(dnsp.new_source,6,1) = 'X'
+or substring(dns.new_source,6,1) = 'X')
+and l.transaction_date &gt;= '01 JAN 2013'
+and l.transaction_date &lt;= dateadd(year,-1,GETDATE())
+and l.invoice = 0
+group by datepart(mm,l.transaction_date), datename(mm,l.transaction_date)
+
+create table #3100YTD2011
+(month_number2011 int
+,month_name2011 varchar(12)
+,amount2011 float (2))
+
+insert into #3100YTD2011
+SELECT datepart(mm, l2.transaction_date) AS [last2_month_number]
+, datename (mm,l2.transaction_date) as [2011_Month]
+, SUM(amount) as [Last2YTD]
+from wft.wft_financial_history_merge l2
+INNER JOIN cis.rates r
+on l2.product = r.product
+and l2.rate = r.rate
+LEFT JOIN cis.duk_new2015_products dnp on dnp.product = r.product
+LEFT JOIN cis.duk_new2015_sources dnsr on dnsr.source = l2.source and dnsr.new_product is null and dnsr.region = r.nominal_account_suffix
+LEFT JOIN cis.duk_new2015_sources dnsp on dnsp.source = l2.source and dnp.new_product is not null and dnsp.new_product = dnp.new_product and dnsp.region is null
+LEFT JOIN cis.duk_new2015_sources dns on dns.source = l2.source and dns.new_product is null and dns.region is null
+where (dnsr.new_cost_centre = 'FMCP'
+or dnsp.new_cost_centre = 'FMCP'
+or dns.new_cost_centre = 'FMCP'
+or dnsr.new_programme = 'FRFCNX')
+and (substring(dnsr.new_source,6,1) = 'X'
+or substring(dnsp.new_source,6,1) = 'X'
+or substring(dns.new_source,6,1) = 'X')
+and l2.transaction_date &gt;= '01 JAN 2012'
+and l2.transaction_date &lt;= dateadd(year,-2,GETDATE())
+and l2.invoice = 0
+group by datepart(mm,l2.transaction_date), datename(mm,l2.transaction_date)
+
+create table #2013cumulative
+(month2013 int
+,cumulative2013 float (2))
+
+insert into #2013cumulative
+select
+a.month_number
+,cumulative_amount = SUM(b.amount)
+FROM #3100YTD a, #3100YTD b
+WHERE b.month_number &lt;= a.month_number
+GROUP BY a.month_number, a.amount
+ORDER BY a.month_number
+
+create table #2012cumulative
+(month2012 int
+,cumulative2012 float (2))
+
+insert into #2012cumulative
+select
+a.month_number2012
+,cumulative_amount = SUM(b.amount2012)
+FROM #3100YTD2012 a, #3100YTD2012 b
+WHERE b.month_number2012 &lt;= a.month_number2012
+GROUP BY a.month_number2012, a.amount2012
+ORDER BY a.month_number2012
+
+create table #2011cumulative
+(month2011 int
+,cumulative2011 float (2))
+
+insert into #2011cumulative
+select
+a.month_number2011
+,cumulative_amount = SUM(b.amount2011)
+FROM #3100YTD2011 a, #3100YTD2011 b
+WHERE b.month_number2011 &lt;= a.month_number2011
+GROUP BY a.month_number2011, a.amount2011
+ORDER BY a.month_number2011
+
+select
+#3100YTD.month_number
+,#3100YTD.month_name
+,#3100YTD.amount
+,#2013cumulative.cumulative2013
+,#3100YTD2012.month_name2012
+,#3100YTD2012.amount2012
+,#2012cumulative.cumulative2012
+,#3100YTD2011.month_name2011
+,#3100YTD2011.amount2011
+,#2011cumulative.cumulative2011
+FROM #3100YTD
+INNER JOIN #3100YTD2012
+ON #3100YTD.month_number = #3100YTD2012.month_number2012
+INNER JOIN #3100YTD2011
+ON #3100YTD.month_number = #3100YTD2011.month_number2011
+INNER JOIN #2013cumulative
+ON #3100YTD.month_number = #2013cumulative.month2013
+INNER JOIN #2012cumulative
+ON #3100YTD.month_number = #2012cumulative.month2012
+INNER JOIN #2011cumulative
+ON #3100YTD.month_number = #2011cumulative.month2011
+ORDER BY #3100YTD.month_number ASC
+
+drop table #3100YTD, #3100YTD2012, #3100YTD2011, #2013cumulative, #2012cumulative, #2011cumulative
+---------------------------------------------------------------------------------------------------
+----------------------END YTD income 3yr comparison------------------------------------------------
+---------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------
+----------------------Old Income Structure YTD income 3yr comparison-------------------------------
+---------------------------------------------------------------------------------------------------
+--if object_id('tempdb..#3100YTD') is not null drop table #3100YTD
+--if object_id('tempdb..#3100YTD2012') is not null drop table #3100YTD2012
+--if object_id('tempdb..#3100YTD2011') is not null drop table #3100YTD2011
+--if object_id('tempdb..#2013cumulative') is not null drop table #2013cumulative
+--if object_id('tempdb..#2012cumulative') is not null drop table #2012cumulative
+--if object_id('tempdb..#2011cumulative') is not null drop table #2011cumulative
+
+--create table #3100YTD
+--(month_number int
+--,month_name varchar(12)
+--,amount float (2))
+
+--insert into #3100YTD
+--select datepart(mm,v.transaction_date) AS [Month_number]
+--, datename(mm,v.transaction_date) as [month]
+--, SUM(amount) as [3100_YTD]
+--from wft.wft_financial_history_merge v
+--      inner join cis.products p on p.product = v.product
+--      inner join cis.contacts c on c.contact_number = v.contact_number
+--where RIGHT(p.nominal_account,4) = '3100'
+--and v.rate = 'CO'
+--and v.transaction_date &gt;= '01 JAN 2014'
+--and v.transaction_date &lt;= GETDATE()
+--and v.invoice = 0
+--group by datepart(mm,v.transaction_date)
+--, datename(mm,v.transaction_date)
+
+--create table #3100YTD2012
+--(month_number2012 int
+--,month_name2012 varchar(12)
+--,amount2012 float (2))
+
+--insert into #3100YTD2012
+--SELECT datepart(mm, l.transaction_date) AS [last_month_number]
+--, datename (mm,l.transaction_date) as [2012_Month]
+--, SUM(amount) as [LastYTD]
+--from wft.wft_financial_history_merge l
+--      inner join cis.products lp on lp.product = l.product
+--      inner join cis.contacts lc on lc.contact_number = l.contact_number
+--where RIGHT(lp.nominal_account,4) = '3100'
+--and l.rate = 'CO'
+--and l.transaction_date &gt;= '01 JAN 2013'
+--and l.transaction_date &lt;= dateadd(year,-1,GETDATE())
+--and l.invoice = 0
+--group by datepart(mm,l.transaction_date), datename(mm,l.transaction_date)
+
+--create table #3100YTD2011
+--(month_number2011 int
+--,month_name2011 varchar(12)
+--,amount2011 float (2))
+
+--insert into #3100YTD2011
+--SELECT datepart(mm, l2.transaction_date) AS [last2_month_number]
+--, datename (mm,l2.transaction_date) as [2011_Month]
+--, SUM(amount) as [Last2YTD]
+--from wft.wft_financial_history_merge l2
+--      inner join cis.products lp2 on lp2.product = l2.product
+--      inner join cis.contacts lc2 on lc2.contact_number = l2.contact_number
+--where RIGHT(lp2.nominal_account,4) = '3100'
+--and l2.rate = 'CO'
+--and l2.transaction_date &gt;= '01 JAN 2012'
+--and l2.transaction_date &lt;= dateadd(year,-2,GETDATE())
+--and l2.invoice = 0
+--group by datepart(mm,l2.transaction_date), datename(mm,l2.transaction_date)
+
+--create table #2013cumulative
+--(month2013 int
+--,cumulative2013 float (2))
+
+--insert into #2013cumulative
+--select
+--a.month_number
+--,cumulative_amount = SUM(b.amount)
+--FROM #3100YTD a, #3100YTD b
+--WHERE b.month_number &lt;= a.month_number
+--GROUP BY a.month_number, a.amount
+--ORDER BY a.month_number
+
+--create table #2012cumulative
+--(month2012 int
+--,cumulative2012 float (2))
+
+--insert into #2012cumulative
+--select
+--a.month_number2012
+--,cumulative_amount = SUM(b.amount2012)
+--FROM #3100YTD2012 a, #3100YTD2012 b
+--WHERE b.month_number2012 &lt;= a.month_number2012
+--GROUP BY a.month_number2012, a.amount2012
+--ORDER BY a.month_number2012
+
+--create table #2011cumulative
+--(month2011 int
+--,cumulative2011 float (2))
+
+--insert into #2011cumulative
+--select
+--a.month_number2011
+--,cumulative_amount = SUM(b.amount2011)
+--FROM #3100YTD2011 a, #3100YTD2011 b
+--WHERE b.month_number2011 &lt;= a.month_number2011
+--GROUP BY a.month_number2011, a.amount2011
+--ORDER BY a.month_number2011
+
+--select
+--#3100YTD.month_number
+--,#3100YTD.month_name
+--,#3100YTD.amount
+--,#2013cumulative.cumulative2013
+--,#3100YTD2012.month_name2012
+--,#3100YTD2012.amount2012
+--,#2012cumulative.cumulative2012
+--,#3100YTD2011.month_name2011
+--,#3100YTD2011.amount2011
+--,#2011cumulative.cumulative2011
+--FROM #3100YTD
+--INNER JOIN #3100YTD2012
+--ON #3100YTD.month_number = #3100YTD2012.month_number2012
+--INNER JOIN #3100YTD2011
+--ON #3100YTD.month_number = #3100YTD2011.month_number2011
+--INNER JOIN #2013cumulative
+--ON #3100YTD.month_number = #2013cumulative.month2013
+--INNER JOIN #2012cumulative
+--ON #3100YTD.month_number = #2012cumulative.month2012
+--INNER JOIN #2011cumulative
+--ON #3100YTD.month_number = #2011cumulative.month2011
+--ORDER BY #3100YTD.month_number ASC
+
+--drop table #3100YTD, #3100YTD2012, #3100YTD2011, #2013cumulative, #2012cumulative, #2011cumulative
+
+---------------------------------------------------------------------------------------------------
+----------------------END Old Income Structure YTD income 3yr comparison---------------------------
+---------------------------------------------------------------------------------------------------</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="month_number">
+          <DataField>month_number</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="month_name">
+          <DataField>month_name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="amount">
+          <DataField>amount</DataField>
+          <rd:TypeName>System.Single</rd:TypeName>
+        </Field>
+        <Field Name="cumulative2013">
+          <DataField>cumulative2013</DataField>
+          <rd:TypeName>System.Single</rd:TypeName>
+        </Field>
+        <Field Name="month_name2012">
+          <DataField>month_name2012</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="amount2012">
+          <DataField>amount2012</DataField>
+          <rd:TypeName>System.Single</rd:TypeName>
+        </Field>
+        <Field Name="cumulative2012">
+          <DataField>cumulative2012</DataField>
+          <rd:TypeName>System.Single</rd:TypeName>
+        </Field>
+        <Field Name="month_name2011">
+          <DataField>month_name2011</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="amount2011">
+          <DataField>amount2011</DataField>
+          <rd:TypeName>System.Single</rd:TypeName>
+        </Field>
+        <Field Name="cumulative2011">
+          <DataField>cumulative2011</DataField>
+          <rd:TypeName>System.Single</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Chart Name="Chart1">
+            <ChartCategoryHierarchy>
+              <ChartMembers>
+                <ChartMember>
+                  <Group Name="Chart1_CategoryGroup">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!month_name.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!month_number.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                  <Label>=Fields!month_name.Value</Label>
+                </ChartMember>
+              </ChartMembers>
+            </ChartCategoryHierarchy>
+            <ChartSeriesHierarchy>
+              <ChartMembers>
+                <ChartMember>
+                  <Label>cumulative2013</Label>
+                </ChartMember>
+                <ChartMember>
+                  <Label>cumulative2012</Label>
+                </ChartMember>
+                <ChartMember>
+                  <Label>cumulative2011</Label>
+                </ChartMember>
+              </ChartMembers>
+            </ChartSeriesHierarchy>
+            <ChartData>
+              <ChartSeriesCollection>
+                <ChartSeries Name="cumulative2013">
+                  <ChartDataPoints>
+                    <ChartDataPoint>
+                      <ChartDataPointValues>
+                        <Y>=Sum(Fields!cumulative2013.Value)</Y>
+                      </ChartDataPointValues>
+                      <ChartDataLabel>
+                        <Style>
+                          <Format>#,0,.0;(#,0,.0)</Format>
+                        </Style>
+                        <UseValueAsLabel>true</UseValueAsLabel>
+                        <Visible>true</Visible>
+                      </ChartDataLabel>
+                      <Style />
+                      <ChartMarker>
+                        <Style />
+                      </ChartMarker>
+                      <DataElementOutput>Output</DataElementOutput>
+                    </ChartDataPoint>
+                  </ChartDataPoints>
+                  <Type>Line</Type>
+                  <Style />
+                  <ChartEmptyPoints>
+                    <Style />
+                    <ChartMarker>
+                      <Style />
+                    </ChartMarker>
+                    <ChartDataLabel>
+                      <Style />
+                    </ChartDataLabel>
+                  </ChartEmptyPoints>
+                  <ChartItemInLegend>
+                    <LegendText>2014</LegendText>
+                  </ChartItemInLegend>
+                  <ValueAxisName>Primary</ValueAxisName>
+                  <CategoryAxisName>Primary</CategoryAxisName>
+                  <ChartSmartLabel>
+                    <CalloutLineColor>Black</CalloutLineColor>
+                    <MinMovingDistance>0pt</MinMovingDistance>
+                  </ChartSmartLabel>
+                </ChartSeries>
+                <ChartSeries Name="cumulative2012">
+                  <ChartDataPoints>
+                    <ChartDataPoint>
+                      <ChartDataPointValues>
+                        <Y>=Sum(Fields!cumulative2012.Value)</Y>
+                      </ChartDataPointValues>
+                      <ChartDataLabel>
+                        <Style>
+                          <Format>#,0,.0;(#,0,.0)</Format>
+                        </Style>
+                        <UseValueAsLabel>true</UseValueAsLabel>
+                        <Visible>true</Visible>
+                      </ChartDataLabel>
+                      <Style />
+                      <ChartMarker>
+                        <Style />
+                      </ChartMarker>
+                      <DataElementOutput>Output</DataElementOutput>
+                    </ChartDataPoint>
+                  </ChartDataPoints>
+                  <Type>Line</Type>
+                  <Style />
+                  <ChartEmptyPoints>
+                    <Style />
+                    <ChartMarker>
+                      <Style />
+                    </ChartMarker>
+                    <ChartDataLabel>
+                      <Style />
+                    </ChartDataLabel>
+                  </ChartEmptyPoints>
+                  <ChartItemInLegend>
+                    <LegendText>2013</LegendText>
+                  </ChartItemInLegend>
+                  <ValueAxisName>Primary</ValueAxisName>
+                  <CategoryAxisName>Primary</CategoryAxisName>
+                  <ChartSmartLabel>
+                    <CalloutLineColor>Black</CalloutLineColor>
+                    <MinMovingDistance>0pt</MinMovingDistance>
+                  </ChartSmartLabel>
+                </ChartSeries>
+                <ChartSeries Name="cumulative2011">
+                  <ChartDataPoints>
+                    <ChartDataPoint>
+                      <ChartDataPointValues>
+                        <Y>=Sum(Fields!cumulative2011.Value)</Y>
+                      </ChartDataPointValues>
+                      <ChartDataLabel>
+                        <Style>
+                          <Format>#,0,.0;(#,0,.0)</Format>
+                        </Style>
+                        <UseValueAsLabel>true</UseValueAsLabel>
+                        <Visible>true</Visible>
+                      </ChartDataLabel>
+                      <Style />
+                      <ChartMarker>
+                        <Style />
+                      </ChartMarker>
+                      <DataElementOutput>Output</DataElementOutput>
+                    </ChartDataPoint>
+                  </ChartDataPoints>
+                  <Type>Line</Type>
+                  <Style />
+                  <ChartEmptyPoints>
+                    <Style />
+                    <ChartMarker>
+                      <Style />
+                    </ChartMarker>
+                    <ChartDataLabel>
+                      <Style />
+                    </ChartDataLabel>
+                  </ChartEmptyPoints>
+                  <ChartItemInLegend>
+                    <LegendText>2012</LegendText>
+                  </ChartItemInLegend>
+                  <ValueAxisName>Primary</ValueAxisName>
+                  <CategoryAxisName>Primary</CategoryAxisName>
+                  <ChartSmartLabel>
+                    <CalloutLineColor>Black</CalloutLineColor>
+                    <MinMovingDistance>0pt</MinMovingDistance>
+                  </ChartSmartLabel>
+                </ChartSeries>
+              </ChartSeriesCollection>
+            </ChartData>
+            <ChartAreas>
+              <ChartArea Name="Default">
+                <ChartCategoryAxes>
+                  <ChartAxis Name="Primary">
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption>Month</Caption>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Enabled>False</Enabled>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMinorTickMarks>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                  <ChartAxis Name="Secondary">
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption>Axis Title</Caption>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Enabled>False</Enabled>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMinorTickMarks>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Location>Opposite</Location>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                </ChartCategoryAxes>
+                <ChartValueAxes>
+                  <ChartAxis Name="Primary">
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption>3100 income
+</Caption>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMinorTickMarks>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                  <ChartAxis Name="Secondary">
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption>Axis Title</Caption>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMinorTickMarks>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Location>Opposite</Location>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                </ChartValueAxes>
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                </Style>
+              </ChartArea>
+            </ChartAreas>
+            <ChartLegends>
+              <ChartLegend Name="Default">
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontSize>8pt</FontSize>
+                </Style>
+                <ChartLegendTitle>
+                  <Caption />
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </ChartLegendTitle>
+                <HeaderSeparatorColor>Black</HeaderSeparatorColor>
+                <ColumnSeparatorColor>Black</ColumnSeparatorColor>
+              </ChartLegend>
+            </ChartLegends>
+            <ChartTitles>
+              <ChartTitle Name="Default">
+                <Caption>Corporate Income YTD comparison (000's)</Caption>
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontWeight>Bold</FontWeight>
+                  <TextAlign>General</TextAlign>
+                  <VerticalAlign>Top</VerticalAlign>
+                </Style>
+              </ChartTitle>
+            </ChartTitles>
+            <Palette>BrightPastel</Palette>
+            <ChartBorderSkin>
+              <Style>
+                <BackgroundColor>Gray</BackgroundColor>
+                <BackgroundGradientType>None</BackgroundGradientType>
+                <Color>White</Color>
+              </Style>
+            </ChartBorderSkin>
+            <ChartNoDataMessage Name="NoDataMessage">
+              <Caption>No Data Available</Caption>
+              <Style>
+                <BackgroundGradientType>None</BackgroundGradientType>
+                <TextAlign>General</TextAlign>
+                <VerticalAlign>Top</VerticalAlign>
+              </Style>
+            </ChartNoDataMessage>
+            <DataSetName>DataSet1</DataSetName>
+            <Top>0.26459mm</Top>
+            <Left>0mm</Left>
+            <Height>134.34131mm</Height>
+            <Width>232.00782mm</Width>
+            <Style>
+              <Border>
+                <Color>LightGrey</Color>
+                <Style>Solid</Style>
+              </Border>
+              <BackgroundColor>White</BackgroundColor>
+              <BackgroundGradientType>None</BackgroundGradientType>
+            </Style>
+          </Chart>
+        </ReportItems>
+        <Height>135.66423mm</Height>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Body>
+      <Width>232.00782mm</Width>
+      <Page>
+        <PageFooter>
+          <Height>5.60917mm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageFooter>
+        <PageHeight>297mm</PageHeight>
+        <PageWidth>210mm</PageWidth>
+        <LeftMargin>20mm</LeftMargin>
+        <RightMargin>20mm</RightMargin>
+        <TopMargin>20mm</TopMargin>
+        <BottomMargin>20mm</BottomMargin>
+        <ColumnSpacing>0.13cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <rd:ReportUnitType>Mm</rd:ReportUnitType>
+  <rd:ReportServerUrl>http://gs1dukmsqlv03/ReportServer</rd:ReportServerUrl>
+  <rd:ReportID>eae0785f-44c0-4c90-8bf8-0904893f5ef8</rd:ReportID>
+</Report>

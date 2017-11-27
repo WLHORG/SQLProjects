@@ -1,0 +1,1660 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:cl="http://schemas.microsoft.com/sqlserver/reporting/2010/01/componentdefinition" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition">
+  <Description>Data Source: DiabetesDWH</Description>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DataSource1">
+      <DataSourceReference>/Data Sources/SharedDataSource_DiabetesDWH</DataSourceReference>
+      <rd:SecurityType>Integrated</rd:SecurityType>
+      <rd:DataSourceID>7f14a6b5-eca0-49fc-901e-b74dad5411c4</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DiabetesDWH_Query">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <QueryParameters>
+          <QueryParameter Name="@duk_region">
+            <Value>=Parameters!duk_region.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>
+
+
+if object_id ('tempdb..#VTFV') is not null drop table #VTFV
+select distinct cis.contact_number 
+into #VTFV
+from openquery(cislive, 'select distinct contact_number 
+							from contact_categories 
+							where activity = ''VT''
+							and activity_value = ''FPV''
+							and sysdate &gt; valid_to') as cis;
+
+if object_id('tempdb..#vfp') is not null drop table #vfp
+create table #vfp 
+(segment varchar(25)
+ ,[source] varchar(10)
+,source_desc varchar(60) 
+,contact_number int
+,label_name varchar(80)
+,under_18 char(1)
+,town varchar(35)
+,county varchar(35)
+,duk_region varchar(80)
+,dated date
+,dated_weekday varchar(10)
+,contact_date date
+,contact_type varchar(30)
+,all_sub_topics varchar(4000)
+,IF_activity char(1)
+,CFR_or_Region_Topic char(1));
+
+
+if object_id('tempdb..#Volunteer_Fundraising_Pack') is not null drop table #Volunteer_Fundraising_Pack
+(select cis.communications_log_number,
+cis.[source],
+cis.source_desc,
+cis.contact_number,
+cis.label_name,
+case when floor(datediff(dd,cis.date_of_birth,getdate())/365.23076923074) &lt;18 then 'Y' else 'N' end as Under_18,
+vu.town,
+vu.county,
+isnull(replace(replace(replace(ctn.duk_region,'Diabetes U K (',''),' region)',''),')',''),'UNKNOWN') as DUK_region,
+cis.topic,	
+cis.sub_topic,	
+cast(cis.dated as date) as dated,
+cis.document_type
+into #Volunteer_Fundraising_Pack
+from OPENQUERY(CISLIVE, 'SELECT cl.communications_log_number,
+										cl.source,
+										s.source_desc,
+										cl.contact_number,
+										c.label_name,
+										c.date_of_birth,
+										cls.topic,	
+										cls.sub_topic,	
+										cl.dated,
+										cl.document_type
+							FROM communications_log cl
+							INNER JOIN communications_log_subjects cls ON cl.communications_log_number = cls.communications_log_number
+							INNER JOIN contacts c ON cl.contact_number = c.contact_number
+							LEFT JOIN sources s ON cl.source=s.source
+							WHERE cls.topic = ''VFP''') as cis
+
+
+
+
+
+--left join custom.cis_contact_to_nation as ctn on cis.contact_number = ctn.contact_number --  REPLACED WITH NEW FUNDRAISING REGION BELOW 
+left join  (SELECT contact_number, fund_region_desc as duk_region  FROM  [cis].[duk_fundraising_areas] fa 
+INNER JOIN [cis].[duk_fund_region_hierarchy] fh ON fa.rf_area = fh.rf_area
+INNER JOIN [cis].[duk_fundraising_regions] fr ON fh.fund_region = fr.fund_region
+INNER JOIN [custom].[cis_contact_to_nation] ctn ON ctn.branch =  fh.branch) as ctn on cis.contact_number = ctn.contact_number
+
+
+
+left join custom.cis_contact_selection_header as vu on cis.contact_number = vu.contact_number)
+
+
+if object_id('tempdb..#cc') is not null drop table #cc
+select distinct cc.contact_number 
+into #cc
+from cis.contact_categories as cc
+inner join #Volunteer_Fundraising_Pack as vfp2 on cc.contact_number=vfp2.contact_number
+where cc.activity like 'IF%' 
+and getdate() between cc.valid_from and cc.valid_to
+and cc.valid_from between vfp2.dated and dateadd(dd,14,vfp2.dated) 
+
+
+if object_id('tempdb..#cfr') is not null drop table #cfr
+select distinct cfr.contact_number
+into #cfr
+from [custom].[cis_contact_topic_subtopic] as cfr
+inner join #Volunteer_Fundraising_Pack as vfp2 on cfr.contact_number=vfp2.contact_number
+where (cfr.topic like 'CFR%'
+		or cfr.topic like 'EA%'
+		or cfr.topic like 'EM%'
+		or cfr.topic like 'ER%'
+		or cfr.topic like 'LR%'
+		or cfr.topic like 'NI%'
+		or cfr.topic like 'NW%'
+		or cfr.topic like 'NY%'
+		or cfr.topic like 'SC%'
+		or cfr.topic like 'SE%'
+		or cfr.topic like 'SW%'
+		or cfr.topic like 'WA%'
+		or cfr.topic like 'WM%')
+and cfr.dated between vfp2.dated and dateadd(dd,14,vfp2.dated)
+
+--001 Download and Post 
+insert into #vfp
+(segment
+,[source]
+,source_desc
+,contact_number
+,label_name
+,under_18
+,town
+,county
+,duk_region
+,dated
+,dated_weekday
+,contact_date
+,contact_type
+,all_sub_topics
+,IF_activity
+,CFR_or_Region_Topic)
+select distinct '001 Download &amp; Post' as segment
+,vfp.source
+,vfp.source_desc
+,vfp.contact_number
+,vfp.label_name
+,vfp.Under_18
+,vfp.town
+,vfp.county
+,vfp.DUK_region
+,vfp.dated
+,datename(dw,vfp.dated) as dated_weekday
+,(select top 1 vfp1.dated
+	from #Volunteer_Fundraising_Pack as vfp1
+	where vfp.contact_number=vfp1.contact_number
+	and vfp1.sub_topic in ('CALL','NOAN')
+	order by dated desc)
+
+,(select top 1 st.sub_topic_desc
+	from #Volunteer_Fundraising_Pack as vfp1
+	inner join cis.sub_topics as st on vfp1.topic=st.topic
+								and vfp1.sub_topic=st.sub_topic
+	where vfp.contact_number=vfp1.contact_number
+	and vfp1.sub_topic in ('CALL','NOAN')
+	order by dated desc)
+
+, stuff(
+		(select ', ' + st.sub_topic_desc
+			from #Volunteer_Fundraising_Pack as vfp1
+			inner join cis.sub_topics as st on vfp1.topic=st.topic
+								and vfp1.sub_topic=st.sub_topic
+			where vfp.contact_number=vfp1.contact_number
+			order by vfp1.dated desc
+          for xml path ('')
+							), 1, 1, '')  as all_sub_topics
+
+, case when cc1.contact_number is not null then 1 else 0 end
+, case when cfr1.contact_number is not null then 1 else 0 end							 
+from #Volunteer_Fundraising_Pack as vfp
+inner join #Volunteer_Fundraising_Pack as vfp1 on vfp.contact_number=vfp1.contact_number
+left join #cc as cc1 on vfp.contact_number=cc1.contact_number 
+left join #cfr as cfr1 on vfp.contact_number=cfr1.contact_number
+where vfp.topic = 'VFP'
+and vfp.sub_topic = 'DOWN'
+and vfp.dated between dateadd(dd,-10,getdate()) and getdate()
+and vfp1.topic = 'VFP'
+and vfp1.sub_topic = 'POST' 
+and vfp1.dated between dateadd(dd,-10,getdate()) and getdate()
+--and (vfp.[source] in (@source_code)
+--		--or vfp1.[source] in (@source_code)
+--		)
+and vfp.duk_region in (@duk_region)
+and vfp.contact_number not in (select vfp1.contact_number
+								from #Volunteer_Fundraising_Pack as vfp1
+								where vfp1.topic = 'VFP' 
+								and vfp1.sub_topic in ('FOLW'
+														,'EMAI'
+														,'NFOL'
+														,'NOAN' --added 27102014 LJS  
+														,'GLC'--added 27102014 LJS 
+														,'FOLW'--added 27102014 LJS 
+														,'NFOL'--added 27102014 LJS 
+														,'PC'--added 27102014 LJS 
+														,'TYC'))--added 27102014 LJS 					
+and vfp.contact_number not in (select contact_number
+								from #VTFV)
+
+
+--002 Download Only
+insert into #vfp
+(segment
+,[source]
+,source_desc
+,contact_number
+,label_name
+,under_18
+,town
+,county
+,duk_region
+,dated
+,dated_weekday
+,contact_date
+,contact_type
+,all_sub_topics
+,IF_activity
+,CFR_or_Region_Topic)
+select distinct '002 Download Only' as segment
+,vfp.source
+,vfp.source_desc
+,vfp.contact_number
+,vfp.label_name
+,vfp.under_18
+,vfp.town
+,vfp.county
+,vfp.DUK_region
+,vfp.dated
+,datename(dw,vfp.dated) as dated_weekday
+,(select top 1 vfp1.dated
+	from #Volunteer_Fundraising_Pack as vfp1
+	where vfp.contact_number=vfp1.contact_number
+	and vfp1.sub_topic in ('CALL','NOAN')
+	order by dated desc)
+
+,(select top 1 st.sub_topic_desc
+	from #Volunteer_Fundraising_Pack as vfp1
+	inner join cis.sub_topics as st on vfp1.topic=st.topic
+								and vfp1.sub_topic=st.sub_topic
+	where vfp.contact_number=vfp1.contact_number
+	and vfp1.sub_topic in ('CALL','NOAN')
+	order by dated desc)
+
+, stuff(
+		(select ', ' + st.sub_topic_desc
+			from #Volunteer_Fundraising_Pack as vfp1
+			inner join cis.sub_topics as st on vfp1.topic=st.topic
+								and vfp1.sub_topic=st.sub_topic
+			where vfp.contact_number=vfp1.contact_number
+			order by vfp1.dated desc
+          for xml path ('')
+							), 1, 1, '')  as all_sub_topics
+
+, case when cc1.contact_number is not null then 1 else 0 end
+, case when cfr1.contact_number is not null then 1 else 0 end							 
+from #Volunteer_Fundraising_Pack as vfp
+left join #cc as cc1 on vfp.contact_number=cc1.contact_number 
+left join #cfr as cfr1 on vfp.contact_number=cfr1.contact_number
+where vfp.topic = 'VFP'
+and vfp.sub_topic = 'DOWN'
+and vfp.dated between dateadd(dd,-10,getdate()) and getdate()
+--and vfp.source in (@source_code)
+and vfp.duk_region in (@duk_region)
+and vfp.contact_number not in (select vfp1.contact_number
+								from #Volunteer_Fundraising_Pack as vfp1
+								where vfp1.topic = 'VFP' 
+								and vfp1.sub_topic = 'POST'
+								and vfp1.dated between dateadd(dd,-10,getdate()) and getdate())
+and vfp.contact_number not in (select vfp1.contact_number
+								from #Volunteer_Fundraising_Pack as vfp1
+								where vfp1.topic = 'VFP' 
+								and vfp1.sub_topic in ('FOLW'
+														,'EMAI'
+														,'NFOL'
+														,'NOAN' --added 27102014 LJS  
+														,'GLC'--added 27102014 LJS 
+														,'FOLW'--added 27102014 LJS 
+														,'NFOL'--added 27102014 LJS 
+														,'PC'--added 27102014 LJS 
+														,'TYC'))--added 27102014 LJS 
+and vfp.contact_number not in (select contact_number
+								from #vfp)
+and vfp.contact_number not in (select contact_number
+								from #VTFV)
+
+--003 Post Only
+insert into #vfp
+(segment
+,[source]
+,source_desc
+,contact_number
+,label_name
+,under_18
+,town
+,county
+,duk_region
+,dated
+,dated_weekday
+,contact_date
+,contact_type
+,all_sub_topics
+,IF_activity
+,CFR_or_Region_Topic)
+select distinct '003 Post Only' as segment
+,vfp.source
+,vfp.source_desc
+,vfp.contact_number
+,vfp.label_name
+,vfp.under_18
+,vfp.town
+,vfp.county
+,vfp.DUK_region
+,vfp.dated
+,datename(dw,vfp.dated) as dated_weekday
+,(select top 1 vfp1.dated
+	from #Volunteer_Fundraising_Pack as vfp1
+	where vfp.contact_number=vfp1.contact_number
+	and vfp1.sub_topic in ('CALL','NOAN')
+	order by dated desc)
+,(select top 1 st.sub_topic_desc
+	from #Volunteer_Fundraising_Pack as vfp1
+	inner join cis.sub_topics as st on vfp1.topic=st.topic
+								and vfp1.sub_topic=st.sub_topic
+	where vfp.contact_number=vfp1.contact_number
+	and vfp1.sub_topic in ('CALL','NOAN')
+	order by dated desc)
+, stuff(
+		(select ', ' + st.sub_topic_desc
+			from #Volunteer_Fundraising_Pack as vfp1
+			inner join cis.sub_topics as st on vfp1.topic=st.topic
+								and vfp1.sub_topic=st.sub_topic
+			where vfp.contact_number=vfp1.contact_number
+			order by vfp1.dated desc
+          for xml path ('')
+							), 1, 1, '')  as all_sub_topics
+, case when cc1.contact_number is not null then 1 else 0 end
+, case when cfr1.contact_number is not null then 1 else 0 end							 
+from #Volunteer_Fundraising_Pack as vfp
+left join #cc as cc1 on vfp.contact_number=cc1.contact_number 
+left join #cfr as cfr1 on vfp.contact_number=cfr1.contact_number
+where vfp.topic = 'VFP'
+and vfp.sub_topic = 'POST'
+and vfp.dated between dateadd(dd,-10,getdate()) and getdate()
+--and vfp.[source] in (@source_code)
+and vfp.duk_region in (@duk_region)
+and vfp.contact_number not in (select vfp1.contact_number
+								from #Volunteer_Fundraising_Pack as vfp1
+								where vfp1.topic = 'VFP' 
+								and vfp1.sub_topic = 'DOWN'
+								and vfp1.dated between dateadd(dd,-10,getdate()) and getdate())
+and vfp.contact_number not in (select vfp1.contact_number
+								from #Volunteer_Fundraising_Pack as vfp1
+								where vfp1.topic = 'VFP' 
+								and vfp1.sub_topic in ('FOLW'
+														,'EMAI'
+														,'NFOL'
+														,'NOAN' --added 27102014 LJS  
+														,'GLC'--added 27102014 LJS 
+														,'FOLW'--added 27102014 LJS 
+														,'NFOL'--added 27102014 LJS 
+														,'PC'--added 27102014 LJS 
+														,'TYC'))--added 27102014 LJS 
+and vfp.contact_number not in (select contact_number
+								from #vfp)
+and vfp.contact_number not in (select contact_number
+								from #VTFV)
+
+--004 Contacts who have requested a pack but not had follow up sent (FOLW) code	
+insert into #vfp
+(segment
+,[source]
+,source_desc
+,contact_number
+,label_name
+,under_18
+,town
+,county
+,duk_region
+,dated
+,dated_weekday
+,contact_date
+,contact_type
+,all_sub_topics
+,IF_activity
+,CFR_or_Region_Topic
+)
+
+select distinct '004 Not Followed Up Yet' as segment
+,vfp.source
+,vfp.source_desc
+,vfp.contact_number
+,vfp.label_name
+,vfp.under_18
+,vfp.town
+,vfp.county
+,vfp.DUK_region
+,vfp.dated
+,datename(dw,vfp.dated) as dated_weekday
+,(select top 1 vfp1.dated
+	from #Volunteer_Fundraising_Pack as vfp1
+	where vfp.contact_number=vfp1.contact_number
+	and vfp1.sub_topic in ('CALL','NOAN')
+	order by dated desc)
+,(select top 1 st.sub_topic_desc
+	from #Volunteer_Fundraising_Pack as vfp1
+	inner join cis.sub_topics as st on vfp1.topic=st.topic
+								and vfp1.sub_topic=st.sub_topic
+	where vfp.contact_number=vfp1.contact_number
+	and vfp1.sub_topic in ('CALL','NOAN')
+	order by dated desc)
+, stuff(
+		(select ', ' + st.sub_topic_desc
+			from #Volunteer_Fundraising_Pack as vfp1
+			inner join cis.sub_topics as st on vfp1.topic=st.topic
+								and vfp1.sub_topic=st.sub_topic
+			where vfp.contact_number=vfp1.contact_number
+			order by vfp1.dated desc
+          for xml path ('')
+							), 1, 1, '')  as all_sub_topics
+
+, case when cc1.contact_number is not null then 1 else 0 end
+, case when cfr1.contact_number is not null then 1 else 0 end						 
+from #Volunteer_Fundraising_Pack as vfp
+left join #cc as cc1 on vfp.contact_number=cc1.contact_number 
+left join #cfr as cfr1 on vfp.contact_number=cfr1.contact_number
+where vfp.topic = 'VFP' 
+and vfp.sub_topic in ('DOWN'
+						,'POST')
+--and vfp.[source] in (@source_code)
+and vfp.duk_region in (@duk_region)
+and vfp.contact_number not in (select vfp1.contact_number
+								from #Volunteer_Fundraising_Pack as vfp1
+								where vfp1.topic = 'VFP' 
+								and vfp1.sub_topic in ('FOLW'
+														,'EMAI'
+														,'NFOL'
+														,'NOAN' --added 27102014 LJS  
+														,'GLC'--added 27102014 LJS 
+														,'FOLW'--added 27102014 LJS 
+														,'NFOL'--added 27102014 LJS 
+														,'PC'--added 27102014 LJS 
+														,'TYC'))--added 27102014 LJS 
+and vfp.contact_number not in (select contact_number
+								from #vfp)
+and vfp.contact_number not in (select contact_number
+								from #VTFV) 
+
+--Selects contacts from segmentation above according to 'Day of the week' rules
+select distinct segment
+,[source]
+,source_desc
+,contact_number
+,label_name
+,under_18
+,town
+,county
+,DUK_region
+,dated
+,dated_weekday
+,contact_date
+,contact_type
+,all_sub_topics
+,IF_activity
+,CFR_or_Region_Topic
+from #vfp as vfp
+where datename(dw,getdate()) = 'Thursday'
+and vfp.dated_weekday = 'Monday'
+and vfp.segment in ('001 Download &amp; Post'
+					,'003 Post Only'
+					,'002 Download Only')
+union
+select distinct segment
+,[source]
+,source_desc
+,contact_number
+,label_name
+,under_18
+,town
+,county
+,DUK_region
+,dated
+,dated_weekday
+,contact_date
+,contact_type
+,all_sub_topics
+,IF_activity
+,CFR_or_Region_Topic
+from #vfp as vfp
+where datename(dw,getdate()) = 'Friday'
+and vfp.dated_weekday = 'Tuesday'
+and vfp.segment in ('001 Download &amp; Post'
+					,'003 Post Only'
+					,'002 Download Only')
+union
+select distinct segment
+,[source]
+,source_desc
+,contact_number
+,label_name
+,under_18
+,town
+,county
+,DUK_region
+,dated
+,dated_weekday
+,contact_date
+,contact_type
+,all_sub_topics
+,IF_activity
+,CFR_or_Region_Topic
+from #vfp as vfp
+where datename(dw,getdate()) = 'Monday'
+and vfp.dated_weekday = 'Wednesday'
+and vfp.segment in ('001 Download &amp; Post'
+					,'003 Post Only')
+union
+select distinct segment
+,[source]
+,source_desc
+,contact_number
+,label_name
+,under_18
+,town
+,county
+,DUK_region
+,dated
+,dated_weekday
+,contact_date
+,contact_type
+,all_sub_topics
+,IF_activity
+,CFR_or_Region_Topic
+from #vfp as vfp
+where datename(dw,getdate()) = 'Monday'
+and vfp.dated_weekday in ('Wednesday'
+						,'Thursday')
+and vfp.segment = '002 Download Only'
+union
+select distinct segment
+,[source]
+,source_desc
+,contact_number
+,label_name
+,under_18
+,town
+,county
+,DUK_region
+,dated
+,dated_weekday
+,contact_date
+,contact_type
+,all_sub_topics
+,IF_activity
+,CFR_or_Region_Topic
+from #vfp as vfp
+where datename(dw,getdate()) = 'Tuesday'
+and vfp.dated_weekday = 'Thursday'
+and vfp.segment in ('001 Download &amp; Post'
+					,'003 Post Only')
+union
+select distinct segment
+,[source]
+,source_desc
+,contact_number
+,label_name
+,under_18
+,town
+,county
+,DUK_region
+,dated
+,dated_weekday
+,contact_date
+,contact_type
+,all_sub_topics
+,IF_activity
+,CFR_or_Region_Topic
+from #vfp as vfp
+where datename(dw,getdate()) = 'Tuesday'
+and vfp.dated_weekday in ('Friday'
+						,'Saturday')
+and vfp.segment = '002 Download Only'
+union
+select distinct segment
+,[source]
+,source_desc
+,contact_number
+,label_name
+,under_18
+,town
+,county
+,DUK_region
+,dated
+,dated_weekday
+,contact_date
+,contact_type
+,all_sub_topics
+,IF_activity
+,CFR_or_Region_Topic
+from #vfp as vfp
+where datename(dw,getdate()) = 'Wednesday'
+and vfp.dated_weekday in ('Friday'
+						,'Saturday')
+and vfp.segment in ('001 Download &amp; Post'
+					,'003 Post Only')
+union
+select distinct segment
+,[source]
+,source_desc
+,contact_number
+,label_name
+,under_18
+,town
+,county
+,DUK_region
+,dated
+,dated_weekday
+,contact_date
+,contact_type
+,all_sub_topics
+,IF_activity
+,CFR_or_Region_Topic
+from #vfp as vfp
+where datename(dw,getdate()) = 'Thursday'
+and vfp.dated_weekday = 'Sunday'
+and vfp.segment in ('001 Download &amp; Post'
+					,'003 Post only')
+union 
+select distinct segment
+,[source]
+,source_desc
+,contact_number
+,label_name
+,under_18
+,town
+,county
+,DUK_region
+,dated
+,dated_weekday
+,contact_date
+,contact_type
+,all_sub_topics
+,IF_activity
+,CFR_or_Region_Topic
+from #vfp as vfp
+where vfp.segment = '004 Not Followed Up Yet'</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <Fields>
+        <Field Name="segment">
+          <DataField>segment</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DateSort">
+          <Value>=format(Fields!dated.value,"yyyyMMdd")</Value>
+        </Field>
+        <Field Name="source">
+          <DataField>source</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="source_desc">
+          <DataField>source_desc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="contact_number">
+          <DataField>contact_number</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="under_18">
+          <DataField>under_18</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="town">
+          <DataField>town</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="label_name">
+          <DataField>label_name</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DUK_region">
+          <DataField>DUK_region</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="dated_weekday">
+          <DataField>dated_weekday</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="county">
+          <DataField>county</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="contact_date">
+          <DataField>contact_date</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="dated">
+          <DataField>dated</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="contact_type">
+          <DataField>contact_type</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="all_sub_topics">
+          <DataField>all_sub_topics</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="IF_activity">
+          <DataField>IF_activity</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CFR_or_Region_Topic">
+          <DataField>CFR_or_Region_Topic</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="DUK_Region">
+      <Query>
+        <DataSourceName>DataSource1</DataSourceName>
+        <CommandText>SELECT DISTINCT('UNKNOWN')  AS DUK_region FROM  [cis].[duk_fundraising_areas] 
+UNION ALL 
+SELECT DISTINCT(LTRIM(RTRIM(fund_region_desc))) as DUK_region
+FROM  [cis].[duk_fundraising_areas] fa 
+INNER JOIN [cis].[duk_fund_region_hierarchy] fh ON fa.rf_area = fh.rf_area
+INNER JOIN [cis].[duk_fundraising_regions] fr ON fh.fund_region = fr.fund_region
+INNER JOIN [custom].[cis_contact_to_nation] ctn ON ctn.branch =  fh.branch
+ORDER BY 1 ASC</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="DUK_region">
+          <DataField>DUK_region</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="textbox1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Globals!ReportName</Value>
+                    <Style>
+                      <FontFamily>Calibri</FontFamily>
+                      <FontSize>22pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                      <Color>#34baed</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>textbox1</rd:DefaultName>
+            <Height>0.42944in</Height>
+            <Width>5.02344in</Width>
+            <Style>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Tablix Name="table1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>1.89062in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.92578in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.52996in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.5625in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.90625in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.90495in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.9375in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.66667in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>0.69792in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.49083in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Segment</Value>
+                                  <Style>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox2</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#34baed</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox5">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Contact Number</Value>
+                                  <Style>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox5</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#34baed</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox6">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Label Name</Value>
+                                  <Style>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox6</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#34baed</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox14">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Under 18</Value>
+                                  <Style>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox14</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#34baed</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox4">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>County</Value>
+                                  <Style>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox4</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#34baed</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox7">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Fundraising Region</Value>
+                                  <Style>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox7</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#34baed</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox8">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Dated</Value>
+                                  <Style>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Format>dd MMM yyyy</Format>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox8</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#34baed</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox15">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>IF Activity</Value>
+                                  <Style>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox15</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#34baed</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox18">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>CFR or Region Topic</Value>
+                                  <Style>
+                                    <FontFamily>Calibri</FontFamily>
+                                    <FontSize>12pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>White</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox18</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>#34baed</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.21in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="segment">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!segment.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>segment</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>= iif(RowNumber(Nothing) Mod 2, "White", "Gainsboro")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="contact_number">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!contact_number.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>contact_number</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>= iif(RowNumber(Nothing) Mod 2, "White", "Gainsboro")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="label_name">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!label_name.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>label_name</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>= iif(RowNumber(Nothing) Mod 2, "White", "Gainsboro")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="under_18">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!under_18.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>under_18</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>= iif(RowNumber(Nothing) Mod 2, "White", "Gainsboro")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="county">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!county.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>county</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>= iif(RowNumber(Nothing) Mod 2, "White", "Gainsboro")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="DUK_region">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!DUK_region.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>DUK_region</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>= iif(RowNumber(Nothing) Mod 2, "White", "Gainsboro")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="dated">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!dated.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                    <Format>dd MMM yyyy</Format>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>dated</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>= iif(RowNumber(Nothing) Mod 2, "White", "Gainsboro")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="IF_activity">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!IF_activity.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>IF_activity</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>= iif(RowNumber(Nothing) Mod 2, "White", "Gainsboro")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="CFR_or_Region_Topic">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!CFR_or_Region_Topic.Value</Value>
+                                  <Style>
+                                    <FontFamily>Tahoma</FontFamily>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Center</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>CFR_or_Region_Topic</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BackgroundColor>= iif(RowNumber(Nothing) Mod 2, "White", "Gainsboro")</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember>
+                  <KeepWithGroup>After</KeepWithGroup>
+                  <RepeatOnNewPage>true</RepeatOnNewPage>
+                  <KeepTogether>true</KeepTogether>
+                </TablixMember>
+                <TablixMember>
+                  <Group Name="table1_Details_Group">
+                    <DataElementName>Detail</DataElementName>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!segment.Value</Value>
+                    </SortExpression>
+                    <SortExpression>
+                      <Value>=Fields!DateSort.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                  <TablixMembers>
+                    <TablixMember />
+                  </TablixMembers>
+                  <DataElementName>Detail_Collection</DataElementName>
+                  <DataElementOutput>Output</DataElementOutput>
+                  <KeepTogether>true</KeepTogether>
+                </TablixMember>
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <RepeatColumnHeaders>true</RepeatColumnHeaders>
+            <RepeatRowHeaders>true</RepeatRowHeaders>
+            <FixedColumnHeaders>true</FixedColumnHeaders>
+            <FixedRowHeaders>true</FixedRowHeaders>
+            <DataSetName>DiabetesDWH_Query</DataSetName>
+            <SortExpressions>
+              <SortExpression>
+                <Value>=Fields!segment.Value</Value>
+              </SortExpression>
+            </SortExpressions>
+            <Top>0.45722in</Top>
+            <Height>0.70083in</Height>
+            <Width>10.02215in</Width>
+            <ZIndex>1</ZIndex>
+            <Style />
+          </Tablix>
+          <Textbox Name="Textbox12">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Requested By: </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#11296b</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>Jonathan Leipert / Fundraising Strategy &amp; Resources</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#11296b</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Requested On: </Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#11296b</Color>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>02/05/2014</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#11296b</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontWeight>Bold</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                      <Color>#11296b</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox12</rd:DefaultName>
+            <Left>5.02344in</Left>
+            <Height>0.42944in</Height>
+            <Width>4.9987in</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <Height>1.64417in</Height>
+        <Style />
+      </Body>
+      <Width>10.04297in</Width>
+      <Page>
+        <PageHeight>8.5in</PageHeight>
+        <PageWidth>11.5in</PageWidth>
+        <LeftMargin>0.5in</LeftMargin>
+        <RightMargin>0.5in</RightMargin>
+        <TopMargin>0.5in</TopMargin>
+        <BottomMargin>0.5in</BottomMargin>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="duk_region">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <DataSetReference>
+          <DataSetName>DUK_Region</DataSetName>
+          <ValueField>DUK_region</ValueField>
+        </DataSetReference>
+      </DefaultValue>
+      <Prompt>Fundraising Region</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>DUK_Region</DataSetName>
+          <ValueField>DUK_region</ValueField>
+        </DataSetReference>
+      </ValidValues>
+      <MultiValue>true</MultiValue>
+    </ReportParameter>
+  </ReportParameters>
+  <Language>en-US</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportServerUrl>http://gs1dukmsqlv03/ReportServer</rd:ReportServerUrl>
+  <rd:ReportID>e4e3fbd4-55bc-4f29-81ec-9834cca3a3f2</rd:ReportID>
+</Report>
