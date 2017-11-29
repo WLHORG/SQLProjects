@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [cis_delta].[gift_aid_declarations] (
     [declaration_number]  INT           NOT NULL,
     [contact_number]      INT           NOT NULL,
-    [declaration_date]    DATETIME      NOT NULL,
+    [declaration_date]    DATETIME2      NOT NULL,
     [declaration_type]    VARCHAR (1)   NOT NULL,
     [source]              VARCHAR (10)  NOT NULL,
     [confirmed_on]        DATETIME      NULL,
