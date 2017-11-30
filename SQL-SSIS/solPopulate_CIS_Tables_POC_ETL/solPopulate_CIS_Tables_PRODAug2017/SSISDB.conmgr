@@ -8,6 +8,6 @@
     DTS:Name="ConnectionString">@[$Project::DUK_ETL_MGT_ConnectionString]</DTS:PropertyExpression>
   <DTS:ObjectData>
     <DTS:ConnectionManager
-      DTS:ConnectionString="Data Source=GS1DUKMSQLV03;Initial Catalog=SSISDB;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-SSIS2008R2StagingTemplate-{843B9DF5-618A-48DA-8301-85359228D94D}localhost.DWConfig;" />
+      DTS:ConnectionString="Data Source=WLHTESTSQL01\DEV01;Initial Catalog=SSISDB;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-SSIS2008R2StagingTemplate-{843B9DF5-618A-48DA-8301-85359228D94D}localhost.DWConfig;" />
   </DTS:ObjectData>
 </DTS:ConnectionManager>

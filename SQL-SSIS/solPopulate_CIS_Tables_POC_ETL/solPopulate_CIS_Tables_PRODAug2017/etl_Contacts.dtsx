@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="etl_Contacts"
   DTS:PackageType="5"
-  DTS:VersionBuild="168"
-  DTS:VersionGUID="{773E37F3-C411-43A1-A642-46FFE3822ABB}">
+  DTS:VersionBuild="172"
+  DTS:VersionGUID="{644A1635-7681-4C63-BBB4-804BF1DE0305}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:LogProviders>
@@ -216,7 +216,7 @@
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[cis_delta].[contacts]</property>
+                      name="OpenRowset">[cis].[contacts]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -551,12 +551,6 @@
                           cachedName="NOTES"
                           externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Full Load\INSERT TO DELTA TABLES.Inputs[OLE DB Destination Input].ExternalColumns[notes]"
                           lineageId="Package\Data Processing\Data Flow Task CONTACTS - Full Load\Oracle Source.Outputs[Oracle Source Output].Columns[NOTES]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Full Load\INSERT TO DELTA TABLES.Inputs[OLE DB Destination Input].Columns[ETLAction]"
-                          cachedDataType="i4"
-                          cachedName="ETLAction"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Full Load\INSERT TO DELTA TABLES.Inputs[OLE DB Destination Input].ExternalColumns[ELTAction]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Full Load\NEW ROWS.Outputs[Derived Column Output].Columns[ETLAction]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -770,10 +764,6 @@
                           dataType="str"
                           length="8"
                           name="label_name_format_code" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Full Load\INSERT TO DELTA TABLES.Inputs[OLE DB Destination Input].ExternalColumns[ELTAction]"
-                          dataType="i4"
-                          name="ELTAction" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -8292,35 +8282,14 @@ ORDER BY CONTACT_NUMBER ASC</property>
               VSTAMinorVersion="0"
               Language="CSharp">
               <ProjectItem
-                Name="Properties\AssemblyInfo.cs"
-                Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
-
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_231a69c233f842a39d0e227465cc132a.csproj")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("ST_231a69c233f842a39d0e227465cc132a.csproj")]
-[assembly: AssemblyCopyright("Copyright @ Microsoft 2014")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+                Name="Properties\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.resx"
                 Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -8623,14 +8592,35 @@ namespace ST_231a69c233f842a39d0e227465cc132a.csproj.Properties
     }
 }]]></ProjectItem>
               <ProjectItem
-                Name="Properties\Settings.settings"
-                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
+                Name="Properties\AssemblyInfo.cs"
+                Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_231a69c233f842a39d0e227465cc132a.csproj")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyProduct("ST_231a69c233f842a39d0e227465cc132a.csproj")]
+[assembly: AssemblyCopyright("Copyright @ Microsoft 2014")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.Designer.cs"
                 Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -9350,21 +9340,21 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="131,42"
-          Id="Package\Data Processing\Data Flow Task CONTACTS - Full Load\Row Count"
-          TopLeft="110.714290239373,277.717650499311" />
-        <NodeLayout
           Size="144,42"
           Id="Package\Data Processing\Data Flow Task CONTACTS - Full Load\Oracle Source"
           TopLeft="98,57" />
+        <NodeLayout
+          Size="135,42"
+          Id="Package\Data Processing\Data Flow Task CONTACTS - Full Load\NEW ROWS"
+          TopLeft="105.79591853417,166.56303072565" />
         <NodeLayout
           Size="207,42"
           Id="Package\Data Processing\Data Flow Task CONTACTS - Full Load\INSERT TO DELTA TABLES"
           TopLeft="79.281181936013,407.146220886631" />
         <NodeLayout
-          Size="135,42"
-          Id="Package\Data Processing\Data Flow Task CONTACTS - Full Load\NEW ROWS"
-          TopLeft="105.79591853417,166.56303072565" />
+          Size="131,42"
+          Id="Package\Data Processing\Data Flow Task CONTACTS - Full Load\Row Count"
+          TopLeft="110.714290239373,277.717650499311" />
         <EdgeLayout
           Id="Package\Data Processing\Data Flow Task CONTACTS - Full Load.Paths[Row Count Output 1]"
           TopLeft="179.497736087693,319.717650499311">
@@ -9463,10 +9453,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="131,42"
-          Id="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Row Count"
-          TopLeft="244.714290239373,728.717650499311" />
-        <NodeLayout
           Size="220,42"
           Id="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table"
           TopLeft="468.79591853417,620.146220886631" />
@@ -9510,6 +9496,10 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           Size="154,42"
           Id="Package\Data Processing\Data Flow Task CONTACTS - Incremental\CHANGE ROWS"
           TopLeft="244.265310265233,514.689081133561" />
+        <NodeLayout
+          Size="131,42"
+          Id="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Row Count"
+          TopLeft="244.714290239373,728.717650499311" />
         <EdgeLayout
           Id="Package\Data Processing\Data Flow Task CONTACTS - Incremental.Paths[Union All Output 1]"
           TopLeft="306.357145119686,667">
