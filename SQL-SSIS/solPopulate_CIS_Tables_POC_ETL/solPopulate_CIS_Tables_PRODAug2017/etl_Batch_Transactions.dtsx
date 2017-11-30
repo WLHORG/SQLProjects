@@ -1,0 +1,2700 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="2/25/2014 8:49:04 AM"
+  DTS:CreationName="SSIS.Package.3"
+  DTS:CreatorComputerName="W2K8R2-SQL2K8R2"
+  DTS:CreatorName="W2K8R2-SQL2K8R2\Administrator"
+  DTS:DTSID="{B7A26C02-49A3-43A8-BAFD-41EE9DDBABD4}"
+  DTS:EnableConfig="True"
+  DTS:ExecutableType="SSIS.Package.3"
+  DTS:LastModifiedProductVersion="11.0.6020.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="etl_Batch_Transactions"
+  DTS:PackageType="5"
+  DTS:VersionBuild="172"
+  DTS:VersionGUID="{2419D484-335B-4611-91B7-A656E2FF52C4}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:LogProviders>
+    <DTS:LogProvider
+      DTS:ConfigString="LocalHost.DiabetesDWH"
+      DTS:CreationName="DTS.LogProviderSQLServer.3"
+      DTS:Description="Writes log entries for events to a SQL Server database"
+      DTS:DTSID="{1070F2D4-CEC4-4023-9E71-51A22BC08110}"
+      DTS:ObjectName="SSIS log provider for SQL Server">
+      <DTS:ObjectData>
+        <InnerObject />
+      </DTS:ObjectData>
+    </DTS:LogProvider>
+  </DTS:LogProviders>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="3"
+      DTS:DTSID="{8383B582-60C5-4980-9518-014D7920DB36}"
+      DTS:ObjectName="TolleranceInDays">
+      <DTS:Property
+        DTS:DataType="3"
+        DTS:Name="ParameterValue">0</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9FDFDF45-8560-49E6-99CC-24BEE6CB06E0}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ApplicationLineageID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{76F86740-5E37-4C98-BED4-08D79CEF957F}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="CISBatch">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{86F06B50-FEA0-4708-B8D1-6BD7C68E5F2D}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="CISLine">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{81C77581-C1F3-49F4-A81F-0DBA73D3AB57}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="CISTransaction">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0838EEFD-C0A4-4237-9576-7381B2C6AF5D}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;Process FAILED &quot; +  (DT_STR, 10, 1252) @[User::RecordCount] + &quot; records processed.&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FailureMessage">
+      <DTS:VariableValue
+        DTS:DataType="8">Process FAILED 0 records processed.</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{D5EC8BEB-481C-4712-BE82-653572B26FF9}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="LastRunDT">
+      <DTS:VariableValue
+        DTS:DataType="7">2/28/2014 12:29:36 PM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1B2F24A1-627C-4176-A175-FC7E9A1B729C}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="LastRunTMST">
+      <DTS:VariableValue
+        DTS:DataType="7">2/28/2014 12:29:15 PM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{4606D77A-2FB6-40B9-9B7D-35A2D2396EA3}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="LineageID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{291CEF1C-E8B6-43F8-81A8-A272451CD218}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="LineageTMST">
+      <DTS:VariableValue
+        DTS:DataType="7">2/26/2014 7:41:11 AM</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{253B8420-7AA8-4B3F-897B-D3032DE02511}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="MarginDays">
+      <DTS:VariableValue
+        DTS:DataType="3">60</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{77445115-2358-497F-81D2-EB956272E2AD}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RecordCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EA114CF5-9ABC-4EF5-99A2-38CA2B644692}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;SELECT batch_number&#xA;      ,transaction_number&#xA;      ,contact_number&#xA;      ,address_number&#xA;      ,transaction_date&#xA;      ,transaction_type&#xA;      ,bank_details_number&#xA;      ,amount&#xA;      ,currency_amount&#xA;      ,payment_method&#xA;      ,reference&#xA;      ,next_line_number&#xA;      ,line_total&#xA;      ,mailing&#xA;      ,receipt&#xA;      ,mailing_contact_number&#xA;      ,mailing_address_number&#xA;      ,amended_by&#xA;      ,amended_on&#xA;      ,eligible_for_gift_aid&#xA;      ,transaction_origin&#xA;      ,notes FROM care_admin.batch_Transactions t &#xA;WHERE t.batch_number &gt;  &quot;  + (DT_WSTR, 50) @[User::CISBatch]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SQLStatement">
+      <DTS:VariableValue
+        DTS:DataType="8">SELECT batch_number
+      ,transaction_number
+      ,contact_number
+      ,address_number
+      ,transaction_date
+      ,transaction_type
+      ,bank_details_number
+      ,amount
+      ,currency_amount
+      ,payment_method
+      ,reference
+      ,next_line_number
+      ,line_total
+      ,mailing
+      ,receipt
+      ,mailing_contact_number
+      ,mailing_address_number
+      ,amended_by
+      ,amended_on
+      ,eligible_for_gift_aid
+      ,transaction_origin
+      ,notes FROM care_admin.batch_Transactions t 
+WHERE t.batch_number &gt;  0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{79A56DF3-7D1C-43CB-BC22-AEB18E5D5330}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;Process Succeeded - &quot; +  (DT_STR, 10, 1252) @[User::RecordCount] + &quot; rows processed.&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="SuccessMessage">
+      <DTS:VariableValue
+        DTS:DataType="8">Process Succeeded - 0 rows processed.</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{5660EFA6-B224-4490-87DC-46C50CFE202E}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;&#xA;&#xA;truncate table cis_delta.Batch_Transactions&#xA;&#xA;GO&#xA;&#xA;&#xA;IF (SELECT FullExtract FROM   [control].[LastTableUpdate] WHERE TableName = 'Batch_Transactions') =  1 &#xA;BEGIN  TRUNCATE TABLE  cis.Batch_Transactions&#xA;END&#xA;&#xA;ELSE &#xA;&#xA;DELETE FROM  cis.Batch_Transactions WHERE BATCH_NUMBER &gt;  &quot;  +   (DT_WSTR, 50) @[User::CISBatch]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="TruncateStatementBatch">
+      <DTS:VariableValue
+        DTS:DataType="8">
+
+truncate table cis_delta.Batch_Transactions
+
+GO
+
+
+IF (SELECT FullExtract FROM   [control].[LastTableUpdate] WHERE TableName = 'Batch_Transactions') =  1 
+BEGIN  TRUNCATE TABLE  cis.Batch_Transactions
+END
+
+ELSE 
+
+DELETE FROM  cis.Batch_Transactions WHERE BATCH_NUMBER &gt;  0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{05AC6FB3-738C-45DC-A138-45FE17B737BE}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;UPDATE control.LastTableUpdate &#xA;SET [MAXBatch_Number] = t1.batch_number, &#xA;[MAXTransaction_ID] = t1.transaction_number,&#xA;[LastExtractRowCount] = (SELECT COUNT(*) from cis_delta.batch_transactions),&#xA;[LastExtractedDate]  = GETDATE()&#xA;FROM (&#xA;SELECT TOP 1 t.batch_number, t.transaction_number  from cis.batch_transactions t  where t.amended_on = CAST(GETDATE() - &quot; + (DT_STR, 10, 1252)  @[User::MarginDays]  +  &quot;  as date)  order by 1 desc, 2 desc) t1&#xA;WHERE [TableName] = 'batch_transactions'&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="UpdateTableStatementBatch">
+      <DTS:VariableValue
+        DTS:DataType="8">UPDATE control.LastTableUpdate 
+SET [MAXBatch_Number] = t1.batch_number, 
+[MAXTransaction_ID] = t1.transaction_number,
+[LastExtractRowCount] = (SELECT COUNT(*) from cis_delta.batch_transactions),
+[LastExtractedDate]  = GETDATE()
+FROM (
+SELECT TOP 1 t.batch_number, t.transaction_number  from cis.batch_transactions t  where t.amended_on = CAST(GETDATE() - 60  as date)  order by 1 desc, 2 desc) t1
+WHERE [TableName] = 'batch_transactions'</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:LoggingOptions
+    DTS:FilterKind="0"
+    DTS:LoggingMode="1">
+    <DTS:Property
+      DTS:DataType="8"
+      DTS:Name="EventFilter">2,7,OnError,12,OnTaskFailed</DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnError"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">0</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnTaskFailed"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">0</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnWarning"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">0</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">0</DTS:Property>
+    </DTS:Property>
+    <DTS:SelectedLogProviders>
+      <DTS:SelectedLogProvider
+        DTS:InstanceID="{1070F2D4-CEC4-4023-9E71-51A22BC08110}" />
+    </DTS:SelectedLogProviders>
+  </DTS:LoggingOptions>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Processing"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{C3B59F45-5CEF-4B1A-9E6E-1837F6313642}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Processing">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Data Processing\Batch_Transactions"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{4FC82372-FBCB-4E11-AA6B-43C1B679B6A9}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Batch_Transactions"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:PropertyExpression
+            DTS:Name="[Oracle Source].[SqlCommand]">@[User::SQLStatement]</DTS:PropertyExpression>
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Data Processing\Batch_Transactions\OLE DB Destination"
+                  componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[cis_delta].[batch_transactions]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="{A7202722-F760-4DEE-BB0C-B0045540580C}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[LocalHost.DiabetesDWH]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AMENDED_BY]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="14"
+                          cachedName="AMENDED_BY"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amended_by]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_BY]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AMENDED_ON]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="AMENDED_ON"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amended_on]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_ON]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[BATCH_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="BATCH_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[batch_number]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[BATCH_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TRANSACTION_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="TRANSACTION_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[transaction_number]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[TRANSACTION_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CONTACT_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="CONTACT_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[contact_number]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[CONTACT_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ADDRESS_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="ADDRESS_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[address_number]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TRANSACTION_DATE]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="TRANSACTION_DATE"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[transaction_date]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[TRANSACTION_DATE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TRANSACTION_TYPE]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="3"
+                          cachedName="TRANSACTION_TYPE"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[transaction_type]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[TRANSACTION_TYPE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[BANK_DETAILS_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="BANK_DETAILS_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[bank_details_number]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[BANK_DETAILS_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AMOUNT]"
+                          cachedDataType="numeric"
+                          cachedName="AMOUNT"
+                          cachedPrecision="9"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amount]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CURRENCY_AMOUNT]"
+                          cachedDataType="numeric"
+                          cachedName="CURRENCY_AMOUNT"
+                          cachedPrecision="13"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[currency_amount]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[CURRENCY_AMOUNT]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PAYMENT_METHOD]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="4"
+                          cachedName="PAYMENT_METHOD"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[payment_method]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[PAYMENT_METHOD]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[REFERENCE]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="18"
+                          cachedName="REFERENCE"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[reference]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[REFERENCE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NEXT_LINE_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="NEXT_LINE_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[next_line_number]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[NEXT_LINE_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LINE_TOTAL]"
+                          cachedDataType="numeric"
+                          cachedName="LINE_TOTAL"
+                          cachedPrecision="9"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[line_total]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[LINE_TOTAL]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MAILING]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="15"
+                          cachedName="MAILING"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[mailing]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[MAILING]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RECEIPT]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1"
+                          cachedName="RECEIPT"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[receipt]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[RECEIPT]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MAILING_CONTACT_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="MAILING_CONTACT_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[mailing_contact_number]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[MAILING_CONTACT_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MAILING_ADDRESS_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="MAILING_ADDRESS_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[mailing_address_number]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[MAILING_ADDRESS_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ELIGIBLE_FOR_GIFT_AID]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1"
+                          cachedName="ELIGIBLE_FOR_GIFT_AID"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[eligible_for_gift_aid]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[ELIGIBLE_FOR_GIFT_AID]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TRANSACTION_ORIGIN]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="TRANSACTION_ORIGIN"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[transaction_origin]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[TRANSACTION_ORIGIN]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amended_by]"
+                          codePage="1252"
+                          dataType="str"
+                          length="14"
+                          name="amended_by" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amended_on]"
+                          dataType="dbTimeStamp"
+                          name="amended_on" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[batch_number]"
+                          dataType="numeric"
+                          name="batch_number"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[transaction_number]"
+                          dataType="numeric"
+                          name="transaction_number"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[contact_number]"
+                          dataType="numeric"
+                          name="contact_number"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[address_number]"
+                          dataType="numeric"
+                          name="address_number"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[transaction_date]"
+                          dataType="dbTimeStamp"
+                          name="transaction_date" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[transaction_type]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          name="transaction_type" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[bank_details_number]"
+                          dataType="numeric"
+                          name="bank_details_number"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amount]"
+                          dataType="numeric"
+                          name="amount"
+                          precision="9"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[currency_amount]"
+                          dataType="numeric"
+                          name="currency_amount"
+                          precision="13"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[payment_method]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4"
+                          name="payment_method" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[reference]"
+                          codePage="1252"
+                          dataType="str"
+                          length="18"
+                          name="reference" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[next_line_number]"
+                          dataType="numeric"
+                          name="next_line_number"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[line_total]"
+                          dataType="numeric"
+                          name="line_total"
+                          precision="9"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[mailing]"
+                          codePage="1252"
+                          dataType="str"
+                          length="15"
+                          name="mailing" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[receipt]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="receipt" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[mailing_contact_number]"
+                          dataType="numeric"
+                          name="mailing_contact_number"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[mailing_address_number]"
+                          dataType="numeric"
+                          name="mailing_address_number"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[eligible_for_gift_aid]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="eligible_for_gift_aid" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[transaction_origin]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="transaction_origin" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[notes]"
+                          codePage="1252"
+                          dataType="text"
+                          name="notes" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Data Processing\Batch_Transactions\Oracle Source"
+                  componentClassID="{CB67CD40-126C-4280-912D-2A625DFAFB66}"
+                  contactInfo="Oracle Source;Microsoft Connector for Oracle by Attunity; Attunity Ltd.; All Rights Reserved; http://www.attunity.com;4"
+                  description="Microsoft Oracle Source Component by Attunity"
+                  name="Oracle Source"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="The name of the table to be fetched."
+                      expressionType="Notify"
+                      name="TableName">SELECT *  FROM care_admin.batch_Transactions t 
+WHERE t.batch_number &gt;  0</property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      expressionType="Notify"
+                      name="SqlCommand">SELECT batch_number
+      ,transaction_number
+      ,contact_number
+      ,address_number
+      ,transaction_date
+      ,transaction_type
+      ,bank_details_number
+      ,amount
+      ,currency_amount
+      ,payment_method
+      ,reference
+      ,next_line_number
+      ,line_total
+      ,mailing
+      ,receipt
+      ,mailing_contact_number
+      ,mailing_address_number
+      ,amended_by
+      ,amended_on
+      ,eligible_for_gift_aid
+      ,transaction_origin
+      ,notes FROM care_admin.batch_Transactions t 
+WHERE t.batch_number &gt;  0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of rows fetched in a batch."
+                      expressionType="Notify"
+                      name="BatchSize">50000</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Number of pre-fetched rows."
+                      expressionType="Notify"
+                      name="PrefetchCount">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Determines the chunk size allocation for LOB columns"
+                      expressionType="Notify"
+                      name="LobChunkSize">32768</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The code page to use when code page information is unavailable from the data source."
+                      expressionType="Notify"
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">1</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Data Processing\Batch_Transactions\Oracle Source.Connections[MSOraConnection]"
+                      connectionManagerID="{B0E6080B-7584-431F-9BC5-B95A0F1857CA}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CIS Live]"
+                      description="The Oracle runtime connection"
+                      name="MSOraConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output]"
+                      errorRowDisposition="FailComponent"
+                      name="Oracle Source Output"
+                      truncationRowDisposition="FailComponent">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[BATCH_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[BATCH_NUMBER]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[BATCH_NUMBER]"
+                          name="BATCH_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[TRANSACTION_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TRANSACTION_NUMBER]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[TRANSACTION_NUMBER]"
+                          name="TRANSACTION_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[CONTACT_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CONTACT_NUMBER]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[CONTACT_NUMBER]"
+                          name="CONTACT_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_NUMBER]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_NUMBER]"
+                          name="ADDRESS_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[TRANSACTION_DATE]"
+                          dataType="dbTimeStamp"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TRANSACTION_DATE]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[TRANSACTION_DATE]"
+                          name="TRANSACTION_DATE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[TRANSACTION_TYPE]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TRANSACTION_TYPE]"
+                          length="3"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[TRANSACTION_TYPE]"
+                          name="TRANSACTION_TYPE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[BANK_DETAILS_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[BANK_DETAILS_NUMBER]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[BANK_DETAILS_NUMBER]"
+                          name="BANK_DETAILS_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT]"
+                          name="AMOUNT"
+                          precision="9"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[CURRENCY_AMOUNT]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CURRENCY_AMOUNT]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[CURRENCY_AMOUNT]"
+                          name="CURRENCY_AMOUNT"
+                          precision="13"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[PAYMENT_METHOD]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[PAYMENT_METHOD]"
+                          length="4"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[PAYMENT_METHOD]"
+                          name="PAYMENT_METHOD" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[REFERENCE]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[REFERENCE]"
+                          length="18"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[REFERENCE]"
+                          name="REFERENCE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[NEXT_LINE_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[NEXT_LINE_NUMBER]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[NEXT_LINE_NUMBER]"
+                          name="NEXT_LINE_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[LINE_TOTAL]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[LINE_TOTAL]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[LINE_TOTAL]"
+                          name="LINE_TOTAL"
+                          precision="9"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[MAILING]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[MAILING]"
+                          length="15"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[MAILING]"
+                          name="MAILING" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[RECEIPT]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[RECEIPT]"
+                          length="1"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[RECEIPT]"
+                          name="RECEIPT" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[MAILING_CONTACT_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[MAILING_CONTACT_NUMBER]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[MAILING_CONTACT_NUMBER]"
+                          name="MAILING_CONTACT_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[MAILING_ADDRESS_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[MAILING_ADDRESS_NUMBER]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[MAILING_ADDRESS_NUMBER]"
+                          name="MAILING_ADDRESS_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_BY]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMENDED_BY]"
+                          length="14"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_BY]"
+                          name="AMENDED_BY" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_ON]"
+                          dataType="dbTimeStamp"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMENDED_ON]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_ON]"
+                          name="AMENDED_ON" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[ELIGIBLE_FOR_GIFT_AID]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ELIGIBLE_FOR_GIFT_AID]"
+                          length="1"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[ELIGIBLE_FOR_GIFT_AID]"
+                          name="ELIGIBLE_FOR_GIFT_AID" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[TRANSACTION_ORIGIN]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TRANSACTION_ORIGIN]"
+                          length="10"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].Columns[TRANSACTION_ORIGIN]"
+                          name="TRANSACTION_ORIGIN" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[BATCH_NUMBER]"
+                          dataType="numeric"
+                          name="BATCH_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TRANSACTION_NUMBER]"
+                          dataType="numeric"
+                          name="TRANSACTION_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CONTACT_NUMBER]"
+                          dataType="numeric"
+                          name="CONTACT_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_NUMBER]"
+                          dataType="numeric"
+                          name="ADDRESS_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TRANSACTION_DATE]"
+                          dataType="dbTimeStamp"
+                          name="TRANSACTION_DATE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TRANSACTION_TYPE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="3"
+                          name="TRANSACTION_TYPE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[BANK_DETAILS_NUMBER]"
+                          dataType="numeric"
+                          name="BANK_DETAILS_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT]"
+                          dataType="numeric"
+                          name="AMOUNT"
+                          precision="9"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CURRENCY_AMOUNT]"
+                          dataType="numeric"
+                          name="CURRENCY_AMOUNT"
+                          precision="13"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[PAYMENT_METHOD]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4"
+                          name="PAYMENT_METHOD" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[REFERENCE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="18"
+                          name="REFERENCE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[NEXT_LINE_NUMBER]"
+                          dataType="numeric"
+                          name="NEXT_LINE_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[LINE_TOTAL]"
+                          dataType="numeric"
+                          name="LINE_TOTAL"
+                          precision="9"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[MAILING]"
+                          codePage="1252"
+                          dataType="str"
+                          length="15"
+                          name="MAILING" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[RECEIPT]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="RECEIPT" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[MAILING_CONTACT_NUMBER]"
+                          dataType="numeric"
+                          name="MAILING_CONTACT_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[MAILING_ADDRESS_NUMBER]"
+                          dataType="numeric"
+                          name="MAILING_ADDRESS_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMENDED_BY]"
+                          codePage="1252"
+                          dataType="str"
+                          length="14"
+                          name="AMENDED_BY" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMENDED_ON]"
+                          dataType="dbTimeStamp"
+                          name="AMENDED_ON" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ELIGIBLE_FOR_GIFT_AID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="ELIGIBLE_FOR_GIFT_AID" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TRANSACTION_ORIGIN]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="TRANSACTION_ORIGIN" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[NOTES]"
+                          codePage="1252"
+                          dataType="text"
+                          name="NOTES" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output]"
+                      isErrorOut="true"
+                      name="Oracle Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[BATCH_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[BATCH_NUMBER]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[BATCH_NUMBER]"
+                          name="BATCH_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[TRANSACTION_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TRANSACTION_NUMBER]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[TRANSACTION_NUMBER]"
+                          name="TRANSACTION_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[CONTACT_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CONTACT_NUMBER]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[CONTACT_NUMBER]"
+                          name="CONTACT_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[ADDRESS_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_NUMBER]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[ADDRESS_NUMBER]"
+                          name="ADDRESS_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[TRANSACTION_DATE]"
+                          dataType="dbTimeStamp"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TRANSACTION_DATE]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[TRANSACTION_DATE]"
+                          name="TRANSACTION_DATE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[TRANSACTION_TYPE]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TRANSACTION_TYPE]"
+                          length="3"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[TRANSACTION_TYPE]"
+                          name="TRANSACTION_TYPE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[BANK_DETAILS_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[BANK_DETAILS_NUMBER]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[BANK_DETAILS_NUMBER]"
+                          name="BANK_DETAILS_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMOUNT]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMOUNT]"
+                          name="AMOUNT"
+                          precision="9"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[CURRENCY_AMOUNT]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CURRENCY_AMOUNT]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[CURRENCY_AMOUNT]"
+                          name="CURRENCY_AMOUNT"
+                          precision="13"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[PAYMENT_METHOD]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[PAYMENT_METHOD]"
+                          length="4"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[PAYMENT_METHOD]"
+                          name="PAYMENT_METHOD" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[REFERENCE]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[REFERENCE]"
+                          length="18"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[REFERENCE]"
+                          name="REFERENCE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[NEXT_LINE_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[NEXT_LINE_NUMBER]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[NEXT_LINE_NUMBER]"
+                          name="NEXT_LINE_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[LINE_TOTAL]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[LINE_TOTAL]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[LINE_TOTAL]"
+                          name="LINE_TOTAL"
+                          precision="9"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[MAILING]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[MAILING]"
+                          length="15"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[MAILING]"
+                          name="MAILING" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[RECEIPT]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[RECEIPT]"
+                          length="1"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[RECEIPT]"
+                          name="RECEIPT" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[MAILING_CONTACT_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[MAILING_CONTACT_NUMBER]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[MAILING_CONTACT_NUMBER]"
+                          name="MAILING_CONTACT_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[MAILING_ADDRESS_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[MAILING_ADDRESS_NUMBER]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[MAILING_ADDRESS_NUMBER]"
+                          name="MAILING_ADDRESS_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMENDED_BY]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMENDED_BY]"
+                          length="14"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMENDED_BY]"
+                          name="AMENDED_BY" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMENDED_ON]"
+                          dataType="dbTimeStamp"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMENDED_ON]"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMENDED_ON]"
+                          name="AMENDED_ON" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[ELIGIBLE_FOR_GIFT_AID]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ELIGIBLE_FOR_GIFT_AID]"
+                          length="1"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[ELIGIBLE_FOR_GIFT_AID]"
+                          name="ELIGIBLE_FOR_GIFT_AID" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[TRANSACTION_ORIGIN]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TRANSACTION_ORIGIN]"
+                          length="10"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[TRANSACTION_ORIGIN]"
+                          name="TRANSACTION_ORIGIN" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Data Processing\Batch_Transactions\Row Count"
+                  componentClassID="{E2697D8C-70DA-42B2-8208-A19CE3A9FE41}"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Row Count">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::RecordCount</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Data Processing\Batch_Transactions\Row Count.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Data Processing\Batch_Transactions\Row Count.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\Data Processing\Batch_Transactions\Row Count.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Data Processing\Batch_Transactions.Paths[Oracle Source Output]"
+                  endId="Package\Data Processing\Batch_Transactions\Row Count.Inputs[Row Count Input 1]"
+                  name="Oracle Source Output"
+                  startId="Package\Data Processing\Batch_Transactions\Oracle Source.Outputs[Oracle Source Output]" />
+                <path
+                  refId="Package\Data Processing\Batch_Transactions.Paths[Row Count Output 1]"
+                  endId="Package\Data Processing\Batch_Transactions\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Row Count Output 1"
+                  startId="Package\Data Processing\Batch_Transactions\Row Count.Outputs[Row Count Output 1]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Data Processing\Get HighWater Mark from Control"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{4d88864a-169d-4c03-ab33-59ae44851a89}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get HighWater Mark from Control"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{A7202722-F760-4DEE-BB0C-B0045540580C}"
+              SQLTask:SqlStatementSource="SELECT &#xA;CASE WHEN c.FullExtract = 1 THEN 1 ELSE c.MAXBatch_Number END as MaxBatchID FROM control.LastTableUpdate c&#xA;WHERE c.TableName = 'batch_transactions'"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="MaxBatchID"
+                SQLTask:DtsVariableName="User::CISBatch" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Data Processing\Merge delta tables"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{F4F7BB6B-4CF6-4D03-96DA-CA28CD80490F}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Merge delta tables"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{A7202722-F760-4DEE-BB0C-B0045540580C}"
+              SQLTask:SqlStatementSource="EXEC [cis].[usp_Merge_Batch_Transactions]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Data Processing\Truncate Delta Tables"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{390055EA-120B-43B8-93DA-F328FD17E860}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Truncate Delta Tables"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{A7202722-F760-4DEE-BB0C-B0045540580C}"
+              SQLTask:SqlStmtSourceType="Variable"
+              SQLTask:SqlStatementSource="User::TruncateStatementBatch" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Data Processing\Update Control Table"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{b1ed81a3-3d5d-4dcb-800c-0915909d4c74}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Update Control Table"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{A7202722-F760-4DEE-BB0C-B0045540580C}"
+              SQLTask:SqlStmtSourceType="Variable"
+              SQLTask:SqlStatementSource="User::UpdateTableStatementBatch" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="@TolleranceInDays"
+                SQLTask:DtsVariableName="User::MarginDays"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{82B229B8-FAD1-45BA-B794-37E48EF3AF56}"
+          DTS:From="Package\Data Processing\Batch_Transactions"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Data Processing\Merge delta tables" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{34C08678-FC52-4044-B05E-80FCDAF1CDD9}"
+          DTS:From="Package\Data Processing\Truncate Delta Tables"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Data Processing\Batch_Transactions" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{5A24184D-992B-4948-B312-E757FB956F1C}"
+          DTS:From="Package\Data Processing\Merge delta tables"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Data Processing\Update Control Table" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{768733B3-C1AE-48CC-9F1D-60E5FD3FDE52}"
+          DTS:From="Package\Data Processing\Get HighWater Mark from Control"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Data Processing\Truncate Delta Tables" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Failure Loading Closeout"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{AE5008CD-21FB-46E2-A8EA-DC1ABD46A74F}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Failure Loading Closeout">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Failure Loading Closeout\Write Failure Record"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{2ADD7418-1FA4-41E2-8A7D-FE1007FD562B}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Write Failure Record"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{843B9DF5-618A-48DA-8301-85359228D94D}"
+              SQLTask:SqlStatementSource="UPDATE [custom].[PackageAudit] SET&#xA;CompleteTMST = GETDATE(),&#xA;LastRunDT = CAST(GETDATE() AS date),&#xA;CompletionMessage = 'Process Failed- 0 rows processed.'&#xA;WHERE PackageAuditKey = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::LineageID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Setup"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{2FFA7A19-5CCF-4A73-8456-38572707E6A7}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Setup">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Setup\Get Lineage - Insert Audit Record"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{2574A306-3B03-4D3B-B5B0-4D43C8E1DB6E}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Get Lineage - Insert Audit Record"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{843B9DF5-618A-48DA-8301-85359228D94D}"
+              SQLTask:SqlStatementSource="INSERT INTO custom.PackageAudit (ApplicationRunID,PackageName, LineageTMST, LastRunDT) VALUES (?, ?, ?, CAST('1/1/1900' AS date));&#xA;&#xA;SELECT ? = SCOPE_IDENTITY();" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::ApplicationLineageID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="System::PackageName"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="130"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="2"
+                SQLTask:DtsVariableName="System::StartTime"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="7"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="3"
+                SQLTask:DtsVariableName="User::LineageID"
+                SQLTask:ParameterDirection="Output"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Setup\Set Application Run ID"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{392EE989-7E06-4BE4-98ED-F098562DED77}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Set Application Run ID"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{843B9DF5-618A-48DA-8301-85359228D94D}"
+              SQLTask:SqlStatementSource="SELECT ISNULL((SELECT TOP 1 [AppAuditKey] from  [SSISDB].[custom].[ApplicationAudit] WHERE [ApplicationName] = 'CIS DataLoad' and isRunning = 1 ORDER BY AppAuditKey Desc), 0) as AppAuditKey"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="AppAuditKey"
+                SQLTask:DtsVariableName="User::ApplicationLineageID" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Setup\Validate Connections Script"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ScriptTask.ScriptTask, Microsoft.SqlServer.ScriptTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Script Task"
+          DTS:DTSID="{B0933DA8-75BB-4DB1-83E4-926D1D54B924}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ScriptTask.ScriptTask, Microsoft.SqlServer.ScriptTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Validate Connections Script"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:ObjectData>
+            <ScriptProject
+              Name="ST_231a69c233f842a39d0e227465cc132a"
+              VSTAMajorVersion="3"
+              VSTAMinorVersion="0"
+              Language="CSharp">
+              <ProjectItem
+                Name="Properties\AssemblyInfo.cs"
+                Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_231a69c233f842a39d0e227465cc132a.csproj")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyProduct("ST_231a69c233f842a39d0e227465cc132a.csproj")]
+[assembly: AssemblyCopyright("Copyright @ Microsoft 2014")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Resources.resx"
+                Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></ProjectItem>
+              <ProjectItem
+                Name="st_231a69c233f842a39d0e227465cc132a.csproj"
+                Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="utf-16"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- This section defines project-level properties.
+
+       Configuration - Specifies whether the default configuration is Release or Debug.
+       Platform - Specifies what CPU the output of this project can run on.
+       OutputType - Must be "Library" for VSTA.
+       NoStandardLibraries - Set to "false" for VSTA.
+       RootNamespace - In C#, this specifies the namespace given to new files.
+                       In Visual Basic, all objects are wrapped in this namespace at runtime.
+       AssemblyName - Name of the output assembly.
+  -->
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <RootNamespace>ST_231a69c233f842a39d0e227465cc132a.csproj</RootNamespace>
+    <AssemblyName>ST_231a69c233f842a39d0e227465cc132a.csproj</AssemblyName>
+    <ProjectGuid>{5980A4A4-A166-41B3-B4F4-623262612552}</ProjectGuid>
+  </PropertyGroup>
+  <!-- This section defines properties that are set when the "Debug" configuration is
+       selected.
+
+       DebugSymbols - If true, create symbols (.pdb). If false, do not create symbols.
+       Optimize - If true, optimize the build output. If false, do not optimize.
+       OutputPath - Output path of the project relative to the project file.
+       EnableUnmanagedDebugging - If true, starting the debugger will attach both managed and unmanaged debuggers.
+       DefineConstants - Constants defined for the preprocessor.
+       Warning Level - Warning level for the compiler.
+  -->
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- This section defines properties that are set when the "Release" configuration is
+       selected.
+
+       DebugSymbols - If true, create symbols (.pdb). If false, do not create symbols.
+       Optimize - If true, optimize the build output. If false, do not optimize.
+       OutputPath - Output path of the project relative to the project file.
+       EnableUnmanagedDebugging - If true, starting the debugger will attach both managed and unmanaged debuggers.
+       DefineConstants - Constants defined for the preprocessor.
+       Warning Level - Warning level for the compiler.
+  -->
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- This section enables pre- and post-build steps. However,
+       it is recommended that MSBuild tasks be used instead of these properties.
+  -->
+  <PropertyGroup>
+    <PreBuildEvent></PreBuildEvent>
+    <PostBuildEvent></PostBuildEvent>
+  </PropertyGroup>
+  <!-- This sections specifies references for the project. -->
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.ManagedDTS, Version=11.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.ScriptTask, Version=11.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+  </ItemGroup>
+  <!-- This section defines the user source files that are part of the
+       project.
+
+       Compile - Specifies a source file to compile.
+       EmbeddedResource - Specifies a .resx file for embedded resources.
+       None - Specifies a file that is not to be passed to the compiler (for instance,
+              a text file or XML file).
+       AppDesigner - Specifies the directory where the application properties files can
+                     be found.
+  -->
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ScriptMain.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <!-- Include the default configuration information and metadata files for the add-in.
+         These files are copied to the build output directory when the project is
+         built, and the path to the configuration file is passed to add-in on the command
+         line when debugging.
+    -->
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- This section defines VSTA properties that describe the host-changable project properties. -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="VSTAHostName" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" DebugInfoExeName="" />
+        <Host Name="SSIS_ScriptTask" />
+        <ProjectClient>
+          <HostIdentifier>SSIS_ST110</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+  </PropertyGroup>
+</Project>]]></ProjectItem>
+              <ProjectItem
+                Name="ScriptMain.cs"
+                Encoding="UTF8"><![CDATA[/*
+   Microsoft SQL Server Integration Services Script Task
+   Write scripts using Microsoft Visual C# 2008.
+   The ScriptMain is the entry point class of the script.
+*/
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Runtime;
+using System.Windows.Forms;
+
+namespace ValidateConnectionsScript
+{
+    [Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute]
+    public partial class ScriptMain : Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+    {
+
+        #region VSTA generated code
+        enum ScriptResults
+        {
+            Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success,
+            Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+        };
+        #endregion
+
+        /*
+		The execution engine calls this method when the task executes.
+		To access the object model, use the Dts property. Connections, variables, events,
+		and logging features are available as members of the Dts property as shown in the following examples.
+
+		To reference a variable, call Dts.Variables["MyCaseSensitiveVariableName"].Value;
+		To post a log entry, call Dts.Log("This is my log text", 999, null);
+		To fire an event, call Dts.Events.FireInformation(99, "test", "hit the help message", "", 0, true);
+
+		To use the connections collection use something like the following:
+		ConnectionManager cm = Dts.Connections.Add("OLEDB");
+		cm.ConnectionString = "Data Source=localhost;Initial Catalog=AdventureWorks;Provider=SQLNCLI10;Integrated Security=SSPI;Auto Translate=False;";
+
+		Before returning from this method, set the value of Dts.TaskResult to indicate success or failure.
+		
+		To open Help, press F1.
+	*/
+
+   public void Main()
+   {
+        string connStr;
+		bool success = true;
+		bool fireAgain = true;
+														
+		if (Dts.Connections.Count == 0)
+		{
+            MessageBox.Show("Count = " + Dts.Connections.Count.ToString());
+            Dts.TaskResult = (int)Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure;
+			return;
+		}
+
+			
+		foreach(ConnectionManager connMgr in Dts.Connections)
+		{
+			connStr = connMgr.ConnectionString;
+			Dts.Events.FireInformation(1, "", "Connection string = " + connStr, "", 0, ref fireAgain);
+			try
+			{
+				connMgr.AcquireConnection(null);
+				Dts.Events.FireInformation(1, "", "Connected successfully to " + connMgr.Name, "", 0, ref fireAgain);
+			}
+			catch
+			{
+				Dts.Events.FireError(-1, "", "Connection failed on " + connMgr.Name, "", 0);
+				success = false;
+			}
+		}
+
+
+		if (success)
+			Dts.TaskResult = (int)Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success;
+		else
+			Dts.TaskResult = (int)Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure;
+		}	
+   }
+}]]></ProjectItem>
+              <ProjectItem
+                Name="Project"
+                Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:Language>msBuild</msb:Language>
+		<msb:NoContent>Reference;Import;Folder</msb:NoContent>
+		<msb:ProjectId>{A418F06C-C70E-4795-A03F-56C9A83964FD}</msb:ProjectId>
+		<msb:DisplayName>st_231a69c233f842a39d0e227465cc132a</msb:DisplayName>
+		<msb:CodeName>st_231a69c233f842a39d0e227465cc132a</msb:CodeName>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:File Include="Properties\AssemblyInfo.cs"/>
+		<msb:File Include="Properties\Resources.resx"/>
+		<msb:File Include="Properties\Resources.Designer.cs"/>
+		<msb:File Include="Properties\Settings.Designer.cs"/>
+		<msb:File Include="Properties\Settings.settings"/>
+		<msb:File Include="ScriptMain.cs"/>
+		<msb:Project Include="st_231a69c233f842a39d0e227465cc132a.csproj"/>
+	</msb:ItemGroup>
+</c:Project>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Settings.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "ST_231a69c233f842a39d0e227465cc132a.csproj.Properties.Settings.get_Default():ST_231a69c233f842a39d0e227465cc132a.csproj.Properties.Sett" +
+    "ings")]
+
+namespace ST_231a69c233f842a39d0e227465cc132a.csproj.Properties
+{
+
+
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
+    {
+
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+
+        public static Settings Default
+        {
+            get
+            {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Resources.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "ST_231a69c233f842a39d0e227465cc132a.csproj.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "ST_231a69c233f842a39d0e227465cc132a.csproj.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "ST_231a69c233f842a39d0e227465cc132a.csproj.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace ST_231a69c233f842a39d0e227465cc132a.csproj.Properties
+{
+
+
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources
+    {
+
+        private static global::System.Resources.ResourceManager resourceMan;
+
+        private static global::System.Globalization.CultureInfo resourceCulture;
+
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources()
+        {
+        }
+
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager
+        {
+            get
+            {
+                if ((resourceMan == null))
+                {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ST_231a69c233f842a39d0e227465cc132a.csproj.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture
+        {
+            get
+            {
+                return resourceCulture;
+            }
+            set
+            {
+                resourceCulture = value;
+            }
+        }
+    }
+}]]></ProjectItem>
+              <BinaryItem
+                Name="ST_231a69c233f842a39d0e227465cc132a.csproj.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAJFPK1MAAAAAAAAAAOAAAiELAQsAABIAAAAIAAAAAAAArjEA
+AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAEAAAAAAAAAACAAAAAAgAAAAAAAAMAQIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAGAxAABLAAAAAEAAAJAEAAAAAAAAAAAAAAAAAAAA
+AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAAtBEAAAAgAAAAEgAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAJAEAAAAQAAAAAYAAAAUAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAGgAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAACQ
+MQAAAAAAAEgAAAACAAUAyCIAAJgOAAABAAAAAAAAABAiAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4CKA4AAAoqEzACAC0AAAABAAARfgEAAAQtIHIBAABw0AIA
+AAIoDwAACm8QAAAKcxEAAAoKBoABAAAEfgEAAAQqGn4CAAAEKh4CgAIAAAQqGn4DAAAEKi5zBgAA
+BoADAAAEKh4CKBQAAAoqABswBwAuAQAAAgAAERcLFwwCKBYAAApvFwAACm8YAAAKLTZygQAAcAIo
+FgAACm8XAAAKbxgAAAoTBBIEKBkAAAooGgAACigbAAAKJgIoFgAAChdvHAAACioCKBYAAApvFwAA
+Cm8dAAAKEwU4ogAAABEFbx4AAAoNCW8fAAAKCgIoFgAACm8gAAAKF3KTAABwcpUAAHAGKBoAAApy
+kwAAcBYSAm8hAAAKCRRvIgAACiYCKBYAAApvIAAAChdykwAAcHK/AABwCW8jAAAKKBoAAApykwAA
+cBYSAm8hAAAK3jImAigWAAAKbyAAAAoVcpMAAHBy9QAAcAlvIwAACigaAAAKcpMAAHAWbyQAAAom
+FgveABEFbyUAAAo6Uv///wcsDQIoFgAAChZvHAAACioCKBYAAAoXbxwAAAoqAAABEAAAAACbADjT
+ADIBAAABHgIoJgAACiq0AAAAzsrvvgEAAACRAAAAbFN5c3RlbS5SZXNvdXJjZXMuUmVzb3VyY2VS
+ZWFkZXIsIG1zY29ybGliLCBWZXJzaW9uPTQuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGlj
+S2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OSNTeXN0ZW0uUmVzb3VyY2VzLlJ1bnRpbWVSZXNvdXJj
+ZVNldAIAAAAAAAAAAAAAAFBBRFBBRFC0AAAAQlNKQgEAAQAAAAAADAAAAHY0LjAuMzAzMTkAAAAA
+BQBsAAAAQAQAACN+AACsBAAA+AYAACNTdHJpbmdzAAAAAKQLAAAkAQAAI1VTAMgMAAAQAAAAI0dV
+SUQAAADYDAAAwAEAACNCbG9iAAAAAAAAAAIAAAFXHaIBCQMAAAD6JTMAFgAAAQAAACUAAAAFAAAA
+BgAAAAkAAAABAAAAJgAAAAIAAAAPAAAAAgAAAAIAAAADAAAABAAAAAEAAAAFAAAAAQAAAAEAAAAA
+AAoAAQAAAAAABgDFAL4ACgDhAMwADgBBARgBBgBdAb4ABgBzAWIBBgCkAY8BBgBbAkECBgCGAnQC
+BgCdAnQCBgC6AnQCBgDZAnQCBgDyAnQCBgALA3QCBgAmA3QCBgBBA3QCBgBaA3QCBgCTA3MDBgCz
+A3MDBgAPBPwDBgAsBL4ABgAxBL4ABgBVBHQCCgCBBGsECgCaBGsEBgCvBHMDDgDRBBgBDgDzBBgB
+EgBMBSwFEgBoBSwFBgCMBb4ABgCbBb4AFgC+BakFFgDJBakFEgDqBSwFEgANBiwFDgBABhgBEgCU
+BiwFAAAAAAEAAAAAAAEAAQAAABAAOQBDAAUAAQABAAABEAB5AEMACQADAAUAAQAQAIIAjQANAAQA
+CAADAQAApwAAABEABAAKABEAgwETABEAsAEXABEA+gE5AAYGIwJHAFaAKwJKAFaAMwJKAFAgAAAA
+AIMYwAEbAAEAWCAAAAAAkwjGAR8AAQCRIAAAAACTCNoBJAABAJggAAAAAJMI5gEpAAEAoCAAAAAA
+lggKAj0AAgCzIAAAAACGGMABGwACAKcgAAAAAJEYygSJAAIAvCAAAAAAhgAeAhsAAgAIIgAAAACG
+GMABGwACAAAAAQA7AjkAwAFYAEEAwAFYAEkAwAFYAFEAwAFYAFkAwAFYAGEAwAFYAGkAwAFYAHEA
+wAFYAHkAwAFYAIEAwAFYAIkAwAFdAJEAwAEbAJkAwAEbAAkAwAEbAKEAQwRiAKEAXgRpACkAwAFu
+ALkAwAF6AMkAwAEbABEAwAEbANEAwAEbABkABQWNANkAWAWSAOkAggWXAPEAkgWbAPkAogWfAAEB
+1gWlANkA2wVdAOEA/wWsABEBHwayABkBKwabANkAVAa4ACEBXwa+ABkBbwbJABkBgQabACEBigbO
+ACkBogbXABkAwAEbAAgAFABOAAgAGABTACkAkwCAAC4AGwBgAS4AIwBgAS4AYwCeAS4ACwDoAC4A
+EwAwAS4AMwAwAS4AKwBmAS4AOwB1AS4AQwBgAS4AWwCVAUMAawBTAEkAkwCAAGEAmwBTAIMAqwBT
+AHUA2wACAAEAAwADAAAAcwEvAAAA8gE0AAAAFgJCAAIAAgADAAIAAwAFAAEABAAFAAIABQAHAASA
+AAABAAAASBTYZQAAAAAAANEDAAAEAAAAAAAAAAAAAAABALUAAAAAAAQAAAAAAAAAAAAAAAEAvgAA
+AAAACwAAAAAAAAAAAAAACgD5AAAAAAALAAAAAAAAAAAAAAAKAA0FAAAAAAQAAAAAAAAAAAAAAAEA
+qQUAAAAAAAAAAAEAAACrBgAABQAEAAAAAAAAPE1vZHVsZT4AU1RfMjMxYTY5YzIzM2Y4NDJhMzlk
+MGUyMjc0NjVjYzEzMmEuY3Nwcm9qLmRsbABSZXNvdXJjZXMAU1RfMjMxYTY5YzIzM2Y4NDJhMzlk
+MGUyMjc0NjVjYzEzMmEuY3Nwcm9qLlByb3BlcnRpZXMAU2V0dGluZ3MAU2NyaXB0TWFpbgBWYWxp
+ZGF0ZUNvbm5lY3Rpb25zU2NyaXB0AFNjcmlwdFJlc3VsdHMAbXNjb3JsaWIAU3lzdGVtAE9iamVj
+dABTeXN0ZW0uQ29uZmlndXJhdGlvbgBBcHBsaWNhdGlvblNldHRpbmdzQmFzZQBNaWNyb3NvZnQu
+U3FsU2VydmVyLlNjcmlwdFRhc2sATWljcm9zb2Z0LlNxbFNlcnZlci5EdHMuVGFza3MuU2NyaXB0
+VGFzawBWU1RBUlRTY3JpcHRPYmplY3RNb2RlbEJhc2UARW51bQBTeXN0ZW0uUmVzb3VyY2VzAFJl
+c291cmNlTWFuYWdlcgByZXNvdXJjZU1hbgBTeXN0ZW0uR2xvYmFsaXphdGlvbgBDdWx0dXJlSW5m
+bwByZXNvdXJjZUN1bHR1cmUALmN0b3IAZ2V0X1Jlc291cmNlTWFuYWdlcgBnZXRfQ3VsdHVyZQBz
+ZXRfQ3VsdHVyZQBDdWx0dXJlAGRlZmF1bHRJbnN0YW5jZQBnZXRfRGVmYXVsdABEZWZhdWx0AE1h
+aW4AdmFsdWVfXwBTdWNjZXNzAEZhaWx1cmUAdmFsdWUAU3lzdGVtLlJ1bnRpbWUuVmVyc2lvbmlu
+ZwBUYXJnZXRGcmFtZXdvcmtBdHRyaWJ1dGUAU3lzdGVtLlJlZmxlY3Rpb24AQXNzZW1ibHlUaXRs
+ZUF0dHJpYnV0ZQBBc3NlbWJseURlc2NyaXB0aW9uQXR0cmlidXRlAEFzc2VtYmx5Q29uZmlndXJh
+dGlvbkF0dHJpYnV0ZQBBc3NlbWJseUNvbXBhbnlBdHRyaWJ1dGUAQXNzZW1ibHlQcm9kdWN0QXR0
+cmlidXRlAEFzc2VtYmx5Q29weXJpZ2h0QXR0cmlidXRlAEFzc2VtYmx5VHJhZGVtYXJrQXR0cmli
+dXRlAEFzc2VtYmx5Q3VsdHVyZUF0dHJpYnV0ZQBBc3NlbWJseVZlcnNpb25BdHRyaWJ1dGUAU3lz
+dGVtLlJ1bnRpbWUuQ29tcGlsZXJTZXJ2aWNlcwBDb21waWxhdGlvblJlbGF4YXRpb25zQXR0cmli
+dXRlAFJ1bnRpbWVDb21wYXRpYmlsaXR5QXR0cmlidXRlAFNUXzIzMWE2OWMyMzNmODQyYTM5ZDBl
+MjI3NDY1Y2MxMzJhLmNzcHJvagBTeXN0ZW0uRGlhZ25vc3RpY3MARGVidWdnZXJOb25Vc2VyQ29k
+ZUF0dHJpYnV0ZQBUeXBlAFJ1bnRpbWVUeXBlSGFuZGxlAEdldFR5cGVGcm9tSGFuZGxlAEFzc2Vt
+Ymx5AGdldF9Bc3NlbWJseQBTeXN0ZW0uQ29tcG9uZW50TW9kZWwARWRpdG9yQnJvd3NhYmxlQXR0
+cmlidXRlAEVkaXRvckJyb3dzYWJsZVN0YXRlAENvbXBpbGVyR2VuZXJhdGVkQXR0cmlidXRlAC5j
+Y3RvcgBTU0lTU2NyaXB0VGFza0VudHJ5UG9pbnRBdHRyaWJ1dGUAU2NyaXB0T2JqZWN0TW9kZWwA
+Z2V0X0R0cwBNaWNyb3NvZnQuU3FsU2VydmVyLk1hbmFnZWREVFMATWljcm9zb2Z0LlNxbFNlcnZl
+ci5EdHMuUnVudGltZQBDb25uZWN0aW9ucwBnZXRfQ29ubmVjdGlvbnMARFRTUmVhZE9ubHlDb2xs
+ZWN0aW9uQmFzZQBnZXRfQ291bnQASW50MzIAVG9TdHJpbmcAU3RyaW5nAENvbmNhdABTeXN0ZW0u
+V2luZG93cy5Gb3JtcwBNZXNzYWdlQm94AERpYWxvZ1Jlc3VsdABTaG93AHNldF9UYXNrUmVzdWx0
+AENvbm5lY3Rpb25FbnVtZXJhdG9yAEdldEVudW1lcmF0b3IAQ29ubmVjdGlvbk1hbmFnZXIAZ2V0
+X0N1cnJlbnQAZ2V0X0Nvbm5lY3Rpb25TdHJpbmcARXZlbnRzT2JqZWN0V3JhcHBlcgBnZXRfRXZl
+bnRzAEZpcmVJbmZvcm1hdGlvbgBBY3F1aXJlQ29ubmVjdGlvbgBnZXRfTmFtZQBGaXJlRXJyb3IA
+RHRzRW51bWVyYXRvcgBNb3ZlTmV4dABTVF8yMzFhNjljMjMzZjg0MmEzOWQwZTIyNzQ2NWNjMTMy
+YS5jc3Byb2ouUHJvcGVydGllcy5SZXNvdXJjZXMucmVzb3VyY2VzAAAAAAB/UwBUAF8AMgAzADEA
+YQA2ADkAYwAyADMAMwBmADgANAAyAGEAMwA5AGQAMABlADIAMgA3ADQANgA1AGMAYwAxADMAMgBh
+AC4AYwBzAHAAcgBvAGoALgBQAHIAbwBwAGUAcgB0AGkAZQBzAC4AUgBlAHMAbwB1AHIAYwBlAHMA
+ABFDAG8AdQBuAHQAIAA9ACAAAAEAKUMAbwBuAG4AZQBjAHQAaQBvAG4AIABzAHQAcgBpAG4AZwAg
+AD0AIAAANUMAbwBuAG4AZQBjAHQAZQBkACAAcwB1AGMAYwBlAHMAcwBmAHUAbABsAHkAIAB0AG8A
+IAAAK0MAbwBuAG4AZQBjAHQAaQBvAG4AIABmAGEAaQBsAGUAZAAgAG8AbgAgAAAAAAB1m+4UHlB3
+R58RvXJmKx3LAAi3elxWGTTgiQiJhF3NgIDMkQMGEhUDBhIZAyAAAQQAABIVBAAAEhkFAAEBEhkE
+CAASFQQIABIZAwYSDAQAABIMBAgAEgwCBggDBhEUBAAAAAAEAQAAAAQgAQEOBCABAQgGAAESURFV
+BCAAElkGIAIBDhJZBAcBEhUFIAEBEWEIAQACAAAAAAADAAABBCAAEm0EIAAScQMgAAgDIAAOBQAC
+Dg4OBgABEYCFDgUgABKAiQUgABKAjQUgABKAkQogBgEIDg4OCBACBCABHBwIIAUCCA4ODggDIAAC
+DAcGDgICEoCNCBKAiUcBABouTkVURnJhbWV3b3JrLFZlcnNpb249djQuMAEAVA4URnJhbWV3b3Jr
+RGlzcGxheU5hbWUQLk5FVCBGcmFtZXdvcmsgNC8BACpTVF8yMzFhNjljMjMzZjg0MmEzOWQwZTIy
+NzQ2NWNjMTMyYS5jc3Byb2oAAAUBAAAAAA4BAAlNaWNyb3NvZnQAAB8BABpDb3B5cmlnaHQgQCBN
+aWNyb3NvZnQgMjAxNAAACAEACAAAAAAAHgEAAQBUAhZXcmFwTm9uRXhjZXB0aW9uVGhyb3dzAQAA
+AIgxAAAAAAAAAAAAAJ4xAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAACQMQAAAAAAAAAAX0NvckRs
+bE1haW4AbXNjb3JlZS5kbGwAAAAAAP8lACAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAEAEAAAABgAAIAAAAAAAAAAAAAAAAAAAAEAAQAAADAAAIAAAAAAAAAAAAAAAAAAAAEAAAAA
+AEgAAABYQAAAOAQAAAAAAAAAAAAAOAQ0AAAAVgBTAF8AVgBFAFIAUwBJAE8ATgBfAEkATgBGAE8A
+AAAAAL0E7/4AAAEAAAABANhlSBQAAAEA2GVIFD8AAAAAAAAABAAAAAIAAAAAAAAAAAAAAAAAAABE
+AAAAAQBWAGEAcgBGAGkAbABlAEkAbgBmAG8AAAAAACQABAAAAFQAcgBhAG4AcwBsAGEAdABpAG8A
+bgAAAAAAAACwBJgDAAABAFMAdAByAGkAbgBnAEYAaQBsAGUASQBuAGYAbwAAAHQDAAABADAAMAAw
+ADAAMAA0AGIAMAAAADQACgABAEMAbwBtAHAAYQBuAHkATgBhAG0AZQAAAAAATQBpAGMAcgBvAHMA
+bwBmAHQAAACAACsAAQBGAGkAbABlAEQAZQBzAGMAcgBpAHAAdABpAG8AbgAAAAAAUwBUAF8AMgAz
+ADEAYQA2ADkAYwAyADMAMwBmADgANAAyAGEAMwA5AGQAMABlADIAMgA3ADQANgA1AGMAYwAxADMA
+MgBhAC4AYwBzAHAAcgBvAGoAAAAAAEAADwABAEYAaQBsAGUAVgBlAHIAcwBpAG8AbgAAAAAAMQAu
+ADAALgA1ADEAOQAyAC4AMgA2ADAANwAyAAAAAACAAC8AAQBJAG4AdABlAHIAbgBhAGwATgBhAG0A
+ZQAAAFMAVABfADIAMwAxAGEANgA5AGMAMgAzADMAZgA4ADQAMgBhADMAOQBkADAAZQAyADIANwA0
+ADYANQBjAGMAMQAzADIAYQAuAGMAcwBwAHIAbwBqAC4AZABsAGwAAAAAAFwAGwABAEwAZQBnAGEA
+bABDAG8AcAB5AHIAaQBnAGgAdAAAAEMAbwBwAHkAcgBpAGcAaAB0ACAAQAAgAE0AaQBjAHIAbwBz
+AG8AZgB0ACAAMgAwADEANAAAAAAAiAAvAAEATwByAGkAZwBpAG4AYQBsAEYAaQBsAGUAbgBhAG0A
+ZQAAAFMAVABfADIAMwAxAGEANgA5AGMAMgAzADMAZgA4ADQAMgBhADMAOQBkADAAZQAyADIANwA0
+ADYANQBjAGMAMQAzADIAYQAuAGMAcwBwAHIAbwBqAC4AZABsAGwAAAAAAHgAKwABAFAAcgBvAGQA
+dQBjAHQATgBhAG0AZQAAAAAAUwBUAF8AMgAzADEAYQA2ADkAYwAyADMAMwBmADgANAAyAGEAMwA5
+AGQAMABlADIAMgA3ADQANgA1AGMAYwAxADMAMgBhAC4AYwBzAHAAcgBvAGoAAAAAAEQADwABAFAA
+cgBvAGQAdQBjAHQAVgBlAHIAcwBpAG8AbgAAADEALgAwAC4ANQAxADkAMgAuADIANgAwADcAMgAA
+AAAASAAPAAEAQQBzAHMAZQBtAGIAbAB5ACAAVgBlAHIAcwBpAG8AbgAAADEALgAwAC4ANQAxADkA
+MgAuADIANgAwADcAMgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAADAAAALAxAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
+            </ScriptProject>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Setup.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{E5D749A1-7F53-4F40-8CDE-D0AC9EE4FEAD}"
+          DTS:From="Package\Setup\Validate Connections Script"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Setup\Set Application Run ID" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Setup.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{BB8D4470-2EE5-4498-8DAF-B9E54F56B192}"
+          DTS:From="Package\Setup\Set Application Run ID"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\Setup\Get Lineage - Insert Audit Record" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Successful Loading Closeout"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{2189BA1D-31A4-48E7-993D-33C359E770B0}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Successful Loading Closeout">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0" />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Successful Loading Closeout\Write Success Record"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{D39BB9A1-733A-4D56-A5D9-B6A77AFFF3A6}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Write Success Record"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{843B9DF5-618A-48DA-8301-85359228D94D}"
+              SQLTask:SqlStatementSource="&#xA;UPDATE [custom].[PackageAudit] SET&#xA;CompleteTMST = GETDATE(),&#xA; LastRunDT = CAST(GETDATE() AS date),&#xA;CompletionMessage = ?&#xA;WHERE PackageAuditKey = ?&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::SuccessMessage"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="129"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::LineageID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{2FA7C84D-9B35-4617-A1AE-D0D8F27B82E0}"
+      DTS:From="Package\Setup"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Data Processing" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{6A062461-9295-426A-910C-4379FD891619}"
+      DTS:From="Package\Data Processing"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Successful Loading Closeout" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{FFA61AF4-932D-4075-B7C4-81DF1FA40718}"
+      DTS:From="Package\Data Processing"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Failure Loading Closeout"
+      DTS:Value="1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql11">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Data Processing\Batch_Transactions"
+          TopLeft="85.9047623459176,200.047062212539" />
+        <NodeLayout
+          Size="238,42"
+          Id="Package\Data Processing\Get HighWater Mark from Control"
+          TopLeft="47.4903041691428,6.72352942892428" />
+        <NodeLayout
+          Size="167,42"
+          Id="Package\Data Processing\Merge delta tables"
+          TopLeft="81.1428575029179,282.070591349751" />
+        <NodeLayout
+          Size="183,42"
+          Id="Package\Data Processing\Truncate Delta Tables"
+          TopLeft="79.619047953158,96.1019598376793" />
+        <NodeLayout
+          Size="180,42"
+          Id="Package\Data Processing\Update Control Table"
+          TopLeft="82.9188762010593,385.594116694704" />
+        <EdgeLayout
+          Id="Package\Data Processing.PrecedenceConstraints[Constraint]"
+          TopLeft="168.023809924418,242.047062212539">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40.023529137212"
+              Start="0,0"
+              End="0,32.523529137212">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32.523529137212" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Processing.PrecedenceConstraints[Constraint 1]"
+          TopLeft="171.261905149538,138.101959837679">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61.9451023748597"
+              Start="0,0"
+              End="0,54.4451023748597">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54.4451023748597" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Processing.PrecedenceConstraints[Constraint 2]"
+          TopLeft="164.742857502918,323.670591349751">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="8.17601869814143,61.9235253449534"
+              Start="0,0"
+              End="8.17601869814143,54.4235253449534">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.9617626724767" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.9617626724767"
+                    Point2="0,30.9617626724767"
+                    Point3="4,30.9617626724767" />
+                  <mssgle:LineSegment
+                    End="4.17601869814143,30.9617626724767" />
+                  <mssgle:CubicBezierSegment
+                    Point1="4.17601869814143,30.9617626724767"
+                    Point2="8.17601869814143,30.9617626724767"
+                    Point3="8.17601869814143,34.9617626724767" />
+                  <mssgle:LineSegment
+                    End="8.17601869814143,54.4235253449534" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Processing.PrecedenceConstraints[Constraint 3]"
+          TopLeft="168.80467606115,48.7235294289243">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.378430408755"
+              Start="0,0"
+              End="0,39.878430408755">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.878430408755" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43.924528301886795"
+          IsExpanded="True"
+          PanelSize="347,489"
+          Size="347,533"
+          Id="Package\Data Processing"
+          TopLeft="672.06847329944,519.527491009239" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Failure Loading Closeout\Write Failure Record"
+          TopLeft="75.8867924528302,21.6792452830191" />
+        <ContainerLayout
+          HeaderHeight="43.924528301886795"
+          IsExpanded="True"
+          PanelSize="284,116"
+          Size="284,160"
+          Id="Package\Failure Loading Closeout"
+          TopLeft="1054.24933628564,1280.41495414201" />
+        <NodeLayout
+          Size="238,42"
+          Id="Package\Setup\Get Lineage - Insert Audit Record"
+          TopLeft="34.0571503989554,218.258827704899" />
+        <NodeLayout
+          Size="186,42"
+          Id="Package\Setup\Set Application Run ID"
+          TopLeft="67.5664933251099,122.729703928414" />
+        <NodeLayout
+          Size="153,52"
+          Id="Package\Setup\Validate Connections Script"
+          TopLeft="82.1401629658173,11.09248979037" />
+        <EdgeLayout
+          Id="Package\Setup.PrecedenceConstraints[Constraint]"
+          TopLeft="159.653328145464,63.09248979037">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.6372141380444"
+              Start="0,0"
+              End="0,52.1372141380444">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.1372141380444" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Setup.PrecedenceConstraints[Constraint 1]"
+          TopLeft="156.811821862033,164.329703928414">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53.9291237764849"
+              Start="0,0"
+              End="0,46.4291237764849">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.4291237764849" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43.924528301886795"
+          IsExpanded="True"
+          PanelSize="297,322"
+          Size="297,366"
+          Id="Package\Setup"
+          TopLeft="663.404773108813,48.4076992260313" />
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Successful Loading Closeout\Write Success Record"
+          TopLeft="41.9838263741537,22.6892343772847" />
+        <ContainerLayout
+          HeaderHeight="43.924528301886795"
+          IsExpanded="True"
+          PanelSize="303,119"
+          Size="303,163"
+          Id="Package\Successful Loading Closeout"
+          TopLeft="373.090302602392,1248.72187298873" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="811.904773108813,414.407699226031">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="33.6637001906271,105.119791783208"
+              Start="0,0"
+              End="33.6637001906271,97.6197917832077">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.5598958916039" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,48.5598958916039"
+                    Point2="0,52.5598958916039"
+                    Point3="4,52.5598958916039" />
+                  <mssgle:LineSegment
+                    End="29.6637001906271,52.5598958916039" />
+                  <mssgle:CubicBezierSegment
+                    Point1="29.6637001906271,52.5598958916039"
+                    Point2="33.6637001906271,52.5598958916039"
+                    Point3="33.6637001906271,56.5598958916039" />
+                  <mssgle:LineSegment
+                    End="33.6637001906271,97.6197917832077" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="789.06847329944,1052.52749100924">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-264.478170697048,196.194381979491"
+              Start="0,0"
+              End="-264.478170697048,188.694381979491">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,75.0180471311547" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,75.0180471311547"
+                    Point2="0,79.0180471311547"
+                    Point3="-4,79.0180471311547" />
+                  <mssgle:LineSegment
+                    End="-260.478170697048,79.0180471311547" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-260.478170697048,79.0180471311547"
+                    Point2="-264.478170697048,79.0180471311547"
+                    Point3="-264.478170697048,83.0180471311547" />
+                  <mssgle:LineSegment
+                    End="-264.478170697048,188.694381979491" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="902.06847329944,1052.52749100924">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="294.1808629862,227.887463132771"
+              Start="0,0"
+              End="294.1808629862,220.387463132771">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,87.7825583013226" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,87.7825583013226"
+                    Point2="0,91.7825583013226"
+                    Point3="4,91.7825583013226" />
+                  <mssgle:LineSegment
+                    End="290.1808629862,91.7825583013226" />
+                  <mssgle:CubicBezierSegment
+                    Point1="290.1808629862,91.7825583013226"
+                    Point2="294.1808629862,91.7825583013226"
+                    Point3="294.1808629862,95.7825583013226" />
+                  <mssgle:LineSegment
+                    End="294.1808629862,220.387463132771" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="131.84908383685,96.7825583013226,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Processing\Batch_Transactions">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="144,42"
+          Id="Package\Data Processing\Batch_Transactions\Oracle Source"
+          TopLeft="327,57" />
+        <NodeLayout
+          Size="131,42"
+          Id="Package\Data Processing\Batch_Transactions\Row Count"
+          TopLeft="328.571434166967,174.964708336167" />
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Data Processing\Batch_Transactions\OLE DB Destination"
+          TopLeft="308.132275054424,285.329411713228" />
+        <EdgeLayout
+          Id="Package\Data Processing\Batch_Transactions.Paths[Row Count Output 1]"
+          TopLeft="394.151854610695,216.564708336167">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,68.7647033770608"
+              Start="0,0"
+              End="0,61.2647033770608">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,61.2647033770608" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Processing\Batch_Transactions.Paths[Oracle Source Output]"
+          TopLeft="396.535717083484,99">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,75.964708336167"
+              Start="0,0"
+              End="0,68.464708336167">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,68.464708336167" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Processing\Batch_Transactions\Oracle Source">
+    <Properties>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Processing\Batch_Transactions\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
