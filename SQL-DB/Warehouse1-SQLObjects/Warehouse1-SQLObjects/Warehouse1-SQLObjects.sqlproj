@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Warehouse1_SQLObjects</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{43e43818-2d33-4af9-92fd-d012b2b2f843}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>Warehouse1_SQLObjects</RootNamespace>
+    <AssemblyName>Warehouse1_SQLObjects</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>Latin1_General_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Views\" />
+    <Folder Include="Security\" />
+    <Folder Include="dbo\Stored Procedures\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\Fundraising.sql" />
+    <Build Include="dbo\Tables\DimTranType.sql" />
+    <Build Include="dbo\Tables\DimTranOrigin.sql" />
+    <Build Include="dbo\Tables\DimTeam.sql" />
+    <Build Include="dbo\Tables\DimRestriction.sql" />
+    <Build Include="dbo\Tables\DimOrderDetail.sql" />
+    <Build Include="dbo\Tables\DimProducts.sql" />
+    <Build Include="dbo\Tables\DimSource.sql" />
+    <Build Include="dbo\Tables\DimPaymethod.sql" />
+    <Build Include="dbo\Tables\DimOrgContacts.sql" />
+    <Build Include="dbo\Tables\DimOrganisation.sql" />
+    <Build Include="dbo\Tables\DimContactRel.sql" />
+    <Build Include="dbo\Tables\DimRegion.sql" />
+    <Build Include="dbo\Tables\DimRate.sql" />
+    <Build Include="dbo\Tables\DimOrder.sql" />
+    <Build Include="dbo\Tables\DimContact.sql" />
+    <Build Include="dbo\Tables\DimAddresses.sql" />
+    <Build Include="dbo\Tables\DimCommunications.sql" />
+    <Build Include="dbo\Tables\DimChannel.sql" />
+    <Build Include="dbo\Tables\DimAddressLinks.sql" />
+    <Build Include="dbo\Tables\DimOrderPayment.sql" />
+    <Build Include="dbo\Tables\DimActivity.sql" />
+    <Build Include="dbo\Tables\FundraisingError.sql" />
+    <Build Include="dbo\Tables\DimDate.sql" />
+    <Build Include="dbo\Views\vwRepEventsFundraising.sql" />
+    <Build Include="dbo\Views\vwRepEventsFundraisingCurrentMonthPreviousMonth.sql" />
+    <Build Include="dbo\Views\Fundraising_vlf.sql" />
+    <Build Include="dbo\Views\DimDate_vlf.sql" />
+    <Build Include="dbo\Views\DimFundRegion_Mar2016.sql" />
+    <Build Include="dbo\Views\DimRegion_vlf.sql" />
+    <Build Include="dbo\Views\vlf_CurrentMonth.sql" />
+    <Build Include="dbo\Views\DimTranOrigin_vlf.sql" />
+    <Build Include="Security\SQL_SSAS.sql" />
+    <Build Include="Security\SA_SSRS_DATAREADER.sql" />
+    <Build Include="Security\DIABETESUK_SA_SSRS_DataReader.sql" />
+    <Build Include="Security\DIABETESUK_CIS Report Users .sql" />
+    <Build Include="Security\SSRS_DataReader.sql" />
+    <Build Include="Security\RoleMemberships.sql" />
+    <Build Include="dbo\Stored Procedures\PopulateDimOrder.sql" />
+    <Build Include="dbo\Stored Procedures\PopulateDimOrderDetails.sql" />
+    <Build Include="dbo\Stored Procedures\PopulateDimOrderPayment.sql" />
+    <Build Include="dbo\Stored Procedures\RgTopLIneReport.sql" />
+    <Build Include="dbo\Stored Procedures\PopulateDimCommunications.sql" />
+    <Build Include="dbo\Stored Procedures\PopulateDimRestriction.sql" />
+    <Build Include="dbo\Stored Procedures\PopulateDimContact.sql" />
+    <Build Include="dbo\Stored Procedures\PopulateDimContactRel.sql" />
+    <Build Include="dbo\Stored Procedures\PopulateDimTranType.sql" />
+    <Build Include="dbo\Stored Procedures\PopulateDimRate.sql" />
+    <Build Include="dbo\Stored Procedures\PopulateDimSource.sql" />
+    <Build Include="dbo\Stored Procedures\PopulateDimRegion.sql" />
+    <Build Include="dbo\Stored Procedures\PopulateDimOrgContact.sql" />
+    <Build Include="dbo\Stored Procedures\PopulateDimOrg.sql" />
+    <Build Include="dbo\Stored Procedures\PopulateDimAddress.sql" />
+    <Build Include="dbo\Stored Procedures\RgTopLIneReport_TEAM.sql" />
+    <Build Include="dbo\Stored Procedures\PopulateDimPayMeth.sql" />
+    <Build Include="dbo\Stored Procedures\PopulateDimActivity.sql" />
+    <Build Include="dbo\Stored Procedures\PopulateDimChannel.sql" />
+    <Build Include="dbo\Stored Procedures\PopulateDimTranOrigin.sql" />
+    <Build Include="dbo\Stored Procedures\PopulateDimTeam.sql" />
+    <Build Include="dbo\Stored Procedures\PopulateDimProduct.sql" />
+    <Build Include="dbo\Stored Procedures\PopulateDimAddressLinks.sql" />
+    <Build Include="dbo\Stored Procedures\PopulateFundraising.sql" />
+  </ItemGroup>
+</Project>

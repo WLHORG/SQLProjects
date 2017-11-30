@@ -1,0 +1,28 @@
+﻿CREATE TABLE [cis].[event_bookings] (
+    [event_number]         NUMERIC (18)  NOT NULL,
+    [booking_number]       NUMERIC (18)  NOT NULL,
+    [booking_date]         DATETIME      NOT NULL,
+    [batch_number]         NUMERIC (18)  NULL,
+    [transaction_number]   NUMERIC (18)  NULL,
+    [line_number]          NUMERIC (18)  NULL,
+    [rate]                 VARCHAR (4)   NOT NULL,
+    [option_number]        NUMERIC (18)  NOT NULL,
+    [booking_status]       VARCHAR (1)   NOT NULL,
+    [contact_number]       NUMERIC (18)  NOT NULL,
+    [address_number]       NUMERIC (18)  NOT NULL,
+    [quantity]             NUMERIC (18)  NOT NULL,
+    [allocated]            NUMERIC (18)  NOT NULL,
+    [cancellation_reason]  VARCHAR (4)   NULL,
+    [cancelled_by]         VARCHAR (14)  NULL,
+    [cancelled_on]         DATETIME      NULL,
+    [amended_by]           VARCHAR (14)  NOT NULL,
+    [amended_on]           DATETIME      NOT NULL,
+    [sales_contact_number] NUMERIC (18)  NULL,
+    [cancellation_source]  VARCHAR (10)  NULL,
+    [notes]                VARCHAR (MAX) NULL,
+    [adult_quantity]       NUMERIC (18)  NULL,
+    [child_quantity]       NUMERIC (18)  NULL,
+    [start_time]           VARCHAR (5)   NULL,
+    [end_time]             VARCHAR (5)   NULL
+);
+
