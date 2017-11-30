@@ -497,6 +497,11 @@
     <Build Include="Security\control.sql" />
     <Build Include="Security\custom.sql" />
     <Build Include="custom\deleted_cis_contacts.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_duk_acorn.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_Legacy_Bequests.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_contact_address_usages_1.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_GAD_Invalid_Declaration_date.sql" />
+    <Build Include="cis\Stored Procedures\usp_Merge_Fundraising_Request_Targets.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />

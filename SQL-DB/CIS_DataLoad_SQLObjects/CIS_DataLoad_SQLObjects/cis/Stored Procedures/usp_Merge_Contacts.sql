@@ -48,9 +48,10 @@ WHEN NOT MATCHED BY TARGET
       ,[prefix_honorifics]
       ,[surname_prefix]
       ,[informal_salutation]
-      ,[ni_number]
       ,[label_name_format_code]
+	  ,[ni_number]
 	  ,[CIS_CHECKSUM]
+ 
 	) 
 	
 VALUES(
@@ -91,8 +92,9 @@ VALUES(
       ,s.[informal_salutation]
       ,s.[label_name_format_code]
       ,s.[ni_number]
-	  , s.[CIS_CHECKSUM])
-WHEN MATCHED  --AND s.ETLAction <> 3  --MATCHED AND NOT A DELETION
+	  , s.[CIS_CHECKSUM]
+	  )
+WHEN MATCHED AND s.[ELTAction] <> 3  --MATCHED AND NOT A DELETION
     THEN UPDATE SET
 	
 		
@@ -132,7 +134,7 @@ WHEN MATCHED  --AND s.ETLAction <> 3  --MATCHED AND NOT A DELETION
       ,t.[informal_salutation] = s.[informal_salutation]
       ,t.[ni_number] = s.[ni_number]
       ,t.[label_name_format_code] = s.[label_name_format_code]
-	  ,t.[CIS_CHECKSUM] = s.[CIS_CHECKSUM]
+	 ,t.[CIS_CHECKSUM] = s.[CIS_CHECKSUM]
 
 	 
 	  ; 
