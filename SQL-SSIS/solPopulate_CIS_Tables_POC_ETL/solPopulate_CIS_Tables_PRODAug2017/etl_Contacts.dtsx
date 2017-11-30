@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="etl_Contacts"
   DTS:PackageType="5"
-  DTS:VersionBuild="172"
-  DTS:VersionGUID="{644A1635-7681-4C63-BBB4-804BF1DE0305}">
+  DTS:VersionBuild="173"
+  DTS:VersionGUID="{A9A6A3E3-472B-4098-AF3C-927E55282D01}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:LogProviders>
@@ -216,7 +216,7 @@
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[cis].[contacts]</property>
+                      name="OpenRowset">[cis_delta].[contacts]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -551,6 +551,12 @@
                           cachedName="NOTES"
                           externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Full Load\INSERT TO DELTA TABLES.Inputs[OLE DB Destination Input].ExternalColumns[notes]"
                           lineageId="Package\Data Processing\Data Flow Task CONTACTS - Full Load\Oracle Source.Outputs[Oracle Source Output].Columns[NOTES]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Full Load\INSERT TO DELTA TABLES.Inputs[OLE DB Destination Input].Columns[ETLAction]"
+                          cachedDataType="i4"
+                          cachedName="ETLAction"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Full Load\INSERT TO DELTA TABLES.Inputs[OLE DB Destination Input].ExternalColumns[ELTAction]"
+                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Full Load\NEW ROWS.Outputs[Derived Column Output].Columns[ETLAction]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -764,6 +770,10 @@
                           dataType="str"
                           length="8"
                           name="label_name_format_code" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Full Load\INSERT TO DELTA TABLES.Inputs[OLE DB Destination Input].ExternalColumns[ELTAction]"
+                          dataType="i4"
+                          name="ELTAction" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -2985,277 +2995,6 @@ ORDER BY CONTACT_NUMBER ASC</property>
                       name="OLE DB Destination Input">
                       <inputColumns>
                         <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[CONTACT_NUMBER]"
-                          cachedDataType="numeric"
-                          cachedName="CONTACT_NUMBER"
-                          cachedPrecision="38"
-                          cachedSortKeyPosition="1"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[contact_number]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[CONTACT_NUMBER]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[TITLE]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="40"
-                          cachedName="TITLE"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[title]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[TITLE]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[FORENAMES]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="60"
-                          cachedName="FORENAMES"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[forenames]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[FORENAMES]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[INITIALS]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="7"
-                          cachedName="INITIALS"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[initials]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[INITIALS]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[SURNAME]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="50"
-                          cachedName="SURNAME"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[surname]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[SURNAME]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[HONORIFICS]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="30"
-                          cachedName="HONORIFICS"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[honorifics]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[HONORIFICS]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[SALUTATION]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="80"
-                          cachedName="SALUTATION"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[salutation]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[SALUTATION]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[LABEL_NAME]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="80"
-                          cachedName="LABEL_NAME"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[label_name]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[LABEL_NAME]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[PREFERRED_FORENAME]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="30"
-                          cachedName="PREFERRED_FORENAME"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[preferred_forename]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[PREFERRED_FORENAME]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[SEX]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="1"
-                          cachedName="SEX"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[sex]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[SEX]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[SOURCE]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="10"
-                          cachedName="SOURCE"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[source]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[SOURCE]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[SOURCE_DATE]"
-                          cachedDataType="dbTimeStamp"
-                          cachedName="SOURCE_DATE"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[source_date]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[SOURCE_DATE]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[NAME_GATHERING_SOURCE]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="10"
-                          cachedName="NAME_GATHERING_SOURCE"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[name_gathering_source]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[NAME_GATHERING_SOURCE]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[STATUS]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="4"
-                          cachedName="STATUS"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[status]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[STATUS]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[STATUS_DATE]"
-                          cachedDataType="dbTimeStamp"
-                          cachedName="STATUS_DATE"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[status_date]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[STATUS_DATE]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[STATUS_REASON]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="80"
-                          cachedName="STATUS_REASON"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[status_reason]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[STATUS_REASON]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[DEPARTMENT]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="4"
-                          cachedName="DEPARTMENT"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[department]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[DEPARTMENT]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[ADDRESS_NUMBER]"
-                          cachedDataType="numeric"
-                          cachedName="ADDRESS_NUMBER"
-                          cachedPrecision="38"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[address_number]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[ADDRESS_NUMBER]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[DIALLING_CODE]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="5"
-                          cachedName="DIALLING_CODE"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[dialling_code]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[DIALLING_CODE]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[STD_CODE]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="8"
-                          cachedName="STD_CODE"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[std_code]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[STD_CODE]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[TELEPHONE]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="20"
-                          cachedName="TELEPHONE"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[telephone]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[TELEPHONE]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[EX_DIRECTORY]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="1"
-                          cachedName="EX_DIRECTORY"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[ex_directory]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[EX_DIRECTORY]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[CONTACT_VAT_CATEGORY]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="1"
-                          cachedName="CONTACT_VAT_CATEGORY"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[contact_vat_category]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[CONTACT_VAT_CATEGORY]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[AMENDED_BY]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="14"
-                          cachedName="AMENDED_BY"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[amended_by]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[AMENDED_BY]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[DATE_OF_BIRTH]"
-                          cachedDataType="dbTimeStamp"
-                          cachedName="DATE_OF_BIRTH"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[date_of_birth]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[DATE_OF_BIRTH]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[AMENDED_ON]"
-                          cachedDataType="dbTimeStamp"
-                          cachedName="AMENDED_ON"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[amended_on]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[AMENDED_ON]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[CONTACT_TYPE]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="1"
-                          cachedName="CONTACT_TYPE"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[contact_type]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[CONTACT_TYPE]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[DOB_ESTIMATED]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="1"
-                          cachedName="DOB_ESTIMATED"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[dob_estimated]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[DOB_ESTIMATED]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[CONTACT_GROUP]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="4"
-                          cachedName="CONTACT_GROUP"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[contact_group]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[CONTACT_GROUP]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[OWNERSHIP_GROUP]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="4"
-                          cachedName="OWNERSHIP_GROUP"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[ownership_group]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[OWNERSHIP_GROUP]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[PREFIX_HONORIFICS]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="30"
-                          cachedName="PREFIX_HONORIFICS"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[prefix_honorifics]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[PREFIX_HONORIFICS]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[SURNAME_PREFIX]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="10"
-                          cachedName="SURNAME_PREFIX"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[surname_prefix]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[SURNAME_PREFIX]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[INFORMAL_SALUTATION]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="80"
-                          cachedName="INFORMAL_SALUTATION"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[informal_salutation]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[INFORMAL_SALUTATION]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[NI_NUMBER]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="9"
-                          cachedName="NI_NUMBER"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[ni_number]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[NI_NUMBER]" />
-                        <inputColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[LABEL_NAME_FORMAT_CODE]"
-                          cachedCodepage="1252"
-                          cachedDataType="str"
-                          cachedLength="8"
-                          cachedName="LABEL_NAME_FORMAT_CODE"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[label_name_format_code]"
-                          lineageId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Outputs[Merge Join Output].Columns[LABEL_NAME_FORMAT_CODE]" />
-                        <inputColumn
                           refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].Columns[deleted_on]"
                           cachedDataType="dbTimeStamp"
                           cachedName="deleted_on"
@@ -3265,214 +3004,230 @@ ORDER BY CONTACT_NUMBER ASC</property>
                       <externalMetadataColumns
                         isUsed="True">
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[contact_number]"
-                          dataType="numeric"
-                          name="contact_number"
-                          precision="18" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[title]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="title" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[forenames]"
-                          codePage="1252"
-                          dataType="str"
-                          length="60"
-                          name="forenames" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[initials]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="initials" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[surname]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="surname" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[honorifics]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="honorifics" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[salutation]"
-                          codePage="1252"
-                          dataType="str"
-                          length="80"
-                          name="salutation" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[label_name]"
-                          codePage="1252"
-                          dataType="str"
-                          length="80"
-                          name="label_name" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[preferred_forename]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="preferred_forename" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[sex]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="sex" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[source]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="source" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[source_date]"
-                          dataType="dbTimeStamp"
-                          name="source_date" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[name_gathering_source]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="name_gathering_source" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[date_of_birth]"
-                          dataType="dbTimeStamp"
-                          name="date_of_birth" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[status]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="status" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[status_date]"
-                          dataType="dbTimeStamp"
-                          name="status_date" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[status_reason]"
-                          codePage="1252"
-                          dataType="str"
-                          length="80"
-                          name="status_reason" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[department]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="department" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[address_number]"
-                          dataType="numeric"
-                          name="address_number"
-                          precision="18" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[dialling_code]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="dialling_code" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[std_code]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="std_code" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[telephone]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="telephone" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[ex_directory]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="ex_directory" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[notes]"
-                          codePage="1252"
-                          dataType="text"
-                          name="notes" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[contact_vat_category]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="contact_vat_category" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[amended_by]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="amended_by" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[amended_on]"
-                          dataType="dbTimeStamp"
-                          name="amended_on" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[contact_type]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="contact_type" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[dob_estimated]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="dob_estimated" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[contact_group]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="contact_group" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[ownership_group]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="ownership_group" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[prefix_honorifics]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="prefix_honorifics" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[surname_prefix]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="surname_prefix" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[informal_salutation]"
-                          codePage="1252"
-                          dataType="str"
-                          length="80"
-                          name="informal_salutation" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[ni_number]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="ni_number" />
-                        <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[label_name_format_code]"
-                          codePage="1252"
-                          dataType="str"
-                          length="50"
-                          name="label_name_format_code" />
-                        <externalMetadataColumn
                           refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[deleted_on]"
                           dataType="dbTimeStamp"
                           name="deleted_on" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[CONTACT_NUMBER]"
+                          dataType="numeric"
+                          name="CONTACT_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[TITLE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="40"
+                          name="TITLE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[FORENAMES]"
+                          codePage="1252"
+                          dataType="str"
+                          length="60"
+                          name="FORENAMES" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[INITIALS]"
+                          codePage="1252"
+                          dataType="str"
+                          length="7"
+                          name="INITIALS" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[SURNAME]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="SURNAME" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[HONORIFICS]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          name="HONORIFICS" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[SALUTATION]"
+                          codePage="1252"
+                          dataType="str"
+                          length="80"
+                          name="SALUTATION" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[LABEL_NAME]"
+                          codePage="1252"
+                          dataType="str"
+                          length="80"
+                          name="LABEL_NAME" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[PREFERRED_FORENAME]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          name="PREFERRED_FORENAME" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[SEX]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="SEX" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[SOURCE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="SOURCE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[SOURCE_DATE]"
+                          dataType="dbTimeStamp"
+                          name="SOURCE_DATE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[NAME_GATHERING_SOURCE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="NAME_GATHERING_SOURCE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[DATE_OF_BIRTH]"
+                          dataType="dbTimeStamp"
+                          name="DATE_OF_BIRTH" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[STATUS]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4"
+                          name="STATUS" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[STATUS_DATE]"
+                          dataType="dbTimeStamp"
+                          name="STATUS_DATE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[STATUS_REASON]"
+                          codePage="1252"
+                          dataType="str"
+                          length="80"
+                          name="STATUS_REASON" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[DEPARTMENT]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4"
+                          name="DEPARTMENT" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[ADDRESS_NUMBER]"
+                          dataType="numeric"
+                          name="ADDRESS_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[DIALLING_CODE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="5"
+                          name="DIALLING_CODE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[STD_CODE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="8"
+                          name="STD_CODE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[TELEPHONE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="TELEPHONE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[EX_DIRECTORY]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="EX_DIRECTORY" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[CONTACT_VAT_CATEGORY]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="CONTACT_VAT_CATEGORY" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[AMENDED_BY]"
+                          codePage="1252"
+                          dataType="str"
+                          length="14"
+                          name="AMENDED_BY" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[AMENDED_ON]"
+                          dataType="dbTimeStamp"
+                          name="AMENDED_ON" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[CONTACT_TYPE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="CONTACT_TYPE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[DOB_ESTIMATED]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="DOB_ESTIMATED" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[CONTACT_GROUP]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4"
+                          name="CONTACT_GROUP" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[OWNERSHIP_GROUP]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4"
+                          name="OWNERSHIP_GROUP" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[PREFIX_HONORIFICS]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          name="PREFIX_HONORIFICS" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[SURNAME_PREFIX]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="SURNAME_PREFIX" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[INFORMAL_SALUTATION]"
+                          codePage="1252"
+                          dataType="str"
+                          length="80"
+                          name="INFORMAL_SALUTATION" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[NI_NUMBER]"
+                          codePage="1252"
+                          dataType="str"
+                          length="9"
+                          name="NI_NUMBER" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[LABEL_NAME_FORMAT_CODE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="8"
+                          name="LABEL_NAME_FORMAT_CODE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[CISSOURCE_CHECKSUM]"
+                          dataType="bytes"
+                          length="16"
+                          name="CISSOURCE_CHECKSUM" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[CIS_CHECKSUM]"
+                          dataType="bytes"
+                          length="16"
+                          name="CIS_CHECKSUM" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[deleted_contact_number]"
+                          dataType="numeric"
+                          name="deleted_contact_number"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input].ExternalColumns[NOTES]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4000"
+                          name="NOTES" />
                       </externalMetadataColumns>
                     </input>
                   </inputs>
@@ -7958,9 +7713,9 @@ ORDER BY CONTACT_NUMBER ASC</property>
                   startId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Split  Actions.Outputs[DeletedRows]" />
                 <path
                   refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental.Paths[Derived Column Output2]"
-                  endId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input]"
+                  endId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Union All.Inputs[Union All Input 1]"
                   name="Derived Column Output"
-                  startId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\DELETED ROWS.Outputs[Derived Column Output]" />
+                  startId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\NEW ROWS.Outputs[Derived Column Output]" />
                 <path
                   refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental.Paths[Derived Column Output1]"
                   endId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Union All.Inputs[Union All Input 3]"
@@ -7968,9 +7723,9 @@ ORDER BY CONTACT_NUMBER ASC</property>
                   startId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\CHANGE ROWS.Outputs[Derived Column Output]" />
                 <path
                   refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental.Paths[Derived Column Output]"
-                  endId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Union All.Inputs[Union All Input 1]"
+                  endId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Insert Delted Records to table.Inputs[OLE DB Destination Input]"
                   name="Derived Column Output"
-                  startId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\NEW ROWS.Outputs[Derived Column Output]" />
+                  startId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\DELETED ROWS.Outputs[Derived Column Output]" />
                 <path
                   refId="Package\Data Processing\Data Flow Task CONTACTS - Incremental.Paths[HashedOutput]"
                   endId="Package\Data Processing\Data Flow Task CONTACTS - Incremental\Merge Join.Inputs[Merge Join Left Input]"
@@ -8165,7 +7920,7 @@ ORDER BY CONTACT_NUMBER ASC</property>
           DTS:LocaleID="-1"
           DTS:ObjectName="Write Failure Record"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:LoggingOptions
             DTS:FilterKind="0" />
@@ -8282,14 +8037,35 @@ ORDER BY CONTACT_NUMBER ASC</property>
               VSTAMinorVersion="0"
               Language="CSharp">
               <ProjectItem
-                Name="Properties\Settings.settings"
-                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
+                Name="Properties\AssemblyInfo.cs"
+                Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_231a69c233f842a39d0e227465cc132a.csproj")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyProduct("ST_231a69c233f842a39d0e227465cc132a.csproj")]
+[assembly: AssemblyCopyright("Copyright @ Microsoft 2014")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.resx"
                 Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -8592,35 +8368,14 @@ namespace ST_231a69c233f842a39d0e227465cc132a.csproj.Properties
     }
 }]]></ProjectItem>
               <ProjectItem
-                Name="Properties\AssemblyInfo.cs"
-                Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
-
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_231a69c233f842a39d0e227465cc132a.csproj")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("ST_231a69c233f842a39d0e227465cc132a.csproj")]
-[assembly: AssemblyCopyright("Copyright @ Microsoft 2014")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+                Name="Properties\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.Designer.cs"
                 Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -8869,7 +8624,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           DTS:LocaleID="-1"
           DTS:ObjectName="Write Success Record"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:LoggingOptions
             DTS:FilterKind="0" />
@@ -9340,21 +9095,21 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
+          Size="131,42"
+          Id="Package\Data Processing\Data Flow Task CONTACTS - Full Load\Row Count"
+          TopLeft="110.714290239373,277.717650499311" />
+        <NodeLayout
           Size="144,42"
           Id="Package\Data Processing\Data Flow Task CONTACTS - Full Load\Oracle Source"
           TopLeft="98,57" />
-        <NodeLayout
-          Size="135,42"
-          Id="Package\Data Processing\Data Flow Task CONTACTS - Full Load\NEW ROWS"
-          TopLeft="105.79591853417,166.56303072565" />
         <NodeLayout
           Size="207,42"
           Id="Package\Data Processing\Data Flow Task CONTACTS - Full Load\INSERT TO DELTA TABLES"
           TopLeft="79.281181936013,407.146220886631" />
         <NodeLayout
-          Size="131,42"
-          Id="Package\Data Processing\Data Flow Task CONTACTS - Full Load\Row Count"
-          TopLeft="110.714290239373,277.717650499311" />
+          Size="135,42"
+          Id="Package\Data Processing\Data Flow Task CONTACTS - Full Load\NEW ROWS"
+          TopLeft="105.79591853417,166.56303072565" />
         <EdgeLayout
           Id="Package\Data Processing\Data Flow Task CONTACTS - Full Load.Paths[Row Count Output 1]"
           TopLeft="179.497736087693,319.717650499311">
@@ -9705,7 +9460,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Data Processing\Data Flow Task CONTACTS - Incremental.Paths[Derived Column Output2]"
+          Id="Package\Data Processing\Data Flow Task CONTACTS - Incremental.Paths[Derived Column Output]"
           TopLeft="576.744902254889,548.697484396851">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -9749,7 +9504,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Data Processing\Data Flow Task CONTACTS - Incremental.Paths[Derived Column Output]"
+          Id="Package\Data Processing\Data Flow Task CONTACTS - Incremental.Paths[Derived Column Output2]"
           TopLeft="79.7959185341704,555.56303072565">
           <EdgeLayout.Curve>
             <mssgle:Curve

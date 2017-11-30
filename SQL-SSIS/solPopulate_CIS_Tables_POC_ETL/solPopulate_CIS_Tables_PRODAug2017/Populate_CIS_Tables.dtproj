@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">L3620</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA8kZIAXw5jUOO/wjY8ajMxgAAAAACAAAAAAADZgAAwAAAABAAAAAujsrGvEEKKva0vmRwY7+dAAAAAASAAACgAAAAEAAAABhB50KDufUDZzve4LluhBuIAAAAIIVujHprm9s54IM3g+Iopybd62Hzj/sb4IKYAd0obbUzqvX7gP4+mimWgzNpclZOZgWEw2UgO1DwBSiV0nZ7GZ44CTAG4STtHpAVxkgnlPgfWzWqkFwiO0+9L5bx2PWOQy722+XA/Liw9GXayglgqEwu4PKBQz+GpEkW9zk4IWcChyhMd7a/sRQAAAASvZxW+XtOGnVlp9T3SYOAAYbHMw==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA8kZIAXw5jUOO/wjY8ajMxgAAAAACAAAAAAADZgAAwAAAABAAAABcOHXlF/afQEsuKvn5HhWFAAAAAASAAACgAAAAEAAAAAlmvIZ1h2JGl50EhKhpFsKIAAAAYrfJWoGko3RHgen764Q7iYEzvVdNvawRUfPmUEHM8Lj+N3qD0yryV58WudUificwn4LV1o0+D+ePGPLb53B6YA/z+wa+I8XHGAP1bxEH8SJR6SCAD+0hNK5IFqKjGZPwTC7V7USLzSURJmIfma1l9GuZyfPL6Pkowh6xQLr5cG6jwcap63eorxQAAABiJ92I3aVXKuKXwf46MaQGCQROXQ==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -124,6 +124,10 @@
           <SSIS:Package SSIS:Name="etl_Gaye_Payments.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="etl_Gaye_Pledge_Payment_History.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="etl_Gaye_Pledges.dtsx" SSIS:EntryPoint="1" />
+          <SSIS:Package SSIS:Name="etl_duk_acorn.dtsx" SSIS:EntryPoint="1" />
+          <SSIS:Package SSIS:Name="etl_fundraising_request_targets.dtsx" SSIS:EntryPoint="1" />
+          <SSIS:Package SSIS:Name="etl_GAD_Invalid_Declaration_date.dtsx" SSIS:EntryPoint="1" />
+          <SSIS:Package SSIS:Name="etl_legacy_bequests.dtsx" SSIS:EntryPoint="1" />
         </SSIS:Packages>
         <SSIS:ConnectionManagers>
           <SSIS:ConnectionManager SSIS:Name="LocalHost.DiabetesDWH.conmgr" />
@@ -245,7 +249,7 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">GS1DUKMSQLV03</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">WLHTESTSQL01\DEV01</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
@@ -2023,6 +2027,74 @@
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionGUID">{8CFD5E08-D1BF-436A-BD24-46B562F93484}</SSIS:Property>
+                <SSIS:Property SSIS:Name="PackageFormatVersion">6</SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
+              </SSIS:Properties>
+              <SSIS:Parameters />
+            </SSIS:PackageMetaData>
+            <SSIS:PackageMetaData SSIS:Name="etl_duk_acorn.dtsx">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">{EC84649B-8A23-4F71-91DD-B2B166382946}</SSIS:Property>
+                <SSIS:Property SSIS:Name="Name">etl_duk_acorn</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">146</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionComments">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{D92B6056-EC47-4FE1-9E56-6CB0C6FAB152}</SSIS:Property>
+                <SSIS:Property SSIS:Name="PackageFormatVersion">6</SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
+              </SSIS:Properties>
+              <SSIS:Parameters />
+            </SSIS:PackageMetaData>
+            <SSIS:PackageMetaData SSIS:Name="etl_fundraising_request_targets.dtsx">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">{268A9060-7653-4982-A5BE-D28312E17C75}</SSIS:Property>
+                <SSIS:Property SSIS:Name="Name">etl_fundraising_request_targets</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">145</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionComments">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{99F49E1F-4EF1-4950-BDE2-843A22C98DBF}</SSIS:Property>
+                <SSIS:Property SSIS:Name="PackageFormatVersion">6</SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
+              </SSIS:Properties>
+              <SSIS:Parameters />
+            </SSIS:PackageMetaData>
+            <SSIS:PackageMetaData SSIS:Name="etl_GAD_Invalid_Declaration_date.dtsx">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">{10ECF9FC-087E-4374-8754-8962A0D56115}</SSIS:Property>
+                <SSIS:Property SSIS:Name="Name">etl_GAD_Invalid_Declaration_date</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">145</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionComments">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{1B9DF003-5F74-4FD9-8CCB-7E4ADC2CE188}</SSIS:Property>
+                <SSIS:Property SSIS:Name="PackageFormatVersion">6</SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
+              </SSIS:Properties>
+              <SSIS:Parameters />
+            </SSIS:PackageMetaData>
+            <SSIS:PackageMetaData SSIS:Name="etl_legacy_bequests.dtsx">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">{359F227C-FC80-4A9D-AF7C-88FB1A921BC9}</SSIS:Property>
+                <SSIS:Property SSIS:Name="Name">etl_legacy_bequests</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">145</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionComments">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{D830417D-982D-4D58-8D3D-98E9114DBD2F}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">6</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
