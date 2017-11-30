@@ -1,0 +1,352 @@
+﻿<Dimension xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="47ba5a79-0186-4b72-9161-6416290ab6b1" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>GDPR Dim Suppression DPA</ID>
+  <Name>GDPR Dim Suppression DPA</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramLayout</Name>
+      <Value>
+        <dds xmlns="">
+          <diagram fontclsid="{0BE35203-8F91-11CE-9DE3-00AA004BB851}" mouseiconclsid="{0BE35204-8F91-11CE-9DE3-00AA004BB851}" defaultlayout="MSDDS.Rectilinear" defaultlineroute="MSDDS.Rectilinear" version="7" nextobject="3" scale="100" pagebreakanchorx="0" pagebreakanchory="0" pagebreaksizex="0" pagebreaksizey="0" scrollleft="-1895" scrolltop="-5321" gridx="150" gridy="150" marginx="5000" marginy="5000" zoom="100" x="4572" y="15642" backcolor="16119285" defaultpersistence="2" PrintPageNumbersMode="3" PrintMarginTop="0" PrintMarginBottom="635" PrintMarginLeft="0" PrintMarginRight="0" marqueeselectionmode="0" mousepointer="0" snaptogrid="0" autotypeannotation="1" showscrollbars="0" viewpagebreaks="0" donotforceconnectorsbehindshapes="1" backpictureclsid="{00000000-0000-0000-0000-000000000000}">
+            <font>
+              <ddsxmlobjectstreamwrapper binary="01010000900180380100065461686f6d61" />
+            </font>
+            <mouseicon>
+              <ddsxmlobjectstreamwrapper binary="6c74000000000000" />
+            </mouseicon>
+          </diagram>
+          <layoutmanager>
+            <ddsxmlobj />
+          </layoutmanager>
+          <ddscontrol controlprogid="DdsShapes.DdsObjectManagedBridge.3" left="20" top="0" logicalid="2" controlid="1" masterid="0" hint1="0" hint2="0" width="0" height="0" noresize="0" nomove="0" nodefaultattachpoints="0" autodrag="0" usedefaultiddshape="1" selectable="1" showselectionhandles="1" allownudging="1" isannotation="0" dontautolayout="0" groupcollapsed="0" tabstop="1" visible="0" snaptogrid="0">
+            <control>
+              <ddsxmlobjectstreaminitwrapper binary="000c00000000000000000000" />
+            </control>
+            <layoutobject>
+              <ddsxmlobj>
+                <property name="LogicalObject" value="GDPR_GDPR_dimSuppression_DPA" vartype="8" />
+              </ddsxmlobj>
+            </layoutobject>
+            <shape groupshapeid="0" groupnode="0" />
+          </ddscontrol>
+        </dds>
+      </Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowRelationshipNames</Name>
+      <Value>false</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:UseDiagramDefaultLayout</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortLeft</Name>
+      <Value>-1895</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramViewPortTop</Name>
+      <Value>-5321</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingLeft</Name>
+      <Value>20</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramBoundingTop</Name>
+      <Value>0</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:DiagramZoom</Name>
+      <Value>100</Value>
+    </Annotation>
+  </Annotations>
+  <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+  <State>Unprocessed</State>
+  <Source xsi:type="DataSourceViewBinding" dwd:design-time-name="0dce85ce-3938-436e-a767-956c5fbe5dee">
+    <DataSourceViewID>GDPRSSUP</DataSourceViewID>
+  </Source>
+  <UnknownMember>Visible</UnknownMember>
+  <ErrorConfiguration dwd:design-time-name="b652b800-9a49-4a43-83f3-ce3c8b4687bc">
+    <KeyNotFound>IgnoreError</KeyNotFound>
+    <NullKeyNotAllowed>ReportAndStop</NullKeyNotAllowed>
+  </ErrorConfiguration>
+  <CurrentStorageMode>Molap</CurrentStorageMode>
+  <UnknownMemberName> </UnknownMemberName>
+  <Attributes>
+    <Attribute dwd:design-time-name="294bc279-22ad-479d-a11e-a5604575af87">
+      <ID>Contact Number</ID>
+      <Name>Contact Number</Name>
+      <Usage>Key</Usage>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="9bd9cc3b-6611-4027-a944-1ec03eba609d">
+          <DataType>Double</DataType>
+          <NullProcessing>UnknownMember</NullProcessing>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="d0e25b06-8301-4e18-b123-5d5a3989a043">
+            <TableID>GDPR_GDPR_dimSuppression_DPA</TableID>
+            <ColumnID>contact_number</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <AttributeRelationships>
+        <AttributeRelationship dwd:design-time-name="0393db4e-073c-408e-972e-ce782ae74dfa">
+          <AttributeID>Mailing Suppression</AttributeID>
+          <Name>Mailing Suppression</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="64bbdf47-4dec-4a9b-8aa0-9fddeca50fd7">
+          <AttributeID>Valid From</AttributeID>
+          <Name>Valid From</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="cb77f067-66e4-4977-a305-ad27a699f511">
+          <AttributeID>Valid To</AttributeID>
+          <Name>Valid To</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="a93a7f1b-2569-425b-8c90-7c981c7cddbd">
+          <AttributeID>Source</AttributeID>
+          <Name>Source</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="37f70fc6-e782-4967-84c2-3156d4800c66">
+          <AttributeID>Source Desc</AttributeID>
+          <Name>Source Desc</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="e661838b-8c71-43f1-96d9-b7e41dc3ea5c">
+          <AttributeID>Amended On</AttributeID>
+          <Name>Amended On</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="d36b53ba-1c9f-4358-9e7a-fd4597c1b76f">
+          <AttributeID>Cost Centre Team Desc</AttributeID>
+          <Name>Cost Centre Team Desc</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="05e878ca-32f1-4e27-81a0-9520842ee5db">
+          <AttributeID>Cost Centre Activity Desc</AttributeID>
+          <Name>Cost Centre Activity Desc</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="20e07a96-7563-41c7-82f6-f144fef5348d">
+          <AttributeID>Region Desc</AttributeID>
+          <Name>Region Desc</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="1ae2e326-58fe-4560-bb54-55e0497de2a1">
+          <AttributeID>Channel Desc</AttributeID>
+          <Name>Channel Desc</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="0ff91403-3f05-4339-9cae-a6e4d6605794">
+          <AttributeID>Has Sufficient Campaign Detail</AttributeID>
+          <Name>Has Sufficient Campaign Detail</Name>
+        </AttributeRelationship>
+        <AttributeRelationship dwd:design-time-name="0e5cca07-0abf-4dcc-a248-3818599e6502">
+          <AttributeID>Date Of Code</AttributeID>
+          <Name>Date Of Code</Name>
+        </AttributeRelationship>
+      </AttributeRelationships>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="2904ad6d-61c7-41b8-bf9e-861c2df1446e">
+      <ID>Mailing Suppression</ID>
+      <Name>DPA</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="43f2be34-814d-48b3-94e1-564a03e270fa">
+          <DataType>WChar</DataType>
+          <DataSize>4</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="189974ba-590e-4ad5-b99c-79529dc26a2e">
+            <TableID>GDPR_GDPR_dimSuppression_DPA</TableID>
+            <ColumnID>mailing_suppression</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="1a635c7b-e1e9-49a1-ad55-a6dec552431e">
+      <ID>Valid From</ID>
+      <Name>Valid From</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="90aa206c-b63d-4c77-bd01-42d58e09a3d8">
+          <DataType>Date</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="ecaef8c0-8546-4733-8e23-533a56de8b0d">
+            <TableID>GDPR_GDPR_dimSuppression_DPA</TableID>
+            <ColumnID>valid_from</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="621ee0be-0123-4653-9fdc-72902ac82607">
+      <ID>Valid To</ID>
+      <Name>Valid To</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="087d0b01-8e06-463b-9949-060afbfd8dc0">
+          <DataType>Date</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="a1403ed5-2751-40ca-b3b4-9aca7591e84e">
+            <TableID>GDPR_GDPR_dimSuppression_DPA</TableID>
+            <ColumnID>valid_to</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="fb229220-a1df-4ed6-9bd3-75fe6bbdf3ea">
+      <ID>Source</ID>
+      <Name>Source</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="7e311f0b-7720-4e20-bb08-01610fa758dc">
+          <DataType>WChar</DataType>
+          <DataSize>10</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="798fe12c-1ae1-4df0-8158-56e660bb2763">
+            <TableID>GDPR_GDPR_dimSuppression_DPA</TableID>
+            <ColumnID>source</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="0817978e-b4da-4136-af5c-868df9c82b2d">
+      <ID>Source Desc</ID>
+      <Name>Source Desc</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="7a63f1de-17e4-4ded-a2ce-d90c319d3c60">
+          <DataType>WChar</DataType>
+          <DataSize>60</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="3540d90c-f7d1-418b-b33a-0d297efffc60">
+            <TableID>GDPR_GDPR_dimSuppression_DPA</TableID>
+            <ColumnID>source_desc</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="a1a45956-cc0b-457f-a23a-44b794390ae0">
+      <ID>Amended On</ID>
+      <Name>Amended On</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="b797ac8e-a7d2-43e5-b552-5a3a3062a308">
+          <DataType>Date</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="97482842-680d-4b13-b73a-ea1a5318e6ed">
+            <TableID>GDPR_GDPR_dimSuppression_DPA</TableID>
+            <ColumnID>amended_on</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="376184e6-6ed2-493b-ba4b-9b1b15e20586">
+      <ID>Cost Centre Team Desc</ID>
+      <Name>Cost Centre Team Desc</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="7addecec-816d-4755-b023-2a120fc0b25c">
+          <DataType>WChar</DataType>
+          <DataSize>60</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="53b98f67-4485-4501-95b2-8f5659229d8e">
+            <TableID>GDPR_GDPR_dimSuppression_DPA</TableID>
+            <ColumnID>cost_centre_team_desc</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="91e11f33-7991-4dd2-90ee-9f55fb616a37">
+      <ID>Cost Centre Activity Desc</ID>
+      <Name>Cost Centre Activity Desc</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="f83b5d1b-3b37-4b79-8f9c-299cdad9dcaa">
+          <DataType>WChar</DataType>
+          <DataSize>60</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="fb6ece12-3610-448a-8d80-ba0ee77e451b">
+            <TableID>GDPR_GDPR_dimSuppression_DPA</TableID>
+            <ColumnID>cost_centre_activity_desc</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="710eed18-05cf-47d9-9d73-062d92f9459d">
+      <ID>Region Desc</ID>
+      <Name>Region Desc</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="159adc6e-12df-4a7c-9ae7-36f40872aac4">
+          <DataType>WChar</DataType>
+          <DataSize>60</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="3ee49b25-0594-4225-bf7a-e771321cfa7e">
+            <TableID>GDPR_GDPR_dimSuppression_DPA</TableID>
+            <ColumnID>region_desc</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="00bb001c-017f-47c7-b812-668b9fe9e2e5">
+      <ID>Channel Desc</ID>
+      <Name>Channel Desc</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="df98dd1b-8eda-4069-a947-391f6d8665d4">
+          <DataType>WChar</DataType>
+          <DataSize>60</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="b9081dbe-1031-4040-8196-322f83b9f248">
+            <TableID>GDPR_GDPR_dimSuppression_DPA</TableID>
+            <ColumnID>channel_desc</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="1c4d84c8-3f0e-4e06-b199-3dacc7ef19a8">
+      <ID>Has Sufficient Campaign Detail</ID>
+      <Name>Has Sufficient Campaign Detail</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="b4f01e36-abdc-48fa-8dfc-998313418025">
+          <DataType>WChar</DataType>
+          <DataSize>1</DataSize>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="0f894641-fffd-4002-b4a0-3378965ad73b">
+            <TableID>GDPR_GDPR_dimSuppression_DPA</TableID>
+            <ColumnID>Has_Sufficient_Campaign_Detail</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+    <Attribute dwd:design-time-name="ef654822-a196-4081-b16a-a54662147cc3">
+      <ID>Date Of Code</ID>
+      <Name>Date Of Code</Name>
+      <KeyColumns>
+        <KeyColumn dwd:design-time-name="a1de1733-6ddd-46a9-b872-f7309e402d0b">
+          <DataType>Date</DataType>
+          <Source xsi:type="ColumnBinding" dwd:design-time-name="34f111fd-f2a8-4c78-854b-de606c1ac447">
+            <TableID>GDPR_GDPR_dimSuppression_DPA</TableID>
+            <ColumnID>date_of_code</ColumnID>
+          </Source>
+        </KeyColumn>
+      </KeyColumns>
+      <OrderBy>Key</OrderBy>
+      <ddl200:ProcessingState>Unprocessed</ddl200:ProcessingState>
+      <ddl300:AttributeHierarchyProcessingState>Unprocessed</ddl300:AttributeHierarchyProcessingState>
+    </Attribute>
+  </Attributes>
+  <ddl300:ProcessingState>Unprocessed</ddl300:ProcessingState>
+</Dimension>
