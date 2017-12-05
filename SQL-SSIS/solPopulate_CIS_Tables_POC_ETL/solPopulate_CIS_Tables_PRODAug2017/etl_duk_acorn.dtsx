@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="etl_duk_acorn"
   DTS:PackageType="5"
-  DTS:VersionBuild="148"
-  DTS:VersionGUID="{2CE22684-F1AB-46D4-ACF3-3649C17BE5B7}">
+  DTS:VersionBuild="152"
+  DTS:VersionGUID="{E4BE984D-5973-4FF2-B22A-D9A71F1A38AE}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:LogProviders>
@@ -269,6 +269,14 @@
                           cachedName="POSTCODE"
                           externalMetadataColumnId="Package\Data Processing\Data Flow Task duk_acorn\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[postcode]"
                           lineageId="Package\Data Processing\Data Flow Task duk_acorn\Oracle Source.Outputs[Oracle Source Output].Columns[POSTCODE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task duk_acorn\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[A_TYPE]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="2"
+                          cachedName="A_TYPE"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task duk_acorn\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[acorn_type]"
+                          lineageId="Package\Data Processing\Data Flow Task duk_acorn\Oracle Source.Outputs[Oracle Source Output].Columns[A_TYPE]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -276,7 +284,7 @@
                           refId="Package\Data Processing\Data Flow Task duk_acorn\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[postcode]"
                           codePage="1252"
                           dataType="str"
-                          length="50"
+                          length="10"
                           name="postcode" />
                         <externalMetadataColumn
                           refId="Package\Data Processing\Data Flow Task duk_acorn\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[acorn_type]"
@@ -323,7 +331,7 @@
                       dataType="System.String"
                       description="The name of the table to be fetched."
                       expressionType="Notify"
-                      name="TableName">"CARE_ADMIN"."DUK_ACORN"</property>
+                      name="TableName">"CARE_ADMIN"."EXT_ACORN"</property>
                     <property
                       dataType="System.String"
                       description="The SQL command to be executed."
@@ -379,13 +387,13 @@
                           lineageId="Package\Data Processing\Data Flow Task duk_acorn\Oracle Source.Outputs[Oracle Source Output].Columns[POSTCODE]"
                           name="POSTCODE" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task duk_acorn\Oracle Source.Outputs[Oracle Source Output].Columns[ACORN_TYPE]"
+                          refId="Package\Data Processing\Data Flow Task duk_acorn\Oracle Source.Outputs[Oracle Source Output].Columns[A_TYPE]"
                           codePage="1252"
                           dataType="str"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task duk_acorn\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ACORN_TYPE]"
-                          length="4"
-                          lineageId="Package\Data Processing\Data Flow Task duk_acorn\Oracle Source.Outputs[Oracle Source Output].Columns[ACORN_TYPE]"
-                          name="ACORN_TYPE" />
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task duk_acorn\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[A_TYPE]"
+                          length="2"
+                          lineageId="Package\Data Processing\Data Flow Task duk_acorn\Oracle Source.Outputs[Oracle Source Output].Columns[A_TYPE]"
+                          name="A_TYPE" />
                       </outputColumns>
                       <externalMetadataColumns
                         isUsed="True">
@@ -396,23 +404,27 @@
                           length="8"
                           name="POSTCODE" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task duk_acorn\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ACORN_CATEGORY]"
+                          refId="Package\Data Processing\Data Flow Task duk_acorn\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CURR_DEL]"
+                          dataType="i1"
+                          name="CURR_DEL" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task duk_acorn\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[A_CAT]"
                           codePage="1252"
                           dataType="str"
                           length="1"
-                          name="ACORN_CATEGORY" />
+                          name="A_CAT" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task duk_acorn\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ACORN_GROUP]"
+                          refId="Package\Data Processing\Data Flow Task duk_acorn\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[A_GRP]"
                           codePage="1252"
                           dataType="str"
                           length="1"
-                          name="ACORN_GROUP" />
+                          name="A_GRP" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task duk_acorn\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ACORN_TYPE]"
+                          refId="Package\Data Processing\Data Flow Task duk_acorn\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[A_TYPE]"
                           codePage="1252"
                           dataType="str"
-                          length="4"
-                          name="ACORN_TYPE" />
+                          length="2"
+                          name="A_TYPE" />
                       </externalMetadataColumns>
                     </output>
                     <output
@@ -429,13 +441,13 @@
                           lineageId="Package\Data Processing\Data Flow Task duk_acorn\Oracle Source.Outputs[Oracle Source Error Output].Columns[POSTCODE]"
                           name="POSTCODE" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task duk_acorn\Oracle Source.Outputs[Oracle Source Error Output].Columns[ACORN_TYPE]"
+                          refId="Package\Data Processing\Data Flow Task duk_acorn\Oracle Source.Outputs[Oracle Source Error Output].Columns[A_TYPE]"
                           codePage="1252"
                           dataType="str"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task duk_acorn\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ACORN_TYPE]"
-                          length="4"
-                          lineageId="Package\Data Processing\Data Flow Task duk_acorn\Oracle Source.Outputs[Oracle Source Error Output].Columns[ACORN_TYPE]"
-                          name="ACORN_TYPE" />
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task duk_acorn\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[A_TYPE]"
+                          length="2"
+                          lineageId="Package\Data Processing\Data Flow Task duk_acorn\Oracle Source.Outputs[Oracle Source Error Output].Columns[A_TYPE]"
+                          name="A_TYPE" />
                         <outputColumn
                           refId="Package\Data Processing\Data Flow Task duk_acorn\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
                           dataType="i4"
@@ -513,7 +525,7 @@
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{A7202722-F760-4DEE-BB0C-B0045540580C}"
-              SQLTask:SqlStatementSource="EXEC [cis].[usp_Merg_duk_acorn]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              SQLTask:SqlStatementSource="EXEC [cis].[usp_Merge_duk_acorn]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
@@ -575,7 +587,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="Write Failure Record"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:LoggingOptions
             DTS:FilterKind="0" />
@@ -689,15 +701,6 @@
               VSTAMajorVersion="3"
               VSTAMinorVersion="0"
               Language="CSharp">
-              <ProjectItem
-                Name="Properties\Settings.settings"
-                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.resx"
                 Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -817,6 +820,39 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
 </root>]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Settings.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "ST_231a69c233f842a39d0e227465cc132a.csproj.Properties.Settings.get_Default():ST_231a69c233f842a39d0e227465cc132a.csproj.Properties.Sett" +
+    "ings")]
+
+namespace ST_231a69c233f842a39d0e227465cc132a.csproj.Properties
+{
+
+
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
+    {
+
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+
+        public static Settings Default
+        {
+            get
+            {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
               <ProjectItem
                 Name="ST_374b266265e948ff8f610409510a2afb.csproj"
                 Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="utf-16"?><Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"><!-- This section defines project-level properties.
@@ -967,39 +1003,6 @@ namespace ValidateConnectionsScript
 	</msb:ItemGroup>
 </c:Project>]]></ProjectItem>
               <ProjectItem
-                Name="Properties\Settings.Designer.cs"
-                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
-// <auto-generated>
-//     This code was generated by a tool.
-//
-//     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated.
-// </auto-generated>
-//------------------------------------------------------------------------------
-
-[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "ST_231a69c233f842a39d0e227465cc132a.csproj.Properties.Settings.get_Default():ST_231a69c233f842a39d0e227465cc132a.csproj.Properties.Sett" +
-    "ings")]
-
-namespace ST_231a69c233f842a39d0e227465cc132a.csproj.Properties
-{
-
-
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
-    {
-
-        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-        private static Settings defaultInstance = new Settings();
-
-        public static Settings Default
-        {
-            get
-            {
-                return defaultInstance;
-            }
-        }
-    }
-}]]></ProjectItem>
-              <ProjectItem
                 Name="Properties\AssemblyInfo.cs"
                 Encoding="UTF8"><![CDATA[using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -1029,6 +1032,15 @@ using System.Runtime.CompilerServices;
 // by using the '*' as shown below:
 
 [assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+              <ProjectItem
+                Name="Properties\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.Designer.cs"
                 Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -1277,7 +1289,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           DTS:LocaleID="-1"
           DTS:ObjectName="Write Success Record"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:LoggingOptions
             DTS:FilterKind="0" />
@@ -1349,7 +1361,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         <NodeLayout
           Size="167,42"
           Id="Package\Data Processing\Merge delta tables"
-          TopLeft="79.428571759438,280.141178177962" />
+          TopLeft="79.428571759438,281.391178177962" />
         <NodeLayout
           Size="183,42"
           Id="Package\Data Processing\Truncate Delta Tables"
@@ -1394,14 +1406,14 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,73.105881117454"
+              EndConnector="0,74.3558811174541"
               Start="0,0"
-              End="0,65.605881117454">
+              End="0,66.8558811174541">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,65.605881117454" />
+                    End="0,66.8558811174541" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1504,18 +1516,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           TopLeft="40.8827496424155,1167.00318330158" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="466.05175022126,419.174543959915">
+          TopLeft="466.10175022126,418.774543959915">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,90.8941240604362"
+              EndConnector="0,91.294124060436"
               Start="0,0"
-              End="0,83.3941240604362">
+              End="0,83.794124060436">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,83.3941240604362" />
+                    End="0,83.794124060436" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1526,30 +1538,30 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="409.835134925257,918.868668020351">
+          TopLeft="409.835134925257,931.068668020351">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-200.952385282841,248.134515281229"
+              EndConnector="-200.952385282841,235.934515281229"
               Start="0,0"
-              End="-200.952385282841,240.634515281229">
+              End="-200.952385282841,228.434515281229">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,95.9511396448978" />
+                    End="0,91.0368539306122" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,95.9511396448978"
-                    Point2="0,99.9511396448978"
-                    Point3="-4,99.9511396448978" />
+                    Point1="0,91.0368539306122"
+                    Point2="0,95.0368539306122"
+                    Point3="-4,95.0368539306122" />
                   <mssgle:LineSegment
-                    End="-196.952385282841,99.9511396448978" />
+                    End="-196.952385282841,95.0368539306122" />
                   <mssgle:CubicBezierSegment
-                    Point1="-196.952385282841,99.9511396448978"
-                    Point2="-200.952385282841,99.9511396448978"
-                    Point3="-200.952385282841,103.951139644898" />
+                    Point1="-196.952385282841,95.0368539306122"
+                    Point2="-200.952385282841,95.0368539306122"
+                    Point3="-200.952385282841,99.0368539306122" />
                   <mssgle:LineSegment
-                    End="-200.952385282841,240.634515281229" />
+                    End="-200.952385282841,228.434515281229" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1560,37 +1572,37 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="520.501801591923,918.868668020351">
+          TopLeft="520.501801591923,931.068668020351">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="160.588503837432,223.899223909109"
+              EndConnector="160.588503837432,211.699223909109"
               Start="0,0"
-              End="160.588503837432,216.399223909109">
+              End="160.588503837432,204.199223909109">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,86.1889145488682" />
+                    End="0,81.2746288345825" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,86.1889145488682"
-                    Point2="0,90.1889145488682"
-                    Point3="4,90.1889145488682" />
+                    Point1="0,81.2746288345825"
+                    Point2="0,85.2746288345825"
+                    Point3="4,85.2746288345825" />
                   <mssgle:LineSegment
-                    End="156.588503837432,90.1889145488682" />
+                    End="156.588503837432,85.2746288345825" />
                   <mssgle:CubicBezierSegment
-                    Point1="156.588503837432,90.1889145488682"
-                    Point2="160.588503837432,90.1889145488682"
-                    Point3="160.588503837432,94.1889145488682" />
+                    Point1="156.588503837432,85.2746288345825"
+                    Point2="160.588503837432,85.2746288345825"
+                    Point3="160.588503837432,89.2746288345825" />
                   <mssgle:LineSegment
-                    End="160.588503837432,216.399223909109" />
+                    End="160.588503837432,204.199223909109" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="65.0529042624658,95.1889145488682,30.4826953125,9.7490234375"
+              BoundingBox="65.0529042624658,90.2746288345825,30.4826953125,9.7490234375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -1603,17 +1615,39 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="131,42"
-          Id="Package\Data Processing\Data Flow Task duk_acorn\Row Count"
-          TopLeft="87.4285729174711,156.000002187841" />
+          Size="171,42"
+          Id="Package\Data Processing\Data Flow Task duk_acorn\OLE DB Destination"
+          TopLeft="70.2751320123853,259.835294143387" />
         <NodeLayout
           Size="144,42"
           Id="Package\Data Processing\Data Flow Task duk_acorn\Oracle Source"
           TopLeft="69,27" />
         <NodeLayout
-          Size="171,42"
-          Id="Package\Data Processing\Data Flow Task duk_acorn\OLE DB Destination"
-          TopLeft="70.2751320123853,259.835294143387" />
+          Size="131,42"
+          Id="Package\Data Processing\Data Flow Task duk_acorn\Row Count"
+          TopLeft="87.4285729174711,156.000002187841" />
+        <EdgeLayout
+          Id="Package\Data Processing\Data Flow Task duk_acorn.Paths[Row Count Output 1]"
+          TopLeft="154.351852464928,198.000002187841">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61.835291955546"
+              Start="0,0"
+              End="0,54.335291955546">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54.335291955546" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Processing\Data Flow Task duk_acorn.Paths[Oracle Source Output]"
           TopLeft="141,69">
@@ -1640,28 +1674,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
                     Point3="11.9285729174711,47.5000010939205" />
                   <mssgle:LineSegment
                     End="11.9285729174711,79.500002187841" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Processing\Data Flow Task duk_acorn.Paths[Row Count Output 1]"
-          TopLeft="154.351852464928,198.000002187841">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,61.835291955546"
-              Start="0,0"
-              End="0,54.335291955546">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,54.335291955546" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
