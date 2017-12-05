@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <DeploymentModel>Project</DeploymentModel>
-  <ProductVersion>11.0.6594.0</ProductVersion>
+  <ProductVersion>11.0.6020.0</ProductVersion>
   <SchemaVersion>9.0.1.0</SchemaVersion>
   <State>$base64$PFNvdXJjZUNvbnRyb2xJbmZvIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOmRkbDI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDAzL2VuZ2luZS8yIiB4bWxuczpkZGwyXzI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDAzL2VuZ2luZS8yLzIiIHhtbG5zOmRkbDEwMF8xMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDA4L2VuZ2luZS8xMDAvMTAwIiB4bWxuczpkZGwyMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEwL2VuZ2luZS8yMDAiIHhtbG5zOmRkbDIwMF8yMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEwL2VuZ2luZS8yMDAvMjAwIiB4bWxuczpkZGwzMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDExL2VuZ2luZS8zMDAiIHhtbG5zOmRkbDMwMF8zMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDExL2VuZ2luZS8zMDAvMzAwIiB4bWxuczpkZGw0MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEyL2VuZ2luZS80MDAiIHhtbG5zOmRkbDQwMF80MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEyL2VuZ2luZS80MDAvNDAwIiB4bWxuczpkd2Q9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vRGF0YVdhcmVob3VzZS9EZXNpZ25lci8xLjAiPg0KICA8RW5hYmxlZD5mYWxzZTwvRW5hYmxlZD4NCiAgPFByb2plY3ROYW1lPjwvUHJvamVjdE5hbWU+DQogIDxBdXhQYXRoPjwvQXV4UGF0aD4NCiAgPExvY2FsUGF0aD48L0xvY2FsUGF0aD4NCiAgPFByb3ZpZGVyPjwvUHJvdmlkZXI+DQo8L1NvdXJjZUNvbnRyb2xJbmZvPg==</State>
   <Database>
@@ -26,7 +26,7 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">L3620</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA8kZIAXw5jUOO/wjY8ajMxgAAAAACAAAAAAADZgAAwAAAABAAAABcOHXlF/afQEsuKvn5HhWFAAAAAASAAACgAAAAEAAAAAlmvIZ1h2JGl50EhKhpFsKIAAAAYrfJWoGko3RHgen764Q7iYEzvVdNvawRUfPmUEHM8Lj+N3qD0yryV58WudUificwn4LV1o0+D+ePGPLb53B6YA/z+wa+I8XHGAP1bxEH8SJR6SCAD+0hNK5IFqKjGZPwTC7V7USLzSURJmIfma1l9GuZyfPL6Pkowh6xQLr5cG6jwcap63eorxQAAABiJ92I3aVXKuKXwf46MaQGCQROXQ==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAp3bNHuOPJk6Lx0448+kRWQAAAAACAAAAAAADZgAAwAAAABAAAAB46Mjlw7chiWkBjBOVdDkKAAAAAASAAACgAAAAEAAAAF+EwUBp1opmBISFv3R+A+mIAAAAQP8Oa8fEUto62TCPJFrSx091P1Bk7LPvhqSwLiByCCeW0dv583eiTstFCfAFYz/fne1Z7bv2SBHXDPAJdrgHZGMsDvlMpLXsK537NV6rMaZ8mbYkp94JiOv8Dg1DlQttvIELL0DDiGSKNjR48WsYK6TyIZj4dpqkDS+t4xjHWqo7UXH2WeykohQAAADxmreVHPi6g2ks5N0hSP5iq0MoTA==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -126,7 +126,6 @@
           <SSIS:Package SSIS:Name="etl_Gaye_Pledges.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="etl_duk_acorn.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="etl_fundraising_request_targets.dtsx" SSIS:EntryPoint="1" />
-          <SSIS:Package SSIS:Name="etl_GAD_Invalid_Declaration_date.dtsx" SSIS:EntryPoint="1" />
           <SSIS:Package SSIS:Name="etl_legacy_bequests.dtsx" SSIS:EntryPoint="1" />
         </SSIS:Packages>
         <SSIS:ConnectionManagers>
@@ -249,7 +248,7 @@
                 <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                 <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="Value">WLHTESTSQL01\DEV01</SSIS:Property>
+                <SSIS:Property SSIS:Name="Value">GS1DUKMSQLV03</SSIS:Property>
                 <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
               </SSIS:Properties>
             </SSIS:Parameter>
@@ -2061,23 +2060,6 @@
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionGUID">{99F49E1F-4EF1-4950-BDE2-843A22C98DBF}</SSIS:Property>
-                <SSIS:Property SSIS:Name="PackageFormatVersion">6</SSIS:Property>
-                <SSIS:Property SSIS:Name="Description">
-                </SSIS:Property>
-                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
-              </SSIS:Properties>
-              <SSIS:Parameters />
-            </SSIS:PackageMetaData>
-            <SSIS:PackageMetaData SSIS:Name="etl_GAD_Invalid_Declaration_date.dtsx">
-              <SSIS:Properties>
-                <SSIS:Property SSIS:Name="ID">{10ECF9FC-087E-4374-8754-8962A0D56115}</SSIS:Property>
-                <SSIS:Property SSIS:Name="Name">etl_GAD_Invalid_Declaration_date</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">145</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionComments">
-                </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{1B9DF003-5F74-4FD9-8CCB-7E4ADC2CE188}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">6</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
