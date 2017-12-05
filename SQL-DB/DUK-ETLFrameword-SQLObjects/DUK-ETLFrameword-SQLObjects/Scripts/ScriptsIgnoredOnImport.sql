@@ -53,10 +53,3 @@ GO
 
 SET QUOTED_IDENTIFIER ON
 GO
-
-/****** Object:  StoredProcedure [custom].[execute_catalog_parent_package]    Script Date: 24/11/2017 15:41:38 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
