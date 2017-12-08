@@ -12,10 +12,220 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="etl_Gift_Aid_Declarations"
   DTS:PackageType="5"
-  DTS:VersionBuild="131"
-  DTS:VersionGUID="{1C923F2C-8149-496C-BB5F-698105FEA550}">
+  DTS:VersionBuild="136"
+  DTS:VersionGUID="{0DB4AE5B-7A51-42C2-A5BD-92080E17FC94}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{B53B7CE2-E0F3-40F5-8F41-6408C47E8FD7}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="2057"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="D:\DWHLoadErrors\gift_aid_declarations.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="38"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DECLARATION_NUMBER"
+              DTS:DTSID="{2E7AC811-D93A-407D-A903-95A0A21A8C6E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="38"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CONTACT_NUMBER"
+              DTS:DTSID="{81F0B299-881D-44AB-A34C-16F89A2798E1}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DECLARATION_DATE"
+              DTS:DTSID="{973C2B68-19F7-4866-8A9B-3262A9561BF8}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DECLARATION_TYPE"
+              DTS:DTSID="{0E36FB80-E4FF-4A13-9E4E-7B9AD1147348}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SOURCE"
+              DTS:DTSID="{40C6B16A-0A7C-4518-872E-7E1AD0ED3F2D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CONFIRMED_ON"
+              DTS:DTSID="{4631126F-3C4C-453D-AB28-EFA21EE56F69}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="METHOD"
+              DTS:DTSID="{299D7278-E495-4B33-BBCE-9782E4491A5A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="START_DATE"
+              DTS:DTSID="{D60283AD-0BBB-4ACB-9677-1D5F62DAB6BF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="END_DATE"
+              DTS:DTSID="{B5D6D3AE-A15A-463F-82DD-9388501E1A0D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="14"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="AMENDED_BY"
+              DTS:DTSID="{0E7FE33E-FB46-4255-8497-A8F177A40523}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="AMENDED_ON"
+              DTS:DTSID="{94BB42DA-28C6-411D-9170-E92AB1E37F22}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="38"
+              DTS:TextQualified="True"
+              DTS:ObjectName="BATCH_NUMBER"
+              DTS:DTSID="{4D0A351B-DB67-4844-9312-47A5637E8BD9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="38"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TRANSACTION_NUMBER"
+              DTS:DTSID="{5410A156-26CC-40DE-9A80-732132ABED6B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="38"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ORDER_NUMBER"
+              DTS:DTSID="{7306133F-5AAE-434B-90EC-7CE7D8B7DDC6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="4"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CANCELLATION_REASON"
+              DTS:DTSID="{DF4B6461-1BA9-4E5B-ABEF-E9D12C4D5401}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="14"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CANCELLED_BY"
+              DTS:DTSID="{96DE21C5-5460-463C-A9E5-A25F8867D0A0}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CANCELLED_ON"
+              DTS:DTSID="{9EB5205D-98EE-43E2-8F04-D5EAB71862FB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CANCELLATION_SOURCE"
+              DTS:DTSID="{8BC654BA-B726-4B8B-8E03-6F6AE99DB36A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="14"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CREATED_BY"
+              DTS:DTSID="{3CA1948E-3C1B-429F-B116-04D56346BD8C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CREATED_ON"
+              DTS:DTSID="{14C84098-D601-4C72-9EEC-5107BAAA568F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ErrorCode"
+              DTS:DTSID="{999DF422-F885-4760-9650-298B34CE38C6}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ErrorColumn"
+              DTS:DTSID="{EB176E5F-3421-4B7D-ABA3-B5397C29BAC8}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
   <DTS:LogProviders>
     <DTS:LogProvider
       DTS:ConfigString="LocalHost.DiabetesDWH"
@@ -35,6 +245,15 @@
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="ApplicationLineageID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{78025D8E-CD7E-4C2F-A303-12FE88DEC8FD}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ErrorRowCnt">
       <DTS:VariableValue
         DTS:DataType="3">0</DTS:VariableValue>
     </DTS:Variable>
@@ -221,6 +440,306 @@
               version="1">
               <components>
                 <component
+                  refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination"
+                  componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+                  contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Flat File Destination"
+                  localeId="2057"
+                  name="Flat File Destination">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether the data will overwrite or append to the destination file."
+                      name="Overwrite">true</property>
+                    <property
+                      dataType="System.Null"
+                      description="Specifies the text to write to the destination file before any data is written."
+                      expressionType="Notify"
+                      name="Header" />
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
+                      connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input]"
+                      hasSideEffects="true"
+                      name="Flat File Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].Columns[DECLARATION_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="DECLARATION_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DECLARATION_NUMBER]"
+                          lineageId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Oracle Source.Outputs[Oracle Source Output].Columns[DECLARATION_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].Columns[CONTACT_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="CONTACT_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CONTACT_NUMBER]"
+                          lineageId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Oracle Source.Outputs[Oracle Source Output].Columns[CONTACT_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].Columns[DECLARATION_DATE]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="DECLARATION_DATE"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DECLARATION_DATE]"
+                          lineageId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Oracle Source.Outputs[Oracle Source Output].Columns[DECLARATION_DATE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].Columns[DECLARATION_TYPE]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1"
+                          cachedName="DECLARATION_TYPE"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DECLARATION_TYPE]"
+                          lineageId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Oracle Source.Outputs[Oracle Source Output].Columns[DECLARATION_TYPE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].Columns[SOURCE]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="SOURCE"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SOURCE]"
+                          lineageId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Oracle Source.Outputs[Oracle Source Output].Columns[SOURCE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].Columns[CONFIRMED_ON]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="CONFIRMED_ON"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CONFIRMED_ON]"
+                          lineageId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Oracle Source.Outputs[Oracle Source Output].Columns[CONFIRMED_ON]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].Columns[METHOD]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1"
+                          cachedName="METHOD"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[METHOD]"
+                          lineageId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Oracle Source.Outputs[Oracle Source Output].Columns[METHOD]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].Columns[START_DATE]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="START_DATE"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[START_DATE]"
+                          lineageId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Oracle Source.Outputs[Oracle Source Output].Columns[START_DATE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].Columns[END_DATE]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="END_DATE"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[END_DATE]"
+                          lineageId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Oracle Source.Outputs[Oracle Source Output].Columns[END_DATE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].Columns[AMENDED_BY]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="14"
+                          cachedName="AMENDED_BY"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[AMENDED_BY]"
+                          lineageId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_BY]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].Columns[AMENDED_ON]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="AMENDED_ON"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[AMENDED_ON]"
+                          lineageId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_ON]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].Columns[BATCH_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="BATCH_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[BATCH_NUMBER]"
+                          lineageId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Oracle Source.Outputs[Oracle Source Output].Columns[BATCH_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].Columns[TRANSACTION_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="TRANSACTION_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[TRANSACTION_NUMBER]"
+                          lineageId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Oracle Source.Outputs[Oracle Source Output].Columns[TRANSACTION_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].Columns[ORDER_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="ORDER_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ORDER_NUMBER]"
+                          lineageId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Oracle Source.Outputs[Oracle Source Output].Columns[ORDER_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].Columns[CANCELLATION_REASON]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="4"
+                          cachedName="CANCELLATION_REASON"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CANCELLATION_REASON]"
+                          lineageId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Oracle Source.Outputs[Oracle Source Output].Columns[CANCELLATION_REASON]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].Columns[CANCELLED_BY]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="14"
+                          cachedName="CANCELLED_BY"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CANCELLED_BY]"
+                          lineageId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Oracle Source.Outputs[Oracle Source Output].Columns[CANCELLED_BY]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].Columns[CANCELLED_ON]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="CANCELLED_ON"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CANCELLED_ON]"
+                          lineageId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Oracle Source.Outputs[Oracle Source Output].Columns[CANCELLED_ON]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].Columns[CANCELLATION_SOURCE]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="CANCELLATION_SOURCE"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CANCELLATION_SOURCE]"
+                          lineageId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Oracle Source.Outputs[Oracle Source Output].Columns[CANCELLATION_SOURCE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].Columns[CREATED_BY]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="14"
+                          cachedName="CREATED_BY"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CREATED_BY]"
+                          lineageId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Oracle Source.Outputs[Oracle Source Output].Columns[CREATED_BY]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].Columns[CREATED_ON]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="CREATED_ON"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CREATED_ON]"
+                          lineageId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Oracle Source.Outputs[Oracle Source Output].Columns[CREATED_ON]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].Columns[ErrorCode]"
+                          cachedDataType="i4"
+                          cachedName="ErrorCode"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ErrorCode]"
+                          lineageId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].Columns[ErrorColumn]"
+                          cachedDataType="i4"
+                          cachedName="ErrorColumn"
+                          externalMetadataColumnId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ErrorColumn]"
+                          lineageId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DECLARATION_NUMBER]"
+                          dataType="numeric"
+                          name="DECLARATION_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CONTACT_NUMBER]"
+                          dataType="numeric"
+                          name="CONTACT_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DECLARATION_DATE]"
+                          dataType="dbTimeStamp"
+                          name="DECLARATION_DATE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DECLARATION_TYPE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="DECLARATION_TYPE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SOURCE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="SOURCE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CONFIRMED_ON]"
+                          dataType="dbTimeStamp"
+                          name="CONFIRMED_ON" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[METHOD]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="METHOD" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[START_DATE]"
+                          dataType="dbTimeStamp"
+                          name="START_DATE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[END_DATE]"
+                          dataType="dbTimeStamp"
+                          name="END_DATE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[AMENDED_BY]"
+                          codePage="1252"
+                          dataType="str"
+                          length="14"
+                          name="AMENDED_BY" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[AMENDED_ON]"
+                          dataType="dbTimeStamp"
+                          name="AMENDED_ON" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[BATCH_NUMBER]"
+                          dataType="numeric"
+                          name="BATCH_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[TRANSACTION_NUMBER]"
+                          dataType="numeric"
+                          name="TRANSACTION_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ORDER_NUMBER]"
+                          dataType="numeric"
+                          name="ORDER_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CANCELLATION_REASON]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4"
+                          name="CANCELLATION_REASON" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CANCELLED_BY]"
+                          codePage="1252"
+                          dataType="str"
+                          length="14"
+                          name="CANCELLED_BY" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CANCELLED_ON]"
+                          dataType="dbTimeStamp"
+                          name="CANCELLED_ON" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CANCELLATION_SOURCE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="CANCELLATION_SOURCE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CREATED_BY]"
+                          codePage="1252"
+                          dataType="str"
+                          length="14"
+                          name="CREATED_BY" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CREATED_ON]"
+                          dataType="dbTimeStamp"
+                          name="CREATED_ON" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ErrorCode]"
+                          dataType="i4"
+                          name="ErrorCode" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ErrorColumn]"
+                          dataType="i4"
+                          name="ErrorColumn" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                </component>
+                <component
                   refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\OLE DB Destination"
                   componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
                   contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
@@ -288,7 +807,7 @@
                     <input
                       refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\OLE DB Destination.Inputs[OLE DB Destination Input]"
                       errorOrTruncationOperation="Insert"
-                      errorRowDisposition="FailComponent"
+                      errorRowDisposition="RedirectRow"
                       hasSideEffects="true"
                       name="OLE DB Destination Input">
                       <inputColumns>
@@ -1069,18 +1588,57 @@
                     </output>
                   </outputs>
                 </component>
+                <component
+                  refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Row Count 1"
+                  componentClassID="{E2697D8C-70DA-42B2-8208-A19CE3A9FE41}"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Row Count 1">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::ErrorRowCnt</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Row Count 1.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Row Count 1.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Row Count 1.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
               </components>
               <paths>
+                <path
+                  refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS.Paths[OLE DB Destination Error Output]"
+                  endId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Row Count 1.Inputs[Row Count Input 1]"
+                  name="OLE DB Destination Error Output"
+                  startId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\OLE DB Destination.Outputs[OLE DB Destination Error Output]" />
                 <path
                   refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS.Paths[Oracle Source Output]"
                   endId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Row Count.Inputs[Row Count Input 1]"
                   name="Oracle Source Output"
                   startId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Oracle Source.Outputs[Oracle Source Output]" />
                 <path
-                  refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS.Paths[Row Count Output 1]"
+                  refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS.Paths[Row Count Output 11]"
                   endId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\OLE DB Destination.Inputs[OLE DB Destination Input]"
                   name="Row Count Output 1"
                   startId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Row Count.Outputs[Row Count Output 1]" />
+                <path
+                  refId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS.Paths[Row Count Output 1]"
+                  endId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination.Inputs[Flat File Destination Input]"
+                  name="Row Count Output 1"
+                  startId="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Row Count 1.Outputs[Row Count Output 1]" />
               </paths>
             </pipeline>
           </DTS:ObjectData>
@@ -1101,6 +1659,29 @@
             <SQLTask:SqlTaskData
               SQLTask:Connection="{A7202722-F760-4DEE-BB0C-B0045540580C}"
               SQLTask:SqlStatementSource="EXEC [cis].[usp_Merge_Gift_Aid_Declarations]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Data Processing\Send Mail Task"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.SendMailTask.SendMailTask, Microsoft.SqlServer.SendMailTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Send Mail Task"
+          DTS:DTSID="{644E5323-F623-4B74-B54C-2797EBED1596}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.SendMailTask.SendMailTask, Microsoft.SqlServer.SendMailTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Send Mail Task"
+          DTS:TaskContact="Send Mail Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SendMailTask:SendMailTaskData
+              SendMailTask:SMTPServer="{B896DBAE-3819-43E4-8946-E97FDB750CEF}"
+              SendMailTask:From="robert.purnell@diabetes.org.uk"
+              SendMailTask:To="robert.purnell@diabetes.org.uk"
+              SendMailTask:Subject="Records failed Gift AId Declarations DWH Load last nigh"
+              SendMailTask:MessageSource="Records failed Gift AId Declarations DWH Load last night.  The attached .txt. file contains the rejected records.  Please check error message for this failure in SSISDB.custom.SSISErrors" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask">
+              <SendMailTask:Attachments
+                SendMailTask:FileName="D:\DWHLoadErrors\gift_aid_declarations.txt" />
+            </SendMailTask:SendMailTaskData>
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
@@ -1139,6 +1720,16 @@
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 1"
           DTS:To="Package\Data Processing\Merge delta tables" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{3AD5AEB4-5DB7-49EB-B77F-723388CA39E8}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::ErrorRowCnt] &gt; 0"
+          DTS:From="Package\Data Processing\Merge delta tables"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Data Processing\Send Mail Task" />
       </DTS:PrecedenceConstraints>
     </DTS:Executable>
     <DTS:Executable
@@ -1277,35 +1868,14 @@
               VSTAMinorVersion="0"
               Language="CSharp">
               <ProjectItem
-                Name="Properties\AssemblyInfo.cs"
-                Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
-
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_231a69c233f842a39d0e227465cc132a.csproj")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("ST_231a69c233f842a39d0e227465cc132a.csproj")]
-[assembly: AssemblyCopyright("Copyright @ Microsoft 2014")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+                Name="Properties\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.resx"
                 Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -1700,14 +2270,35 @@ namespace ST_231a69c233f842a39d0e227465cc132a.csproj.Properties
     }
 }]]></ProjectItem>
               <ProjectItem
-                Name="Properties\Settings.settings"
-                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
+                Name="Properties\AssemblyInfo.cs"
+                Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_231a69c233f842a39d0e227465cc132a.csproj")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyProduct("ST_231a69c233f842a39d0e227465cc132a.csproj")]
+[assembly: AssemblyCopyright("Copyright @ Microsoft 2014")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.Designer.cs"
                 Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -2077,11 +2668,39 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Data Processing\Send Mail Task"
+          TopLeft="128,325" />
+        <EdgeLayout
+          Id="Package\Data Processing.PrecedenceConstraints[Constraint 2]"
+          TopLeft="201.54753332565,265.545392791155">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.454607208845"
+              Start="0,0"
+              End="0,51.954607208845">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.954607208845" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,17.9773036044225,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43.924528301886795"
           IsExpanded="True"
-          PanelSize="348,320"
-          Size="348,364"
+          PanelSize="348,423"
+          Size="348,467"
           Id="Package\Data Processing"
           TopLeft="382.025612594901,519.527491009239" />
         <NodeLayout
@@ -2171,18 +2790,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           TopLeft="164.709346672733,967.310104336155" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="556.48661925319,414.807699226031">
+          TopLeft="556.53661925319,414.407699226031">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,104.719791783208"
+              EndConnector="0,105.119791783208"
               Start="0,0"
-              End="0,97.2197917832078">
+              End="0,97.6197917832077">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,97.2197917832078" />
+                    End="0,97.6197917832077" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2193,30 +2812,24 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="499.358945928234,883.527491009239">
+          TopLeft="382.025612594901,753.027491009239">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-166.649599255501,83.7826133269159"
+              EndConnector="-49.3162659221681,214.282613326916"
               Start="0,0"
-              End="-166.649599255501,76.2826133269159">
+              End="-49.3162659221681,206.782613326916">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,29.7431120035176" />
+                    End="-45.3162659221681,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,29.7431120035176"
-                    Point2="0,33.7431120035176"
-                    Point3="-4,33.7431120035176" />
+                    Point1="-45.3162659221681,0"
+                    Point2="-49.3162659221681,0"
+                    Point3="-49.3162659221681,4" />
                   <mssgle:LineSegment
-                    End="-162.649599255501,33.7431120035176" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-162.649599255501,33.7431120035176"
-                    Point2="-166.649599255501,33.7431120035176"
-                    Point3="-166.649599255501,37.7431120035176" />
-                  <mssgle:LineSegment
-                    End="-166.649599255501,76.2826133269159" />
+                    End="-49.3162659221681,206.782613326916" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2227,37 +2840,31 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="612.692279261568,883.527491009239">
+          TopLeft="730.025612594901,753.027491009239">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="241.461813102988,84.761969636338"
+              EndConnector="124.128479769655,215.261969636338"
               Start="0,0"
-              End="241.461813102988,77.261969636338">
+              End="124.128479769655,207.761969636338">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,30.13754383523" />
+                    End="120.128479769655,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,30.13754383523"
-                    Point2="0,34.13754383523"
-                    Point3="4,34.13754383523" />
+                    Point1="120.128479769655,0"
+                    Point2="124.128479769655,0"
+                    Point3="124.128479769655,4" />
                   <mssgle:LineSegment
-                    End="237.461813102988,34.13754383523" />
-                  <mssgle:CubicBezierSegment
-                    Point1="237.461813102988,34.13754383523"
-                    Point2="241.461813102988,34.13754383523"
-                    Point3="241.461813102988,38.13754383523" />
-                  <mssgle:LineSegment
-                    End="241.461813102988,77.261969636338" />
+                    End="124.128479769655,207.761969636338" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="105.489558895244,39.13754383523,30.4826953125,9.7490234375"
+              BoundingBox="108.887132113405,-15.7490234375,30.4826953125,9.7490234375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2268,21 +2875,29 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
     design-time-name="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="144,42"
-          Id="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Oracle Source"
-          TopLeft="295,53" />
-        <NodeLayout
-          Size="172,42"
-          Id="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\OLE DB Destination"
-          TopLeft="312.132275122544,288.388235285538" />
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="131,42"
           Id="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Row Count"
           TopLeft="328.571434166967,174.964708336167" />
+        <NodeLayout
+          Size="139,42"
+          Id="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Row Count 1"
+          TopLeft="581,291" />
+        <NodeLayout
+          Size="144,42"
+          Id="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Oracle Source"
+          TopLeft="315,65" />
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\Flat File Destination"
+          TopLeft="796,294" />
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS\OLE DB Destination"
+          TopLeft="312.132275122544,288.388235285538" />
         <EdgeLayout
-          Id="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS.Paths[Row Count Output 1]"
+          Id="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS.Paths[Row Count Output 11]"
           TopLeft="396.151854644755,216.564708336167">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -2300,41 +2915,81 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS.Paths[Oracle Source Output]"
-          TopLeft="367,95">
+          Id="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS.Paths[Row Count Output 1]"
+          TopLeft="720,313.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="27.071434166967,79.964708336167"
+              EndConnector="76,0"
               Start="0,0"
-              End="27.071434166967,72.464708336167">
+              End="68.5,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,35.9823541680835" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,35.9823541680835"
-                    Point2="0,39.9823541680835"
-                    Point3="4,39.9823541680835" />
-                  <mssgle:LineSegment
-                    End="23.071434166967,39.9823541680835" />
-                  <mssgle:CubicBezierSegment
-                    Point1="23.071434166967,39.9823541680835"
-                    Point2="27.071434166967,39.9823541680835"
-                    Point3="27.071434166967,43.9823541680835" />
-                  <mssgle:LineSegment
-                    End="27.071434166967,72.464708336167" />
+                    End="68.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS.Paths[Oracle Source Output]"
+          TopLeft="390.535717083484,107">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,67.964708336167"
+              Start="0,0"
+              End="0,60.464708336167">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,60.464708336167" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Processing\Data Flow Task GIFT_AID_DECLARATIONS.Paths[OLE DB Destination Error Output]"
+          TopLeft="484.132275122544,310.694117642769">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="96.867724877456,0"
+              Start="0,0"
+              End="89.367724877456,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="89.367724877456,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-28.525043811272,5,146.4178125,11.43359375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

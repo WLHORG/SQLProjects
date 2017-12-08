@@ -12,10 +12,293 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="etl_direct_debits"
   DTS:PackageType="5"
-  DTS:VersionBuild="135"
-  DTS:VersionGUID="{871A7088-B38C-48A0-99CB-40CCCF57C571}">
+  DTS:VersionBuild="142"
+  DTS:VersionGUID="{73074865-90DF-4C9B-843C-1A310676BCF8}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{073F311D-CCC9-4474-9E15-54A0CC0633A8}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="2057"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="D:\DWHLoadErrors\direct_debits.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="38"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DIRECT_DEBIT_NUMBER"
+              DTS:DTSID="{468D4EA8-F112-4F32-987D-B872AC54F098}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="38"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CONTACT_NUMBER"
+              DTS:DTSID="{2F904993-6396-441B-A1CC-F3D23E3EFCB5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="38"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ADDRESS_NUMBER"
+              DTS:DTSID="{FF44FFD3-3568-47FE-9EBE-F2E005B311D7}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="38"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ORDER_NUMBER"
+              DTS:DTSID="{0FDBAEE4-A24F-4086-A1B6-978F723AEF21}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="START_DATE"
+              DTS:DTSID="{C5094CEE-543C-4631-B97C-6DD346405573}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="38"
+              DTS:TextQualified="True"
+              DTS:ObjectName="BANK_DETAILS_NUMBER"
+              DTS:DTSID="{2F0F2C5E-4E13-4BC0-B672-DDCA8A84753C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="4"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="BANK_ACCOUNT"
+              DTS:DTSID="{9EE5CCFE-9638-4B45-B004-BADECDA5A207}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="4"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CANCELLATION_REASON"
+              DTS:DTSID="{159D9069-B058-417B-91FC-23A670464527}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CANCELLED_ON"
+              DTS:DTSID="{C760D077-286E-4BDC-8B98-8F6B17680993}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="14"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CANCELLED_BY"
+              DTS:DTSID="{57AF0E93-33BE-468E-90F5-04701225F89E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="AMENDED_ON"
+              DTS:DTSID="{2A75D484-AF31-4B69-8F1F-20EC7631DDBA}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="14"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="AMENDED_BY"
+              DTS:DTSID="{C216FB9C-3BE1-428F-93BC-961CA3649AFB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="9"
+              DTS:DataScale="2"
+              DTS:TextQualified="True"
+              DTS:ObjectName="AMOUNT"
+              DTS:DTSID="{62099F94-34C4-4A3E-B2E6-7F0B89E16372}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SOURCE"
+              DTS:DTSID="{0AB23EA0-ADB1-4E02-A4CA-F8B3258BE7CB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="18"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="REFERENCE"
+              DTS:DTSID="{562D7C50-B45F-463A-8AA6-96633A0E687B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FIRST_CLAIM"
+              DTS:DTSID="{0C4DC79F-897D-4B53-8E7F-E7D3FA59FA71}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="EMANDATE_CREATED"
+              DTS:DTSID="{5944C736-753D-44BD-AD3B-56AFD2C0C965}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="AUDDIS_CANCEL_NOTIFIED"
+              DTS:DTSID="{158D6E92-5A1B-494B-B5A3-A88BCEFFC481}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CANCELLATION_SOURCE"
+              DTS:DTSID="{F0A6F108-A188-4F60-94B2-E679AA999728}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MANDATE_TYPE"
+              DTS:DTSID="{B20BF65A-DC08-4C90-B727-B02D86C75C49}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="14"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CREATED_BY"
+              DTS:DTSID="{1AB5AA44-5330-443B-AFB7-8C23C7466175}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CREATED_ON"
+              DTS:DTSID="{84A71114-D5CE-4C26-9043-EF88626DBC65}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="4"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FUTURE_CANCELLATION_REASON"
+              DTS:DTSID="{569E7D22-2978-4DF4-A3B4-683549F0B395}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FUTURE_CANCELLATION_DATE"
+              DTS:DTSID="{1E84E830-AF39-42B7-A6AF-E1778C0F96EC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="FUTURE_CANCELLATION_SOURCE"
+              DTS:DTSID="{FFE1BF41-3F15-4234-BE3A-B8418A87F52B}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="DATE_SIGNED"
+              DTS:DTSID="{C3958BB7-A8A7-4167-AE3A-FA8E480955C5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="1"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="BANK_DETAILS_CHANGED"
+              DTS:DTSID="{F56E7E06-540D-4AC4-8FCF-BBE17D1AC23C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="38"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PREVIOUS_BANK_DETAILS_NUMBER"
+              DTS:DTSID="{DE3059A6-C3EA-43BE-B437-68F99B115B02}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ErrorCode"
+              DTS:DTSID="{EE99EFF4-5B91-49FC-B4A6-C41E7307EE7F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ErrorColumn"
+              DTS:DTSID="{7DE165FA-123A-46C8-8669-0D7BA616C7C8}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
   <DTS:LogProviders>
     <DTS:LogProvider
       DTS:ConfigString="LocalHost.DiabetesDWH"
@@ -35,6 +318,15 @@
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="ApplicationLineageID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7D48B684-5F8A-4B2B-8B11-BD30DA4A2A26}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ErrorRowCnt">
       <DTS:VariableValue
         DTS:DataType="3">0</DTS:VariableValue>
     </DTS:Variable>
@@ -221,6 +513,412 @@
               version="1">
               <components>
                 <component
+                  refId="Package\Data Processing\direct_debits\Flat File Destination"
+                  componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+                  contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Flat File Destination"
+                  localeId="2057"
+                  name="Flat File Destination">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether the data will overwrite or append to the destination file."
+                      name="Overwrite">true</property>
+                    <property
+                      dataType="System.Null"
+                      description="Specifies the text to write to the destination file before any data is written."
+                      expressionType="Notify"
+                      name="Header" />
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Data Processing\direct_debits\Flat File Destination.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
+                      connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input]"
+                      hasSideEffects="true"
+                      name="Flat File Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[DIRECT_DEBIT_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="DIRECT_DEBIT_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DIRECT_DEBIT_NUMBER]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[DIRECT_DEBIT_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[CONTACT_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="CONTACT_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CONTACT_NUMBER]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[CONTACT_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[ADDRESS_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="ADDRESS_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ADDRESS_NUMBER]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[ORDER_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="ORDER_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ORDER_NUMBER]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[ORDER_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[START_DATE]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="START_DATE"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[START_DATE]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[START_DATE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[BANK_DETAILS_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="BANK_DETAILS_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[BANK_DETAILS_NUMBER]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[BANK_DETAILS_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[BANK_ACCOUNT]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="4"
+                          cachedName="BANK_ACCOUNT"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[BANK_ACCOUNT]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[BANK_ACCOUNT]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[CANCELLATION_REASON]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="4"
+                          cachedName="CANCELLATION_REASON"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CANCELLATION_REASON]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[CANCELLATION_REASON]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[CANCELLED_ON]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="CANCELLED_ON"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CANCELLED_ON]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[CANCELLED_ON]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[CANCELLED_BY]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="14"
+                          cachedName="CANCELLED_BY"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CANCELLED_BY]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[CANCELLED_BY]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[AMENDED_ON]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="AMENDED_ON"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[AMENDED_ON]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_ON]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[AMENDED_BY]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="14"
+                          cachedName="AMENDED_BY"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[AMENDED_BY]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_BY]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[AMOUNT]"
+                          cachedDataType="numeric"
+                          cachedName="AMOUNT"
+                          cachedPrecision="9"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[AMOUNT]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[SOURCE]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="SOURCE"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SOURCE]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[SOURCE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[REFERENCE]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="18"
+                          cachedName="REFERENCE"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[REFERENCE]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[REFERENCE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[FIRST_CLAIM]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1"
+                          cachedName="FIRST_CLAIM"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FIRST_CLAIM]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[FIRST_CLAIM]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[EMANDATE_CREATED]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="EMANDATE_CREATED"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[EMANDATE_CREATED]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[EMANDATE_CREATED]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[AUDDIS_CANCEL_NOTIFIED]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="AUDDIS_CANCEL_NOTIFIED"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[AUDDIS_CANCEL_NOTIFIED]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[AUDDIS_CANCEL_NOTIFIED]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[CANCELLATION_SOURCE]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="CANCELLATION_SOURCE"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CANCELLATION_SOURCE]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[CANCELLATION_SOURCE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[MANDATE_TYPE]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1"
+                          cachedName="MANDATE_TYPE"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[MANDATE_TYPE]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[MANDATE_TYPE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[CREATED_BY]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="14"
+                          cachedName="CREATED_BY"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CREATED_BY]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[CREATED_BY]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[CREATED_ON]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="CREATED_ON"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CREATED_ON]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[CREATED_ON]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[FUTURE_CANCELLATION_REASON]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="4"
+                          cachedName="FUTURE_CANCELLATION_REASON"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FUTURE_CANCELLATION_REASON]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[FUTURE_CANCELLATION_REASON]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[FUTURE_CANCELLATION_DATE]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="FUTURE_CANCELLATION_DATE"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FUTURE_CANCELLATION_DATE]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[FUTURE_CANCELLATION_DATE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[FUTURE_CANCELLATION_SOURCE]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="FUTURE_CANCELLATION_SOURCE"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FUTURE_CANCELLATION_SOURCE]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[FUTURE_CANCELLATION_SOURCE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[DATE_SIGNED]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="DATE_SIGNED"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DATE_SIGNED]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[DATE_SIGNED]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[BANK_DETAILS_CHANGED]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1"
+                          cachedName="BANK_DETAILS_CHANGED"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[BANK_DETAILS_CHANGED]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[BANK_DETAILS_CHANGED]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[PREVIOUS_BANK_DETAILS_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="PREVIOUS_BANK_DETAILS_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PREVIOUS_BANK_DETAILS_NUMBER]"
+                          lineageId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output].Columns[PREVIOUS_BANK_DETAILS_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[ErrorCode]"
+                          cachedDataType="i4"
+                          cachedName="ErrorCode"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ErrorCode]"
+                          lineageId="Package\Data Processing\direct_debits\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]" />
+                        <inputColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].Columns[ErrorColumn]"
+                          cachedDataType="i4"
+                          cachedName="ErrorColumn"
+                          externalMetadataColumnId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ErrorColumn]"
+                          lineageId="Package\Data Processing\direct_debits\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DIRECT_DEBIT_NUMBER]"
+                          dataType="numeric"
+                          name="DIRECT_DEBIT_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CONTACT_NUMBER]"
+                          dataType="numeric"
+                          name="CONTACT_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ADDRESS_NUMBER]"
+                          dataType="numeric"
+                          name="ADDRESS_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ORDER_NUMBER]"
+                          dataType="numeric"
+                          name="ORDER_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[START_DATE]"
+                          dataType="dbTimeStamp"
+                          name="START_DATE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[BANK_DETAILS_NUMBER]"
+                          dataType="numeric"
+                          name="BANK_DETAILS_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[BANK_ACCOUNT]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4"
+                          name="BANK_ACCOUNT" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CANCELLATION_REASON]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4"
+                          name="CANCELLATION_REASON" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CANCELLED_ON]"
+                          dataType="dbTimeStamp"
+                          name="CANCELLED_ON" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CANCELLED_BY]"
+                          codePage="1252"
+                          dataType="str"
+                          length="14"
+                          name="CANCELLED_BY" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[AMENDED_ON]"
+                          dataType="dbTimeStamp"
+                          name="AMENDED_ON" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[AMENDED_BY]"
+                          codePage="1252"
+                          dataType="str"
+                          length="14"
+                          name="AMENDED_BY" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[AMOUNT]"
+                          dataType="numeric"
+                          name="AMOUNT"
+                          precision="9"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SOURCE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="SOURCE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[REFERENCE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="18"
+                          name="REFERENCE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FIRST_CLAIM]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="FIRST_CLAIM" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[EMANDATE_CREATED]"
+                          dataType="dbTimeStamp"
+                          name="EMANDATE_CREATED" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[AUDDIS_CANCEL_NOTIFIED]"
+                          dataType="dbTimeStamp"
+                          name="AUDDIS_CANCEL_NOTIFIED" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CANCELLATION_SOURCE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="CANCELLATION_SOURCE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[MANDATE_TYPE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="MANDATE_TYPE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CREATED_BY]"
+                          codePage="1252"
+                          dataType="str"
+                          length="14"
+                          name="CREATED_BY" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[CREATED_ON]"
+                          dataType="dbTimeStamp"
+                          name="CREATED_ON" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FUTURE_CANCELLATION_REASON]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4"
+                          name="FUTURE_CANCELLATION_REASON" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FUTURE_CANCELLATION_DATE]"
+                          dataType="dbTimeStamp"
+                          name="FUTURE_CANCELLATION_DATE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[FUTURE_CANCELLATION_SOURCE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="FUTURE_CANCELLATION_SOURCE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[DATE_SIGNED]"
+                          dataType="dbTimeStamp"
+                          name="DATE_SIGNED" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[BANK_DETAILS_CHANGED]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="BANK_DETAILS_CHANGED" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[PREVIOUS_BANK_DETAILS_NUMBER]"
+                          dataType="numeric"
+                          name="PREVIOUS_BANK_DETAILS_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ErrorCode]"
+                          dataType="i4"
+                          name="ErrorCode" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ErrorColumn]"
+                          dataType="i4"
+                          name="ErrorColumn" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                </component>
+                <component
                   refId="Package\Data Processing\direct_debits\OLE DB Destination"
                   componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
                   contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
@@ -288,7 +986,7 @@
                     <input
                       refId="Package\Data Processing\direct_debits\OLE DB Destination.Inputs[OLE DB Destination Input]"
                       errorOrTruncationOperation="Insert"
-                      errorRowDisposition="FailComponent"
+                      errorRowDisposition="RedirectRow"
                       hasSideEffects="true"
                       name="OLE DB Destination Input">
                       <inputColumns>
@@ -1301,18 +1999,57 @@
                     </output>
                   </outputs>
                 </component>
+                <component
+                  refId="Package\Data Processing\direct_debits\Row Count 1"
+                  componentClassID="{E2697D8C-70DA-42B2-8208-A19CE3A9FE41}"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Row Count 1">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::ErrorRowCnt</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Data Processing\direct_debits\Row Count 1.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Data Processing\direct_debits\Row Count 1.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\Data Processing\direct_debits\Row Count 1.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
               </components>
               <paths>
+                <path
+                  refId="Package\Data Processing\direct_debits.Paths[OLE DB Destination Error Output]"
+                  endId="Package\Data Processing\direct_debits\Row Count 1.Inputs[Row Count Input 1]"
+                  name="OLE DB Destination Error Output"
+                  startId="Package\Data Processing\direct_debits\OLE DB Destination.Outputs[OLE DB Destination Error Output]" />
                 <path
                   refId="Package\Data Processing\direct_debits.Paths[Oracle Source Output]"
                   endId="Package\Data Processing\direct_debits\Row Count.Inputs[Row Count Input 1]"
                   name="Oracle Source Output"
                   startId="Package\Data Processing\direct_debits\Oracle Source.Outputs[Oracle Source Output]" />
                 <path
-                  refId="Package\Data Processing\direct_debits.Paths[Row Count Output 1]"
+                  refId="Package\Data Processing\direct_debits.Paths[Row Count Output 11]"
                   endId="Package\Data Processing\direct_debits\OLE DB Destination.Inputs[OLE DB Destination Input]"
                   name="Row Count Output 1"
                   startId="Package\Data Processing\direct_debits\Row Count.Outputs[Row Count Output 1]" />
+                <path
+                  refId="Package\Data Processing\direct_debits.Paths[Row Count Output 1]"
+                  endId="Package\Data Processing\direct_debits\Flat File Destination.Inputs[Flat File Destination Input]"
+                  name="Row Count Output 1"
+                  startId="Package\Data Processing\direct_debits\Row Count 1.Outputs[Row Count Output 1]" />
               </paths>
             </pipeline>
           </DTS:ObjectData>
@@ -1333,6 +2070,29 @@
             <SQLTask:SqlTaskData
               SQLTask:Connection="{A7202722-F760-4DEE-BB0C-B0045540580C}"
               SQLTask:SqlStatementSource="EXEC [cis].[usp_Merge_direct_debits]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Data Processing\Send Mail Task"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.SendMailTask.SendMailTask, Microsoft.SqlServer.SendMailTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Send Mail Task"
+          DTS:DTSID="{157fc9a9-6217-4898-b151-234360d03162}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.SendMailTask.SendMailTask, Microsoft.SqlServer.SendMailTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Send Mail Task"
+          DTS:TaskContact="Send Mail Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SendMailTask:SendMailTaskData
+              SendMailTask:SMTPServer="{B896DBAE-3819-43E4-8946-E97FDB750CEF}"
+              SendMailTask:From="robert.purnell@diabetes.org.uk"
+              SendMailTask:To="robert.purnell@diabetes.org.uk"
+              SendMailTask:Subject="Records failed Direct Debit DWH Load last night."
+              SendMailTask:MessageSource="Records failed Direct Debit DWH Load last night.  The attached .txt. file contains the rejected records.  Please check error message for this failure in SSISDB.custom.SSISErrors" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask">
+              <SendMailTask:Attachments
+                SendMailTask:FileName="D:\DWHLoadErrors\direct_debits.txt" />
+            </SendMailTask:SendMailTaskData>
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
@@ -1371,6 +2131,16 @@
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 1"
           DTS:To="Package\Data Processing\direct_debits" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{C8203504-CC05-45D5-B136-BACDCA2035D5}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::ErrorRowCnt] &gt; 0"
+          DTS:From="Package\Data Processing\Merge delta tables"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Data Processing\Send Mail Task" />
       </DTS:PrecedenceConstraints>
     </DTS:Executable>
     <DTS:Executable
@@ -1394,7 +2164,7 @@
           DTS:LocaleID="-1"
           DTS:ObjectName="Write Failure Record"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:LoggingOptions
             DTS:FilterKind="0" />
@@ -1509,35 +2279,14 @@
               VSTAMinorVersion="0"
               Language="CSharp">
               <ProjectItem
-                Name="Properties\AssemblyInfo.cs"
-                Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
-
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_231a69c233f842a39d0e227465cc132a.csproj")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("ST_231a69c233f842a39d0e227465cc132a.csproj")]
-[assembly: AssemblyCopyright("Copyright @ Microsoft 2014")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+                Name="Properties\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.resx"
                 Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -1932,14 +2681,35 @@ namespace ST_231a69c233f842a39d0e227465cc132a.csproj.Properties
     }
 }]]></ProjectItem>
               <ProjectItem
-                Name="Properties\Settings.settings"
-                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
+                Name="Properties\AssemblyInfo.cs"
+                Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_231a69c233f842a39d0e227465cc132a.csproj")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyProduct("ST_231a69c233f842a39d0e227465cc132a.csproj")]
+[assembly: AssemblyCopyright("Copyright @ Microsoft 2014")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.Designer.cs"
                 Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -2188,7 +2958,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           DTS:LocaleID="-1"
           DTS:ObjectName="Write Success Record"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:LoggingOptions
             DTS:FilterKind="0" />
@@ -2256,29 +3026,33 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         <NodeLayout
           Size="140,42"
           Id="Package\Data Processing\direct_debits"
-          TopLeft="81.714286084078,133.670590693398" />
+          TopLeft="83.714286084078,140.670590693398" />
         <NodeLayout
           Size="167,42"
           Id="Package\Data Processing\Merge delta tables"
           TopLeft="62.8571429057997,242.917649624175" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Data Processing\Send Mail Task"
+          TopLeft="73.8571429057997,347.917649624175" />
         <NodeLayout
           Size="183,42"
           Id="Package\Data Processing\Truncate Delta Tables"
           TopLeft="64.8571429398594,31.90588053403" />
         <EdgeLayout
           Id="Package\Data Processing.PrecedenceConstraints[Constraint]"
-          TopLeft="149.085714494939,175.270590693398">
+          TopLeft="150.035714494939,182.670590693398">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,67.647058930777"
+              EndConnector="0,60.247058930777"
               Start="0,0"
-              End="0,60.147058930777">
+              End="0,52.747058930777">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,60.147058930777" />
+                    End="0,52.747058930777" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2289,18 +3063,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Processing.PrecedenceConstraints[Constraint 1]"
-          TopLeft="154.085714511969,73.50588053403">
+          TopLeft="155.035714511969,73.90588053403">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,60.164710159368"
+              EndConnector="0,66.764710159368"
               Start="0,0"
-              End="0,52.664710159368">
+              End="0,59.264710159368">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,52.664710159368" />
+                    End="0,59.264710159368" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2309,11 +3083,35 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Processing.PrecedenceConstraints[Constraint 2]"
+          TopLeft="147.6071429058,284.917649624175">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,63.0000000000001"
+              Start="0,0"
+              End="0,55.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,55.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,19.75,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43.924528301886795"
           IsExpanded="True"
-          PanelSize="313,339"
-          Size="313,383"
+          PanelSize="313,395"
+          Size="313,439"
           Id="Package\Data Processing"
           TopLeft="417.211326102106,519.527491009239" />
         <NodeLayout
@@ -2403,30 +3201,30 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           TopLeft="164.709346672733,967.310104336155" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="556.947625911479,414.807699226031">
+          TopLeft="557.047625911479,414.407699226031">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="16.663700190627,104.719791783208"
+              EndConnector="16.6637001906271,105.119791783208"
               Start="0,0"
-              End="16.663700190627,97.2197917832078">
+              End="16.6637001906271,97.6197917832077">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,48.3598958916039" />
+                    End="0,48.5598958916039" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,48.3598958916039"
-                    Point2="0,52.3598958916039"
-                    Point3="4,52.3598958916039" />
+                    Point1="0,48.5598958916039"
+                    Point2="0,52.5598958916039"
+                    Point3="4,52.5598958916039" />
                   <mssgle:LineSegment
-                    End="12.663700190627,52.3598958916039" />
+                    End="12.6637001906271,52.5598958916039" />
                   <mssgle:CubicBezierSegment
-                    Point1="12.663700190627,52.3598958916039"
-                    Point2="16.663700190627,52.3598958916039"
-                    Point3="16.663700190627,56.3598958916039" />
+                    Point1="12.6637001906271,52.5598958916039"
+                    Point2="16.6637001906271,52.5598958916039"
+                    Point3="16.6637001906271,56.5598958916039" />
                   <mssgle:LineSegment
-                    End="16.663700190627,97.2197917832078" />
+                    End="16.6637001906271,97.6197917832077" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2437,30 +3235,24 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="522.811326102106,902.727491009239">
+          TopLeft="417.211326102106,739.027491009239">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-190.101979429373,64.582613326916"
+              EndConnector="-84.501979429373,228.282613326916"
               Start="0,0"
-              End="-190.101979429373,57.082613326916">
+              End="-84.501979429373,220.782613326916">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22.0302441500852" />
+                    End="-80.501979429373,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,22.0302441500852"
-                    Point2="0,26.0302441500852"
-                    Point3="-4,26.0302441500852" />
+                    Point1="-80.501979429373,0"
+                    Point2="-84.501979429373,0"
+                    Point3="-84.501979429373,4" />
                   <mssgle:LineSegment
-                    End="-186.101979429373,26.0302441500852" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-186.101979429373,26.0302441500852"
-                    Point2="-190.101979429373,26.0302441500852"
-                    Point3="-190.101979429373,30.0302441500852" />
-                  <mssgle:LineSegment
-                    End="-190.101979429373,57.082613326916" />
+                    End="-84.501979429373,220.782613326916" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2471,37 +3263,31 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="624.411326102106,902.727491009239">
+          TopLeft="730.211326102106,739.027491009239">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="229.74276626245,65.5619696363381"
+              EndConnector="123.94276626245,229.261969636338"
               Start="0,0"
-              End="229.74276626245,58.0619696363381">
+              End="123.94276626245,221.761969636338">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22.4249770747989" />
+                    End="119.94276626245,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,22.4249770747989"
-                    Point2="0,26.4249770747989"
-                    Point3="4,26.4249770747989" />
+                    Point1="119.94276626245,0"
+                    Point2="123.94276626245,0"
+                    Point3="123.94276626245,4" />
                   <mssgle:LineSegment
-                    End="225.74276626245,26.4249770747989" />
-                  <mssgle:CubicBezierSegment
-                    Point1="225.74276626245,26.4249770747989"
-                    Point2="229.74276626245,26.4249770747989"
-                    Point3="229.74276626245,30.4249770747989" />
-                  <mssgle:LineSegment
-                    End="229.74276626245,58.0619696363381" />
+                    End="123.94276626245,221.761969636338" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="99.6300354749751,31.4249770747989,30.4826953125,9.7490234375"
+              BoundingBox="108.7014186062,-15.7490234375,30.4826953125,9.7490234375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2512,21 +3298,29 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
     design-time-name="Package\Data Processing\direct_debits">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Data Processing\direct_debits\OLE DB Destination"
+          TopLeft="307.560846473264,286.552941142152" />
         <NodeLayout
           Size="144,42"
           Id="Package\Data Processing\direct_debits\Oracle Source"
           TopLeft="353,39" />
+        <NodeLayout
+          Size="139,42"
+          Id="Package\Data Processing\direct_debits\Row Count 1"
+          TopLeft="544,305" />
         <NodeLayout
           Size="131,42"
           Id="Package\Data Processing\direct_debits\Row Count"
           TopLeft="328.571434166967,174.964708336167" />
         <NodeLayout
           Size="172,42"
-          Id="Package\Data Processing\direct_debits\OLE DB Destination"
-          TopLeft="307.560846473264,286.552941142152" />
+          Id="Package\Data Processing\direct_debits\Flat File Destination"
+          TopLeft="766,323" />
         <EdgeLayout
-          Id="Package\Data Processing\direct_debits.Paths[Row Count Output 1]"
+          Id="Package\Data Processing\direct_debits.Paths[Row Count Output 11]"
           TopLeft="393.866140320116,216.564708336167">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -2544,7 +3338,45 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Processing\direct_debits.Paths[Row Count Output 1]"
+          TopLeft="683,326">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="83,18"
+              Start="0,0"
+              End="75.5,18">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="37.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="37.5,0"
+                    Point2="41.5,0"
+                    Point3="41.5,4" />
+                  <mssgle:LineSegment
+                    End="41.5,14" />
+                  <mssgle:CubicBezierSegment
+                    Point1="41.5,14"
+                    Point2="41.5,18"
+                    Point3="45.5,18" />
+                  <mssgle:LineSegment
+                    End="75.5,18" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2578,15 +3410,56 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Processing\direct_debits.Paths[OLE DB Destination Error Output]"
+          TopLeft="479.560846473264,307.552941142152">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="64.439153526736,18.447058857848"
+              Start="0,0"
+              End="56.939153526736,18.447058857848">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="28.219576763368,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="28.219576763368,0"
+                    Point2="32.219576763368,0"
+                    Point3="32.219576763368,4" />
+                  <mssgle:LineSegment
+                    End="32.219576763368,14.447058857848" />
+                  <mssgle:CubicBezierSegment
+                    Point1="32.219576763368,14.447058857848"
+                    Point2="32.219576763368,18.447058857848"
+                    Point3="36.219576763368,18.447058857848" />
+                  <mssgle:LineSegment
+                    End="56.939153526736,18.447058857848" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-40.989329486632,-17.43359375,146.4178125,11.43359375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Processing\direct_debits\Oracle Source">
+    design-time-name="Package\Data Processing\direct_debits\OLE DB Destination">
     <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
@@ -2595,11 +3468,8 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Processing\direct_debits\OLE DB Destination">
+    design-time-name="Package\Data Processing\direct_debits\Oracle Source">
     <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value

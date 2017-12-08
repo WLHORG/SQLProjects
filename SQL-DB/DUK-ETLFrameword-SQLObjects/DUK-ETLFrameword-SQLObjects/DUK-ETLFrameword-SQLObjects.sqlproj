@@ -73,6 +73,7 @@
     <Build Include="custom\Stored Procedures\execute_catalog_parent_package.sql" />
     <Build Include="Security\custom.sql" />
     <None Include="Scripts\ScriptsIgnoredOnImport.sql" />
+    <Build Include="custom\Stored Procedures\Procedure1.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment1.sql" />

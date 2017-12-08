@@ -12,10 +12,173 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="etl_mailing_history"
   DTS:PackageType="5"
-  DTS:VersionBuild="139"
-  DTS:VersionGUID="{1675C967-5558-452D-AD95-4720B835F172}">
+  DTS:VersionBuild="157"
+  DTS:VersionGUID="{28E29D78-D578-4C48-ABB2-8B7014B34E6D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{B7CD8B25-7C86-491B-9D58-F6ADF2C48B3B}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="2057"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="D:\DWHLoadErrors\mailing_history.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="15"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MAILING"
+              DTS:DTSID="{36510E4C-E374-4483-8AF0-E34714AF1010}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MAILING_DATE"
+              DTS:DTSID="{D82C9D26-2AD6-4CF9-99E2-DDD01D1D7B29}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="14"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MAILING_BY"
+              DTS:DTSID="{E62DF599-07D2-4446-B52D-1DD5B23354B3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="38"
+              DTS:TextQualified="True"
+              DTS:ObjectName="NUMBER_IN_MAILING"
+              DTS:DTSID="{E4865D6A-EF36-42FF-B47A-480104F36DE9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="38"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MAILING_NUMBER"
+              DTS:DTSID="{A69946FD-35C7-423C-A946-7D4D395965EF}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="255"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="MAILING_FILENAME"
+              DTS:DTSID="{21540F39-822A-44F9-9E61-EBC2F85542AB}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="200"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="NOTES"
+              DTS:DTSID="{B9146C9C-6712-423D-8476-22CBF1015796}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="15"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ISSUE_ID"
+              DTS:DTSID="{FDC783F3-C504-4446-A3AF-8E846D4CBFAC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="38"
+              DTS:TextQualified="True"
+              DTS:ObjectName="NUMBER_EMAILS_BOUNCED"
+              DTS:DTSID="{A7DA0BF8-66C0-4ED3-A48D-A9B926BF5B7F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="38"
+              DTS:TextQualified="True"
+              DTS:ObjectName="NUMBER_EMAILS_OPENED"
+              DTS:DTSID="{988A064E-C400-4EAF-8B69-CE7EAFC6FB56}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="38"
+              DTS:TextQualified="True"
+              DTS:ObjectName="NUMBER_EMAILS_CLICKED"
+              DTS:DTSID="{310BF099-61EB-4A38-A563-F7CF55E30322}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="6"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="TOPIC"
+              DTS:DTSID="{7E0045C7-56CE-480D-809B-F6BCF2917932}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="4"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SUB_TOPIC"
+              DTS:DTSID="{C54E8254-776C-4F3C-B814-AF9FA480B14A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="80"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SUBJECT"
+              DTS:DTSID="{3AFA8FBC-EB7C-4DE1-ACE7-2D47E407DE07}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ErrorCode"
+              DTS:DTSID="{828A8C78-A754-4A5D-A014-80759143DD11}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ErrorColumn"
+              DTS:DTSID="{7240282C-0E70-4519-BA72-EF663AE4CC75}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
   <DTS:LogProviders>
     <DTS:LogProvider
       DTS:ConfigString="LocalHost.DiabetesDWH"
@@ -35,6 +198,15 @@
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="ApplicationLineageID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{A512860D-9176-4181-9B9F-4FB16E549FA4}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ErrorRowCnt">
       <DTS:VariableValue
         DTS:DataType="3">0</DTS:VariableValue>
     </DTS:Variable>
@@ -221,6 +393,275 @@
               version="1">
               <components>
                 <component
+                  refId="Package\Data Processing\mailing_history\ErrorRowCnt"
+                  componentClassID="{E2697D8C-70DA-42B2-8208-A19CE3A9FE41}"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="ErrorRowCnt">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::ErrorRowCnt</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Data Processing\mailing_history\ErrorRowCnt.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Data Processing\mailing_history\ErrorRowCnt.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\Data Processing\mailing_history\ErrorRowCnt.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Data Processing\mailing_history\Flat File Destination"
+                  componentClassID="{8DA75FED-1B7C-407D-B2AD-2B24209CCCA4}"
+                  contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Flat File Destination"
+                  localeId="2057"
+                  name="Flat File Destination">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether the data will overwrite or append to the destination file."
+                      name="Overwrite">true</property>
+                    <property
+                      dataType="System.Null"
+                      description="Specifies the text to write to the destination file before any data is written."
+                      expressionType="Notify"
+                      name="Header" />
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Data Processing\mailing_history\Flat File Destination.Connections[FlatFileConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
+                      connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input]"
+                      hasSideEffects="true"
+                      name="Flat File Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].Columns[MAILING]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="15"
+                          cachedName="MAILING"
+                          externalMetadataColumnId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[MAILING]"
+                          lineageId="Package\Data Processing\mailing_history\Oracle Source.Outputs[Oracle Source Output].Columns[MAILING]" />
+                        <inputColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].Columns[MAILING_DATE]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="MAILING_DATE"
+                          externalMetadataColumnId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[MAILING_DATE]"
+                          lineageId="Package\Data Processing\mailing_history\Oracle Source.Outputs[Oracle Source Output].Columns[MAILING_DATE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].Columns[MAILING_BY]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="14"
+                          cachedName="MAILING_BY"
+                          externalMetadataColumnId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[MAILING_BY]"
+                          lineageId="Package\Data Processing\mailing_history\Oracle Source.Outputs[Oracle Source Output].Columns[MAILING_BY]" />
+                        <inputColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].Columns[NUMBER_IN_MAILING]"
+                          cachedDataType="numeric"
+                          cachedName="NUMBER_IN_MAILING"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[NUMBER_IN_MAILING]"
+                          lineageId="Package\Data Processing\mailing_history\Oracle Source.Outputs[Oracle Source Output].Columns[NUMBER_IN_MAILING]" />
+                        <inputColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].Columns[MAILING_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="MAILING_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[MAILING_NUMBER]"
+                          lineageId="Package\Data Processing\mailing_history\Oracle Source.Outputs[Oracle Source Output].Columns[MAILING_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].Columns[MAILING_FILENAME]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="255"
+                          cachedName="MAILING_FILENAME"
+                          externalMetadataColumnId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[MAILING_FILENAME]"
+                          lineageId="Package\Data Processing\mailing_history\Oracle Source.Outputs[Oracle Source Output].Columns[MAILING_FILENAME]" />
+                        <inputColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].Columns[NOTES]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="200"
+                          cachedName="NOTES"
+                          externalMetadataColumnId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[NOTES]"
+                          lineageId="Package\Data Processing\mailing_history\Oracle Source.Outputs[Oracle Source Output].Columns[NOTES]" />
+                        <inputColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].Columns[ISSUE_ID]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="15"
+                          cachedName="ISSUE_ID"
+                          externalMetadataColumnId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ISSUE_ID]"
+                          lineageId="Package\Data Processing\mailing_history\Oracle Source.Outputs[Oracle Source Output].Columns[ISSUE_ID]" />
+                        <inputColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].Columns[NUMBER_EMAILS_BOUNCED]"
+                          cachedDataType="numeric"
+                          cachedName="NUMBER_EMAILS_BOUNCED"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[NUMBER_EMAILS_BOUNCED]"
+                          lineageId="Package\Data Processing\mailing_history\Oracle Source.Outputs[Oracle Source Output].Columns[NUMBER_EMAILS_BOUNCED]" />
+                        <inputColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].Columns[NUMBER_EMAILS_OPENED]"
+                          cachedDataType="numeric"
+                          cachedName="NUMBER_EMAILS_OPENED"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[NUMBER_EMAILS_OPENED]"
+                          lineageId="Package\Data Processing\mailing_history\Oracle Source.Outputs[Oracle Source Output].Columns[NUMBER_EMAILS_OPENED]" />
+                        <inputColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].Columns[NUMBER_EMAILS_CLICKED]"
+                          cachedDataType="numeric"
+                          cachedName="NUMBER_EMAILS_CLICKED"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[NUMBER_EMAILS_CLICKED]"
+                          lineageId="Package\Data Processing\mailing_history\Oracle Source.Outputs[Oracle Source Output].Columns[NUMBER_EMAILS_CLICKED]" />
+                        <inputColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].Columns[TOPIC]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="6"
+                          cachedName="TOPIC"
+                          externalMetadataColumnId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[TOPIC]"
+                          lineageId="Package\Data Processing\mailing_history\Oracle Source.Outputs[Oracle Source Output].Columns[TOPIC]" />
+                        <inputColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].Columns[SUB_TOPIC]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="4"
+                          cachedName="SUB_TOPIC"
+                          externalMetadataColumnId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SUB_TOPIC]"
+                          lineageId="Package\Data Processing\mailing_history\Oracle Source.Outputs[Oracle Source Output].Columns[SUB_TOPIC]" />
+                        <inputColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].Columns[SUBJECT]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="80"
+                          cachedName="SUBJECT"
+                          externalMetadataColumnId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SUBJECT]"
+                          lineageId="Package\Data Processing\mailing_history\Oracle Source.Outputs[Oracle Source Output].Columns[SUBJECT]" />
+                        <inputColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].Columns[ErrorCode]"
+                          cachedDataType="i4"
+                          cachedName="ErrorCode"
+                          externalMetadataColumnId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ErrorCode]"
+                          lineageId="Package\Data Processing\mailing_history\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]" />
+                        <inputColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].Columns[ErrorColumn]"
+                          cachedDataType="i4"
+                          cachedName="ErrorColumn"
+                          externalMetadataColumnId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ErrorColumn]"
+                          lineageId="Package\Data Processing\mailing_history\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[MAILING]"
+                          codePage="1252"
+                          dataType="str"
+                          length="15"
+                          name="MAILING" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[MAILING_DATE]"
+                          dataType="dbTimeStamp"
+                          name="MAILING_DATE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[MAILING_BY]"
+                          codePage="1252"
+                          dataType="str"
+                          length="14"
+                          name="MAILING_BY" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[NUMBER_IN_MAILING]"
+                          dataType="numeric"
+                          name="NUMBER_IN_MAILING"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[MAILING_NUMBER]"
+                          dataType="numeric"
+                          name="MAILING_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[MAILING_FILENAME]"
+                          codePage="1252"
+                          dataType="str"
+                          length="255"
+                          name="MAILING_FILENAME" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[NOTES]"
+                          codePage="1252"
+                          dataType="str"
+                          length="200"
+                          name="NOTES" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ISSUE_ID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="15"
+                          name="ISSUE_ID" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[NUMBER_EMAILS_BOUNCED]"
+                          dataType="numeric"
+                          name="NUMBER_EMAILS_BOUNCED"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[NUMBER_EMAILS_OPENED]"
+                          dataType="numeric"
+                          name="NUMBER_EMAILS_OPENED"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[NUMBER_EMAILS_CLICKED]"
+                          dataType="numeric"
+                          name="NUMBER_EMAILS_CLICKED"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[TOPIC]"
+                          codePage="1252"
+                          dataType="str"
+                          length="6"
+                          name="TOPIC" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SUB_TOPIC]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4"
+                          name="SUB_TOPIC" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[SUBJECT]"
+                          codePage="1252"
+                          dataType="str"
+                          length="80"
+                          name="SUBJECT" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ErrorCode]"
+                          dataType="i4"
+                          name="ErrorCode" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input].ExternalColumns[ErrorColumn]"
+                          dataType="i4"
+                          name="ErrorColumn" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                </component>
+                <component
                   refId="Package\Data Processing\mailing_history\OLE DB Destination"
                   componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
                   contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
@@ -288,7 +729,7 @@
                     <input
                       refId="Package\Data Processing\mailing_history\OLE DB Destination.Inputs[OLE DB Destination Input]"
                       errorOrTruncationOperation="Insert"
-                      errorRowDisposition="FailComponent"
+                      errorRowDisposition="RedirectRow"
                       hasSideEffects="true"
                       name="OLE DB Destination Input">
                       <inputColumns>
@@ -384,9 +825,8 @@
                           name="mailing" />
                         <externalMetadataColumn
                           refId="Package\Data Processing\mailing_history\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[mailing_date]"
-                          dataType="dbTimeStamp2"
-                          name="mailing_date"
-                          scale="7" />
+                          dataType="dbTimeStamp"
+                          name="mailing_date" />
                         <externalMetadataColumn
                           refId="Package\Data Processing\mailing_history\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[mailing_by]"
                           codePage="1252"
@@ -482,7 +922,8 @@
                       dataType="System.String"
                       description="The SQL command to be executed."
                       expressionType="Notify"
-                      name="SqlCommand">SELECT * FROM "CARE_ADMIN"."MAILING_HISTORY" where mailing_date &gt; [1904-06-16 00:00:00.0000000]</property>
+                      name="SqlCommand">SELECT * FROM "CARE_ADMIN"."MAILING_HISTORY"
+ where mailing_date &gt; '2000-01-01'</property>
                     <property
                       dataType="System.Int32"
                       description="The number of rows fetched in a batch."
@@ -870,10 +1311,20 @@
               </components>
               <paths>
                 <path
+                  refId="Package\Data Processing\mailing_history.Paths[OLE DB Destination Error Output]"
+                  endId="Package\Data Processing\mailing_history\ErrorRowCnt.Inputs[Row Count Input 1]"
+                  name="OLE DB Destination Error Output"
+                  startId="Package\Data Processing\mailing_history\OLE DB Destination.Outputs[OLE DB Destination Error Output]" />
+                <path
                   refId="Package\Data Processing\mailing_history.Paths[Oracle Source Output]"
                   endId="Package\Data Processing\mailing_history\Row Count.Inputs[Row Count Input 1]"
                   name="Oracle Source Output"
                   startId="Package\Data Processing\mailing_history\Oracle Source.Outputs[Oracle Source Output]" />
+                <path
+                  refId="Package\Data Processing\mailing_history.Paths[Row Count Output 11]"
+                  endId="Package\Data Processing\mailing_history\Flat File Destination.Inputs[Flat File Destination Input]"
+                  name="Row Count Output 1"
+                  startId="Package\Data Processing\mailing_history\ErrorRowCnt.Outputs[Row Count Output 1]" />
                 <path
                   refId="Package\Data Processing\mailing_history.Paths[Row Count Output 1]"
                   endId="Package\Data Processing\mailing_history\OLE DB Destination.Inputs[OLE DB Destination Input]"
@@ -899,6 +1350,29 @@
             <SQLTask:SqlTaskData
               SQLTask:Connection="{A7202722-F760-4DEE-BB0C-B0045540580C}"
               SQLTask:SqlStatementSource="EXEC [cis].[usp_Merge_mailing_history]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Data Processing\Send Mail Task"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.SendMailTask.SendMailTask, Microsoft.SqlServer.SendMailTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Send Mail Task"
+          DTS:DTSID="{4085C4E0-EBB2-4F4E-B53C-3B4F19181C33}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.SendMailTask.SendMailTask, Microsoft.SqlServer.SendMailTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Send Mail Task"
+          DTS:TaskContact="Send Mail Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SendMailTask:SendMailTaskData
+              SendMailTask:SMTPServer="{B896DBAE-3819-43E4-8946-E97FDB750CEF}"
+              SendMailTask:From="robert.purnell@diabetes.org.uk"
+              SendMailTask:To="robert.purnell@diabetes.org.uk"
+              SendMailTask:Subject="Records failed Mailing History DWH Load"
+              SendMailTask:MessageSource="Records failed Mailing History DWH Load last night.  The attached .txt. file contains the rejected records.  Please check error message for this failure in SSISDB.custom.SSISErrors" xmlns:SendMailTask="www.microsoft.com/sqlserver/dts/tasks/sendmailtask">
+              <SendMailTask:Attachments
+                SendMailTask:FileName="D:\DWHLoadErrors\mailing_history.txt" />
+            </SendMailTask:SendMailTaskData>
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
@@ -937,6 +1411,16 @@
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 1"
           DTS:To="Package\Data Processing\mailing_history" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{FC505ACA-D021-4F68-897F-CD6E2F9950BC}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::ErrorRowCnt] &gt; 0"
+          DTS:From="Package\Data Processing\Merge delta tables"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\Data Processing\Send Mail Task" />
       </DTS:PrecedenceConstraints>
     </DTS:Executable>
     <DTS:Executable
@@ -1822,41 +2306,33 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         <NodeLayout
           Size="151,42"
           Id="Package\Data Processing\mailing_history"
-          TopLeft="84.8888893127443,132.820917478868" />
+          TopLeft="69.1746035984585,124.24948890744" />
         <NodeLayout
           Size="167,42"
           Id="Package\Data Processing\Merge delta tables"
-          TopLeft="62.8571429057997,242.917649624175" />
+          TopLeft="66.2857143343712,206.489078195604" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Data Processing\Send Mail Task"
+          TopLeft="71,309" />
         <NodeLayout
           Size="183,42"
           Id="Package\Data Processing\Truncate Delta Tables"
           TopLeft="47.5555553436279,28.5071876759071" />
         <EdgeLayout
           Id="Package\Data Processing.PrecedenceConstraints[Constraint]"
-          TopLeft="160.488889312744,174.420917478868">
+          TopLeft="147.230158966415,166.24948890744">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-14.0317464069446,68.496732145307"
+              EndConnector="0,40.239589288164"
               Start="0,0"
-              End="-14.0317464069446,60.996732145307">
+              End="0,32.739589288164">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,30.2483660726535" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,30.2483660726535"
-                    Point2="0,34.2483660726535"
-                    Point3="-4,34.2483660726535" />
-                  <mssgle:LineSegment
-                    End="-10.0317464069446,34.2483660726535" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-10.0317464069446,34.2483660726535"
-                    Point2="-14.0317464069446,34.2483660726535"
-                    Point3="-14.0317464069446,38.2483660726535" />
-                  <mssgle:LineSegment
-                    End="-14.0317464069446,60.996732145307" />
+                    End="0,32.739589288164" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1867,30 +2343,18 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Processing.PrecedenceConstraints[Constraint 1]"
-          TopLeft="139.155555343628,70.1071876759071">
+          TopLeft="141.865079471043,70.5071876759071">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="21.3333339691164,62.7137298029609"
+              EndConnector="0,53.7423012315324"
               Start="0,0"
-              End="21.3333339691164,55.2137298029609">
+              End="0,46.2423012315324">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,27.3568649014805" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,27.3568649014805"
-                    Point2="0,31.3568649014805"
-                    Point3="4,31.3568649014805" />
-                  <mssgle:LineSegment
-                    End="17.3333339691164,31.3568649014805" />
-                  <mssgle:CubicBezierSegment
-                    Point1="17.3333339691164,31.3568649014805"
-                    Point2="21.3333339691164,31.3568649014805"
-                    Point3="21.3333339691164,35.3568649014805" />
-                  <mssgle:LineSegment
-                    End="21.3333339691164,55.2137298029609" />
+                    End="0,46.2423012315324" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1899,11 +2363,35 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Processing.PrecedenceConstraints[Constraint 2]"
+          TopLeft="147.892857167186,248.489078195604">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.510921804396"
+              Start="0,0"
+              End="0,53.010921804396">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,53.010921804396" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,18.505460902198,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43.924528301886795"
           IsExpanded="True"
-          PanelSize="313,339"
-          Size="313,383"
+          PanelSize="313,407"
+          Size="313,451"
           Id="Package\Data Processing"
           TopLeft="417.211326102106,519.527491009239" />
         <NodeLayout
@@ -1916,7 +2404,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           PanelSize="284,116"
           Size="284,160"
           Id="Package\Failure Loading Closeout"
-          TopLeft="712.154092364556,968.289460645577" />
+          TopLeft="876.43980665027,954.003746359863" />
         <NodeLayout
           Size="238,42"
           Id="Package\Setup\Get Lineage - Insert Audit Record"
@@ -1993,30 +2481,30 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           TopLeft="164.709346672733,967.310104336155" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="556.947625911479,414.807699226031">
+          TopLeft="557.047625911479,414.407699226031">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="16.663700190627,104.719791783208"
+              EndConnector="16.6637001906271,105.119791783208"
               Start="0,0"
-              End="16.663700190627,97.2197917832078">
+              End="16.6637001906271,97.6197917832077">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,48.3598958916039" />
+                    End="0,48.5598958916039" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,48.3598958916039"
-                    Point2="0,52.3598958916039"
-                    Point3="4,52.3598958916039" />
+                    Point1="0,48.5598958916039"
+                    Point2="0,52.5598958916039"
+                    Point3="4,52.5598958916039" />
                   <mssgle:LineSegment
-                    End="12.663700190627,52.3598958916039" />
+                    End="12.6637001906271,52.5598958916039" />
                   <mssgle:CubicBezierSegment
-                    Point1="12.663700190627,52.3598958916039"
-                    Point2="16.663700190627,52.3598958916039"
-                    Point3="16.663700190627,56.3598958916039" />
+                    Point1="12.6637001906271,52.5598958916039"
+                    Point2="16.6637001906271,52.5598958916039"
+                    Point3="16.6637001906271,56.5598958916039" />
                   <mssgle:LineSegment
-                    End="16.663700190627,97.2197917832078" />
+                    End="16.6637001906271,97.6197917832077" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2027,30 +2515,24 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="522.811326102106,902.727491009239">
+          TopLeft="417.211326102106,745.027491009239">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-190.101979429373,64.582613326916"
+              EndConnector="-84.501979429373,222.282613326916"
               Start="0,0"
-              End="-190.101979429373,57.082613326916">
+              End="-84.501979429373,214.782613326916">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22.0302441500852" />
+                    End="-80.501979429373,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,22.0302441500852"
-                    Point2="0,26.0302441500852"
-                    Point3="-4,26.0302441500852" />
+                    Point1="-80.501979429373,0"
+                    Point2="-84.501979429373,0"
+                    Point3="-84.501979429373,4" />
                   <mssgle:LineSegment
-                    End="-186.101979429373,26.0302441500852" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-186.101979429373,26.0302441500852"
-                    Point2="-190.101979429373,26.0302441500852"
-                    Point3="-190.101979429373,30.0302441500852" />
-                  <mssgle:LineSegment
-                    End="-190.101979429373,57.082613326916" />
+                    End="-84.501979429373,214.782613326916" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2061,37 +2543,37 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="624.411326102106,902.727491009239">
+          TopLeft="730.211326102106,745.027491009239">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="229.74276626245,65.5619696363381"
+              EndConnector="146.228480548164,288.976255350624"
               Start="0,0"
-              End="229.74276626245,58.0619696363381">
+              End="138.728480548164,288.976255350624">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22.4249770747989" />
+                    End="69.114240274082,0" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,22.4249770747989"
-                    Point2="0,26.4249770747989"
-                    Point3="4,26.4249770747989" />
+                    Point1="69.114240274082,0"
+                    Point2="73.114240274082,0"
+                    Point3="73.114240274082,4" />
                   <mssgle:LineSegment
-                    End="225.74276626245,26.4249770747989" />
+                    End="73.114240274082,284.976255350624" />
                   <mssgle:CubicBezierSegment
-                    Point1="225.74276626245,26.4249770747989"
-                    Point2="229.74276626245,26.4249770747989"
-                    Point3="229.74276626245,30.4249770747989" />
+                    Point1="73.114240274082,284.976255350624"
+                    Point2="73.114240274082,288.976255350624"
+                    Point3="77.114240274082,288.976255350624" />
                   <mssgle:LineSegment
-                    End="229.74276626245,58.0619696363381" />
+                    End="138.728480548164,288.976255350624" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="99.6300354749751,31.4249770747989,30.4826953125,9.7490234375"
+              BoundingBox="57.872892617832,-15.7490234375,30.4826953125,9.7490234375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2102,39 +2584,73 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
     design-time-name="Package\Data Processing\mailing_history">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="144,42"
           Id="Package\Data Processing\mailing_history\Oracle Source"
           TopLeft="283,30" />
         <NodeLayout
+          Size="172,42"
+          Id="Package\Data Processing\mailing_history\OLE DB Destination"
+          TopLeft="308.560846473264,285.94117642769" />
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Data Processing\mailing_history\Flat File Destination"
+          TopLeft="739,291" />
+        <NodeLayout
+          Size="139,42"
+          Id="Package\Data Processing\mailing_history\ErrorRowCnt"
+          TopLeft="554,289" />
+        <NodeLayout
           Size="131,42"
           Id="Package\Data Processing\mailing_history\Row Count"
           TopLeft="328.571434166967,174.964708336167" />
-        <NodeLayout
-          Size="172,42"
-          Id="Package\Data Processing\mailing_history\OLE DB Destination"
-          TopLeft="307.560846473264,285.94117642769" />
         <EdgeLayout
-          Id="Package\Data Processing\mailing_history.Paths[Row Count Output 1]"
-          TopLeft="393.866140320116,216.564708336167">
+          Id="Package\Data Processing\mailing_history.Paths[Row Count Output 11]"
+          TopLeft="693,311">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,69.3764680915225"
+              EndConnector="46,0"
               Start="0,0"
-              End="0,61.8764680915225">
+              End="38.5,0">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,61.8764680915225" />
+                    End="38.5,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Processing\mailing_history.Paths[Row Count Output 1]"
+          TopLeft="394.316140320115,216.964708336167">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,68.976468091523"
+              Start="0,0"
+              End="0,61.476468091523">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,61.476468091523" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -2168,7 +2684,33 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Processing\mailing_history.Paths[OLE DB Destination Error Output]"
+          TopLeft="480.560846473264,308.470588213845">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="73.439153526736,0"
+              Start="0,0"
+              End="65.939153526736,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="65.939153526736,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-40.239329486632,5,146.4178125,11.43359375"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

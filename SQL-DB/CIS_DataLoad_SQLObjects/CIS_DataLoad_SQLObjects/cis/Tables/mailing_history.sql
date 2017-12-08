@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [cis].[mailing_history] (
     [mailing]               VARCHAR (15)  NOT NULL,
-    [mailing_date]          DATETIME2      NOT NULL,
+    [mailing_date]          DATETIME      NOT NULL,
     [mailing_by]            VARCHAR (14)  NOT NULL,
     [number_in_mailing]     NUMERIC (18)  NOT NULL,
     [mailing_number]        NUMERIC (18)  NULL,
