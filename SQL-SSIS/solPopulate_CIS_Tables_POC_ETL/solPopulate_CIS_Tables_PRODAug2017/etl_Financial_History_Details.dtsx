@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="etl_Financial_History_Details"
   DTS:PackageType="5"
-  DTS:VersionBuild="153"
-  DTS:VersionGUID="{7AA726B5-78BA-47BC-AB33-03BBE02FF313}">
+  DTS:VersionBuild="160"
+  DTS:VersionGUID="{CCFB16FD-F85D-4FC5-80CC-E158410A0148}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:LogProviders>
@@ -75,6 +75,15 @@
       DTS:ObjectName="FailureMessage">
       <DTS:VariableValue
         DTS:DataType="8">Process FAILED 0 records processed.</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BD66BFBD-38CF-4875-98F5-61D6919C9DE4}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="isFullLoad">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -194,15 +203,14 @@ DELETE FROM  cis.Financial_History_details WHERE BATCH_NUMBER &gt;  1</DTS:Varia
       DTS:CreationName=""
       DTS:DTSID="{9AD2BF06-99CF-4CBB-9E2F-79F3DBE50894}"
       DTS:EvaluateAsExpression="True"
-      DTS:Expression="&quot;UPDATE control.LastTableUpdate &#xA;SET [MAXBatch_Number] = t1.batch_number, &#xA;[MAXTransaction_ID] = t1.transaction_number,&#xA;[LastExtractRowCount] = (SELECT COUNT(*) from cis_delta.financial_history_details),&#xA;[LastExtractedDate]  = GETDATE()&#xA;FROM (&#xA;  SELECT TOP 1 t1.batch_number, t1.transaction_number  from cis.financial_history t1  where t1.transaction_date =  CAST(GETDATE() - &quot; + (DT_STR, 10, 1252)  @[User::MarginDays]  +  &quot;  as date)  order by 1 desc, 2 desc) t1&#xA;WHERE [TableName] = 'financial_history_details'&quot;"
+      DTS:Expression="&quot;UPDATE control.LastTableUpdate SET [MAXBatch_Number] = t1.batch_number, &#xA;[MAXTransaction_ID] = t1.transaction_number,&#xA;[LastExtractRowCount] = &quot; +  (DT_STR, 10, 1252) @[User::RecordCount] + &quot;,&#xA;[LastExtractedDate]  = GETDATE()&#xA;FROM (&#xA;  SELECT TOP 1 t1.batch_number, t1.transaction_number  from cis.financial_history t1  where t1.transaction_date =  CAST(GETDATE() - &quot; + (DT_STR, 10, 1252)  @[User::MarginDays]  +  &quot;  as date)  order by 1 desc, 2 desc) t1&#xA;WHERE [TableName] = 'financial_history_details'&quot;"
       DTS:IncludeInDebugDump="2345"
       DTS:Namespace="User"
       DTS:ObjectName="UpdateTableStatementFinDetails">
       <DTS:VariableValue
-        DTS:DataType="8">UPDATE control.LastTableUpdate 
-SET [MAXBatch_Number] = t1.batch_number, 
+        DTS:DataType="8">UPDATE control.LastTableUpdate SET [MAXBatch_Number] = t1.batch_number, 
 [MAXTransaction_ID] = t1.transaction_number,
-[LastExtractRowCount] = (SELECT COUNT(*) from cis_delta.financial_history_details),
+[LastExtractRowCount] = 0,
 [LastExtractedDate]  = GETDATE()
 FROM (
   SELECT TOP 1 t1.batch_number, t1.transaction_number  from cis.financial_history t1  where t1.transaction_date =  CAST(GETDATE() - 60  as date)  order by 1 desc, 2 desc) t1
@@ -288,19 +296,39 @@ WHERE [TableName] = 'financial_history_details'</DTS:VariableValue>
         DTS:FilterKind="0" />
       <DTS:Executables>
         <DTS:Executable
-          DTS:refId="Package\Data Processing\Data Flow Task"
+          DTS:refId="Package\Data Processing\Execute SQL Task"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{c496a70b-0d93-4538-89b2-1d8190bd3172}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Execute SQL Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{A7202722-F760-4DEE-BB0C-B0045540580C}"
+              SQLTask:SqlStatementSource="SELECT t.FullExtract FROM [DiabetesDWH].[control].[LastTableUpdate] t WHERE TableName = 'financial_history_details'"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="FullExtract"
+                SQLTask:DtsVariableName="User::isFullLoad" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Data Processing\Financial History Details Full"
           DTS:CreationName="SSIS.Pipeline.3"
           DTS:Description="Data Flow Task"
-          DTS:DTSID="{ef7edbae-0dcf-42bd-986a-8664ee63d685}"
+          DTS:DTSID="{c15ef837-9f3d-4592-bcb2-0b1d34291fd9}"
           DTS:ExecutableType="SSIS.Pipeline.3"
           DTS:LocaleID="-1"
-          DTS:ObjectName="Data Flow Task"
+          DTS:ObjectName="Financial History Details Full"
           DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
           <DTS:Variables />
           <DTS:LoggingOptions
             DTS:FilterKind="0" />
-          <DTS:PropertyExpression
-            DTS:Name="[Oracle Source].[SqlCommand]">@[User::SQLStatement]</DTS:PropertyExpression>
           <DTS:ObjectData>
             <pipeline
               defaultBufferMaxRows="60000"
@@ -308,7 +336,7 @@ WHERE [TableName] = 'financial_history_details'</DTS:VariableValue>
               version="1">
               <components>
                 <component
-                  refId="Package\Data Processing\Data Flow Task\OLE DB Destination"
+                  refId="Package\Data Processing\Financial History Details Full\OLE DB Destination"
                   componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
                   contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
                   description="OLE DB Destination"
@@ -323,7 +351,7 @@ WHERE [TableName] = 'financial_history_details'</DTS:VariableValue>
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[cis_delta].[financial_history_details]</property>
+                      name="OpenRowset">[cis].[financial_history_details]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -365,7 +393,7 @@ WHERE [TableName] = 'financial_history_details'</DTS:VariableValue>
                   </properties>
                   <connections>
                     <connection
-                      refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Connections[OleDbConnection]"
+                      refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Connections[OleDbConnection]"
                       connectionManagerID="{A7202722-F760-4DEE-BB0C-B0045540580C}:external"
                       connectionManagerRefId="Project.ConnectionManagers[LocalHost.DiabetesDWH]"
                       description="The OLE DB runtime connection used to access the database."
@@ -373,225 +401,225 @@ WHERE [TableName] = 'financial_history_details'</DTS:VariableValue>
                   </connections>
                   <inputs>
                     <input
-                      refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input]"
                       errorOrTruncationOperation="Insert"
                       errorRowDisposition="FailComponent"
                       hasSideEffects="true"
                       name="OLE DB Destination Input">
                       <inputColumns>
                         <inputColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[BATCH_NUMBER]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[BATCH_NUMBER]"
                           cachedDataType="numeric"
                           cachedName="BATCH_NUMBER"
                           cachedPrecision="38"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[batch_number]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[BATCH_NUMBER]" />
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[batch_number]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[BATCH_NUMBER]" />
                         <inputColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TRANSACTION_NUMBER]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TRANSACTION_NUMBER]"
                           cachedDataType="numeric"
                           cachedName="TRANSACTION_NUMBER"
                           cachedPrecision="38"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[transaction_number]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[TRANSACTION_NUMBER]" />
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[transaction_number]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[TRANSACTION_NUMBER]" />
                         <inputColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AMOUNT]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AMOUNT]"
                           cachedDataType="numeric"
                           cachedName="AMOUNT"
                           cachedPrecision="9"
                           cachedScale="2"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amount]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT]" />
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amount]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT]" />
                         <inputColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CURRENCY_AMOUNT]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CURRENCY_AMOUNT]"
                           cachedDataType="numeric"
                           cachedName="CURRENCY_AMOUNT"
                           cachedPrecision="13"
                           cachedScale="2"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[currency_amount]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[CURRENCY_AMOUNT]" />
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[currency_amount]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[CURRENCY_AMOUNT]" />
                         <inputColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LINE_NUMBER]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LINE_NUMBER]"
                           cachedDataType="numeric"
                           cachedName="LINE_NUMBER"
                           cachedPrecision="38"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[line_number]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[LINE_NUMBER]" />
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[line_number]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[LINE_NUMBER]" />
                         <inputColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[QUANTITY]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[QUANTITY]"
                           cachedDataType="numeric"
                           cachedName="QUANTITY"
                           cachedPrecision="38"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[quantity]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[QUANTITY]" />
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[quantity]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[QUANTITY]" />
                         <inputColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[VAT_AMOUNT]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[VAT_AMOUNT]"
                           cachedDataType="numeric"
                           cachedName="VAT_AMOUNT"
                           cachedPrecision="9"
                           cachedScale="2"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[vat_amount]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[VAT_AMOUNT]" />
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[vat_amount]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[VAT_AMOUNT]" />
                         <inputColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SALES_CONTACT_NUMBER]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SALES_CONTACT_NUMBER]"
                           cachedDataType="numeric"
                           cachedName="SALES_CONTACT_NUMBER"
                           cachedPrecision="38"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sales_contact_number]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[SALES_CONTACT_NUMBER]" />
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sales_contact_number]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[SALES_CONTACT_NUMBER]" />
                         <inputColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CURRENCY_VAT_AMOUNT]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CURRENCY_VAT_AMOUNT]"
                           cachedDataType="numeric"
                           cachedName="CURRENCY_VAT_AMOUNT"
                           cachedPrecision="13"
                           cachedScale="2"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[currency_vat_amount]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[CURRENCY_VAT_AMOUNT]" />
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[currency_vat_amount]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[CURRENCY_VAT_AMOUNT]" />
                         <inputColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[STATUS]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[STATUS]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="1"
                           cachedName="STATUS"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[status]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[STATUS]" />
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[status]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[STATUS]" />
                         <inputColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PRODUCT]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PRODUCT]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="20"
                           cachedName="PRODUCT"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[PRODUCT]" />
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[PRODUCT]" />
                         <inputColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RATE]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RATE]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="4"
                           cachedName="RATE"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rate]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[RATE]" />
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rate]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[RATE]" />
                         <inputColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SOURCE]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SOURCE]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="10"
                           cachedName="SOURCE"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[source]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[SOURCE]" />
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[source]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[SOURCE]" />
                         <inputColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[VAT_RATE]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[VAT_RATE]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="1"
                           cachedName="VAT_RATE"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[vat_rate]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[VAT_RATE]" />
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[vat_rate]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[VAT_RATE]" />
                         <inputColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[INVOICE_PAYMENT]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[INVOICE_PAYMENT]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="1"
                           cachedName="INVOICE_PAYMENT"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[invoice_payment]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[INVOICE_PAYMENT]" />
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[invoice_payment]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[INVOICE_PAYMENT]" />
                         <inputColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DISTRIBUTION_CODE]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DISTRIBUTION_CODE]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="10"
                           cachedName="DISTRIBUTION_CODE"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[distribution_code]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[DISTRIBUTION_CODE]" />
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[distribution_code]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[DISTRIBUTION_CODE]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[batch_number]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[batch_number]"
                           dataType="numeric"
                           name="batch_number"
                           precision="18" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[transaction_number]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[transaction_number]"
                           dataType="numeric"
                           name="transaction_number"
                           precision="18" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amount]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amount]"
                           dataType="numeric"
                           name="amount"
                           precision="9"
                           scale="2" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[currency_amount]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[currency_amount]"
                           dataType="numeric"
                           name="currency_amount"
                           precision="13"
                           scale="2" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[status]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[status]"
                           codePage="1252"
                           dataType="str"
-                          length="50"
+                          length="1"
                           name="status" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[line_number]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[line_number]"
                           dataType="numeric"
                           name="line_number"
                           precision="18" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product]"
                           codePage="1252"
                           dataType="str"
-                          length="50"
+                          length="20"
                           name="product" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rate]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rate]"
                           codePage="1252"
                           dataType="str"
-                          length="50"
+                          length="4"
                           name="rate" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[source]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[source]"
                           codePage="1252"
                           dataType="str"
-                          length="50"
+                          length="10"
                           name="source" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[quantity]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[quantity]"
                           dataType="numeric"
                           name="quantity"
                           precision="18" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[vat_rate]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[vat_rate]"
                           codePage="1252"
                           dataType="str"
-                          length="50"
+                          length="1"
                           name="vat_rate" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[vat_amount]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[vat_amount]"
                           dataType="numeric"
                           name="vat_amount"
                           precision="9"
                           scale="2" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sales_contact_number]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sales_contact_number]"
                           dataType="numeric"
                           name="sales_contact_number"
                           precision="18" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[invoice_payment]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[invoice_payment]"
                           codePage="1252"
                           dataType="str"
-                          length="50"
+                          length="1"
                           name="invoice_payment" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[distribution_code]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[distribution_code]"
                           codePage="1252"
                           dataType="str"
-                          length="50"
+                          length="10"
                           name="distribution_code" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[currency_vat_amount]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[currency_vat_amount]"
                           dataType="numeric"
                           name="currency_vat_amount"
                           precision="13"
@@ -601,22 +629,22 @@ WHERE [TableName] = 'financial_history_details'</DTS:VariableValue>
                   </inputs>
                   <outputs>
                     <output
-                      refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
                       exclusionGroup="1"
                       isErrorOut="true"
                       name="OLE DB Destination Error Output"
-                      synchronousInputId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      synchronousInputId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input]">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                           dataType="i4"
-                          lineageId="Package\Data Processing\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          lineageId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                           name="ErrorCode"
                           specialFlags="1" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          refId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                           dataType="i4"
-                          lineageId="Package\Data Processing\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          lineageId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
                       </outputColumns>
@@ -625,7 +653,7 @@ WHERE [TableName] = 'financial_history_details'</DTS:VariableValue>
                   </outputs>
                 </component>
                 <component
-                  refId="Package\Data Processing\Data Flow Task\Oracle Source"
+                  refId="Package\Data Processing\Financial History Details Full\Oracle Source"
                   componentClassID="{CB67CD40-126C-4280-912D-2A625DFAFB66}"
                   contactInfo="Oracle Source;Microsoft Connector for Oracle by Attunity; Attunity Ltd.; All Rights Reserved; http://www.attunity.com;4"
                   description="Microsoft Oracle Source Component by Attunity"
@@ -687,7 +715,7 @@ WHERE t.batch_number &gt;  1</property>
                   </properties>
                   <connections>
                     <connection
-                      refId="Package\Data Processing\Data Flow Task\Oracle Source.Connections[MSOraConnection]"
+                      refId="Package\Data Processing\Financial History Details Full\Oracle Source.Connections[MSOraConnection]"
                       connectionManagerID="{B0E6080B-7584-431F-9BC5-B95A0F1857CA}:external"
                       connectionManagerRefId="Project.ConnectionManagers[CIS Live]"
                       description="The Oracle runtime connection"
@@ -695,131 +723,131 @@ WHERE t.batch_number &gt;  1</property>
                   </connections>
                   <outputs>
                     <output
-                      refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output]"
+                      refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output]"
                       errorRowDisposition="FailComponent"
                       name="Oracle Source Output"
                       truncationRowDisposition="FailComponent">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[BATCH_NUMBER]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[BATCH_NUMBER]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[BATCH_NUMBER]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[BATCH_NUMBER]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[BATCH_NUMBER]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[BATCH_NUMBER]"
                           name="BATCH_NUMBER"
                           precision="38" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[TRANSACTION_NUMBER]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[TRANSACTION_NUMBER]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TRANSACTION_NUMBER]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[TRANSACTION_NUMBER]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TRANSACTION_NUMBER]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[TRANSACTION_NUMBER]"
                           name="TRANSACTION_NUMBER"
                           precision="38" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[LINE_NUMBER]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[LINE_NUMBER]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[LINE_NUMBER]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[LINE_NUMBER]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[LINE_NUMBER]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[LINE_NUMBER]"
                           name="LINE_NUMBER"
                           precision="38" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT]"
                           name="AMOUNT"
                           precision="9"
                           scale="2" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[PRODUCT]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[PRODUCT]"
                           codePage="1252"
                           dataType="str"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[PRODUCT]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[PRODUCT]"
                           length="20"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[PRODUCT]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[PRODUCT]"
                           name="PRODUCT" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[RATE]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[RATE]"
                           codePage="1252"
                           dataType="str"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[RATE]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[RATE]"
                           length="4"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[RATE]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[RATE]"
                           name="RATE" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[SOURCE]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[SOURCE]"
                           codePage="1252"
                           dataType="str"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SOURCE]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SOURCE]"
                           length="10"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[SOURCE]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[SOURCE]"
                           name="SOURCE" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[QUANTITY]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[QUANTITY]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[QUANTITY]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[QUANTITY]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[QUANTITY]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[QUANTITY]"
                           name="QUANTITY"
                           precision="38" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[VAT_RATE]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[VAT_RATE]"
                           codePage="1252"
                           dataType="str"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[VAT_RATE]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[VAT_RATE]"
                           length="1"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[VAT_RATE]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[VAT_RATE]"
                           name="VAT_RATE" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[VAT_AMOUNT]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[VAT_AMOUNT]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[VAT_AMOUNT]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[VAT_AMOUNT]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[VAT_AMOUNT]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[VAT_AMOUNT]"
                           name="VAT_AMOUNT"
                           precision="9"
                           scale="2" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[STATUS]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[STATUS]"
                           codePage="1252"
                           dataType="str"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[STATUS]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[STATUS]"
                           length="1"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[STATUS]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[STATUS]"
                           name="STATUS" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[SALES_CONTACT_NUMBER]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[SALES_CONTACT_NUMBER]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SALES_CONTACT_NUMBER]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[SALES_CONTACT_NUMBER]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SALES_CONTACT_NUMBER]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[SALES_CONTACT_NUMBER]"
                           name="SALES_CONTACT_NUMBER"
                           precision="38" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[INVOICE_PAYMENT]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[INVOICE_PAYMENT]"
                           codePage="1252"
                           dataType="str"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[INVOICE_PAYMENT]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[INVOICE_PAYMENT]"
                           length="1"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[INVOICE_PAYMENT]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[INVOICE_PAYMENT]"
                           name="INVOICE_PAYMENT" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[DISTRIBUTION_CODE]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[DISTRIBUTION_CODE]"
                           codePage="1252"
                           dataType="str"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DISTRIBUTION_CODE]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DISTRIBUTION_CODE]"
                           length="10"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[DISTRIBUTION_CODE]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[DISTRIBUTION_CODE]"
                           name="DISTRIBUTION_CODE" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[CURRENCY_AMOUNT]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[CURRENCY_AMOUNT]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CURRENCY_AMOUNT]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[CURRENCY_AMOUNT]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CURRENCY_AMOUNT]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[CURRENCY_AMOUNT]"
                           name="CURRENCY_AMOUNT"
                           precision="13"
                           scale="2" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[CURRENCY_VAT_AMOUNT]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[CURRENCY_VAT_AMOUNT]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CURRENCY_VAT_AMOUNT]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].Columns[CURRENCY_VAT_AMOUNT]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CURRENCY_VAT_AMOUNT]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].Columns[CURRENCY_VAT_AMOUNT]"
                           name="CURRENCY_VAT_AMOUNT"
                           precision="13"
                           scale="2" />
@@ -827,92 +855,92 @@ WHERE t.batch_number &gt;  1</property>
                       <externalMetadataColumns
                         isUsed="True">
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[BATCH_NUMBER]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[BATCH_NUMBER]"
                           dataType="numeric"
                           name="BATCH_NUMBER"
                           precision="38" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TRANSACTION_NUMBER]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TRANSACTION_NUMBER]"
                           dataType="numeric"
                           name="TRANSACTION_NUMBER"
                           precision="38" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[LINE_NUMBER]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[LINE_NUMBER]"
                           dataType="numeric"
                           name="LINE_NUMBER"
                           precision="38" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT]"
                           dataType="numeric"
                           name="AMOUNT"
                           precision="9"
                           scale="2" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[PRODUCT]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[PRODUCT]"
                           codePage="1252"
                           dataType="str"
                           length="20"
                           name="PRODUCT" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[RATE]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[RATE]"
                           codePage="1252"
                           dataType="str"
                           length="4"
                           name="RATE" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SOURCE]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SOURCE]"
                           codePage="1252"
                           dataType="str"
                           length="10"
                           name="SOURCE" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[QUANTITY]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[QUANTITY]"
                           dataType="numeric"
                           name="QUANTITY"
                           precision="38" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[VAT_RATE]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[VAT_RATE]"
                           codePage="1252"
                           dataType="str"
                           length="1"
                           name="VAT_RATE" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[VAT_AMOUNT]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[VAT_AMOUNT]"
                           dataType="numeric"
                           name="VAT_AMOUNT"
                           precision="9"
                           scale="2" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[STATUS]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[STATUS]"
                           codePage="1252"
                           dataType="str"
                           length="1"
                           name="STATUS" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SALES_CONTACT_NUMBER]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SALES_CONTACT_NUMBER]"
                           dataType="numeric"
                           name="SALES_CONTACT_NUMBER"
                           precision="38" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[INVOICE_PAYMENT]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[INVOICE_PAYMENT]"
                           codePage="1252"
                           dataType="str"
                           length="1"
                           name="INVOICE_PAYMENT" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DISTRIBUTION_CODE]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DISTRIBUTION_CODE]"
                           codePage="1252"
                           dataType="str"
                           length="10"
                           name="DISTRIBUTION_CODE" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CURRENCY_AMOUNT]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CURRENCY_AMOUNT]"
                           dataType="numeric"
                           name="CURRENCY_AMOUNT"
                           precision="13"
                           scale="2" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CURRENCY_VAT_AMOUNT]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CURRENCY_VAT_AMOUNT]"
                           dataType="numeric"
                           name="CURRENCY_VAT_AMOUNT"
                           precision="13"
@@ -920,143 +948,143 @@ WHERE t.batch_number &gt;  1</property>
                       </externalMetadataColumns>
                     </output>
                     <output
-                      refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output]"
+                      refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output]"
                       isErrorOut="true"
                       name="Oracle Source Error Output">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[BATCH_NUMBER]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[BATCH_NUMBER]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[BATCH_NUMBER]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[BATCH_NUMBER]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[BATCH_NUMBER]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[BATCH_NUMBER]"
                           name="BATCH_NUMBER"
                           precision="38" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[TRANSACTION_NUMBER]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[TRANSACTION_NUMBER]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TRANSACTION_NUMBER]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[TRANSACTION_NUMBER]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TRANSACTION_NUMBER]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[TRANSACTION_NUMBER]"
                           name="TRANSACTION_NUMBER"
                           precision="38" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[LINE_NUMBER]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[LINE_NUMBER]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[LINE_NUMBER]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[LINE_NUMBER]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[LINE_NUMBER]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[LINE_NUMBER]"
                           name="LINE_NUMBER"
                           precision="38" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMOUNT]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMOUNT]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMOUNT]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMOUNT]"
                           name="AMOUNT"
                           precision="9"
                           scale="2" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[PRODUCT]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[PRODUCT]"
                           codePage="1252"
                           dataType="str"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[PRODUCT]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[PRODUCT]"
                           length="20"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[PRODUCT]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[PRODUCT]"
                           name="PRODUCT" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[RATE]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[RATE]"
                           codePage="1252"
                           dataType="str"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[RATE]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[RATE]"
                           length="4"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[RATE]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[RATE]"
                           name="RATE" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[SOURCE]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[SOURCE]"
                           codePage="1252"
                           dataType="str"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SOURCE]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SOURCE]"
                           length="10"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[SOURCE]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[SOURCE]"
                           name="SOURCE" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[QUANTITY]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[QUANTITY]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[QUANTITY]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[QUANTITY]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[QUANTITY]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[QUANTITY]"
                           name="QUANTITY"
                           precision="38" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[VAT_RATE]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[VAT_RATE]"
                           codePage="1252"
                           dataType="str"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[VAT_RATE]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[VAT_RATE]"
                           length="1"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[VAT_RATE]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[VAT_RATE]"
                           name="VAT_RATE" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[VAT_AMOUNT]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[VAT_AMOUNT]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[VAT_AMOUNT]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[VAT_AMOUNT]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[VAT_AMOUNT]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[VAT_AMOUNT]"
                           name="VAT_AMOUNT"
                           precision="9"
                           scale="2" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[STATUS]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[STATUS]"
                           codePage="1252"
                           dataType="str"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[STATUS]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[STATUS]"
                           length="1"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[STATUS]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[STATUS]"
                           name="STATUS" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[SALES_CONTACT_NUMBER]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[SALES_CONTACT_NUMBER]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SALES_CONTACT_NUMBER]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[SALES_CONTACT_NUMBER]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SALES_CONTACT_NUMBER]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[SALES_CONTACT_NUMBER]"
                           name="SALES_CONTACT_NUMBER"
                           precision="38" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[INVOICE_PAYMENT]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[INVOICE_PAYMENT]"
                           codePage="1252"
                           dataType="str"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[INVOICE_PAYMENT]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[INVOICE_PAYMENT]"
                           length="1"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[INVOICE_PAYMENT]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[INVOICE_PAYMENT]"
                           name="INVOICE_PAYMENT" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[DISTRIBUTION_CODE]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[DISTRIBUTION_CODE]"
                           codePage="1252"
                           dataType="str"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DISTRIBUTION_CODE]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DISTRIBUTION_CODE]"
                           length="10"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[DISTRIBUTION_CODE]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[DISTRIBUTION_CODE]"
                           name="DISTRIBUTION_CODE" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[CURRENCY_AMOUNT]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[CURRENCY_AMOUNT]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CURRENCY_AMOUNT]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[CURRENCY_AMOUNT]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CURRENCY_AMOUNT]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[CURRENCY_AMOUNT]"
                           name="CURRENCY_AMOUNT"
                           precision="13"
                           scale="2" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[CURRENCY_VAT_AMOUNT]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[CURRENCY_VAT_AMOUNT]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CURRENCY_VAT_AMOUNT]"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[CURRENCY_VAT_AMOUNT]"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CURRENCY_VAT_AMOUNT]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[CURRENCY_VAT_AMOUNT]"
                           name="CURRENCY_VAT_AMOUNT"
                           precision="13"
                           scale="2" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
                           dataType="i4"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
                           name="ErrorCode"
                           specialFlags="1" />
                         <outputColumn
-                          refId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
+                          refId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
                           dataType="i4"
-                          lineageId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
+                          lineageId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
                       </outputColumns>
@@ -1065,7 +1093,7 @@ WHERE t.batch_number &gt;  1</property>
                   </outputs>
                 </component>
                 <component
-                  refId="Package\Data Processing\Data Flow Task\Row Count"
+                  refId="Package\Data Processing\Financial History Details Full\Row Count"
                   componentClassID="{E2697D8C-70DA-42B2-8208-A19CE3A9FE41}"
                   contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
                   description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
@@ -1078,7 +1106,7 @@ WHERE t.batch_number &gt;  1</property>
                   </properties>
                   <inputs>
                     <input
-                      refId="Package\Data Processing\Data Flow Task\Row Count.Inputs[Row Count Input 1]"
+                      refId="Package\Data Processing\Financial History Details Full\Row Count.Inputs[Row Count Input 1]"
                       hasSideEffects="true"
                       name="Row Count Input 1">
                       <externalMetadataColumns />
@@ -1086,9 +1114,9 @@ WHERE t.batch_number &gt;  1</property>
                   </inputs>
                   <outputs>
                     <output
-                      refId="Package\Data Processing\Data Flow Task\Row Count.Outputs[Row Count Output 1]"
+                      refId="Package\Data Processing\Financial History Details Full\Row Count.Outputs[Row Count Output 1]"
                       name="Row Count Output 1"
-                      synchronousInputId="Package\Data Processing\Data Flow Task\Row Count.Inputs[Row Count Input 1]">
+                      synchronousInputId="Package\Data Processing\Financial History Details Full\Row Count.Inputs[Row Count Input 1]">
                       <externalMetadataColumns />
                     </output>
                   </outputs>
@@ -1096,15 +1124,837 @@ WHERE t.batch_number &gt;  1</property>
               </components>
               <paths>
                 <path
-                  refId="Package\Data Processing\Data Flow Task.Paths[Oracle Source Output]"
-                  endId="Package\Data Processing\Data Flow Task\Row Count.Inputs[Row Count Input 1]"
+                  refId="Package\Data Processing\Financial History Details Full.Paths[Oracle Source Output]"
+                  endId="Package\Data Processing\Financial History Details Full\Row Count.Inputs[Row Count Input 1]"
                   name="Oracle Source Output"
-                  startId="Package\Data Processing\Data Flow Task\Oracle Source.Outputs[Oracle Source Output]" />
+                  startId="Package\Data Processing\Financial History Details Full\Oracle Source.Outputs[Oracle Source Output]" />
                 <path
-                  refId="Package\Data Processing\Data Flow Task.Paths[Row Count Output 1]"
-                  endId="Package\Data Processing\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  refId="Package\Data Processing\Financial History Details Full.Paths[Row Count Output 1]"
+                  endId="Package\Data Processing\Financial History Details Full\OLE DB Destination.Inputs[OLE DB Destination Input]"
                   name="Row Count Output 1"
-                  startId="Package\Data Processing\Data Flow Task\Row Count.Outputs[Row Count Output 1]" />
+                  startId="Package\Data Processing\Financial History Details Full\Row Count.Outputs[Row Count Output 1]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Data Processing\Financial History Details Inc"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{ef7edbae-0dcf-42bd-986a-8664ee63d685}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Financial History Details Inc"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:PropertyExpression
+            DTS:Name="[Oracle Source].[SqlCommand]">@[User::SQLStatement]</DTS:PropertyExpression>
+          <DTS:ObjectData>
+            <pipeline
+              defaultBufferMaxRows="60000"
+              defaultBufferSize="60485760"
+              version="1">
+              <components>
+                <component
+                  refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination"
+                  componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[cis_delta].[financial_history_details]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="{A7202722-F760-4DEE-BB0C-B0045540580C}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[LocalHost.DiabetesDWH]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[BATCH_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="BATCH_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[batch_number]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[BATCH_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[TRANSACTION_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="TRANSACTION_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[transaction_number]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[TRANSACTION_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AMOUNT]"
+                          cachedDataType="numeric"
+                          cachedName="AMOUNT"
+                          cachedPrecision="9"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amount]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CURRENCY_AMOUNT]"
+                          cachedDataType="numeric"
+                          cachedName="CURRENCY_AMOUNT"
+                          cachedPrecision="13"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[currency_amount]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[CURRENCY_AMOUNT]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[LINE_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="LINE_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[line_number]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[LINE_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[QUANTITY]"
+                          cachedDataType="numeric"
+                          cachedName="QUANTITY"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[quantity]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[QUANTITY]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[VAT_AMOUNT]"
+                          cachedDataType="numeric"
+                          cachedName="VAT_AMOUNT"
+                          cachedPrecision="9"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[vat_amount]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[VAT_AMOUNT]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SALES_CONTACT_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="SALES_CONTACT_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sales_contact_number]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[SALES_CONTACT_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CURRENCY_VAT_AMOUNT]"
+                          cachedDataType="numeric"
+                          cachedName="CURRENCY_VAT_AMOUNT"
+                          cachedPrecision="13"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[currency_vat_amount]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[CURRENCY_VAT_AMOUNT]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[STATUS]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1"
+                          cachedName="STATUS"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[status]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[STATUS]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PRODUCT]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="20"
+                          cachedName="PRODUCT"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[PRODUCT]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[RATE]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="4"
+                          cachedName="RATE"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rate]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[RATE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SOURCE]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="SOURCE"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[source]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[SOURCE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[VAT_RATE]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1"
+                          cachedName="VAT_RATE"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[vat_rate]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[VAT_RATE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[INVOICE_PAYMENT]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1"
+                          cachedName="INVOICE_PAYMENT"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[invoice_payment]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[INVOICE_PAYMENT]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DISTRIBUTION_CODE]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="DISTRIBUTION_CODE"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[distribution_code]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[DISTRIBUTION_CODE]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[batch_number]"
+                          dataType="numeric"
+                          name="batch_number"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[transaction_number]"
+                          dataType="numeric"
+                          name="transaction_number"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amount]"
+                          dataType="numeric"
+                          name="amount"
+                          precision="9"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[currency_amount]"
+                          dataType="numeric"
+                          name="currency_amount"
+                          precision="13"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[status]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="status" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[line_number]"
+                          dataType="numeric"
+                          name="line_number"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[product]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="product" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[rate]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="rate" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[source]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="source" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[quantity]"
+                          dataType="numeric"
+                          name="quantity"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[vat_rate]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="vat_rate" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[vat_amount]"
+                          dataType="numeric"
+                          name="vat_amount"
+                          precision="9"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[sales_contact_number]"
+                          dataType="numeric"
+                          name="sales_contact_number"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[invoice_payment]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="invoice_payment" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[distribution_code]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="distribution_code" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[currency_vat_amount]"
+                          dataType="numeric"
+                          name="currency_vat_amount"
+                          precision="13"
+                          scale="2" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Data Processing\Financial History Details Inc\Oracle Source"
+                  componentClassID="{CB67CD40-126C-4280-912D-2A625DFAFB66}"
+                  contactInfo="Oracle Source;Microsoft Connector for Oracle by Attunity; Attunity Ltd.; All Rights Reserved; http://www.attunity.com;4"
+                  description="Microsoft Oracle Source Component by Attunity"
+                  name="Oracle Source"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="The name of the table to be fetched."
+                      expressionType="Notify"
+                      name="TableName">"CARE_ADMIN"."FINANCIAL_HISTORY_DETAILS"</property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      expressionType="Notify"
+                      name="SqlCommand">SELECT batch_number
+      ,transaction_number
+      ,line_number
+      ,amount
+      ,product
+      ,rate
+      ,source
+      ,quantity
+      ,vat_rate
+      ,vat_amount
+      ,status
+      ,sales_contact_number
+      ,invoice_payment
+      ,distribution_code
+      ,currency_amount
+      ,currency_vat_amount  FROM care_admin.financial_history_details t 
+WHERE t.batch_number &gt;  1</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of rows fetched in a batch."
+                      expressionType="Notify"
+                      name="BatchSize">50000</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Number of pre-fetched rows."
+                      expressionType="Notify"
+                      name="PrefetchCount">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Determines the chunk size allocation for LOB columns"
+                      expressionType="Notify"
+                      name="LobChunkSize">32768</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The code page to use when code page information is unavailable from the data source."
+                      expressionType="Notify"
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">1</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Connections[MSOraConnection]"
+                      connectionManagerID="{B0E6080B-7584-431F-9BC5-B95A0F1857CA}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CIS Live]"
+                      description="The Oracle runtime connection"
+                      name="MSOraConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output]"
+                      errorRowDisposition="FailComponent"
+                      name="Oracle Source Output"
+                      truncationRowDisposition="FailComponent">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[BATCH_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[BATCH_NUMBER]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[BATCH_NUMBER]"
+                          name="BATCH_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[TRANSACTION_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TRANSACTION_NUMBER]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[TRANSACTION_NUMBER]"
+                          name="TRANSACTION_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[LINE_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[LINE_NUMBER]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[LINE_NUMBER]"
+                          name="LINE_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT]"
+                          name="AMOUNT"
+                          precision="9"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[PRODUCT]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[PRODUCT]"
+                          length="20"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[PRODUCT]"
+                          name="PRODUCT" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[RATE]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[RATE]"
+                          length="4"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[RATE]"
+                          name="RATE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[SOURCE]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SOURCE]"
+                          length="10"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[SOURCE]"
+                          name="SOURCE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[QUANTITY]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[QUANTITY]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[QUANTITY]"
+                          name="QUANTITY"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[VAT_RATE]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[VAT_RATE]"
+                          length="1"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[VAT_RATE]"
+                          name="VAT_RATE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[VAT_AMOUNT]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[VAT_AMOUNT]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[VAT_AMOUNT]"
+                          name="VAT_AMOUNT"
+                          precision="9"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[STATUS]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[STATUS]"
+                          length="1"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[STATUS]"
+                          name="STATUS" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[SALES_CONTACT_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SALES_CONTACT_NUMBER]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[SALES_CONTACT_NUMBER]"
+                          name="SALES_CONTACT_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[INVOICE_PAYMENT]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[INVOICE_PAYMENT]"
+                          length="1"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[INVOICE_PAYMENT]"
+                          name="INVOICE_PAYMENT" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[DISTRIBUTION_CODE]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DISTRIBUTION_CODE]"
+                          length="10"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[DISTRIBUTION_CODE]"
+                          name="DISTRIBUTION_CODE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[CURRENCY_AMOUNT]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CURRENCY_AMOUNT]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[CURRENCY_AMOUNT]"
+                          name="CURRENCY_AMOUNT"
+                          precision="13"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[CURRENCY_VAT_AMOUNT]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CURRENCY_VAT_AMOUNT]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].Columns[CURRENCY_VAT_AMOUNT]"
+                          name="CURRENCY_VAT_AMOUNT"
+                          precision="13"
+                          scale="2" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[BATCH_NUMBER]"
+                          dataType="numeric"
+                          name="BATCH_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TRANSACTION_NUMBER]"
+                          dataType="numeric"
+                          name="TRANSACTION_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[LINE_NUMBER]"
+                          dataType="numeric"
+                          name="LINE_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT]"
+                          dataType="numeric"
+                          name="AMOUNT"
+                          precision="9"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[PRODUCT]"
+                          codePage="1252"
+                          dataType="str"
+                          length="20"
+                          name="PRODUCT" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[RATE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4"
+                          name="RATE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SOURCE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="SOURCE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[QUANTITY]"
+                          dataType="numeric"
+                          name="QUANTITY"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[VAT_RATE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="VAT_RATE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[VAT_AMOUNT]"
+                          dataType="numeric"
+                          name="VAT_AMOUNT"
+                          precision="9"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[STATUS]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="STATUS" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SALES_CONTACT_NUMBER]"
+                          dataType="numeric"
+                          name="SALES_CONTACT_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[INVOICE_PAYMENT]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="INVOICE_PAYMENT" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DISTRIBUTION_CODE]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="DISTRIBUTION_CODE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CURRENCY_AMOUNT]"
+                          dataType="numeric"
+                          name="CURRENCY_AMOUNT"
+                          precision="13"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CURRENCY_VAT_AMOUNT]"
+                          dataType="numeric"
+                          name="CURRENCY_VAT_AMOUNT"
+                          precision="13"
+                          scale="2" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output]"
+                      isErrorOut="true"
+                      name="Oracle Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[BATCH_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[BATCH_NUMBER]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[BATCH_NUMBER]"
+                          name="BATCH_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[TRANSACTION_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[TRANSACTION_NUMBER]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[TRANSACTION_NUMBER]"
+                          name="TRANSACTION_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[LINE_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[LINE_NUMBER]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[LINE_NUMBER]"
+                          name="LINE_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMOUNT]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMOUNT]"
+                          name="AMOUNT"
+                          precision="9"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[PRODUCT]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[PRODUCT]"
+                          length="20"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[PRODUCT]"
+                          name="PRODUCT" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[RATE]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[RATE]"
+                          length="4"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[RATE]"
+                          name="RATE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[SOURCE]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SOURCE]"
+                          length="10"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[SOURCE]"
+                          name="SOURCE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[QUANTITY]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[QUANTITY]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[QUANTITY]"
+                          name="QUANTITY"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[VAT_RATE]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[VAT_RATE]"
+                          length="1"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[VAT_RATE]"
+                          name="VAT_RATE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[VAT_AMOUNT]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[VAT_AMOUNT]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[VAT_AMOUNT]"
+                          name="VAT_AMOUNT"
+                          precision="9"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[STATUS]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[STATUS]"
+                          length="1"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[STATUS]"
+                          name="STATUS" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[SALES_CONTACT_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SALES_CONTACT_NUMBER]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[SALES_CONTACT_NUMBER]"
+                          name="SALES_CONTACT_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[INVOICE_PAYMENT]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[INVOICE_PAYMENT]"
+                          length="1"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[INVOICE_PAYMENT]"
+                          name="INVOICE_PAYMENT" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[DISTRIBUTION_CODE]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DISTRIBUTION_CODE]"
+                          length="10"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[DISTRIBUTION_CODE]"
+                          name="DISTRIBUTION_CODE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[CURRENCY_AMOUNT]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CURRENCY_AMOUNT]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[CURRENCY_AMOUNT]"
+                          name="CURRENCY_AMOUNT"
+                          precision="13"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[CURRENCY_VAT_AMOUNT]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CURRENCY_VAT_AMOUNT]"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[CURRENCY_VAT_AMOUNT]"
+                          name="CURRENCY_VAT_AMOUNT"
+                          precision="13"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Data Processing\Financial History Details Inc\Row Count"
+                  componentClassID="{E2697D8C-70DA-42B2-8208-A19CE3A9FE41}"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Row Count">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::RecordCount</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Data Processing\Financial History Details Inc\Row Count.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Data Processing\Financial History Details Inc\Row Count.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\Data Processing\Financial History Details Inc\Row Count.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Data Processing\Financial History Details Inc.Paths[Oracle Source Output]"
+                  endId="Package\Data Processing\Financial History Details Inc\Row Count.Inputs[Row Count Input 1]"
+                  name="Oracle Source Output"
+                  startId="Package\Data Processing\Financial History Details Inc\Oracle Source.Outputs[Oracle Source Output]" />
+                <path
+                  refId="Package\Data Processing\Financial History Details Inc.Paths[Row Count Output 1]"
+                  endId="Package\Data Processing\Financial History Details Inc\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Row Count Output 1"
+                  startId="Package\Data Processing\Financial History Details Inc\Row Count.Outputs[Row Count Output 1]" />
               </paths>
             </pipeline>
           </DTS:ObjectData>
@@ -1177,7 +2027,7 @@ WHERE t.batch_number &gt;  1</property>
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Update Control Table"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:LoggingOptions
             DTS:FilterKind="0" />
@@ -1202,25 +2052,57 @@ WHERE t.batch_number &gt;  1</property>
           DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint 1]"
           DTS:CreationName=""
           DTS:DTSID="{B806EFAB-CA64-4966-9DDF-EA9E701320EE}"
-          DTS:From="Package\Data Processing\Data Flow Task"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::isFullLoad] ==0"
+          DTS:From="Package\Data Processing\Financial History Details Inc"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 1"
           DTS:To="Package\Data Processing\Merge delta tables" />
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint 2]"
           DTS:CreationName=""
-          DTS:DTSID="{A9FA2FBF-BDBC-48A5-9AE7-C8939E858EC6}"
+          DTS:DTSID="{55BCBC8B-A370-4F10-8705-128236865C9F}"
           DTS:From="Package\Data Processing\Truncate Delta Tables"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 2"
-          DTS:To="Package\Data Processing\Data Flow Task" />
+          DTS:To="Package\Data Processing\Execute SQL Task" />
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint 3]"
           DTS:CreationName=""
           DTS:DTSID="{9D0A9898-E822-4677-8B9C-9221BE47D77C}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::isFullLoad] ==0"
           DTS:From="Package\Data Processing\Merge delta tables"
-          DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 3"
+          DTS:To="Package\Data Processing\Update Control Table" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{9631E785-98F6-4728-8D10-2C9625911382}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::isFullLoad] ==1"
+          DTS:From="Package\Data Processing\Execute SQL Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Data Processing\Financial History Details Full" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint 5]"
+          DTS:CreationName=""
+          DTS:DTSID="{0CEFC76D-0237-4C73-8A52-C4E8BDB75DD9}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::isFullLoad] ==0"
+          DTS:From="Package\Data Processing\Execute SQL Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 5"
+          DTS:To="Package\Data Processing\Financial History Details Inc" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint 6]"
+          DTS:CreationName=""
+          DTS:DTSID="{2ADB2DE7-E640-403A-9CDA-E4E74D46D4DC}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::isFullLoad] ==1"
+          DTS:From="Package\Data Processing\Financial History Details Full"
+          DTS:ObjectName="Constraint 6"
           DTS:To="Package\Data Processing\Update Control Table" />
       </DTS:PrecedenceConstraints>
     </DTS:Executable>
@@ -1360,14 +2242,35 @@ WHERE t.batch_number &gt;  1</property>
               VSTAMinorVersion="0"
               Language="CSharp">
               <ProjectItem
-                Name="Properties\Settings.settings"
-                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
+                Name="Properties\AssemblyInfo.cs"
+                Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_231a69c233f842a39d0e227465cc132a.csproj")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyProduct("ST_231a69c233f842a39d0e227465cc132a.csproj")]
+[assembly: AssemblyCopyright("Copyright @ Microsoft 2014")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.resx"
                 Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -1670,35 +2573,14 @@ namespace ST_231a69c233f842a39d0e227465cc132a.csproj.Properties
     }
 }]]></ProjectItem>
               <ProjectItem
-                Name="Properties\AssemblyInfo.cs"
-                Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
-
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_231a69c233f842a39d0e227465cc132a.csproj")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("ST_231a69c233f842a39d0e227465cc132a.csproj")]
-[assembly: AssemblyCopyright("Copyright @ Microsoft 2014")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+                Name="Properties\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.Designer.cs"
                 Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -2013,39 +2895,39 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="151,42"
-          Id="Package\Data Processing\Data Flow Task"
-          TopLeft="98.5113342942873,267.486554341167" />
+          Size="209,42"
+          Id="Package\Data Processing\Financial History Details Inc"
+          TopLeft="64.6224454053986,266.486554341167" />
         <NodeLayout
           Size="238,42"
           Id="Package\Data Processing\Get HighWater Mark from Control"
-          TopLeft="57.1428570942006,60" />
+          TopLeft="169.142857094201,12" />
         <NodeLayout
           Size="167,42"
           Id="Package\Data Processing\Merge delta tables"
           TopLeft="90.857143382637,354.160780638724" />
         <NodeLayout
-          Size="183,42"
+          Size="182,42"
           Id="Package\Data Processing\Truncate Delta Tables"
-          TopLeft="89.7142862203171,133.92548343236" />
+          TopLeft="201.714286220317,85.92548343236" />
         <NodeLayout
           Size="174,42"
           Id="Package\Data Processing\Update Control Table"
-          TopLeft="83.9455786390831,448.675069103438" />
+          TopLeft="179.945578639083,465.675069103438" />
         <EdgeLayout
           Id="Package\Data Processing.PrecedenceConstraints[Constraint]"
-          TopLeft="178.628571657259,101.6">
+          TopLeft="290.428571657259,54">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,32.32548343236"
+              EndConnector="0,31.92548343236"
               Start="0,0"
-              End="0,24.82548343236">
+              End="0,24.42548343236">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,24.82548343236" />
+                    End="0,24.42548343236" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2056,75 +2938,207 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Processing.PrecedenceConstraints[Constraint 1]"
-          TopLeft="174.184238838462,309.486554341167">
+          TopLeft="171.739794394018,308.486554341167">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,44.674226297557"
+              EndConnector="0,45.674226297557"
               Start="0,0"
-              End="0,37.174226297557">
+              End="0,38.174226297557">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,37.174226297557" />
+                    End="0,38.174226297557" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Processing.PrecedenceConstraints[Constraint 2]"
-          TopLeft="177.612810257302,175.92548343236">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,91.561070908807"
-              Start="0,0"
-              End="0,84.061070908807">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,84.061070908807" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="-8,11.0871131487785,16,16"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Processing.PrecedenceConstraints[Constraint 3]"
-          TopLeft="172.60136101086,395.760780638724">
+          TopLeft="174.357143382637,396.160780638724">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,52.9142884647143"
+              EndConnector="64.9217685897794,69.5142884647141"
               Start="0,0"
-              End="0,45.4142884647143">
+              End="64.9217685897794,62.0142884647141">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,45.4142884647143" />
+                    End="0,37.3285405223015" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,37.3285405223015"
+                    Point2="0,41.3285405223015"
+                    Point3="4,41.3285405223015" />
+                  <mssgle:LineSegment
+                    End="60.9217685897794,41.3285405223015" />
+                  <mssgle:CubicBezierSegment
+                    Point1="60.9217685897794,41.3285405223015"
+                    Point2="64.9217685897794,41.3285405223015"
+                    Point3="64.9217685897794,45.3285405223015" />
+                  <mssgle:LineSegment
+                    End="64.9217685897794,62.0142884647141" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="24.4608842948897,46.3285405223015,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="211,42"
+          Id="Package\Data Processing\Financial History Details Full"
+          TopLeft="312.142857094201,263.675069103438" />
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Data Processing\Execute SQL Task"
+          TopLeft="210.142857094201,175.675069103438" />
+        <EdgeLayout
+          Id="Package\Data Processing.PrecedenceConstraints[Constraint 2]"
+          TopLeft="292.178571657259,127.92548343236">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,47.7495856710781"
+              Start="0,0"
+              End="0,40.2495856710781">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.2495856710781" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Processing.PrecedenceConstraints[Constraint 4]"
+          TopLeft="317.476190427534,217.675069103438">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="100.166666666667,46"
+              Start="0,0"
+              End="100.166666666667,38.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.6682867557716" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.6682867557716"
+                    Point2="0,18.6682867557716"
+                    Point3="4,18.6682867557716" />
+                  <mssgle:LineSegment
+                    End="96.1666666666667,18.6682867557716" />
+                  <mssgle:CubicBezierSegment
+                    Point1="96.1666666666667,18.6682867557716"
+                    Point2="100.166666666667,18.6682867557716"
+                    Point3="100.166666666667,22.6682867557716" />
+                  <mssgle:LineSegment
+                    End="100.166666666667,38.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="42.0833333333333,23.6682867557716,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Processing.PrecedenceConstraints[Constraint 5]"
+          TopLeft="265.809523760867,217.675069103438">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-96.6870783554687,48.8114852377289"
+              Start="0,0"
+              End="-96.6870783554687,41.3114852377289">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.8092783346312" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.8092783346312"
+                    Point2="0,19.8092783346312"
+                    Point3="-4,19.8092783346312" />
+                  <mssgle:LineSegment
+                    End="-92.6870783554687,19.8092783346312" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-92.6870783554687,19.8092783346312"
+                    Point2="-96.6870783554687,19.8092783346312"
+                    Point3="-96.6870783554687,23.8092783346312" />
+                  <mssgle:LineSegment
+                    End="-96.6870783554687,41.3114852377289" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-56.3435391777344,24.8092783346312,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Processing.PrecedenceConstraints[Constraint 6]"
+          TopLeft="417.642857094201,305.675069103438">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-123.030611788451,160"
+              Start="0,0"
+              End="-123.030611788451,152.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,91.125284738041" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,91.125284738041"
+                    Point2="0,95.125284738041"
+                    Point3="-4,95.125284738041" />
+                  <mssgle:LineSegment
+                    End="-119.030611788451,95.125284738041" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-119.030611788451,95.125284738041"
+                    Point2="-123.030611788451,95.125284738041"
+                    Point3="-123.030611788451,99.125284738041" />
+                  <mssgle:LineSegment
+                    End="-123.030611788451,152.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-69.5153058942254,100.125284738041,16,16"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43.924528301886795"
           IsExpanded="True"
-          PanelSize="340,546"
-          Size="340,590"
+          PanelSize="528,648"
+          Size="528,692"
           Id="Package\Data Processing"
           TopLeft="495.454185955149,593.056904253957" />
         <NodeLayout
@@ -2137,7 +3151,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           PanelSize="284,116"
           Size="284,160"
           Id="Package\Failure Loading Closeout"
-          TopLeft="754.328404332934,1241.31009879362" />
+          TopLeft="961.328404332934,1471.31009879362" />
         <NodeLayout
           Size="238,42"
           Id="Package\Setup\Get Lineage - Insert Audit Record"
@@ -2211,21 +3225,33 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           PanelSize="336,95"
           Size="336,139"
           Id="Package\Successful Loading Closeout"
-          TopLeft="288.042682106421,1251.33363113967" />
+          TopLeft="251.042682106421,1475.33363113967" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="668.4517536613,466.374544397486">
+          TopLeft="671.54932136745,465.974544397487">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,126.68235985647"
+              EndConnector="87.904864587699,127.08235985647"
               Start="0,0"
-              End="0,119.18235985647">
+              End="87.904864587699,119.58235985647">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,119.18235985647" />
+                    End="0,59.5411799282352" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,59.5411799282352"
+                    Point2="0,63.5411799282352"
+                    Point3="4,63.5411799282352" />
+                  <mssgle:LineSegment
+                    End="83.904864587699,63.5411799282352" />
+                  <mssgle:CubicBezierSegment
+                    Point1="83.904864587699,63.5411799282352"
+                    Point2="87.904864587699,63.5411799282352"
+                    Point3="87.904864587699,67.5411799282352" />
+                  <mssgle:LineSegment
+                    End="87.904864587699,119.58235985647" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2236,30 +3262,30 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="610.120852621816,1183.45690425396">
+          TopLeft="672.787519288482,1285.05690425396">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-154.078170515395,67.876726885713"
+              EndConnector="-253.744837182061,190.276726885713"
               Start="0,0"
-              End="-154.078170515395,60.376726885713">
+              End="-253.744837182061,182.776726885713">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,23.3414450218797" />
+                    End="0,72.4556032501506" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,23.3414450218797"
-                    Point2="0,27.3414450218797"
-                    Point3="-4,27.3414450218797" />
+                    Point1="0,72.4556032501506"
+                    Point2="0,76.4556032501506"
+                    Point3="-4,76.4556032501506" />
                   <mssgle:LineSegment
-                    End="-150.078170515395,27.3414450218797" />
+                    End="-249.744837182061,76.4556032501506" />
                   <mssgle:CubicBezierSegment
-                    Point1="-150.078170515395,27.3414450218797"
-                    Point2="-154.078170515395,27.3414450218797"
-                    Point3="-154.078170515395,31.3414450218797" />
+                    Point1="-249.744837182061,76.4556032501506"
+                    Point2="-253.744837182061,76.4556032501506"
+                    Point3="-253.744837182061,80.4556032501506" />
                   <mssgle:LineSegment
-                    End="-154.078170515395,60.376726885713" />
+                    End="-253.744837182061,182.776726885713" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2270,37 +3296,37 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="720.787519288482,1183.45690425396">
+          TopLeft="846.120852621816,1285.05690425396">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="175.540885044452,57.853194539663"
+              EndConnector="257.207551711118,186.253194539663"
               Start="0,0"
-              End="175.540885044452,50.353194539663">
+              End="257.207551711118,178.753194539663">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,19.3038629059064" />
+                    End="0,70.838896899623" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,19.3038629059064"
-                    Point2="0,23.3038629059064"
-                    Point3="4,23.3038629059064" />
+                    Point1="0,70.838896899623"
+                    Point2="0,74.838896899623"
+                    Point3="4,74.838896899623" />
                   <mssgle:LineSegment
-                    End="171.540885044452,23.3038629059064" />
+                    End="253.207551711118,74.838896899623" />
                   <mssgle:CubicBezierSegment
-                    Point1="171.540885044452,23.3038629059064"
-                    Point2="175.540885044452,23.3038629059064"
-                    Point3="175.540885044452,27.3038629059064" />
+                    Point1="253.207551711118,74.838896899623"
+                    Point2="257.207551711118,74.838896899623"
+                    Point3="257.207551711118,78.838896899623" />
                   <mssgle:LineSegment
-                    End="175.540885044452,50.353194539663" />
+                    End="257.207551711118,178.753194539663" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="72.5290948659758,28.3038629059064,30.4826953125,9.7490234375"
+              BoundingBox="113.362428199309,79.838896899623,30.4826953125,9.7490234375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2308,24 +3334,24 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\Data Processing\Data Flow Task">
+    design-time-name="Package\Data Processing\Financial History Details Inc">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="131,42"
-          Id="Package\Data Processing\Data Flow Task\Row Count"
+          Id="Package\Data Processing\Financial History Details Inc\Row Count"
           TopLeft="342.857148695965,168.847061191546" />
         <NodeLayout
           Size="144,42"
-          Id="Package\Data Processing\Data Flow Task\Oracle Source"
+          Id="Package\Data Processing\Financial History Details Inc\Oracle Source"
           TopLeft="307,45" />
         <NodeLayout
           Size="171,42"
-          Id="Package\Data Processing\Data Flow Task\OLE DB Destination"
+          Id="Package\Data Processing\Financial History Details Inc\OLE DB Destination"
           TopLeft="323.786595837719,276.635293414106" />
         <EdgeLayout
-          Id="Package\Data Processing\Data Flow Task.Paths[Row Count Output 1]"
+          Id="Package\Data Processing\Financial History Details Inc.Paths[Row Count Output 1]"
           TopLeft="408.921872266842,210.447061191546">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -2347,7 +3373,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Data Processing\Data Flow Task.Paths[Oracle Source Output]"
+          Id="Package\Data Processing\Financial History Details Inc.Paths[Oracle Source Output]"
           TopLeft="379,87">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -2384,7 +3410,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Processing\Data Flow Task\Oracle Source">
+    design-time-name="Package\Data Processing\Financial History Details Inc\Oracle Source">
     <Properties>
       <Property>
         <Name>TableInfoObjectType</Name>
@@ -2394,7 +3420,84 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Processing\Data Flow Task\OLE DB Destination">
+    design-time-name="Package\Data Processing\Financial History Details Inc\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Data Processing\Financial History Details Full">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="131,42"
+          Id="Package\Data Processing\Financial History Details Full\Row Count"
+          TopLeft="342.857148695965,168.847061191546" />
+        <NodeLayout
+          Size="144,42"
+          Id="Package\Data Processing\Financial History Details Full\Oracle Source"
+          TopLeft="333,43" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Data Processing\Financial History Details Full\OLE DB Destination"
+          TopLeft="323.786595837719,276.635293414106" />
+        <EdgeLayout
+          Id="Package\Data Processing\Financial History Details Full.Paths[Oracle Source Output]"
+          TopLeft="406.678574347982,85">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,83.847061191546"
+              Start="0,0"
+              End="0,76.347061191546">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,76.347061191546" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Processing\Financial History Details Full.Paths[Row Count Output 1]"
+          TopLeft="408.921872266842,210.447061191546">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,66.1882322225602"
+              Start="0,0"
+              End="0,58.6882322225602">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,58.6882322225602" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Processing\Financial History Details Full\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>

@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="etl_contact_mailings"
   DTS:PackageType="5"
-  DTS:VersionBuild="160"
-  DTS:VersionGUID="{836E0C3F-9FB3-4683-AFAF-FA8DBFA3F329}">
+  DTS:VersionBuild="165"
+  DTS:VersionGUID="{9DEE9362-29FE-4F17-877B-7936D8E1E03B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:LogProviders>
@@ -57,6 +57,15 @@
       DTS:ObjectName="FailureMessage">
       <DTS:VariableValue
         DTS:DataType="8">Process FAILED 0 records processed.</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E44DBA77-7000-41F3-B402-64905213835D}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="isFullLoad">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -128,6 +137,17 @@ WHERE t.mailing_number &gt;  0</DTS:VariableValue>
       DTS:ObjectName="SuccessMessage">
       <DTS:VariableValue
         DTS:DataType="8">Process Succeeded - 0 rows processed.</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{9585B80A-960D-48D1-9F23-9439BAB809CB}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;UPDATE control.LastTableUpdate SET [MaxBusKeyID] = (SELECT MAX(t1.mailing_number) FROM cis.contact_mailings t1) , [BusKeyColumn] = 'mailing_number', [LastExtractRowCount] = &quot; +  (DT_STR, 10, 1252) @[User::RecordCount] + &quot;, [LastExtractedDate]  = GETDATE()  WHERE [TableName] = 'contact_mailings'&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="UpdateMessage">
+      <DTS:VariableValue
+        DTS:DataType="8">UPDATE control.LastTableUpdate SET [MaxBusKeyID] = (SELECT MAX(t1.mailing_number) FROM cis.contact_mailings t1) , [BusKeyColumn] = 'mailing_number', [LastExtractRowCount] = 0, [LastExtractedDate]  = GETDATE()  WHERE [TableName] = 'contact_mailings'</DTS:VariableValue>
     </DTS:Variable>
   </DTS:Variables>
   <DTS:LoggingOptions
@@ -209,13 +229,363 @@ WHERE t.mailing_number &gt;  0</DTS:VariableValue>
         DTS:FilterKind="0" />
       <DTS:Executables>
         <DTS:Executable
-          DTS:refId="Package\Data Processing\contact_mailings"
+          DTS:refId="Package\Data Processing\contact_mailings Full"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{dd2fa49d-824f-4415-a15f-f4925da9deb5}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="contact_mailings Full"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:ObjectData>
+            <pipeline
+              defaultBufferMaxRows="60000"
+              defaultBufferSize="30485760"
+              version="1">
+              <components>
+                <component
+                  refId="Package\Data Processing\contact_mailings Full\OLE DB Destination"
+                  componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[cis].[contact_mailings]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Data Processing\contact_mailings Full\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="{A7202722-F760-4DEE-BB0C-B0045540580C}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[LocalHost.DiabetesDWH]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Data Processing\contact_mailings Full\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Data Processing\contact_mailings Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CONTACT_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="CONTACT_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\contact_mailings Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[contact_number]"
+                          lineageId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Output].Columns[CONTACT_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\contact_mailings Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ADDRESS_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="ADDRESS_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\contact_mailings Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[address_number]"
+                          lineageId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\contact_mailings Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MAILING_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="MAILING_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\contact_mailings Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[mailing_number]"
+                          lineageId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Output].Columns[MAILING_NUMBER]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\contact_mailings Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[contact_number]"
+                          dataType="numeric"
+                          name="contact_number"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\contact_mailings Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[address_number]"
+                          dataType="numeric"
+                          name="address_number"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\contact_mailings Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[mailing_number]"
+                          dataType="numeric"
+                          name="mailing_number"
+                          precision="18" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Data Processing\contact_mailings Full\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Data Processing\contact_mailings Full\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Data Processing\contact_mailings Full\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Data Processing\contact_mailings Full\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Data Processing\contact_mailings Full\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Data Processing\contact_mailings Full\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Data Processing\contact_mailings Full\Oracle Source"
+                  componentClassID="{CB67CD40-126C-4280-912D-2A625DFAFB66}"
+                  contactInfo="Oracle Source;Microsoft Connector for Oracle by Attunity; Attunity Ltd.; All Rights Reserved; http://www.attunity.com;4"
+                  description="Microsoft Oracle Source Component by Attunity"
+                  name="Oracle Source"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="The name of the table to be fetched."
+                      expressionType="Notify"
+                      name="TableName">"CARE_ADMIN"."CONTACT_MAILINGS"</property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      expressionType="Notify"
+                      name="SqlCommand">SELECT  contact_number
+      ,address_number
+      ,mailing_number
+FROM CARE_ADMIN.CONTACT_MAILINGS  t 
+WHERE t.mailing_number &gt;  0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of rows fetched in a batch."
+                      expressionType="Notify"
+                      name="BatchSize">50000</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Number of pre-fetched rows."
+                      expressionType="Notify"
+                      name="PrefetchCount">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Determines the chunk size allocation for LOB columns"
+                      expressionType="Notify"
+                      name="LobChunkSize">32768</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The code page to use when code page information is unavailable from the data source."
+                      expressionType="Notify"
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">1</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Data Processing\contact_mailings Full\Oracle Source.Connections[MSOraConnection]"
+                      connectionManagerID="{B0E6080B-7584-431F-9BC5-B95A0F1857CA}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CIS Live]"
+                      description="The Oracle runtime connection"
+                      name="MSOraConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Output]"
+                      errorRowDisposition="FailComponent"
+                      name="Oracle Source Output"
+                      truncationRowDisposition="FailComponent">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Output].Columns[CONTACT_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CONTACT_NUMBER]"
+                          lineageId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Output].Columns[CONTACT_NUMBER]"
+                          name="CONTACT_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_NUMBER]"
+                          lineageId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_NUMBER]"
+                          name="ADDRESS_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Output].Columns[MAILING_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[MAILING_NUMBER]"
+                          lineageId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Output].Columns[MAILING_NUMBER]"
+                          name="MAILING_NUMBER"
+                          precision="38" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CONTACT_NUMBER]"
+                          dataType="numeric"
+                          name="CONTACT_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_NUMBER]"
+                          dataType="numeric"
+                          name="ADDRESS_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[MAILING_NUMBER]"
+                          dataType="numeric"
+                          name="MAILING_NUMBER"
+                          precision="38" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Error Output]"
+                      isErrorOut="true"
+                      name="Oracle Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[CONTACT_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CONTACT_NUMBER]"
+                          lineageId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[CONTACT_NUMBER]"
+                          name="CONTACT_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[ADDRESS_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_NUMBER]"
+                          lineageId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[ADDRESS_NUMBER]"
+                          name="ADDRESS_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[MAILING_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[MAILING_NUMBER]"
+                          lineageId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[MAILING_NUMBER]"
+                          name="MAILING_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Data Processing\contact_mailings Full\Row Count"
+                  componentClassID="{E2697D8C-70DA-42B2-8208-A19CE3A9FE41}"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Row Count">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::RecordCount</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Data Processing\contact_mailings Full\Row Count.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Data Processing\contact_mailings Full\Row Count.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\Data Processing\contact_mailings Full\Row Count.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Data Processing\contact_mailings Full.Paths[Oracle Source Output]"
+                  endId="Package\Data Processing\contact_mailings Full\Row Count.Inputs[Row Count Input 1]"
+                  name="Oracle Source Output"
+                  startId="Package\Data Processing\contact_mailings Full\Oracle Source.Outputs[Oracle Source Output]" />
+                <path
+                  refId="Package\Data Processing\contact_mailings Full.Paths[Row Count Output 1]"
+                  endId="Package\Data Processing\contact_mailings Full\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Row Count Output 1"
+                  startId="Package\Data Processing\contact_mailings Full\Row Count.Outputs[Row Count Output 1]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Data Processing\contact_mailings Inc"
           DTS:CreationName="SSIS.Pipeline.3"
           DTS:Description="Data Flow Task"
           DTS:DTSID="{5E3D3680-A77C-48D2-A934-F59FC0E80415}"
           DTS:ExecutableType="SSIS.Pipeline.3"
           DTS:LocaleID="-1"
-          DTS:ObjectName="contact_mailings"
+          DTS:ObjectName="contact_mailings Inc"
           DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
           <DTS:Variables />
           <DTS:LoggingOptions
@@ -229,7 +599,7 @@ WHERE t.mailing_number &gt;  0</DTS:VariableValue>
               version="1">
               <components>
                 <component
-                  refId="Package\Data Processing\contact_mailings\OLE DB Destination"
+                  refId="Package\Data Processing\contact_mailings Inc\OLE DB Destination"
                   componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
                   contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
                   description="OLE DB Destination"
@@ -286,7 +656,7 @@ WHERE t.mailing_number &gt;  0</DTS:VariableValue>
                   </properties>
                   <connections>
                     <connection
-                      refId="Package\Data Processing\contact_mailings\OLE DB Destination.Connections[OleDbConnection]"
+                      refId="Package\Data Processing\contact_mailings Inc\OLE DB Destination.Connections[OleDbConnection]"
                       connectionManagerID="{A7202722-F760-4DEE-BB0C-B0045540580C}:external"
                       connectionManagerRefId="Project.ConnectionManagers[LocalHost.DiabetesDWH]"
                       description="The OLE DB runtime connection used to access the database."
@@ -294,46 +664,46 @@ WHERE t.mailing_number &gt;  0</DTS:VariableValue>
                   </connections>
                   <inputs>
                     <input
-                      refId="Package\Data Processing\contact_mailings\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      refId="Package\Data Processing\contact_mailings Inc\OLE DB Destination.Inputs[OLE DB Destination Input]"
                       errorOrTruncationOperation="Insert"
                       errorRowDisposition="FailComponent"
                       hasSideEffects="true"
                       name="OLE DB Destination Input">
                       <inputColumns>
                         <inputColumn
-                          refId="Package\Data Processing\contact_mailings\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CONTACT_NUMBER]"
+                          refId="Package\Data Processing\contact_mailings Inc\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CONTACT_NUMBER]"
                           cachedDataType="numeric"
                           cachedName="CONTACT_NUMBER"
                           cachedPrecision="38"
-                          externalMetadataColumnId="Package\Data Processing\contact_mailings\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[contact_number]"
-                          lineageId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Output].Columns[CONTACT_NUMBER]" />
+                          externalMetadataColumnId="Package\Data Processing\contact_mailings Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[contact_number]"
+                          lineageId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Output].Columns[CONTACT_NUMBER]" />
                         <inputColumn
-                          refId="Package\Data Processing\contact_mailings\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ADDRESS_NUMBER]"
+                          refId="Package\Data Processing\contact_mailings Inc\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ADDRESS_NUMBER]"
                           cachedDataType="numeric"
                           cachedName="ADDRESS_NUMBER"
                           cachedPrecision="38"
-                          externalMetadataColumnId="Package\Data Processing\contact_mailings\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[address_number]"
-                          lineageId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_NUMBER]" />
+                          externalMetadataColumnId="Package\Data Processing\contact_mailings Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[address_number]"
+                          lineageId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_NUMBER]" />
                         <inputColumn
-                          refId="Package\Data Processing\contact_mailings\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MAILING_NUMBER]"
+                          refId="Package\Data Processing\contact_mailings Inc\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[MAILING_NUMBER]"
                           cachedDataType="numeric"
                           cachedName="MAILING_NUMBER"
                           cachedPrecision="38"
-                          externalMetadataColumnId="Package\Data Processing\contact_mailings\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[mailing_number]"
-                          lineageId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Output].Columns[MAILING_NUMBER]" />
+                          externalMetadataColumnId="Package\Data Processing\contact_mailings Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[mailing_number]"
+                          lineageId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Output].Columns[MAILING_NUMBER]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
                         <externalMetadataColumn
-                          refId="Package\Data Processing\contact_mailings\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[contact_number]"
+                          refId="Package\Data Processing\contact_mailings Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[contact_number]"
                           dataType="i4"
                           name="contact_number" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\contact_mailings\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[address_number]"
+                          refId="Package\Data Processing\contact_mailings Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[address_number]"
                           dataType="i4"
                           name="address_number" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\contact_mailings\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[mailing_number]"
+                          refId="Package\Data Processing\contact_mailings Inc\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[mailing_number]"
                           dataType="i4"
                           name="mailing_number" />
                       </externalMetadataColumns>
@@ -341,22 +711,22 @@ WHERE t.mailing_number &gt;  0</DTS:VariableValue>
                   </inputs>
                   <outputs>
                     <output
-                      refId="Package\Data Processing\contact_mailings\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      refId="Package\Data Processing\contact_mailings Inc\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
                       exclusionGroup="1"
                       isErrorOut="true"
                       name="OLE DB Destination Error Output"
-                      synchronousInputId="Package\Data Processing\contact_mailings\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      synchronousInputId="Package\Data Processing\contact_mailings Inc\OLE DB Destination.Inputs[OLE DB Destination Input]">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Data Processing\contact_mailings\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          refId="Package\Data Processing\contact_mailings Inc\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                           dataType="i4"
-                          lineageId="Package\Data Processing\contact_mailings\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          lineageId="Package\Data Processing\contact_mailings Inc\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                           name="ErrorCode"
                           specialFlags="1" />
                         <outputColumn
-                          refId="Package\Data Processing\contact_mailings\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          refId="Package\Data Processing\contact_mailings Inc\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                           dataType="i4"
-                          lineageId="Package\Data Processing\contact_mailings\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          lineageId="Package\Data Processing\contact_mailings Inc\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
                       </outputColumns>
@@ -365,7 +735,7 @@ WHERE t.mailing_number &gt;  0</DTS:VariableValue>
                   </outputs>
                 </component>
                 <component
-                  refId="Package\Data Processing\contact_mailings\Oracle Source"
+                  refId="Package\Data Processing\contact_mailings Inc\Oracle Source"
                   componentClassID="{CB67CD40-126C-4280-912D-2A625DFAFB66}"
                   contactInfo="Oracle Source;Microsoft Connector for Oracle by Attunity; Attunity Ltd.; All Rights Reserved; http://www.attunity.com;4"
                   description="Microsoft Oracle Source Component by Attunity"
@@ -415,7 +785,7 @@ WHERE t.mailing_number &gt;  0</property>
                   </properties>
                   <connections>
                     <connection
-                      refId="Package\Data Processing\contact_mailings\Oracle Source.Connections[MSOraConnection]"
+                      refId="Package\Data Processing\contact_mailings Inc\Oracle Source.Connections[MSOraConnection]"
                       connectionManagerID="{B0E6080B-7584-431F-9BC5-B95A0F1857CA}:external"
                       connectionManagerRefId="Project.ConnectionManagers[CIS Live]"
                       description="The Oracle runtime connection"
@@ -423,88 +793,88 @@ WHERE t.mailing_number &gt;  0</property>
                   </connections>
                   <outputs>
                     <output
-                      refId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Output]"
+                      refId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Output]"
                       errorRowDisposition="FailComponent"
                       name="Oracle Source Output"
                       truncationRowDisposition="FailComponent">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Output].Columns[CONTACT_NUMBER]"
+                          refId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Output].Columns[CONTACT_NUMBER]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CONTACT_NUMBER]"
-                          lineageId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Output].Columns[CONTACT_NUMBER]"
+                          externalMetadataColumnId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CONTACT_NUMBER]"
+                          lineageId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Output].Columns[CONTACT_NUMBER]"
                           name="CONTACT_NUMBER"
                           precision="38" />
                         <outputColumn
-                          refId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_NUMBER]"
+                          refId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_NUMBER]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_NUMBER]"
-                          lineageId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_NUMBER]"
+                          externalMetadataColumnId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_NUMBER]"
+                          lineageId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Output].Columns[ADDRESS_NUMBER]"
                           name="ADDRESS_NUMBER"
                           precision="38" />
                         <outputColumn
-                          refId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Output].Columns[MAILING_NUMBER]"
+                          refId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Output].Columns[MAILING_NUMBER]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[MAILING_NUMBER]"
-                          lineageId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Output].Columns[MAILING_NUMBER]"
+                          externalMetadataColumnId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[MAILING_NUMBER]"
+                          lineageId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Output].Columns[MAILING_NUMBER]"
                           name="MAILING_NUMBER"
                           precision="38" />
                       </outputColumns>
                       <externalMetadataColumns
                         isUsed="True">
                         <externalMetadataColumn
-                          refId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CONTACT_NUMBER]"
+                          refId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CONTACT_NUMBER]"
                           dataType="numeric"
                           name="CONTACT_NUMBER"
                           precision="38" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_NUMBER]"
+                          refId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_NUMBER]"
                           dataType="numeric"
                           name="ADDRESS_NUMBER"
                           precision="38" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[MAILING_NUMBER]"
+                          refId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[MAILING_NUMBER]"
                           dataType="numeric"
                           name="MAILING_NUMBER"
                           precision="38" />
                       </externalMetadataColumns>
                     </output>
                     <output
-                      refId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Error Output]"
+                      refId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Error Output]"
                       isErrorOut="true"
                       name="Oracle Source Error Output">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Error Output].Columns[CONTACT_NUMBER]"
+                          refId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[CONTACT_NUMBER]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CONTACT_NUMBER]"
-                          lineageId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Error Output].Columns[CONTACT_NUMBER]"
+                          externalMetadataColumnId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CONTACT_NUMBER]"
+                          lineageId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[CONTACT_NUMBER]"
                           name="CONTACT_NUMBER"
                           precision="38" />
                         <outputColumn
-                          refId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Error Output].Columns[ADDRESS_NUMBER]"
+                          refId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[ADDRESS_NUMBER]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_NUMBER]"
-                          lineageId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Error Output].Columns[ADDRESS_NUMBER]"
+                          externalMetadataColumnId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ADDRESS_NUMBER]"
+                          lineageId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[ADDRESS_NUMBER]"
                           name="ADDRESS_NUMBER"
                           precision="38" />
                         <outputColumn
-                          refId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Error Output].Columns[MAILING_NUMBER]"
+                          refId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[MAILING_NUMBER]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[MAILING_NUMBER]"
-                          lineageId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Error Output].Columns[MAILING_NUMBER]"
+                          externalMetadataColumnId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[MAILING_NUMBER]"
+                          lineageId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[MAILING_NUMBER]"
                           name="MAILING_NUMBER"
                           precision="38" />
                         <outputColumn
-                          refId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
+                          refId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
                           dataType="i4"
-                          lineageId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
+                          lineageId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
                           name="ErrorCode"
                           specialFlags="1" />
                         <outputColumn
-                          refId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
+                          refId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
                           dataType="i4"
-                          lineageId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
+                          lineageId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
                       </outputColumns>
@@ -513,7 +883,7 @@ WHERE t.mailing_number &gt;  0</property>
                   </outputs>
                 </component>
                 <component
-                  refId="Package\Data Processing\contact_mailings\Row Count"
+                  refId="Package\Data Processing\contact_mailings Inc\Row Count"
                   componentClassID="{E2697D8C-70DA-42B2-8208-A19CE3A9FE41}"
                   contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
                   description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
@@ -526,7 +896,7 @@ WHERE t.mailing_number &gt;  0</property>
                   </properties>
                   <inputs>
                     <input
-                      refId="Package\Data Processing\contact_mailings\Row Count.Inputs[Row Count Input 1]"
+                      refId="Package\Data Processing\contact_mailings Inc\Row Count.Inputs[Row Count Input 1]"
                       hasSideEffects="true"
                       name="Row Count Input 1">
                       <externalMetadataColumns />
@@ -534,9 +904,9 @@ WHERE t.mailing_number &gt;  0</property>
                   </inputs>
                   <outputs>
                     <output
-                      refId="Package\Data Processing\contact_mailings\Row Count.Outputs[Row Count Output 1]"
+                      refId="Package\Data Processing\contact_mailings Inc\Row Count.Outputs[Row Count Output 1]"
                       name="Row Count Output 1"
-                      synchronousInputId="Package\Data Processing\contact_mailings\Row Count.Inputs[Row Count Input 1]">
+                      synchronousInputId="Package\Data Processing\contact_mailings Inc\Row Count.Inputs[Row Count Input 1]">
                       <externalMetadataColumns />
                     </output>
                   </outputs>
@@ -544,17 +914,39 @@ WHERE t.mailing_number &gt;  0</property>
               </components>
               <paths>
                 <path
-                  refId="Package\Data Processing\contact_mailings.Paths[Oracle Source Output]"
-                  endId="Package\Data Processing\contact_mailings\Row Count.Inputs[Row Count Input 1]"
+                  refId="Package\Data Processing\contact_mailings Inc.Paths[Oracle Source Output]"
+                  endId="Package\Data Processing\contact_mailings Inc\Row Count.Inputs[Row Count Input 1]"
                   name="Oracle Source Output"
-                  startId="Package\Data Processing\contact_mailings\Oracle Source.Outputs[Oracle Source Output]" />
+                  startId="Package\Data Processing\contact_mailings Inc\Oracle Source.Outputs[Oracle Source Output]" />
                 <path
-                  refId="Package\Data Processing\contact_mailings.Paths[Row Count Output 1]"
-                  endId="Package\Data Processing\contact_mailings\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  refId="Package\Data Processing\contact_mailings Inc.Paths[Row Count Output 1]"
+                  endId="Package\Data Processing\contact_mailings Inc\OLE DB Destination.Inputs[OLE DB Destination Input]"
                   name="Row Count Output 1"
-                  startId="Package\Data Processing\contact_mailings\Row Count.Outputs[Row Count Output 1]" />
+                  startId="Package\Data Processing\contact_mailings Inc\Row Count.Outputs[Row Count Output 1]" />
               </paths>
             </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Data Processing\Execute SQL Task"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{3ca6d9c9-28b1-4394-b461-423a7bbc30f8}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Execute SQL Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{A7202722-F760-4DEE-BB0C-B0045540580C}"
+              SQLTask:SqlStatementSource="SELECT t.FullExtract FROM [DiabetesDWH].[control].[LastTableUpdate] t WHERE TableName = 'contact_mailings'"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="FullExtract"
+                SQLTask:DtsVariableName="User::isFullLoad" />
+            </SQLTask:SqlTaskData>
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
@@ -624,14 +1016,15 @@ WHERE t.mailing_number &gt;  0</property>
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Update Control Table"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:LoggingOptions
             DTS:FilterKind="0" />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{A7202722-F760-4DEE-BB0C-B0045540580C}"
-              SQLTask:SqlStatementSource="   UPDATE control.LastTableUpdate &#xA;SET [MaxBusKeyID] = t1.[mailing_number], [BusKeyColumn] = 'mailing_number', &#xA;[LastExtractRowCount] = (SELECT COUNT(*) from cis_delta.contact_mailings),&#xA;[LastExtractedDate]  = GETDATE()&#xA;FROM (SELECT TOP 1 t.[mailing_number] from cis.contact_mailings t order by 1 desc) t1&#xA;WHERE [TableName] = 'contact_mailings'&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              SQLTask:SqlStmtSourceType="Variable"
+              SQLTask:SqlStatementSource="User::UpdateMessage" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
       </DTS:Executables>
@@ -640,18 +1033,20 @@ WHERE t.mailing_number &gt;  0</property>
           DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint]"
           DTS:CreationName=""
           DTS:DTSID="{CD0EB407-5A63-4698-B129-8ECB42C9BEEA}"
-          DTS:From="Package\Data Processing\contact_mailings"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::isFullLoad] ==1"
+          DTS:From="Package\Data Processing\contact_mailings Inc"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint"
           DTS:To="Package\Data Processing\Merge delta tables" />
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint 1]"
           DTS:CreationName=""
-          DTS:DTSID="{75BB6756-2370-486A-B26A-F323C8AEF8B3}"
+          DTS:DTSID="{A45B9CDD-E889-40D0-8FB4-1304F9F64DA7}"
           DTS:From="Package\Data Processing\Truncate Delta Tables"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 1"
-          DTS:To="Package\Data Processing\contact_mailings" />
+          DTS:To="Package\Data Processing\Execute SQL Task" />
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint 2]"
           DTS:CreationName=""
@@ -664,10 +1059,40 @@ WHERE t.mailing_number &gt;  0</property>
           DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint 3]"
           DTS:CreationName=""
           DTS:DTSID="{F9D185BB-E404-4AF0-A96C-9804C82F979B}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::isFullLoad] ==0"
           DTS:From="Package\Data Processing\Merge delta tables"
-          DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 3"
           DTS:To="Package\Data Processing\Update Control Table" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{9B5F1B02-CEB8-42E7-96F9-5876859891FA}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::isFullLoad] ==0"
+          DTS:From="Package\Data Processing\Execute SQL Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Data Processing\contact_mailings Inc" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint 5]"
+          DTS:CreationName=""
+          DTS:DTSID="{FF774747-7B26-4D38-BFAC-5E98F5478970}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::isFullLoad] ==1"
+          DTS:From="Package\Data Processing\contact_mailings Full"
+          DTS:ObjectName="Constraint 5"
+          DTS:To="Package\Data Processing\Update Control Table" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint 6]"
+          DTS:CreationName=""
+          DTS:DTSID="{4297ADD1-032E-4EAC-81FF-6A6879E71E9D}"
+          DTS:EvalOp="3"
+          DTS:Expression="@[User::isFullLoad] ==1"
+          DTS:From="Package\Data Processing\Execute SQL Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 6"
+          DTS:To="Package\Data Processing\contact_mailings Full" />
       </DTS:PrecedenceConstraints>
     </DTS:Executable>
     <DTS:Executable
@@ -806,6 +1231,15 @@ WHERE t.mailing_number &gt;  0</property>
               VSTAMinorVersion="0"
               Language="CSharp">
               <ProjectItem
+                Name="Properties\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
+              <ProjectItem
                 Name="Properties\Resources.resx"
                 Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
 <root>
@@ -924,39 +1358,6 @@ WHERE t.mailing_number &gt;  0</property>
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
 </root>]]></ProjectItem>
-              <ProjectItem
-                Name="Properties\Settings.Designer.cs"
-                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
-// <auto-generated>
-//     This code was generated by a tool.
-//
-//     Changes to this file may cause incorrect behavior and will be lost if
-//     the code is regenerated.
-// </auto-generated>
-//------------------------------------------------------------------------------
-
-[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "ST_231a69c233f842a39d0e227465cc132a.csproj.Properties.Settings.get_Default():ST_231a69c233f842a39d0e227465cc132a.csproj.Properties.Sett" +
-    "ings")]
-
-namespace ST_231a69c233f842a39d0e227465cc132a.csproj.Properties
-{
-
-
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
-    {
-
-        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-        private static Settings defaultInstance = new Settings();
-
-        public static Settings Default
-        {
-            get
-            {
-                return defaultInstance;
-            }
-        }
-    }
-}]]></ProjectItem>
               <ProjectItem
                 Name="st_231a69c233f842a39d0e227465cc132a.csproj"
                 Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="utf-16"?>
@@ -1199,6 +1600,39 @@ namespace ValidateConnectionsScript
 	</msb:ItemGroup>
 </c:Project>]]></ProjectItem>
               <ProjectItem
+                Name="Properties\Settings.Designer.cs"
+                Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope = "member", Target = "ST_231a69c233f842a39d0e227465cc132a.csproj.Properties.Settings.get_Default():ST_231a69c233f842a39d0e227465cc132a.csproj.Properties.Sett" +
+    "ings")]
+
+namespace ST_231a69c233f842a39d0e227465cc132a.csproj.Properties
+{
+
+
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
+    {
+
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+
+        public static Settings Default
+        {
+            get
+            {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
+              <ProjectItem
                 Name="Properties\AssemblyInfo.cs"
                 Encoding="UTF8"><![CDATA[using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -1228,15 +1662,6 @@ using System.Runtime.CompilerServices;
 // by using the '*' as shown below:
 
 [assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
-              <ProjectItem
-                Name="Properties\Settings.settings"
-                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.Designer.cs"
                 Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -1551,83 +1976,63 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
       <GraphLayout
         Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
-          Size="158,42"
-          Id="Package\Data Processing\contact_mailings"
-          TopLeft="72.5079367209456,176.664055348653" />
+          Size="176,42"
+          Id="Package\Data Processing\contact_mailings Inc"
+          TopLeft="72.5079367209456,229.664055348653" />
         <NodeLayout
           Size="238,42"
           Id="Package\Data Processing\Get HighWater Mark from Control"
-          TopLeft="30.4126979088296,14.1647038146291" />
+          TopLeft="147.41269790883,5.5" />
         <NodeLayout
           Size="167,42"
           Id="Package\Data Processing\Merge delta tables"
-          TopLeft="71.4285716231987,283.70196392165" />
+          TopLeft="75.4285716231987,321.70196392165" />
         <NodeLayout
-          Size="183,42"
+          Size="183,55"
           Id="Package\Data Processing\Truncate Delta Tables"
-          TopLeft="58.0317459982268,97.8405219816142" />
+          TopLeft="173.031745998227,70.8405219816142" />
         <NodeLayout
           Size="180,42"
           Id="Package\Data Processing\Update Control Table"
-          TopLeft="67.5555556842257,374.990194977361" />
+          TopLeft="194.555555684226,410.990194977361" />
         <EdgeLayout
           Id="Package\Data Processing.PrecedenceConstraints[Constraint]"
-          TopLeft="153.368254172072,218.264055348653">
+          TopLeft="159.718254172072,271.664055348653">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,65.4379085729968"
+              EndConnector="0,50.0379085729971"
               Start="0,0"
-              End="0,57.9379085729968">
+              End="0,42.5379085729971">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,57.9379085729968" />
+                    End="0,42.5379085729971" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Processing.PrecedenceConstraints[Constraint 1]"
-          TopLeft="150.669841359586,139.440521981614">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,37.223533367039"
-              Start="0,0"
-              End="0,29.723533367039">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,29.723533367039" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="-8,13.2689542864986,16,16"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Processing.PrecedenceConstraints[Constraint 2]"
-          TopLeft="149.622221953528,55.7647038146291">
+          TopLeft="265.472221953528,47.5">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,42.0758181669851"
+              EndConnector="0,23.3405219816142"
               Start="0,0"
-              End="0,34.5758181669851">
+              End="0,15.8405219816142">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,34.5758181669851" />
+                    End="0,15.8405219816142" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1638,18 +2043,98 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Processing.PrecedenceConstraints[Constraint 3]"
-          TopLeft="156.292063653712,325.30196392165">
+          TopLeft="158.928571623199,363.70196392165">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,49.6882310557108"
+              EndConnector="125.626984061027,47.2882310557109"
               Start="0,0"
-              End="0,42.1882310557108">
+              End="125.626984061027,39.7882310557109">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,42.1882310557108" />
+                    End="0,19.6441155278554" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,19.6441155278554"
+                    Point2="0,23.6441155278554"
+                    Point3="4,23.6441155278554" />
+                  <mssgle:LineSegment
+                    End="121.626984061027,23.6441155278554" />
+                  <mssgle:CubicBezierSegment
+                    Point1="121.626984061027,23.6441155278554"
+                    Point2="125.626984061027,23.6441155278554"
+                    Point3="125.626984061027,27.6441155278554" />
+                  <mssgle:LineSegment
+                    End="125.626984061027,39.7882310557109" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="54.8134920305135,28.6441155278554,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="177,42"
+          Id="Package\Data Processing\contact_mailings Full"
+          TopLeft="300.41269790883,238.990194977361" />
+        <EdgeLayout
+          Id="Package\Data Processing.PrecedenceConstraints[Constraint 5]"
+          TopLeft="388.91269790883,280.990194977361">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-75.6904755579372,130"
+              Start="0,0"
+              End="-75.6904755579372,122.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,73.3127753303964" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,73.3127753303964"
+                    Point2="0,77.3127753303964"
+                    Point3="-4,77.3127753303964" />
+                  <mssgle:LineSegment
+                    End="-71.6904755579372,77.3127753303964" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-71.6904755579372,77.3127753303964"
+                    Point2="-75.6904755579372,77.3127753303964"
+                    Point3="-75.6904755579372,81.3127753303964" />
+                  <mssgle:LineSegment
+                    End="-75.6904755579372,122.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-45.8452377789686,82.3127753303964,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Data Processing\Execute SQL Task"
+          TopLeft="185.428571623199,148.990194977361" />
+        <EdgeLayout
+          Id="Package\Data Processing.PrecedenceConstraints[Constraint 1]"
+          TopLeft="265.730158810713,125.840521981614">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,23.1496729957468"
+              Start="0,0"
+              End="0,15.6496729957468">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.6496729957468" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1658,11 +2143,83 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Processing.PrecedenceConstraints[Constraint 4]"
+          TopLeft="241.095238289865,190.990194977361">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-80.5873015689197,38.673860371292"
+              Start="0,0"
+              End="-80.5873015689197,31.173860371292">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,11.6951025079119" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,11.6951025079119"
+                    Point2="0,15.6951025079119"
+                    Point3="-4,15.6951025079119" />
+                  <mssgle:LineSegment
+                    End="-76.5873015689197,15.6951025079119" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-76.5873015689197,15.6951025079119"
+                    Point2="-80.5873015689197,15.6951025079119"
+                    Point3="-80.5873015689197,19.6951025079119" />
+                  <mssgle:LineSegment
+                    End="-80.5873015689197,31.173860371292" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.2936507844598,20.6951025079119,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Processing.PrecedenceConstraints[Constraint 6]"
+          TopLeft="292.761904956532,190.990194977361">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="96.1507929522977,48"
+              Start="0,0"
+              End="96.1507929522977,40.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.4799513973269" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.4799513973269"
+                    Point2="0,19.4799513973269"
+                    Point3="4,19.4799513973269" />
+                  <mssgle:LineSegment
+                    End="92.1507929522977,19.4799513973269" />
+                  <mssgle:CubicBezierSegment
+                    Point1="92.1507929522977,19.4799513973269"
+                    Point2="96.1507929522977,19.4799513973269"
+                    Point3="96.1507929522977,23.4799513973269" />
+                  <mssgle:LineSegment
+                    End="96.1507929522977,40.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="40.0753964761488,24.4799513973269,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43.924528301886795"
           IsExpanded="True"
-          PanelSize="313,444"
-          Size="313,488"
+          PanelSize="485,574"
+          Size="485,618"
           Id="Package\Data Processing"
           TopLeft="475.3065651867,519.527491009239" />
         <NodeLayout
@@ -1675,7 +2232,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           PanelSize="284,116"
           Size="284,160"
           Id="Package\Failure Loading Closeout"
-          TopLeft="813.106475036146,1038.64240280872" />
+          TopLeft="871.106475036146,1261.64240280872" />
         <NodeLayout
           Size="238,42"
           Id="Package\Setup\Get Lineage - Insert Audit Record"
@@ -1749,33 +2306,33 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           PanelSize="361,119"
           Size="361,163"
           Id="Package\Successful Loading Closeout"
-          TopLeft="114.233155336938,1065.27088959366" />
+          TopLeft="152.233155336938,1220.27088959366" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="615.042864996073,414.807699226031">
+          TopLeft="615.142864996073,414.407699226031">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="16.663700190627,104.719791783208"
+              EndConnector="102.663700190627,105.119791783208"
               Start="0,0"
-              End="16.663700190627,97.2197917832077">
+              End="102.663700190627,97.6197917832077">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,48.3598958916038" />
+                    End="0,48.5598958916039" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,48.3598958916038"
-                    Point2="0,52.3598958916038"
-                    Point3="4,52.3598958916038" />
+                    Point1="0,48.5598958916039"
+                    Point2="0,52.5598958916039"
+                    Point3="4,52.5598958916039" />
                   <mssgle:LineSegment
-                    End="12.663700190627,52.3598958916038" />
+                    End="98.663700190627,52.5598958916039" />
                   <mssgle:CubicBezierSegment
-                    Point1="12.663700190627,52.3598958916038"
-                    Point2="16.663700190627,52.3598958916038"
-                    Point3="16.663700190627,56.3598958916038" />
+                    Point1="98.663700190627,52.5598958916039"
+                    Point2="102.663700190627,52.5598958916039"
+                    Point3="102.663700190627,56.5598958916039" />
                   <mssgle:LineSegment
-                    End="16.663700190627,97.2197917832077" />
+                    End="102.663700190627,97.6197917832077" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1786,30 +2343,30 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="631.7065651867,1007.52749100924">
+          TopLeft="638.3065651867,1137.52749100924">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-337.073409849762,57.7433985844161"
+              EndConnector="-305.573409849762,82.7433985844211"
               Start="0,0"
-              End="-337.073409849762,50.2433985844161">
+              End="-305.573409849762,75.2433985844211">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,24.8716992922081" />
+                    End="0,29.2606016504578" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,24.8716992922081"
-                    Point2="0,28.8716992922081"
-                    Point3="-4,28.8716992922081" />
+                    Point1="0,29.2606016504578"
+                    Point2="0,33.2606016504578"
+                    Point3="-4,33.2606016504578" />
                   <mssgle:LineSegment
-                    End="-333.073409849762,28.8716992922081" />
+                    End="-301.573409849762,33.2606016504578" />
                   <mssgle:CubicBezierSegment
-                    Point1="-333.073409849762,28.8716992922081"
-                    Point2="-337.073409849762,28.8716992922081"
-                    Point3="-337.073409849762,32.8716992922081" />
+                    Point1="-301.573409849762,33.2606016504578"
+                    Point2="-305.573409849762,33.2606016504578"
+                    Point3="-305.573409849762,37.2606016504578" />
                   <mssgle:LineSegment
-                    End="-337.073409849762,50.2433985844161" />
+                    End="-305.573409849762,75.2433985844211" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1820,37 +2377,37 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="682.5065651867,1007.52749100924">
+          TopLeft="797.3065651867,1137.52749100924">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="272.599909849445,31.1149117994821"
+              EndConnector="215.799909849446,124.114911799481"
               Start="0,0"
-              End="272.599909849445,23.6149117994821">
+              End="215.799909849446,116.614911799481">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,8.54097208406607" />
+                    End="0,45.8908276777199" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,8.54097208406607"
-                    Point2="0,12.5409720840661"
-                    Point3="4,12.5409720840661" />
+                    Point1="0,45.8908276777199"
+                    Point2="0,49.8908276777199"
+                    Point3="4,49.8908276777199" />
                   <mssgle:LineSegment
-                    End="268.599909849445,12.5409720840661" />
+                    End="211.799909849446,49.8908276777199" />
                   <mssgle:CubicBezierSegment
-                    Point1="268.599909849445,12.5409720840661"
-                    Point2="272.599909849445,12.5409720840661"
-                    Point3="272.599909849445,16.5409720840661" />
+                    Point1="211.799909849446,49.8908276777199"
+                    Point2="215.799909849446,49.8908276777199"
+                    Point3="215.799909849446,53.8908276777199" />
                   <mssgle:LineSegment
-                    End="272.599909849445,23.6149117994821" />
+                    End="215.799909849446,116.614911799481" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="121.058607268473,17.5409720840661,30.4826953125,9.7490234375"
+              BoundingBox="92.658607268473,54.8908276777199,30.4826953125,9.7490234375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -1858,24 +2415,24 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\Data Processing\contact_mailings">
+    design-time-name="Package\Data Processing\contact_mailings Inc">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="131,42"
-          Id="Package\Data Processing\contact_mailings\Row Count"
+          Id="Package\Data Processing\contact_mailings Inc\Row Count"
           TopLeft="151.265308698482,161.324377589808" />
         <NodeLayout
           Size="130,42"
-          Id="Package\Data Processing\contact_mailings\Oracle Source"
+          Id="Package\Data Processing\contact_mailings Inc\Oracle Source"
           TopLeft="191,42" />
         <NodeLayout
           Size="172,42"
-          Id="Package\Data Processing\contact_mailings\OLE DB Destination"
+          Id="Package\Data Processing\contact_mailings Inc\OLE DB Destination"
           TopLeft="126.009822973305,270.411769048471" />
         <EdgeLayout
-          Id="Package\Data Processing\contact_mailings.Paths[Row Count Output 1]"
+          Id="Package\Data Processing\contact_mailings Inc.Paths[Row Count Output 1]"
           TopLeft="214.437565835894,202.924377589808">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -1893,11 +2450,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Data Processing\contact_mailings.Paths[Oracle Source Output]"
+          Id="Package\Data Processing\contact_mailings Inc.Paths[Oracle Source Output]"
           TopLeft="256,84">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -1927,14 +2486,16 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Processing\contact_mailings\Oracle Source">
+    design-time-name="Package\Data Processing\contact_mailings Inc\Oracle Source">
     <Properties>
       <Property>
         <Name>TableInfoObjectType</Name>
@@ -1944,7 +2505,96 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Processing\contact_mailings\OLE DB Destination">
+    design-time-name="Package\Data Processing\contact_mailings Inc\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Data Processing\contact_mailings Full">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="131,42"
+          Id="Package\Data Processing\contact_mailings Full\Row Count"
+          TopLeft="151.265308698482,161.324377589808" />
+        <NodeLayout
+          Size="135,43"
+          Id="Package\Data Processing\contact_mailings Full\Oracle Source"
+          TopLeft="159,37" />
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Data Processing\contact_mailings Full\OLE DB Destination"
+          TopLeft="126.009822973305,270.411769048471" />
+        <EdgeLayout
+          Id="Package\Data Processing\contact_mailings Full.Paths[Row Count Output 1]"
+          TopLeft="214.437565835894,202.924377589808">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,67.4873914586639"
+              Start="0,0"
+              End="0,59.9873914586639">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.9873914586639" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Processing\contact_mailings Full.Paths[Oracle Source Output]"
+          TopLeft="226.5,80">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-9.73469130151801,81.324377589808"
+              Start="0,0"
+              End="-9.73469130151801,73.824377589808">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.662188794904" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,36.662188794904"
+                    Point2="0,40.662188794904"
+                    Point3="-4,40.662188794904" />
+                  <mssgle:LineSegment
+                    End="-5.73469130151801,40.662188794904" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-5.73469130151801,40.662188794904"
+                    Point2="-9.73469130151801,40.662188794904"
+                    Point3="-9.73469130151801,44.662188794904" />
+                  <mssgle:LineSegment
+                    End="-9.73469130151801,73.824377589808" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Processing\contact_mailings Full\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
