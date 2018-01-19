@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="etl_Order_Payment_Schedule"
   DTS:PackageType="5"
-  DTS:VersionBuild="146"
-  DTS:VersionGUID="{B52B839F-B0E0-4A52-B20F-B259BCFF3063}">
+  DTS:VersionBuild="153"
+  DTS:VersionGUID="{C8072FA2-BA2E-44F6-A72C-0724C27B401E}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:LogProviders>
@@ -57,6 +57,15 @@
       DTS:ObjectName="FailureMessage">
       <DTS:VariableValue
         DTS:DataType="8">Process FAILED 0 records processed.</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{14B51F6B-ACA0-49C7-8DCA-19A9ECBCC500}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="isFullLoad">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -138,6 +147,17 @@ WHERE t.scheduled_payment_number &gt;  0</DTS:VariableValue>
       <DTS:VariableValue
         DTS:DataType="8">Process Succeeded - 0 rows processed.</DTS:VariableValue>
     </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{68B44FCC-80E3-483C-ADE5-DCFD843EDFFB}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;UPDATE control.LastTableUpdate SET [MaxBusKeyID] = (SELECT MAX(t1.[scheduled_payment_number] ) FROM cis.order_payment_schedule t1) , [BusKeyColumn] = 'scheduled_payment_number', [LastExtractRowCount] = &quot; +  (DT_STR, 10, 1252) @[User::RecordCount] + &quot;, [LastExtractedDate]  = GETDATE()  WHERE [TableName] = 'order_payment_schedule'&quot;"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="UpdateMessage">
+      <DTS:VariableValue
+        DTS:DataType="8">UPDATE control.LastTableUpdate SET [MaxBusKeyID] = (SELECT MAX(t1.[scheduled_payment_number] ) FROM cis.order_payment_schedule t1) , [BusKeyColumn] = 'scheduled_payment_number', [LastExtractRowCount] = 0, [LastExtractedDate]  = GETDATE()  WHERE [TableName] = 'order_payment_schedule'</DTS:VariableValue>
+    </DTS:Variable>
   </DTS:Variables>
   <DTS:LoggingOptions
     DTS:FilterKind="0"
@@ -218,6 +238,28 @@ WHERE t.scheduled_payment_number &gt;  0</DTS:VariableValue>
         DTS:FilterKind="0" />
       <DTS:Executables>
         <DTS:Executable
+          DTS:refId="Package\Data Processing\Execute SQL Task"
+          DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{1bc55147-fceb-42a6-88a3-05f537212e29}"
+          DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Execute SQL Task"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2012; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{A7202722-F760-4DEE-BB0C-B0045540580C}"
+              SQLTask:SqlStatementSource="SELECT t.FullExtract FROM [DiabetesDWH].[control].[LastTableUpdate] t WHERE TableName = 'order_payment_schedule'"
+              SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ResultBinding
+                SQLTask:ResultName="FullExtract"
+                SQLTask:DtsVariableName="User::isFullLoad" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
           DTS:refId="Package\Data Processing\Get HighWater Mark from Control"
           DTS:CreationName="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:Description="Execute SQL Task"
@@ -259,19 +301,17 @@ WHERE t.scheduled_payment_number &gt;  0</DTS:VariableValue>
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
-          DTS:refId="Package\Data Processing\Order_Payment_Schedule"
+          DTS:refId="Package\Data Processing\Order_Payment_Schedule Full"
           DTS:CreationName="SSIS.Pipeline.3"
           DTS:Description="Data Flow Task"
-          DTS:DTSID="{52744BF1-BC9D-444B-A129-1B9A54090B59}"
+          DTS:DTSID="{30d99c9f-3a55-4c2f-b5d4-4f300b192717}"
           DTS:ExecutableType="SSIS.Pipeline.3"
           DTS:LocaleID="-1"
-          DTS:ObjectName="Order_Payment_Schedule"
+          DTS:ObjectName="Order_Payment_Schedule Full"
           DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
           <DTS:Variables />
           <DTS:LoggingOptions
             DTS:FilterKind="0" />
-          <DTS:PropertyExpression
-            DTS:Name="[Oracle Source].[SqlCommand]">@[User::SQLStatement]</DTS:PropertyExpression>
           <DTS:ObjectData>
             <pipeline
               defaultBufferMaxRows="60000"
@@ -279,7 +319,7 @@ WHERE t.scheduled_payment_number &gt;  0</DTS:VariableValue>
               version="1">
               <components>
                 <component
-                  refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination"
+                  refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination"
                   componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
                   contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
                   description="OLE DB Destination"
@@ -294,7 +334,7 @@ WHERE t.scheduled_payment_number &gt;  0</DTS:VariableValue>
                     <property
                       dataType="System.String"
                       description="Specifies the name of the database object used to open a rowset."
-                      name="OpenRowset">[cis_delta].[order_payment_schedule]</property>
+                      name="OpenRowset">[cis].[order_payment_schedule]</property>
                     <property
                       dataType="System.String"
                       description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -336,7 +376,7 @@ WHERE t.scheduled_payment_number &gt;  0</DTS:VariableValue>
                   </properties>
                   <connections>
                     <connection
-                      refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Connections[OleDbConnection]"
+                      refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Connections[OleDbConnection]"
                       connectionManagerID="{A7202722-F760-4DEE-BB0C-B0045540580C}:external"
                       connectionManagerRefId="Project.ConnectionManagers[LocalHost.DiabetesDWH]"
                       description="The OLE DB runtime connection used to access the database."
@@ -344,163 +384,163 @@ WHERE t.scheduled_payment_number &gt;  0</DTS:VariableValue>
                   </connections>
                   <inputs>
                     <input
-                      refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input]"
                       errorOrTruncationOperation="Insert"
                       errorRowDisposition="FailComponent"
                       hasSideEffects="true"
                       name="OLE DB Destination Input">
                       <inputColumns>
                         <inputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AMENDED_BY]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AMENDED_BY]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="14"
                           cachedName="AMENDED_BY"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amended_by]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_BY]" />
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amended_by]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_BY]" />
                         <inputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AMENDED_ON]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AMENDED_ON]"
                           cachedDataType="dbTimeStamp"
                           cachedName="AMENDED_ON"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amended_on]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_ON]" />
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amended_on]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_ON]" />
                         <inputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ORDER_NUMBER]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ORDER_NUMBER]"
                           cachedDataType="numeric"
                           cachedName="ORDER_NUMBER"
                           cachedPrecision="38"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[order_number]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[ORDER_NUMBER]" />
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[order_number]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[ORDER_NUMBER]" />
                         <inputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SCHEDULED_PAYMENT_NUMBER]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SCHEDULED_PAYMENT_NUMBER]"
                           cachedDataType="numeric"
                           cachedName="SCHEDULED_PAYMENT_NUMBER"
                           cachedPrecision="38"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[scheduled_payment_number]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULED_PAYMENT_NUMBER]" />
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[scheduled_payment_number]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULED_PAYMENT_NUMBER]" />
                         <inputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DUE_DATE]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DUE_DATE]"
                           cachedDataType="dbTimeStamp"
                           cachedName="DUE_DATE"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[due_date]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[DUE_DATE]" />
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[due_date]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[DUE_DATE]" />
                         <inputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CLAIM_DATE]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CLAIM_DATE]"
                           cachedDataType="dbTimeStamp"
                           cachedName="CLAIM_DATE"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[claim_date]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[CLAIM_DATE]" />
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[claim_date]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[CLAIM_DATE]" />
                         <inputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AMOUNT_DUE]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AMOUNT_DUE]"
                           cachedDataType="numeric"
                           cachedName="AMOUNT_DUE"
                           cachedPrecision="9"
                           cachedScale="2"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amount_due]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT_DUE]" />
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amount_due]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT_DUE]" />
                         <inputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AMOUNT_OUTSTANDING]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AMOUNT_OUTSTANDING]"
                           cachedDataType="numeric"
                           cachedName="AMOUNT_OUTSTANDING"
                           cachedPrecision="9"
                           cachedScale="2"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amount_outstanding]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT_OUTSTANDING]" />
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amount_outstanding]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT_OUTSTANDING]" />
                         <inputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[REVISED_AMOUNT]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[REVISED_AMOUNT]"
                           cachedDataType="numeric"
                           cachedName="REVISED_AMOUNT"
                           cachedPrecision="9"
                           cachedScale="2"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[revised_amount]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[REVISED_AMOUNT]" />
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[revised_amount]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[REVISED_AMOUNT]" />
                         <inputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EXPECTED_BALANCE]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EXPECTED_BALANCE]"
                           cachedDataType="numeric"
                           cachedName="EXPECTED_BALANCE"
                           cachedPrecision="9"
                           cachedScale="2"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[expected_balance]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[EXPECTED_BALANCE]" />
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[expected_balance]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[EXPECTED_BALANCE]" />
                         <inputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SCHEDULED_PAYMENT_STATUS]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SCHEDULED_PAYMENT_STATUS]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="1"
                           cachedName="SCHEDULED_PAYMENT_STATUS"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[scheduled_payment_status]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULED_PAYMENT_STATUS]" />
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[scheduled_payment_status]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULED_PAYMENT_STATUS]" />
                         <inputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SCHEDULE_CREATION_REASON]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SCHEDULE_CREATION_REASON]"
                           cachedCodepage="1252"
                           cachedDataType="str"
                           cachedLength="2"
                           cachedName="SCHEDULE_CREATION_REASON"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[schedule_creation_reason]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULE_CREATION_REASON]" />
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[schedule_creation_reason]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULE_CREATION_REASON]" />
                       </inputColumns>
                       <externalMetadataColumns
                         isUsed="True">
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amended_by]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amended_by]"
                           codePage="1252"
                           dataType="str"
                           length="14"
                           name="amended_by" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amended_on]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amended_on]"
                           dataType="dbTimeStamp"
                           name="amended_on" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[order_number]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[order_number]"
                           dataType="numeric"
                           name="order_number"
                           precision="18" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[scheduled_payment_number]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[scheduled_payment_number]"
                           dataType="numeric"
                           name="scheduled_payment_number"
                           precision="18" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[due_date]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[due_date]"
                           dataType="dbTimeStamp"
                           name="due_date" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[claim_date]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[claim_date]"
                           dataType="dbTimeStamp"
                           name="claim_date" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amount_due]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amount_due]"
                           dataType="numeric"
                           name="amount_due"
                           precision="9"
                           scale="2" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amount_outstanding]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amount_outstanding]"
                           dataType="numeric"
                           name="amount_outstanding"
                           precision="9"
                           scale="2" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[revised_amount]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[revised_amount]"
                           dataType="numeric"
                           name="revised_amount"
                           precision="9"
                           scale="2" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[expected_balance]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[expected_balance]"
                           dataType="numeric"
                           name="expected_balance"
                           precision="9"
                           scale="2" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[scheduled_payment_status]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[scheduled_payment_status]"
                           codePage="1252"
                           dataType="str"
                           length="1"
                           name="scheduled_payment_status" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[schedule_creation_reason]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[schedule_creation_reason]"
                           codePage="1252"
                           dataType="str"
                           length="2"
@@ -510,22 +550,22 @@ WHERE t.scheduled_payment_number &gt;  0</DTS:VariableValue>
                   </inputs>
                   <outputs>
                     <output
-                      refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
                       exclusionGroup="1"
                       isErrorOut="true"
                       name="OLE DB Destination Error Output"
-                      synchronousInputId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      synchronousInputId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input]">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                           dataType="i4"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
                           name="ErrorCode"
                           specialFlags="1" />
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                           dataType="i4"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
                       </outputColumns>
@@ -534,7 +574,7 @@ WHERE t.scheduled_payment_number &gt;  0</DTS:VariableValue>
                   </outputs>
                 </component>
                 <component
-                  refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source"
+                  refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source"
                   componentClassID="{CB67CD40-126C-4280-912D-2A625DFAFB66}"
                   contactInfo="Oracle Source;Microsoft Connector for Oracle by Attunity; Attunity Ltd.; All Rights Reserved; http://www.attunity.com;4"
                   description="Microsoft Oracle Source Component by Attunity"
@@ -593,7 +633,7 @@ WHERE t.scheduled_payment_number &gt;  0</property>
                   </properties>
                   <connections>
                     <connection
-                      refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Connections[MSOraConnection]"
+                      refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Connections[MSOraConnection]"
                       connectionManagerID="{B0E6080B-7584-431F-9BC5-B95A0F1857CA}:external"
                       connectionManagerRefId="Project.ConnectionManagers[CIS Live]"
                       description="The Oracle runtime connection"
@@ -601,271 +641,271 @@ WHERE t.scheduled_payment_number &gt;  0</property>
                   </connections>
                   <outputs>
                     <output
-                      refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output]"
+                      refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output]"
                       errorRowDisposition="FailComponent"
                       name="Oracle Source Output"
                       truncationRowDisposition="FailComponent">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULED_PAYMENT_NUMBER]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULED_PAYMENT_NUMBER]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULED_PAYMENT_NUMBER]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULED_PAYMENT_NUMBER]"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULED_PAYMENT_NUMBER]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULED_PAYMENT_NUMBER]"
                           name="SCHEDULED_PAYMENT_NUMBER"
                           precision="38" />
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[ORDER_NUMBER]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[ORDER_NUMBER]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ORDER_NUMBER]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[ORDER_NUMBER]"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ORDER_NUMBER]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[ORDER_NUMBER]"
                           name="ORDER_NUMBER"
                           precision="38" />
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[DUE_DATE]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[DUE_DATE]"
                           dataType="dbTimeStamp"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DUE_DATE]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[DUE_DATE]"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DUE_DATE]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[DUE_DATE]"
                           name="DUE_DATE" />
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[CLAIM_DATE]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[CLAIM_DATE]"
                           dataType="dbTimeStamp"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CLAIM_DATE]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[CLAIM_DATE]"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CLAIM_DATE]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[CLAIM_DATE]"
                           name="CLAIM_DATE" />
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT_DUE]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT_DUE]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT_DUE]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT_DUE]"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT_DUE]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT_DUE]"
                           name="AMOUNT_DUE"
                           precision="9"
                           scale="2" />
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT_OUTSTANDING]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT_OUTSTANDING]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT_OUTSTANDING]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT_OUTSTANDING]"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT_OUTSTANDING]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT_OUTSTANDING]"
                           name="AMOUNT_OUTSTANDING"
                           precision="9"
                           scale="2" />
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[REVISED_AMOUNT]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[REVISED_AMOUNT]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[REVISED_AMOUNT]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[REVISED_AMOUNT]"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[REVISED_AMOUNT]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[REVISED_AMOUNT]"
                           name="REVISED_AMOUNT"
                           precision="9"
                           scale="2" />
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[EXPECTED_BALANCE]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[EXPECTED_BALANCE]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[EXPECTED_BALANCE]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[EXPECTED_BALANCE]"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[EXPECTED_BALANCE]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[EXPECTED_BALANCE]"
                           name="EXPECTED_BALANCE"
                           precision="9"
                           scale="2" />
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULED_PAYMENT_STATUS]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULED_PAYMENT_STATUS]"
                           codePage="1252"
                           dataType="str"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULED_PAYMENT_STATUS]"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULED_PAYMENT_STATUS]"
                           length="1"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULED_PAYMENT_STATUS]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULED_PAYMENT_STATUS]"
                           name="SCHEDULED_PAYMENT_STATUS" />
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULE_CREATION_REASON]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULE_CREATION_REASON]"
                           codePage="1252"
                           dataType="str"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULE_CREATION_REASON]"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULE_CREATION_REASON]"
                           length="2"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULE_CREATION_REASON]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULE_CREATION_REASON]"
                           name="SCHEDULE_CREATION_REASON" />
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_BY]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_BY]"
                           codePage="1252"
                           dataType="str"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMENDED_BY]"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMENDED_BY]"
                           length="14"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_BY]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_BY]"
                           name="AMENDED_BY" />
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_ON]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_ON]"
                           dataType="dbTimeStamp"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMENDED_ON]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_ON]"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMENDED_ON]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_ON]"
                           name="AMENDED_ON" />
                       </outputColumns>
                       <externalMetadataColumns
                         isUsed="True">
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULED_PAYMENT_NUMBER]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULED_PAYMENT_NUMBER]"
                           dataType="numeric"
                           name="SCHEDULED_PAYMENT_NUMBER"
                           precision="38" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ORDER_NUMBER]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ORDER_NUMBER]"
                           dataType="numeric"
                           name="ORDER_NUMBER"
                           precision="38" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DUE_DATE]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DUE_DATE]"
                           dataType="dbTimeStamp"
                           name="DUE_DATE" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CLAIM_DATE]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CLAIM_DATE]"
                           dataType="dbTimeStamp"
                           name="CLAIM_DATE" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT_DUE]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT_DUE]"
                           dataType="numeric"
                           name="AMOUNT_DUE"
                           precision="9"
                           scale="2" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT_OUTSTANDING]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT_OUTSTANDING]"
                           dataType="numeric"
                           name="AMOUNT_OUTSTANDING"
                           precision="9"
                           scale="2" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[REVISED_AMOUNT]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[REVISED_AMOUNT]"
                           dataType="numeric"
                           name="REVISED_AMOUNT"
                           precision="9"
                           scale="2" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[EXPECTED_BALANCE]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[EXPECTED_BALANCE]"
                           dataType="numeric"
                           name="EXPECTED_BALANCE"
                           precision="9"
                           scale="2" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULED_PAYMENT_STATUS]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULED_PAYMENT_STATUS]"
                           codePage="1252"
                           dataType="str"
                           length="1"
                           name="SCHEDULED_PAYMENT_STATUS" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULE_CREATION_REASON]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULE_CREATION_REASON]"
                           codePage="1252"
                           dataType="str"
                           length="2"
                           name="SCHEDULE_CREATION_REASON" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMENDED_BY]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMENDED_BY]"
                           codePage="1252"
                           dataType="str"
                           length="14"
                           name="AMENDED_BY" />
                         <externalMetadataColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMENDED_ON]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMENDED_ON]"
                           dataType="dbTimeStamp"
                           name="AMENDED_ON" />
                       </externalMetadataColumns>
                     </output>
                     <output
-                      refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output]"
+                      refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output]"
                       isErrorOut="true"
                       name="Oracle Source Error Output">
                       <outputColumns>
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[SCHEDULED_PAYMENT_NUMBER]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[SCHEDULED_PAYMENT_NUMBER]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULED_PAYMENT_NUMBER]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[SCHEDULED_PAYMENT_NUMBER]"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULED_PAYMENT_NUMBER]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[SCHEDULED_PAYMENT_NUMBER]"
                           name="SCHEDULED_PAYMENT_NUMBER"
                           precision="38" />
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[ORDER_NUMBER]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[ORDER_NUMBER]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ORDER_NUMBER]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[ORDER_NUMBER]"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ORDER_NUMBER]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[ORDER_NUMBER]"
                           name="ORDER_NUMBER"
                           precision="38" />
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[DUE_DATE]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[DUE_DATE]"
                           dataType="dbTimeStamp"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DUE_DATE]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[DUE_DATE]"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DUE_DATE]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[DUE_DATE]"
                           name="DUE_DATE" />
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[CLAIM_DATE]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[CLAIM_DATE]"
                           dataType="dbTimeStamp"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CLAIM_DATE]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[CLAIM_DATE]"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CLAIM_DATE]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[CLAIM_DATE]"
                           name="CLAIM_DATE" />
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMOUNT_DUE]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMOUNT_DUE]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT_DUE]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMOUNT_DUE]"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT_DUE]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMOUNT_DUE]"
                           name="AMOUNT_DUE"
                           precision="9"
                           scale="2" />
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMOUNT_OUTSTANDING]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMOUNT_OUTSTANDING]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT_OUTSTANDING]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMOUNT_OUTSTANDING]"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT_OUTSTANDING]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMOUNT_OUTSTANDING]"
                           name="AMOUNT_OUTSTANDING"
                           precision="9"
                           scale="2" />
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[REVISED_AMOUNT]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[REVISED_AMOUNT]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[REVISED_AMOUNT]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[REVISED_AMOUNT]"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[REVISED_AMOUNT]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[REVISED_AMOUNT]"
                           name="REVISED_AMOUNT"
                           precision="9"
                           scale="2" />
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[EXPECTED_BALANCE]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[EXPECTED_BALANCE]"
                           dataType="numeric"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[EXPECTED_BALANCE]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[EXPECTED_BALANCE]"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[EXPECTED_BALANCE]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[EXPECTED_BALANCE]"
                           name="EXPECTED_BALANCE"
                           precision="9"
                           scale="2" />
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[SCHEDULED_PAYMENT_STATUS]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[SCHEDULED_PAYMENT_STATUS]"
                           codePage="1252"
                           dataType="str"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULED_PAYMENT_STATUS]"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULED_PAYMENT_STATUS]"
                           length="1"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[SCHEDULED_PAYMENT_STATUS]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[SCHEDULED_PAYMENT_STATUS]"
                           name="SCHEDULED_PAYMENT_STATUS" />
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[SCHEDULE_CREATION_REASON]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[SCHEDULE_CREATION_REASON]"
                           codePage="1252"
                           dataType="str"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULE_CREATION_REASON]"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULE_CREATION_REASON]"
                           length="2"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[SCHEDULE_CREATION_REASON]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[SCHEDULE_CREATION_REASON]"
                           name="SCHEDULE_CREATION_REASON" />
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMENDED_BY]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMENDED_BY]"
                           codePage="1252"
                           dataType="str"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMENDED_BY]"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMENDED_BY]"
                           length="14"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMENDED_BY]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMENDED_BY]"
                           name="AMENDED_BY" />
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMENDED_ON]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMENDED_ON]"
                           dataType="dbTimeStamp"
-                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMENDED_ON]"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMENDED_ON]"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMENDED_ON]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMENDED_ON]"
                           name="AMENDED_ON" />
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
                           dataType="i4"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
                           name="ErrorCode"
                           specialFlags="1" />
                         <outputColumn
-                          refId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
+                          refId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
                           dataType="i4"
-                          lineageId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
                           name="ErrorColumn"
                           specialFlags="2" />
                       </outputColumns>
@@ -874,7 +914,7 @@ WHERE t.scheduled_payment_number &gt;  0</property>
                   </outputs>
                 </component>
                 <component
-                  refId="Package\Data Processing\Order_Payment_Schedule\Row Count"
+                  refId="Package\Data Processing\Order_Payment_Schedule Full\Row Count"
                   componentClassID="{E2697D8C-70DA-42B2-8208-A19CE3A9FE41}"
                   contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
                   description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
@@ -887,7 +927,7 @@ WHERE t.scheduled_payment_number &gt;  0</property>
                   </properties>
                   <inputs>
                     <input
-                      refId="Package\Data Processing\Order_Payment_Schedule\Row Count.Inputs[Row Count Input 1]"
+                      refId="Package\Data Processing\Order_Payment_Schedule Full\Row Count.Inputs[Row Count Input 1]"
                       hasSideEffects="true"
                       name="Row Count Input 1">
                       <externalMetadataColumns />
@@ -895,9 +935,9 @@ WHERE t.scheduled_payment_number &gt;  0</property>
                   </inputs>
                   <outputs>
                     <output
-                      refId="Package\Data Processing\Order_Payment_Schedule\Row Count.Outputs[Row Count Output 1]"
+                      refId="Package\Data Processing\Order_Payment_Schedule Full\Row Count.Outputs[Row Count Output 1]"
                       name="Row Count Output 1"
-                      synchronousInputId="Package\Data Processing\Order_Payment_Schedule\Row Count.Inputs[Row Count Input 1]">
+                      synchronousInputId="Package\Data Processing\Order_Payment_Schedule Full\Row Count.Inputs[Row Count Input 1]">
                       <externalMetadataColumns />
                     </output>
                   </outputs>
@@ -905,15 +945,675 @@ WHERE t.scheduled_payment_number &gt;  0</property>
               </components>
               <paths>
                 <path
-                  refId="Package\Data Processing\Order_Payment_Schedule.Paths[Oracle Source Output]"
-                  endId="Package\Data Processing\Order_Payment_Schedule\Row Count.Inputs[Row Count Input 1]"
+                  refId="Package\Data Processing\Order_Payment_Schedule Full.Paths[Oracle Source Output]"
+                  endId="Package\Data Processing\Order_Payment_Schedule Full\Row Count.Inputs[Row Count Input 1]"
                   name="Oracle Source Output"
-                  startId="Package\Data Processing\Order_Payment_Schedule\Oracle Source.Outputs[Oracle Source Output]" />
+                  startId="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source.Outputs[Oracle Source Output]" />
                 <path
-                  refId="Package\Data Processing\Order_Payment_Schedule.Paths[Row Count Output 1]"
-                  endId="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  refId="Package\Data Processing\Order_Payment_Schedule Full.Paths[Row Count Output 1]"
+                  endId="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination.Inputs[OLE DB Destination Input]"
                   name="Row Count Output 1"
-                  startId="Package\Data Processing\Order_Payment_Schedule\Row Count.Outputs[Row Count Output 1]" />
+                  startId="Package\Data Processing\Order_Payment_Schedule Full\Row Count.Outputs[Row Count Output 1]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Data Processing\Order_Payment_Schedule Incr"
+          DTS:CreationName="SSIS.Pipeline.3"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{52744BF1-BC9D-444B-A129-1B9A54090B59}"
+          DTS:ExecutableType="SSIS.Pipeline.3"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Order_Payment_Schedule Incr"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0" />
+          <DTS:PropertyExpression
+            DTS:Name="[Oracle Source].[SqlCommand]">@[User::SQLStatement]</DTS:PropertyExpression>
+          <DTS:ObjectData>
+            <pipeline
+              defaultBufferMaxRows="60000"
+              defaultBufferSize="60485760"
+              version="1">
+              <components>
+                <component
+                  refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination"
+                  componentClassID="{4ADA7EAA-136C-4215-8098-D7A7C27FC0D1}"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[cis_delta].[order_payment_schedule]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="{A7202722-F760-4DEE-BB0C-B0045540580C}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[LocalHost.DiabetesDWH]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AMENDED_BY]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="14"
+                          cachedName="AMENDED_BY"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amended_by]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_BY]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AMENDED_ON]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="AMENDED_ON"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amended_on]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_ON]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ORDER_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="ORDER_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[order_number]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[ORDER_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SCHEDULED_PAYMENT_NUMBER]"
+                          cachedDataType="numeric"
+                          cachedName="SCHEDULED_PAYMENT_NUMBER"
+                          cachedPrecision="38"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[scheduled_payment_number]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULED_PAYMENT_NUMBER]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[DUE_DATE]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="DUE_DATE"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[due_date]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[DUE_DATE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CLAIM_DATE]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="CLAIM_DATE"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[claim_date]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[CLAIM_DATE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AMOUNT_DUE]"
+                          cachedDataType="numeric"
+                          cachedName="AMOUNT_DUE"
+                          cachedPrecision="9"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amount_due]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT_DUE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[AMOUNT_OUTSTANDING]"
+                          cachedDataType="numeric"
+                          cachedName="AMOUNT_OUTSTANDING"
+                          cachedPrecision="9"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amount_outstanding]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT_OUTSTANDING]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[REVISED_AMOUNT]"
+                          cachedDataType="numeric"
+                          cachedName="REVISED_AMOUNT"
+                          cachedPrecision="9"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[revised_amount]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[REVISED_AMOUNT]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[EXPECTED_BALANCE]"
+                          cachedDataType="numeric"
+                          cachedName="EXPECTED_BALANCE"
+                          cachedPrecision="9"
+                          cachedScale="2"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[expected_balance]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[EXPECTED_BALANCE]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SCHEDULED_PAYMENT_STATUS]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="1"
+                          cachedName="SCHEDULED_PAYMENT_STATUS"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[scheduled_payment_status]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULED_PAYMENT_STATUS]" />
+                        <inputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[SCHEDULE_CREATION_REASON]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="2"
+                          cachedName="SCHEDULE_CREATION_REASON"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[schedule_creation_reason]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULE_CREATION_REASON]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amended_by]"
+                          codePage="1252"
+                          dataType="str"
+                          length="14"
+                          name="amended_by" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amended_on]"
+                          dataType="dbTimeStamp"
+                          name="amended_on" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[order_number]"
+                          dataType="numeric"
+                          name="order_number"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[scheduled_payment_number]"
+                          dataType="numeric"
+                          name="scheduled_payment_number"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[due_date]"
+                          dataType="dbTimeStamp"
+                          name="due_date" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[claim_date]"
+                          dataType="dbTimeStamp"
+                          name="claim_date" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amount_due]"
+                          dataType="numeric"
+                          name="amount_due"
+                          precision="9"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[amount_outstanding]"
+                          dataType="numeric"
+                          name="amount_outstanding"
+                          precision="9"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[revised_amount]"
+                          dataType="numeric"
+                          name="revised_amount"
+                          precision="9"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[expected_balance]"
+                          dataType="numeric"
+                          name="expected_balance"
+                          precision="9"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[scheduled_payment_status]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="scheduled_payment_status" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[schedule_creation_reason]"
+                          codePage="1252"
+                          dataType="str"
+                          length="2"
+                          name="schedule_creation_reason" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source"
+                  componentClassID="{CB67CD40-126C-4280-912D-2A625DFAFB66}"
+                  contactInfo="Oracle Source;Microsoft Connector for Oracle by Attunity; Attunity Ltd.; All Rights Reserved; http://www.attunity.com;4"
+                  description="Microsoft Oracle Source Component by Attunity"
+                  name="Oracle Source"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="The name of the table to be fetched."
+                      expressionType="Notify"
+                      name="TableName">"CARE_ADMIN"."ORDER_PAYMENT_SCHEDULE"</property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      expressionType="Notify"
+                      name="SqlCommand">SELECT 
+scheduled_payment_number
+      ,order_number
+      ,due_date
+      ,claim_date
+      ,amount_due
+      ,amount_outstanding
+      ,revised_amount
+      ,expected_balance
+      ,scheduled_payment_status
+      ,schedule_creation_reason
+      ,amended_by
+      ,amended_on FROM care_admin.order_payment_schedule  t 
+WHERE t.scheduled_payment_number &gt;  0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of rows fetched in a batch."
+                      expressionType="Notify"
+                      name="BatchSize">50000</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Number of pre-fetched rows."
+                      expressionType="Notify"
+                      name="PrefetchCount">0</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Determines the chunk size allocation for LOB columns"
+                      expressionType="Notify"
+                      name="LobChunkSize">32768</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The code page to use when code page information is unavailable from the data source."
+                      expressionType="Notify"
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Int32"
+                      description="The mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">1</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Connections[MSOraConnection]"
+                      connectionManagerID="{B0E6080B-7584-431F-9BC5-B95A0F1857CA}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[CIS Live]"
+                      description="The Oracle runtime connection"
+                      name="MSOraConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output]"
+                      errorRowDisposition="FailComponent"
+                      name="Oracle Source Output"
+                      truncationRowDisposition="FailComponent">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULED_PAYMENT_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULED_PAYMENT_NUMBER]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULED_PAYMENT_NUMBER]"
+                          name="SCHEDULED_PAYMENT_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[ORDER_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ORDER_NUMBER]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[ORDER_NUMBER]"
+                          name="ORDER_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[DUE_DATE]"
+                          dataType="dbTimeStamp"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DUE_DATE]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[DUE_DATE]"
+                          name="DUE_DATE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[CLAIM_DATE]"
+                          dataType="dbTimeStamp"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CLAIM_DATE]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[CLAIM_DATE]"
+                          name="CLAIM_DATE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT_DUE]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT_DUE]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT_DUE]"
+                          name="AMOUNT_DUE"
+                          precision="9"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT_OUTSTANDING]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT_OUTSTANDING]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[AMOUNT_OUTSTANDING]"
+                          name="AMOUNT_OUTSTANDING"
+                          precision="9"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[REVISED_AMOUNT]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[REVISED_AMOUNT]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[REVISED_AMOUNT]"
+                          name="REVISED_AMOUNT"
+                          precision="9"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[EXPECTED_BALANCE]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[EXPECTED_BALANCE]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[EXPECTED_BALANCE]"
+                          name="EXPECTED_BALANCE"
+                          precision="9"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULED_PAYMENT_STATUS]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULED_PAYMENT_STATUS]"
+                          length="1"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULED_PAYMENT_STATUS]"
+                          name="SCHEDULED_PAYMENT_STATUS" />
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULE_CREATION_REASON]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULE_CREATION_REASON]"
+                          length="2"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[SCHEDULE_CREATION_REASON]"
+                          name="SCHEDULE_CREATION_REASON" />
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_BY]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMENDED_BY]"
+                          length="14"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_BY]"
+                          name="AMENDED_BY" />
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_ON]"
+                          dataType="dbTimeStamp"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMENDED_ON]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].Columns[AMENDED_ON]"
+                          name="AMENDED_ON" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULED_PAYMENT_NUMBER]"
+                          dataType="numeric"
+                          name="SCHEDULED_PAYMENT_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ORDER_NUMBER]"
+                          dataType="numeric"
+                          name="ORDER_NUMBER"
+                          precision="38" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DUE_DATE]"
+                          dataType="dbTimeStamp"
+                          name="DUE_DATE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CLAIM_DATE]"
+                          dataType="dbTimeStamp"
+                          name="CLAIM_DATE" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT_DUE]"
+                          dataType="numeric"
+                          name="AMOUNT_DUE"
+                          precision="9"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT_OUTSTANDING]"
+                          dataType="numeric"
+                          name="AMOUNT_OUTSTANDING"
+                          precision="9"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[REVISED_AMOUNT]"
+                          dataType="numeric"
+                          name="REVISED_AMOUNT"
+                          precision="9"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[EXPECTED_BALANCE]"
+                          dataType="numeric"
+                          name="EXPECTED_BALANCE"
+                          precision="9"
+                          scale="2" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULED_PAYMENT_STATUS]"
+                          codePage="1252"
+                          dataType="str"
+                          length="1"
+                          name="SCHEDULED_PAYMENT_STATUS" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULE_CREATION_REASON]"
+                          codePage="1252"
+                          dataType="str"
+                          length="2"
+                          name="SCHEDULE_CREATION_REASON" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMENDED_BY]"
+                          codePage="1252"
+                          dataType="str"
+                          length="14"
+                          name="AMENDED_BY" />
+                        <externalMetadataColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMENDED_ON]"
+                          dataType="dbTimeStamp"
+                          name="AMENDED_ON" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output]"
+                      isErrorOut="true"
+                      name="Oracle Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[SCHEDULED_PAYMENT_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULED_PAYMENT_NUMBER]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[SCHEDULED_PAYMENT_NUMBER]"
+                          name="SCHEDULED_PAYMENT_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[ORDER_NUMBER]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[ORDER_NUMBER]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[ORDER_NUMBER]"
+                          name="ORDER_NUMBER"
+                          precision="38" />
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[DUE_DATE]"
+                          dataType="dbTimeStamp"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[DUE_DATE]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[DUE_DATE]"
+                          name="DUE_DATE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[CLAIM_DATE]"
+                          dataType="dbTimeStamp"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[CLAIM_DATE]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[CLAIM_DATE]"
+                          name="CLAIM_DATE" />
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMOUNT_DUE]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT_DUE]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMOUNT_DUE]"
+                          name="AMOUNT_DUE"
+                          precision="9"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMOUNT_OUTSTANDING]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMOUNT_OUTSTANDING]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMOUNT_OUTSTANDING]"
+                          name="AMOUNT_OUTSTANDING"
+                          precision="9"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[REVISED_AMOUNT]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[REVISED_AMOUNT]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[REVISED_AMOUNT]"
+                          name="REVISED_AMOUNT"
+                          precision="9"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[EXPECTED_BALANCE]"
+                          dataType="numeric"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[EXPECTED_BALANCE]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[EXPECTED_BALANCE]"
+                          name="EXPECTED_BALANCE"
+                          precision="9"
+                          scale="2" />
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[SCHEDULED_PAYMENT_STATUS]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULED_PAYMENT_STATUS]"
+                          length="1"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[SCHEDULED_PAYMENT_STATUS]"
+                          name="SCHEDULED_PAYMENT_STATUS" />
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[SCHEDULE_CREATION_REASON]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[SCHEDULE_CREATION_REASON]"
+                          length="2"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[SCHEDULE_CREATION_REASON]"
+                          name="SCHEDULE_CREATION_REASON" />
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMENDED_BY]"
+                          codePage="1252"
+                          dataType="str"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMENDED_BY]"
+                          length="14"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMENDED_BY]"
+                          name="AMENDED_BY" />
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMENDED_ON]"
+                          dataType="dbTimeStamp"
+                          externalMetadataColumnId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output].ExternalColumns[AMENDED_ON]"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[AMENDED_ON]"
+                          name="AMENDED_ON" />
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Data Processing\Order_Payment_Schedule Incr\Row Count"
+                  componentClassID="{E2697D8C-70DA-42B2-8208-A19CE3A9FE41}"
+                  contactInfo="Row Count;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Counts rows as they pass through a data flow. For example, use the number of rows processed to determine whether or not to perform cleanup operations, or update text in an e-mail message to communicate processing status."
+                  name="Row Count">
+                  <properties>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable to hold the row count."
+                      name="VariableName">User::RecordCount</property>
+                  </properties>
+                  <inputs>
+                    <input
+                      refId="Package\Data Processing\Order_Payment_Schedule Incr\Row Count.Inputs[Row Count Input 1]"
+                      hasSideEffects="true"
+                      name="Row Count Input 1">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Data Processing\Order_Payment_Schedule Incr\Row Count.Outputs[Row Count Output 1]"
+                      name="Row Count Output 1"
+                      synchronousInputId="Package\Data Processing\Order_Payment_Schedule Incr\Row Count.Inputs[Row Count Input 1]">
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Data Processing\Order_Payment_Schedule Incr.Paths[Oracle Source Output]"
+                  endId="Package\Data Processing\Order_Payment_Schedule Incr\Row Count.Inputs[Row Count Input 1]"
+                  name="Oracle Source Output"
+                  startId="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source.Outputs[Oracle Source Output]" />
+                <path
+                  refId="Package\Data Processing\Order_Payment_Schedule Incr.Paths[Row Count Output 1]"
+                  endId="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Row Count Output 1"
+                  startId="Package\Data Processing\Order_Payment_Schedule Incr\Row Count.Outputs[Row Count Output 1]" />
               </paths>
             </pipeline>
           </DTS:ObjectData>
@@ -944,14 +1644,15 @@ WHERE t.scheduled_payment_number &gt;  0</property>
           DTS:ExecutableType="Microsoft.SqlServer.Dts.Tasks.ExecuteSQLTask.ExecuteSQLTask, Microsoft.SqlServer.SQLTask, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"
           DTS:LocaleID="-1"
           DTS:ObjectName="Update Control Table"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:LoggingOptions
             DTS:FilterKind="0" />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
               SQLTask:Connection="{A7202722-F760-4DEE-BB0C-B0045540580C}"
-              SQLTask:SqlStatementSource="    UPDATE control.LastTableUpdate &#xA;SET [MaxBusKeyID] = t1.[scheduled_payment_number] ,&#xA;[BusKeyColumn] = 'scheduled_payment_number', &#xA;[LastExtractRowCount] = (SELECT COUNT(*) from cis_delta.Order_Payment_History),&#xA;[LastExtractedDate]  = GETDATE()&#xA;FROM (SELECT TOP 1 t.[scheduled_payment_number]  FROM  cis.Order_Payment_History t order by t.[scheduled_payment_number]  desc) t1&#xA;WHERE [TableName] = 'Order_Payment_History'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              SQLTask:SqlStmtSourceType="Variable"
+              SQLTask:SqlStatementSource="User::UpdateMessage" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
           </DTS:ObjectData>
         </DTS:Executable>
       </DTS:Executables>
@@ -960,18 +1661,20 @@ WHERE t.scheduled_payment_number &gt;  0</property>
           DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint]"
           DTS:CreationName=""
           DTS:DTSID="{7296011B-44E0-4970-860B-E92028B818CD}"
-          DTS:From="Package\Data Processing\Order_Payment_Schedule"
+          DTS:EvalOp="3"
+          DTS:Expression="@isFullLoad == 0"
+          DTS:From="Package\Data Processing\Order_Payment_Schedule Incr"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint"
           DTS:To="Package\Data Processing\Merge delta tables" />
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint 1]"
           DTS:CreationName=""
-          DTS:DTSID="{E895C95A-1D3B-4958-B508-66CCC00C0552}"
+          DTS:DTSID="{06DBFC64-E40E-4F58-9BD2-2A8EF5893073}"
           DTS:From="Package\Data Processing\Truncate Delta Tables"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 1"
-          DTS:To="Package\Data Processing\Order_Payment_Schedule" />
+          DTS:To="Package\Data Processing\Execute SQL Task" />
         <DTS:PrecedenceConstraint
           DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint 2]"
           DTS:CreationName=""
@@ -984,10 +1687,40 @@ WHERE t.scheduled_payment_number &gt;  0</property>
           DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint 3]"
           DTS:CreationName=""
           DTS:DTSID="{E3A9E240-8471-4D16-B2EA-4C8F859B2FAA}"
+          DTS:EvalOp="3"
+          DTS:Expression="@isFullLoad == 0"
           DTS:From="Package\Data Processing\Merge delta tables"
-          DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 3"
           DTS:To="Package\Data Processing\Update Control Table" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{480C2C9C-02F8-4E36-A42C-5245A813A456}"
+          DTS:EvalOp="3"
+          DTS:Expression="@isFullLoad == 1"
+          DTS:From="Package\Data Processing\Order_Payment_Schedule Full"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\Data Processing\Update Control Table" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint 5]"
+          DTS:CreationName=""
+          DTS:DTSID="{87018BC8-14C3-4B1D-96B1-5D2A1A9A292F}"
+          DTS:EvalOp="3"
+          DTS:Expression="@isFullLoad == 0"
+          DTS:From="Package\Data Processing\Execute SQL Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 5"
+          DTS:To="Package\Data Processing\Order_Payment_Schedule Incr" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Data Processing.PrecedenceConstraints[Constraint 6]"
+          DTS:CreationName=""
+          DTS:DTSID="{C0042F53-050D-48C0-83CA-6E0423460D35}"
+          DTS:EvalOp="3"
+          DTS:Expression="@isFullLoad == 1"
+          DTS:From="Package\Data Processing\Execute SQL Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 6"
+          DTS:To="Package\Data Processing\Order_Payment_Schedule Full" />
       </DTS:PrecedenceConstraints>
     </DTS:Executable>
     <DTS:Executable
@@ -1011,7 +1744,7 @@ WHERE t.scheduled_payment_number &gt;  0</property>
           DTS:LocaleID="-1"
           DTS:ObjectName="Write Failure Record"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:LoggingOptions
             DTS:FilterKind="0" />
@@ -1126,14 +1859,35 @@ WHERE t.scheduled_payment_number &gt;  0</property>
               VSTAMinorVersion="0"
               Language="CSharp">
               <ProjectItem
-                Name="Properties\Settings.settings"
-                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
+                Name="Properties\AssemblyInfo.cs"
+                Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_231a69c233f842a39d0e227465cc132a.csproj")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyProduct("ST_231a69c233f842a39d0e227465cc132a.csproj")]
+[assembly: AssemblyCopyright("Copyright @ Microsoft 2014")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.resx"
                 Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -1528,35 +2282,14 @@ namespace ST_231a69c233f842a39d0e227465cc132a.csproj.Properties
     }
 }]]></ProjectItem>
               <ProjectItem
-                Name="Properties\AssemblyInfo.cs"
-                Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
-
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_231a69c233f842a39d0e227465cc132a.csproj")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("ST_231a69c233f842a39d0e227465cc132a.csproj")]
-[assembly: AssemblyCopyright("Copyright @ Microsoft 2014")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+                Name="Properties\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.Designer.cs"
                 Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -1805,7 +2538,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           DTS:LocaleID="-1"
           DTS:ObjectName="Write Success Record"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:LoggingOptions
             DTS:FilterKind="0" />
@@ -1877,11 +2610,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         <NodeLayout
           Size="167,42"
           Id="Package\Data Processing\Merge delta tables"
-          TopLeft="64.7619048429995,273.098042204307" />
+          TopLeft="23.7619048429995,409.098042204307" />
         <NodeLayout
-          Size="202,42"
-          Id="Package\Data Processing\Order_Payment_Schedule"
-          TopLeft="53.1428570260807,193.317650353455" />
+          Size="223,42"
+          Id="Package\Data Processing\Order_Payment_Schedule Incr"
+          TopLeft="9.14285702608072,288.317650353455" />
         <NodeLayout
           Size="183,42"
           Id="Package\Data Processing\Truncate Delta Tables"
@@ -1889,49 +2622,41 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         <NodeLayout
           Size="180,42"
           Id="Package\Data Processing\Update Control Table"
-          TopLeft="56.0476189632803,380.407846205953" />
+          TopLeft="178.04761896328,531.407846205953" />
         <EdgeLayout
           Id="Package\Data Processing.PrecedenceConstraints[Constraint]"
-          TopLeft="151.15238093454,234.917650353455">
+          TopLeft="120.642857026081,330.317650353455">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,38.1803918508517"
+              EndConnector="-13.3809521830812,78.7803918508519"
               Start="0,0"
-              End="0,30.6803918508517">
+              End="-13.3809521830812,71.2803918508519">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,30.6803918508517" />
+                    End="0,35.3901959254259" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,35.3901959254259"
+                    Point2="0,39.3901959254259"
+                    Point3="-4,39.3901959254259" />
+                  <mssgle:LineSegment
+                    End="-9.38095218308121,39.3901959254259" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-9.38095218308121,39.3901959254259"
+                    Point2="-13.3809521830812,39.3901959254259"
+                    Point3="-13.3809521830812,43.3901959254259" />
+                  <mssgle:LineSegment
+                    End="-13.3809521830812,71.2803918508519" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Processing.PrecedenceConstraints[Constraint 1]"
-          TopLeft="157.34285716232,134.682351980242">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,58.635298373213"
-              Start="0,0"
-              End="0,51.135298373213">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,51.135298373213" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="-14.6904760915406,44.3901959254259,16,16"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -1958,18 +2683,58 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Processing.PrecedenceConstraints[Constraint 3]"
-          TopLeft="147.15476190314,315.098042204307">
+          TopLeft="107.261904843,451.098042204307">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,65.309804001646"
+              EndConnector="132.119047453614,80.3098040016459"
               Start="0,0"
-              End="0,57.809804001646">
+              End="132.119047453614,72.8098040016459">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,57.809804001646" />
+                    End="0,43.7613371815956" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,43.7613371815956"
+                    Point2="0,47.7613371815956"
+                    Point3="4,47.7613371815956" />
+                  <mssgle:LineSegment
+                    End="128.119047453614,47.7613371815956" />
+                  <mssgle:CubicBezierSegment
+                    Point1="128.119047453614,47.7613371815956"
+                    Point2="132.119047453614,47.7613371815956"
+                    Point3="132.119047453614,51.7613371815956" />
+                  <mssgle:LineSegment
+                    End="132.119047453614,72.8098040016459" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="58.059523726807,52.7613371815956,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Data Processing\Execute SQL Task"
+          TopLeft="75.2857140521614,173.407846205953" />
+        <EdgeLayout
+          Id="Package\Data Processing.PrecedenceConstraints[Constraint 1]"
+          TopLeft="161.71428567536,135.082351980242">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.3254942257106"
+              Start="0,0"
+              End="0,30.8254942257106">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.8254942257106" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1978,13 +2743,125 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="220,42"
+          Id="Package\Data Processing\Order_Payment_Schedule Full"
+          TopLeft="276.142857026081,279.407846205953" />
+        <EdgeLayout
+          Id="Package\Data Processing.PrecedenceConstraints[Constraint 4]"
+          TopLeft="386.142857026081,321.407846205953">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-89.4285713961339,210"
+              Start="0,0"
+              End="-89.4285713961339,202.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,120.88986784141" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,120.88986784141"
+                    Point2="0,124.88986784141"
+                    Point3="-4,124.88986784141" />
+                  <mssgle:LineSegment
+                    End="-85.4285713961339,124.88986784141" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-85.4285713961339,124.88986784141"
+                    Point2="-89.4285713961339,124.88986784141"
+                    Point3="-89.4285713961339,128.88986784141" />
+                  <mssgle:LineSegment
+                    End="-89.4285713961339,202.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-52.7142856980669,129.88986784141,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Processing.PrecedenceConstraints[Constraint 5]"
+          TopLeft="134.952380718828,215.407846205953">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-14.3095236927474,72.9098041475022"
+              Start="0,0"
+              End="-14.3095236927474,65.4098041475022">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.5602603451934" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,25.5602603451934"
+                    Point2="0,29.5602603451934"
+                    Point3="-4,29.5602603451934" />
+                  <mssgle:LineSegment
+                    End="-10.3095236927474,29.5602603451934" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-10.3095236927474,29.5602603451934"
+                    Point2="-14.3095236927474,29.5602603451934"
+                    Point3="-14.3095236927474,33.5602603451934" />
+                  <mssgle:LineSegment
+                    End="-14.3095236927474,65.4098041475022" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-15.1547618463737,34.5602603451934,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Processing.PrecedenceConstraints[Constraint 6]"
+          TopLeft="190.619047385495,215.407846205953">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="195.523809640586,64"
+              Start="0,0"
+              End="195.523809640586,56.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.9479048697622" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.9479048697622"
+                    Point2="0,25.9479048697622"
+                    Point3="4,25.9479048697622" />
+                  <mssgle:LineSegment
+                    End="191.523809640586,25.9479048697622" />
+                  <mssgle:CubicBezierSegment
+                    Point1="191.523809640586,25.9479048697622"
+                    Point2="195.523809640586,25.9479048697622"
+                    Point3="195.523809640586,29.9479048697622" />
+                  <mssgle:LineSegment
+                    End="195.523809640586,56.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="89.761904820293,30.9479048697622,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <ContainerLayout
           HeaderHeight="43.924528301886795"
           IsExpanded="True"
-          PanelSize="313,502"
-          Size="313,546"
+          PanelSize="501,628"
+          Size="501,672"
           Id="Package\Data Processing"
-          TopLeft="417.211326102106,519.527491009239" />
+          TopLeft="435.211326102106,712.527491009239" />
         <NodeLayout
           Size="176,42"
           Id="Package\Failure Loading Closeout\Write Failure Record"
@@ -1995,7 +2872,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           PanelSize="284,116"
           Size="284,160"
           Id="Package\Failure Loading Closeout"
-          TopLeft="763.582664668951,1133.46593355035" />
+          TopLeft="1025.58266466895,1463.46593355035" />
         <NodeLayout
           Size="238,42"
           Id="Package\Setup\Get Lineage - Insert Audit Record"
@@ -2058,7 +2935,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           PanelSize="297,322"
           Size="297,366"
           Id="Package\Setup"
-          TopLeft="408.547625911479,48.4076992260313" />
+          TopLeft="426.547625911479,241.407699226031" />
         <NodeLayout
           Size="182,42"
           Id="Package\Successful Loading Closeout\Write Success Record"
@@ -2069,33 +2946,33 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           PanelSize="336,119"
           Size="336,163"
           Id="Package\Successful Loading Closeout"
-          TopLeft="126.614107928737,1128.40814581118" />
+          TopLeft="24.614107928737,1495.40814581118" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="557.047625911479,414.407699226031">
+          TopLeft="575.047625911479,607.407699226031">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="16.6637001906271,105.119791783208"
+              EndConnector="110.663700190627,105.119791783208"
               Start="0,0"
-              End="16.6637001906271,97.6197917832077">
+              End="110.663700190627,97.6197917832076">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,48.5598958916039" />
+                    End="0,48.5598958916038" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,48.5598958916039"
-                    Point2="0,52.5598958916039"
-                    Point3="4,52.5598958916039" />
+                    Point1="0,48.5598958916038"
+                    Point2="0,52.5598958916038"
+                    Point3="4,52.5598958916038" />
                   <mssgle:LineSegment
-                    End="12.6637001906271,52.5598958916039" />
+                    End="106.663700190627,52.5598958916038" />
                   <mssgle:CubicBezierSegment
-                    Point1="12.6637001906271,52.5598958916039"
-                    Point2="16.6637001906271,52.5598958916039"
-                    Point3="16.6637001906271,56.5598958916039" />
+                    Point1="106.663700190627,52.5598958916038"
+                    Point2="110.663700190627,52.5598958916038"
+                    Point3="110.663700190627,56.5598958916038" />
                   <mssgle:LineSegment
-                    End="16.6637001906271,97.6197917832077" />
+                    End="110.663700190627,97.6197917832076" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2106,30 +2983,30 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="522.877992768773,1065.52749100924">
+          TopLeft="603.544659435439,1335.52749100924">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-228.263884840036,62.8806548019411"
+              EndConnector="-410.930551506702,159.880654801941"
               Start="0,0"
-              End="-228.263884840036,55.3806548019411">
+              End="-410.930551506702,152.380654801941">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,21.3441418591422" />
+                    End="0,60.2576447870913" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,21.3441418591422"
-                    Point2="0,25.3441418591422"
-                    Point3="-4,25.3441418591422" />
+                    Point1="0,60.2576447870913"
+                    Point2="0,64.2576447870913"
+                    Point3="-4,64.2576447870913" />
                   <mssgle:LineSegment
-                    End="-224.263884840036,25.3441418591422" />
+                    End="-406.930551506702,64.2576447870913" />
                   <mssgle:CubicBezierSegment
-                    Point1="-224.263884840036,25.3441418591422"
-                    Point2="-228.263884840036,25.3441418591422"
-                    Point3="-228.263884840036,29.3441418591422" />
+                    Point1="-406.930551506702,64.2576447870913"
+                    Point2="-410.930551506702,64.2576447870913"
+                    Point3="-410.930551506702,68.2576447870913" />
                   <mssgle:LineSegment
-                    End="-228.263884840036,55.3806548019411" />
+                    End="-410.930551506702,152.380654801941" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -2140,37 +3017,37 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="624.544659435439,1065.52749100924">
+          TopLeft="767.877992768773,1335.52749100924">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="281.038005233512,67.938442541111"
+              EndConnector="399.704671900178,127.938442541111"
               Start="0,0"
-              End="281.038005233512,60.438442541111">
+              End="399.704671900178,120.438442541111">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,23.3826907635502" />
+                    End="0,47.419748096507" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,23.3826907635502"
-                    Point2="0,27.3826907635502"
-                    Point3="4,27.3826907635502" />
+                    Point1="0,47.419748096507"
+                    Point2="0,51.419748096507"
+                    Point3="4,51.419748096507" />
                   <mssgle:LineSegment
-                    End="277.038005233512,27.3826907635502" />
+                    End="395.704671900178,51.419748096507" />
                   <mssgle:CubicBezierSegment
-                    Point1="277.038005233512,27.3826907635502"
-                    Point2="281.038005233512,27.3826907635502"
-                    Point3="281.038005233512,31.3826907635502" />
+                    Point1="395.704671900178,51.419748096507"
+                    Point2="399.704671900178,51.419748096507"
+                    Point3="399.704671900178,55.419748096507" />
                   <mssgle:LineSegment
-                    End="281.038005233512,60.438442541111" />
+                    End="399.704671900178,120.438442541111" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="125.277654960506,32.3826907635502,30.4826953125,9.7490234375"
+              BoundingBox="184.610988293839,56.419748096507,30.4826953125,9.7490234375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2178,24 +3055,127 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
     </LayoutInfo>
   </Package>
   <TaskHost
-    design-time-name="Package\Data Processing\Order_Payment_Schedule">
+    design-time-name="Package\Data Processing\Order_Payment_Schedule Incr">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="131,42"
+          Id="Package\Data Processing\Order_Payment_Schedule Incr\Row Count"
+          TopLeft="328.571434166967,174.964708336167" />
+        <NodeLayout
+          Size="172,42"
+          Id="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination"
+          TopLeft="307.560846473264,285.94117642769" />
+        <NodeLayout
+          Size="144,42"
+          Id="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source"
+          TopLeft="300,46" />
+        <EdgeLayout
+          Id="Package\Data Processing\Order_Payment_Schedule Incr.Paths[Row Count Output 1]"
+          TopLeft="393.866140320116,216.564708336167">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,69.3764680915225"
+              Start="0,0"
+              End="0,61.8764680915225">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,61.8764680915225" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Processing\Order_Payment_Schedule Incr.Paths[Oracle Source Output]"
+          TopLeft="372,88">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="22.071434166967,86.964708336167"
+              Start="0,0"
+              End="22.071434166967,79.464708336167">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.4823541680835" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,39.4823541680835"
+                    Point2="0,43.4823541680835"
+                    Point3="4,43.4823541680835" />
+                  <mssgle:LineSegment
+                    End="18.071434166967,43.4823541680835" />
+                  <mssgle:CubicBezierSegment
+                    Point1="18.071434166967,43.4823541680835"
+                    Point2="22.071434166967,43.4823541680835"
+                    Point3="22.071434166967,47.4823541680835" />
+                  <mssgle:LineSegment
+                    End="22.071434166967,79.464708336167" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Processing\Order_Payment_Schedule Incr\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Processing\Order_Payment_Schedule Incr\Oracle Source">
+    <Properties>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Data Processing\Order_Payment_Schedule Full">
     <LayoutInfo>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="131,42"
-          Id="Package\Data Processing\Order_Payment_Schedule\Row Count"
+          Id="Package\Data Processing\Order_Payment_Schedule Full\Row Count"
           TopLeft="328.571434166967,174.964708336167" />
         <NodeLayout
           Size="172,42"
-          Id="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination"
+          Id="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination"
           TopLeft="307.560846473264,285.94117642769" />
         <NodeLayout
           Size="144,42"
-          Id="Package\Data Processing\Order_Payment_Schedule\Oracle Source"
+          Id="Package\Data Processing\Order_Payment_Schedule Full\Oracle Source"
           TopLeft="300,46" />
         <EdgeLayout
-          Id="Package\Data Processing\Order_Payment_Schedule.Paths[Row Count Output 1]"
+          Id="Package\Data Processing\Order_Payment_Schedule Full.Paths[Row Count Output 1]"
           TopLeft="393.866140320116,216.564708336167">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -2217,7 +3197,7 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Data Processing\Order_Payment_Schedule.Paths[Oracle Source Output]"
+          Id="Package\Data Processing\Order_Payment_Schedule Full.Paths[Oracle Source Output]"
           TopLeft="372,88">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -2254,21 +3234,11 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
     </LayoutInfo>
   </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\Data Processing\Order_Payment_Schedule\OLE DB Destination">
+    design-time-name="Package\Data Processing\Order_Payment_Schedule Full\OLE DB Destination">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
       </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\Data Processing\Order_Payment_Schedule\Oracle Source">
-    <Properties>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value

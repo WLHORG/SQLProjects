@@ -12,8 +12,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="etl_contact_categories"
   DTS:PackageType="5"
-  DTS:VersionBuild="148"
-  DTS:VersionGUID="{7C4F830A-B4CF-43EF-A599-A3580A34E56B}">
+  DTS:VersionBuild="149"
+  DTS:VersionGUID="{E3A1E0F2-E6DE-4189-9659-2CDA5E702B0C}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">6</DTS:Property>
   <DTS:LogProviders>
@@ -972,14 +972,35 @@
               VSTAMinorVersion="0"
               Language="CSharp">
               <ProjectItem
-                Name="Properties\Settings.settings"
-                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
+                Name="Properties\AssemblyInfo.cs"
+                Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_231a69c233f842a39d0e227465cc132a.csproj")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyProduct("ST_231a69c233f842a39d0e227465cc132a.csproj")]
+[assembly: AssemblyCopyright("Copyright @ Microsoft 2014")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.resx"
                 Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -1282,35 +1303,14 @@ namespace ST_231a69c233f842a39d0e227465cc132a.csproj.Properties
     }
 }]]></ProjectItem>
               <ProjectItem
-                Name="Properties\AssemblyInfo.cs"
-                Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
-
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_231a69c233f842a39d0e227465cc132a.csproj")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("ST_231a69c233f842a39d0e227465cc132a.csproj")]
-[assembly: AssemblyCopyright("Copyright @ Microsoft 2014")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+                Name="Properties\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.Designer.cs"
                 Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
@@ -1901,13 +1901,35 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
           Id="Package\Data Processing\Data Flow Task CONTACT CATEGORIES\Oracle Source"
           TopLeft="69,27" />
         <NodeLayout
-          Size="171,42"
-          Id="Package\Data Processing\Data Flow Task CONTACT CATEGORIES\OLE DB Destination"
-          TopLeft="70.2751320123853,259.835294143387" />
-        <NodeLayout
           Size="131,42"
           Id="Package\Data Processing\Data Flow Task CONTACT CATEGORIES\Row Count"
           TopLeft="87.4285729174711,156.000002187841" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Data Processing\Data Flow Task CONTACT CATEGORIES\OLE DB Destination"
+          TopLeft="70.2751320123853,259.835294143387" />
+        <EdgeLayout
+          Id="Package\Data Processing\Data Flow Task CONTACT CATEGORIES.Paths[Row Count Output 1]"
+          TopLeft="154.351852464928,198.000002187841">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,61.835291955546"
+              Start="0,0"
+              End="0,54.335291955546">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,54.335291955546" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
         <EdgeLayout
           Id="Package\Data Processing\Data Flow Task CONTACT CATEGORIES.Paths[Oracle Source Output]"
           TopLeft="141,69">
@@ -1934,28 +1956,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==</BinaryItem>
                     Point3="11.9285729174711,47.5000010939205" />
                   <mssgle:LineSegment
                     End="11.9285729174711,79.500002187841" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\Data Processing\Data Flow Task CONTACT CATEGORIES.Paths[Row Count Output 1]"
-          TopLeft="154.351852464928,198.000002187841">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,61.835291955546"
-              Start="0,0"
-              End="0,54.335291955546">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,54.335291955546" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>

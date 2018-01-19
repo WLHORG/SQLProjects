@@ -37,7 +37,7 @@
       <SSIS:Property
         SSIS:Name="Sensitive">0</SSIS:Property>
       <SSIS:Property
-        SSIS:Name="Value">Data Source=GS1DUKMSQLV03;Initial Catalog=DiabetesDWH;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;</SSIS:Property>
+        SSIS:Name="Value">Data Source=WLHTESTSQL01\dev01;Initial Catalog=DiabetesDWH;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;</SSIS:Property>
       <SSIS:Property
         SSIS:Name="DataType">18</SSIS:Property>
     </SSIS:Properties>
@@ -58,7 +58,7 @@
       <SSIS:Property
         SSIS:Name="Sensitive">0</SSIS:Property>
       <SSIS:Property
-        SSIS:Name="Value">GS1DUKMSQLV03</SSIS:Property>
+        SSIS:Name="Value">WLHTESTSQL01\dev01</SSIS:Property>
       <SSIS:Property
         SSIS:Name="DataType">18</SSIS:Property>
     </SSIS:Properties>
@@ -121,7 +121,7 @@
       <SSIS:Property
         SSIS:Name="Sensitive">0</SSIS:Property>
       <SSIS:Property
-        SSIS:Name="Value">Data Source=GS1DUKMSQLV03;Initial Catalog=DiabetesDWH;Integrated Security=True;Connect Timeout=30;Application Name=SSIS-{C464B4CC-1FCC-4226-A1A4-347BE1F66E92}TSQL_Statement;</SSIS:Property>
+        SSIS:Name="Value">Data Source=WLHTESTSQL01\dev01;Initial Catalog=DiabetesDWH;Integrated Security=True;Connect Timeout=30;Application Name=SSIS-{C464B4CC-1FCC-4226-A1A4-347BE1F66E92}TSQL_Statement;</SSIS:Property>
       <SSIS:Property
         SSIS:Name="DataType">18</SSIS:Property>
     </SSIS:Properties>
@@ -142,7 +142,7 @@
       <SSIS:Property
         SSIS:Name="Sensitive">0</SSIS:Property>
       <SSIS:Property
-        SSIS:Name="Value">GS1DUKMSQLV03</SSIS:Property>
+        SSIS:Name="Value">WLHTESTSQL01\dev01</SSIS:Property>
       <SSIS:Property
         SSIS:Name="DataType">18</SSIS:Property>
     </SSIS:Properties>
@@ -163,7 +163,7 @@
       <SSIS:Property
         SSIS:Name="Sensitive">0</SSIS:Property>
       <SSIS:Property
-        SSIS:Name="Value">Data Source=GS1DUKMSQLV03;Initial Catalog=SSISDB;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-SSIS2008R2StagingTemplate-{843B9DF5-618A-48DA-8301-85359228D94D}localhost.DWConfig;</SSIS:Property>
+        SSIS:Name="Value">Data Source=WLHTESTSQL01\dev01;Initial Catalog=SSISDB;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-SSIS2008R2StagingTemplate-{843B9DF5-618A-48DA-8301-85359228D94D}localhost.DWConfig;</SSIS:Property>
       <SSIS:Property
         SSIS:Name="DataType">18</SSIS:Property>
     </SSIS:Properties>
