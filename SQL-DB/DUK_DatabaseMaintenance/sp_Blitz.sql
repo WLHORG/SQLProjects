@@ -1,3 +1,7 @@
+USE [DBATOOLS]
+
+Go
+
 IF OBJECT_ID('dbo.sp_Blitz') IS NULL
   EXEC ('CREATE PROCEDURE dbo.sp_Blitz AS RETURN 0;');
 GO
